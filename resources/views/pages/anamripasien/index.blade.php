@@ -59,13 +59,13 @@
                 <div class="card mb-4">
                     <div class="card-header d-sm-flex align-items-center justify-content-between py-3">
                         <h6 class="m-0 font-weight-bold text-primary">Anamnesa dan Riwayat</h6>
-                        @can('mahasiswa')
+                        @can('adminmahasiswa')
                         <a href="{{route('anamripasien.create')}}" class="d-sm-inline-block btn btn-primary btn-sm shadow-sm">
                         <i class="fas fa-plus fa-sm"></i> Tambah Anamnesa dan Riwayat</a>
                         @endcan
                     </div>
                     <div class="card-header d-sm-flex align-items-center">
-                        @can('pembimbing')
+                        @can('adminpembimbing')
                         <a href="{{route('exportanamripasien')}}" class="d-sm-inline-block btn btn-primary btn-sm shadow-sm me-3">
                         <i class="fas fa-file-export fa-sm"></i>  Format Import/Restore</a>
                         
@@ -91,7 +91,7 @@
                     </div>
                     <div class="card-body px-0 pt-0 pb-2">
                         <div class="table-responsive mt-4 ms-5 me-5 mb-4">
-                            @can('pembimbing')
+                            @can('adminpembimbing')
                             <table class="justify-content-end mb-2">
                                 <tr>
                                 <th><i class="ni ni-calendar-grid-58 text-primary text-sm opacity-10 me-2"></i> <input type="text" id="min" name="min" placeholder="Min Date" class="me-2"></th>
@@ -176,7 +176,7 @@
                                         <a href ="{{route('anamripasien.show', $anamripasien->id)}}" title="show" class="btn btn-sm btn-icon-split btn-primary">
                                             <span class="icon"><i class="fas fa-eye text-white" style="padding-top: 4px;"></i></span><span class="text">Lihat</span>
                                         </a>
-                                        @can('mahasiswa')
+                                        @can('adminmahasiswa')
                                         <a href ="{{route('anamripasien.edit', $anamripasien->id)}}" title="Edit" class="btn btn-sm btn-icon-split btn-warning">
                                             <span class="icon"><i class="fas fa-pen text-white" style="padding-top: 4px;"></i></span><span class="text">Edit</span>
                                         </a>
@@ -209,15 +209,15 @@
     </script>
     @endcan
 
-    {{-- @can('mahasiswa')
+    @can('mahasiswa')
     <script type="text/javascript">
         $(document).ready( function () {
         $('#dataTable').DataTable();
         } );
     </script>
-    @endcan --}}
+    @endcan
 
-    @can('pembimbing')
+    @can('adminpembimbing')
     <script type="text/javascript">
     $(document).ready( function () {
         $.fn.dataTable.ext.search.push(

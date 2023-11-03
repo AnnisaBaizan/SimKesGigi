@@ -29,22 +29,31 @@ class UserProfileController extends Controller
 
         if($request->file('avatar')){
             // $attributes['avatar'] = request()->file('avatar')->store('avatars');
-            $avatarname='avatar'.time().'.'.$request->avatar->getClientOriginalExtension();
-            $request->avatar->storeAs('avatars',$avatarname);
             $oldpic = auth()->user()->avatar;
             if ($oldpic !== "AvatarDefault.jpg") {
                 Storage::delete('avatars/'. $oldpic);
+                $avatarname='avatar'.time().'.'.$request->avatar->getClientOriginalExtension();
+                $request->avatar->storeAs('avatars',$avatarname);
                 user::where('id', auth()->user()->id)->update([
                     'avatar' => $avatarname
                     // $request['avatar'] = $avatarname  
                 ]);
             }
-            }
-            else { 
+            else {
+                $avatarname='avatar'.time().'.'.$request->avatar->getClientOriginalExtension();
+                $request->avatar->storeAs('avatars',$avatarname);
                 user::where('id', auth()->user()->id)->update([
-                    'avatar' => auth()->user()->avatar
-                    // $request['avatar']= auth()->user()->avatar
+                    'avatar' => $avatarname
+                    // $request['avatar'] = $avatarname  
                 ]);
+            }
+            
+        }
+        else { 
+            user::where('id', auth()->user()->id)->update([
+                'avatar' => auth()->user()->avatar
+                // $request['avatar']= auth()->user()->avatar
+            ]);
         }
         
         // dd($request);

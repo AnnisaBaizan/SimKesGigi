@@ -7,30 +7,29 @@
                     <script>
                         document.write(new Date().getFullYear())
                     </script>,
-                    made with <i class="fa fa-heart"></i> by
-                    <a href="https://www.creative-tim.com" class="font-weight-bold" target="_blank">Creative Tim</a>
-                    &
-                    <a href="https://www.updivision.com" class="font-weight-bold" target="_blank">UPDIVISION</a>
-                    for a better web.
+                    made by
+                    <a href="https://poltekkespalembang.ac.id/" class="font-weight-bold" target="_blank"><i class="fab fa-chrome"></i> Poltekkes Kemenkes Palembang</a>
+                    for SimKes
+                    <a href="https://gigi.poltekkespalembang.ac.id/" class="font-weight-bold" target="_blank"><i class="fab fa-chrome"></i> Keperawatan Gigi</a>
                 </div>
             </div>
             <div class="col-lg-6">
                 <ul class="nav nav-footer justify-content-center justify-content-lg-end">
                     <li class="nav-item">
-                        <a href="https://www.updivision.com" class="nav-link text-muted" target="_blank">UPDIVISION</a>
+                        <a href="https://www.youtube.com/@polkesbang" class="nav-link pe-0 text-muted"
+                            target="_blank"><i class="fab fa-youtube"></i> Youtube</a>
                     </li>
                     <li class="nav-item">
-                        <a href="https://www.creative-tim.com" class="nav-link text-muted" target="_blank">Creative Tim</a>
+                        <a href="https://www.instagram.com/poltekkesplg/?hl=en" class="nav-link text-muted" target="_blank"><i class="fab fa-instagram-square"></i> Instagram</a>
                     </li>
                     <li class="nav-item">
-                        <a href="https://www.creative-tim.com/presentation" class="nav-link text-muted" target="_blank">About Us</a>
+                        <a href="https://www.facebook.com/poltekkespalembang.ac.id/?locale=id_ID" class="nav-link text-muted" target="_blank"><i class="fab fa-facebook-square"></i> Facebook</a>
                     </li>
                     <li class="nav-item">
-                        <a href="https://www.creative-tim.com/blog" class="nav-link text-muted" target="_blank">Blog</a>
+                        <a href="mailto:info@poltekkespalembang.ac.id" class="nav-link text-muted" target="_blank"><i class="fas fa-at"></i> Email</a>
                     </li>
                     <li class="nav-item">
-                        <a href="https://www.creative-tim.com/license" class="nav-link pe-0 text-muted"
-                            target="_blank">License</a>
+                        <a href="https://api.whatsapp.com/send/?phone=6288287488529&text=Saya+mau+tanya+terkait+Poltekkes+Palembang.+Nama+%3A&type=phone_number&app_absent=0" class="nav-link text-muted" target="_blank"><i class="fab fa-whatsapp-square"></i> Whatsapp</a>
                     </li>
                 </ul>
             </div>
