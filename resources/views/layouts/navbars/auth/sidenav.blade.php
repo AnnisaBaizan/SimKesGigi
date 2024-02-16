@@ -53,15 +53,15 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link {{ Route::currentRouteName() == 'home' ? 'active' : '' }}" href="{{ route('home') }}">
+                <a class="nav-link {{ Request::is('pengsiperi*') ? 'active' : '' }}" href="{{ route('pengsiperi.index') }}">
                     <div
                         class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="ni ni-books text-primary text-sm opacity-10"></i>
                     </div>
-                    <span class="nav-link-text ms-1">Pengetahuan</span>
+                    <span class="nav-link-text ms-1">Pengetahuan, Keterampilan<br> Perilaku & Peran Orang Tua</span>
                 </a>
             </li>
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a class="nav-link {{ Route::currentRouteName() == 'home' ? 'active' : '' }}" href="{{ route('home') }}">
                     <div
                         class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
@@ -69,18 +69,27 @@
                     </div>
                     <span class="nav-link-text ms-1">Prilaku</span>
                 </a>
-            </li>
+            </li> --}}
             
             <li class="nav-item mt-3">
                 <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Pemeriksaan</h6>
             </li>
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a class="nav-link {{ Route::currentRouteName() == 'home' ? 'active' : '' }}" href="{{ route('home') }}">
                     <div
                         class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="ni ni-vector text-success text-sm opacity-10"></i>
                     </div>
                     <span class="nav-link-text ms-1">Eksternal & Internal Oral</span>
+                </a>
+            </li> --}}
+            <li class="nav-item">
+                <a class="nav-link {{ Request::is('user*') ? 'active' : '' }}" href="{{ route('eksplakkal.index') }}">
+                    <div
+                        class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="ni ni-vector text-success text-sm opacity-10"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">Eksternal oral, Plak, Kalkulus</span>
                 </a>
             </li>
 
@@ -137,14 +146,14 @@
                 </a>
             </li> --}}
             
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a class="nav-link {{ str_contains(request()->url(), 'pengukuranplak') == true ? 'active' : '' }}" href="{{ route('page', ['page' => 'pengukuranplak.create']) }}">
                     <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="ni ni-bullet-list-67 text-dark text-sm opacity-10"></i>
                     </div>
                     <span class="nav-link-text ms-1">pengukuranplak</span>
                 </a>
-            </li>
+            </li> --}}
 
             @can('admin')
                 <li class="nav-item">
@@ -155,7 +164,21 @@
                     <span class="nav-link-text ms-1">User Management</span>
                 </a>
             </li>
+            <li class="nav-item mt-3">
+                <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Pertanyaan</h6>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {{ Request::is('pertanyaan*') ? 'active' : '' }} " href="{{ route('pertanyaan.index') }}">
+                    <div
+                        class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="fas fa-question text-dark text-sm opacity-10"></i>
+                        {{-- <i class="ni ni-single-02 text-dark text-sm opacity-10"></i> --}}
+                    </div>
+                    <span class="nav-link-text ms-1">Pertanyaan</span>
+                </a>
+            </li>
             @endcan
+
             
 
 

@@ -11,6 +11,10 @@ class kartupasien extends Model
     protected $guarded = ['id'];
 
     public function anamripasien(){
-        return $this->hasOne(anamripasien::class);
+        return $this->hasMany(anamripasien::class);
+    }
+    
+    public function pengsiperi(){
+        return $this->hasMany(Pengsiperi::class);
     }
 }

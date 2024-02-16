@@ -27,6 +27,10 @@ use App\Http\Controllers\ChangePassword;
 use App\Http\Controllers\KartupasienController;
 use App\Http\Controllers\AnamripasienController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\PertanyaanController;
+use App\Http\Controllers\PengsiperiController;
+use App\Http\Controllers\EksplakkalController;
+
 
 
 
@@ -34,14 +38,14 @@ Route::get('/', function () {
 	return redirect('/dashboard');
 })->middleware('auth');
 
-Route::get('/register', [RegisterController::class, 'create'])->middleware('guest')->name('register');
-Route::post('/register', [RegisterController::class, 'store'])->middleware('guest')->name('register.perform');
-Route::get('/login', [LoginController::class, 'show'])->middleware('guest')->name('login');
-Route::post('/login', [LoginController::class, 'login'])->middleware('guest')->name('login.perform');
-Route::get('/reset-password', [ResetPassword::class, 'show'])->middleware('guest')->name('reset-password');
-Route::post('/reset-password', [ResetPassword::class, 'send'])->middleware('guest')->name('reset.perform');
-Route::get('/change-password', [ChangePassword::class, 'show'])->middleware('guest')->name('change-password');
-Route::post('/change-password', [ChangePassword::class, 'update'])->middleware('guest')->name('change.perform');
+Route::get('/register', [RegisterController::class, 'create'])->name('register');
+Route::post('/register', [RegisterController::class, 'store'])->name('register.perform');
+Route::get('/login', [LoginController::class, 'show'])->name('login');
+Route::post('/login', [LoginController::class, 'login'])->name('login.perform');
+Route::get('/reset-password', [ResetPassword::class, 'show'])->name('reset-password');
+Route::post('/reset-password', [ResetPassword::class, 'send'])->name('reset.perform');
+Route::get('/change-password', [ChangePassword::class, 'show'])->name('change-password');
+Route::post('/change-password', [ChangePassword::class, 'update'])->name('change.perform');
 Route::get('/dashboard', [HomeController::class, 'index'])->name('home')->middleware('auth');
 
 Route::group(['middleware' => 'auth'], function () {
@@ -84,9 +88,58 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::post('importanamripasien', [AnamripasienController::class, 'import'])->name('importanamripasien')->middleware('pembimbing');
     Route::get('exportanamripasien', [AnamripasienController::class, 'export'])->name('exportanamripasien')->middleware('pembimbing');
 
+	// Route::resource('/anamripasien', anamripasienController::class);
+	Route::get('/anamripasien', [AnamripasienController::class, 'index'])->name('anamripasien.index');
+	Route::get('/anamripasien/create', [AnamripasienController::class, 'create'])->name('anamripasien.create')->middleware('mahasiswa');
+	Route::post('/anamripasien', [AnamripasienController::class, 'store'])->name('anamripasien.store')->middleware('mahasiswa');
+	Route::get('/anamripasien/{anamripasien}', [AnamripasienController::class, 'show'])->name('anamripasien.show');
+	Route::get('/anamripasien/{anamripasien}/edit', [AnamripasienController::class, 'edit'])->name('anamripasien.edit')->middleware('mahasiswa');
+	Route::put('/anamripasien/{anamripasien}', [AnamripasienController::class, 'update'])->name('anamripasien.update')->middleware('mahasiswa');
+	Route::Delete('/anamripasien/{anamripasien}', [AnamripasienController::class, 'destroy'])->name('anamripasien.destroy')->middleware('mahasiswa');
+
+	Route::post('importanamripasien', [AnamripasienController::class, 'import'])->name('importanamripasien')->middleware('pembimbing');
+    Route::get('exportanamripasien', [AnamripasienController::class, 'export'])->name('exportanamripasien')->middleware('pembimbing');
+
 	// Route::get('/profile-static', [PageController::class, 'profile'])->name('profile-static');
 	// Route::get('/sign-in-static', [PageController::class, 'signin'])->name('sign-in-static');
 	// Route::get('/sign-up-static', [PageController::class, 'signup'])->name('sign-up-static');
+
+	// Route::resource('/pertanyaan', PertanyaanController::class);
+	Route::get('/pertanyaan', [PertanyaanController::class, 'index'])->name('pertanyaan.index');
+	Route::get('/pertanyaan/create', [PertanyaanController::class, 'create'])->name('pertanyaan.create')->middleware('admin');
+	Route::post('/pertanyaan', [PertanyaanController::class, 'store'])->name('pertanyaan.store')->middleware('admin');
+	Route::get('/pertanyaan/{pertanyaan}', [PertanyaanController::class, 'show'])->name('pertanyaan.show');
+	Route::get('/pertanyaan/{pertanyaan}/edit', [PertanyaanController::class, 'edit'])->name('pertanyaan.edit')->middleware('admin');
+	Route::put('/pertanyaan/{pertanyaan}', [PertanyaanController::class, 'update'])->name('pertanyaan.update')->middleware('admin');
+	Route::Delete('/pertanyaan/{pertanyaan}', [PertanyaanController::class, 'destroy'])->name('pertanyaan.destroy')->middleware('admin');
+
+	Route::post('importpertanyaan', [pertanyaanController::class, 'import'])->name('importpertanyaan')->middleware('admin');
+    Route::get('exportpertanyaan', [pertanyaanController::class, 'export'])->name('exportpertanyaan')->middleware('admin');
+
+	// Route::resource('/pengsiperi', PengsiperiController::class);
+	Route::get('/pengsiperi', [PengsiperiController::class, 'index'])->name('pengsiperi.index');
+	Route::get('/pengsiperi/create', [PengsiperiController::class, 'create'])->name('pengsiperi.create')->middleware('mahasiswa');
+	Route::post('/pengsiperi', [PengsiperiController::class, 'store'])->name('pengsiperi.store')->middleware('mahasiswa');
+	Route::get('/pengsiperi/{pengsiperi}', [PengsiperiController::class, 'show'])->name('pengsiperi.show');
+	Route::get('/pengsiperi/{pengsiperi}/edit', [PengsiperiController::class, 'edit'])->name('pengsiperi.edit')->middleware('mahasiswa');
+	Route::put('/pengsiperi/{pengsiperi}', [PengsiperiController::class, 'update'])->name('pengsiperi.update')->middleware('mahasiswa');
+	Route::Delete('/pengsiperi/{pengsiperi}', [PengsiperiController::class, 'destroy'])->name('pengsiperi.destroy')->middleware('mahasiswa');
+
+	Route::post('importpengsiperi', [PengsiperiController::class, 'import'])->name('importpengsiperi')->middleware('mahasiswa');
+    Route::get('exportpengsiperi', [PengsiperiController::class, 'export'])->name('exportpengsiperi')->middleware('mahasiswa');
+
+	// Route::resource('/eksplakkal', eksplakkalController::class);
+	Route::get('/eksplakkal', [EksplakkalController::class, 'index'])->name('eksplakkal.index');
+	Route::get('/eksplakkal/create', [EksplakkalController::class, 'create'])->name('eksplakkal.create')->middleware('mahasiswa');
+	Route::post('/eksplakkal', [EksplakkalController::class, 'store'])->name('eksplakkal.store')->middleware('mahasiswa');
+	Route::get('/eksplakkal/{eksplakkal}', [EksplakkalController::class, 'show'])->name('eksplakkal.show');
+	Route::get('/eksplakkal/{eksplakkal}/edit', [EksplakkalController::class, 'edit'])->name('eksplakkal.edit')->middleware('mahasiswa');
+	Route::put('/eksplakkal/{eksplakkal}', [EksplakkalController::class, 'update'])->name('eksplakkal.update')->middleware('mahasiswa');
+	Route::Delete('/eksplakkal/{eksplakkal}', [EksplakkalController::class, 'destroy'])->name('eksplakkal.destroy')->middleware('mahasiswa');
+
+	Route::post('importeksplakkal', [EksplakkalController::class, 'import'])->name('importeksplakkal')->middleware('mahasiswa');
+    Route::get('exporteksplakkal', [EksplakkalController::class, 'export'])->name('exporteksplakkal')->middleware('mahasiswa');
+
 
 	Route::get('/{page}', [PageController::class, 'index'])->name('page');
 	Route::post('logout', [LoginController::class, 'logout'])->name('logout');

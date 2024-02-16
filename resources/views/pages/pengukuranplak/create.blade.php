@@ -1,29 +1,6 @@
 @extends('layouts.app', ['class' => 'g-sidenav-show bg-gray-100'])
 
 @section('content')
-<style>
-    .select {
-  display: grid;
-  grid-template-columns: repeat(48, 1fr);
-  max-width: 1px;
-  gap: 2px;
-}
-
-.select__item {
-  padding: 2px;
-  cursor: pointer;
-  font-family: "Heebo", sans-serif;
-  text-align: center;
-  border-radius: 3px;
-  background: #eeeeee;
-  transition: background 0.1s;
-}
-
-.select__item--selected {
-  background: #000000;
-  color: #ffffff;
-}
-</style>
     @include('layouts.navbars.auth.topnav', ['title' => 'Pengukuran Plak'])
     <div class="container-fluid py-4">
         <div class="card shadow mb-4">
@@ -43,759 +20,1007 @@
                     </div>
                 </div>
                 <hr>
-                    <div class="form-group row col-sm-12 col-lg-12 col-md-12">
-                        <select name="language" class="custom-select col-sm-12 col-lg-12 col-md-12" multiple>
-                            {{-- bagian1 --}}
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                            <option value="7">7</option>
-                            <option value="8">8</option>
-                            <option value="9">9</option>
-                            <option value="10">10</option>
-                            <option value="11">11</option>
-                            <option value="12">12</option>
-                            <option value="13">13</option>
-                            <option value="14">14</option>
-                            <option value="15">15</option>
-                            <option value="16">16</option>
-                            <option value="17">17</option>
-                            <option value="18">18</option>
-                            <option value="19">19</option>
-                            <option value="20">20</option>
-                            <option value="21">21</option>
-                            <option value="22">22</option>
-                            <option value="23">23</option>
-                            <option value="24">24</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                            <option value="7">7</option>
-                            <option value="8">8</option>
-                            <option value="9">9</option>
-                            <option value="10">10</option>
-                            <option value="11">11</option>
-                            <option value="12">12</option>
-                            <option value="13">13</option>
-                            <option value="14">14</option>
-                            <option value="15">15</option>
-                            <option value="16">16</option>
-                            <option value="17">17</option>
-                            <option value="18">18</option>
-                            <option value="19">19</option>
-                            <option value="20">20</option>
-                            <option value="21">21</option>
-                            <option value="22">22</option>
-                            <option value="23">23</option>
-                            <option value="24">24</option>
-
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                            <option value="7">7</option>
-                            <option value="8">8</option>
-                            <option value="9">9</option>
-                            <option value="10">10</option>
-                            <option value="11">11</option>
-                            <option value="12">12</option>
-                            <option value="13">13</option>
-                            <option value="14">14</option>
-                            <option value="15">15</option>
-                            <option value="16">16</option>
-                            <option value="17">17</option>
-                            <option value="18">18</option>
-                            <option value="19">19</option>
-                            <option value="20">20</option>
-                            <option value="21">21</option>
-                            <option value="22">22</option>
-                            <option value="23">23</option>
-                            <option value="24">24</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                            <option value="7">7</option>
-                            <option value="8">8</option>
-                            <option value="9">9</option>
-                            <option value="10">10</option>
-                            <option value="11">11</option>
-                            <option value="12">12</option>
-                            <option value="13">13</option>
-                            <option value="14">14</option>
-                            <option value="15">15</option>
-                            <option value="16">16</option>
-                            <option value="17">17</option>
-                            <option value="18">18</option>
-                            <option value="19">19</option>
-                            <option value="20">20</option>
-                            <option value="21">21</option>
-                            <option value="22">22</option>
-                            <option value="23">23</option>
-                            <option value="24">24</option>
-
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                            <option value="7">7</option>
-                            <option value="8">8</option>
-                            <option value="9">9</option>
-                            <option value="10">10</option>
-                            <option value="11">11</option>
-                            <option value="12">12</option>
-                            <option value="13">13</option>
-                            <option value="14">14</option>
-                            <option value="15">15</option>
-                            <option value="16">16</option>
-                            <option value="17">17</option>
-                            <option value="18">18</option>
-                            <option value="19">19</option>
-                            <option value="20">20</option>
-                            <option value="21">21</option>
-                            <option value="22">22</option>
-                            <option value="23">23</option>
-                            <option value="24">24</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                            <option value="7">7</option>
-                            <option value="8">8</option>
-                            <option value="9">9</option>
-                            <option value="10">10</option>
-                            <option value="11">11</option>
-                            <option value="12">12</option>
-                            <option value="13">13</option>
-                            <option value="14">14</option>
-                            <option value="15">15</option>
-                            <option value="16">16</option>
-                            <option value="17">17</option>
-                            <option value="18">18</option>
-                            <option value="19">19</option>
-                            <option value="20">20</option>
-                            <option value="21">21</option>
-                            <option value="22">22</option>
-                            <option value="23">23</option>
-                            <option value="24">24</option>
-                            {{-- end bagian1 --}}
-
-                            {{-- br --}}
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value="9">9</option>
-                            <option value="0">0</option>
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value="9">9</option>
-                            <option value="0">0</option>
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value="9">9</option>
-                            <option value="0">0</option>
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value="9">9</option>
-                            <option value="0">0</option>
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value=""></option>
-
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value="9">9</option>
-                            <option value="0">0</option>
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value="9">9</option>
-                            <option value="0">0</option>
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value="9">9</option>
-                            <option value="0">0</option>
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value="9">9</option>
-                            <option value="0">0</option>
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value=""></option>
-
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value="9">9</option>
-                            <option value="0">0</option>
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value="9">9</option>
-                            <option value="0">0</option>
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value="9">9</option>
-                            <option value="0">0</option>
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value="9">9</option>
-                            <option value="0">0</option>
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value=""></option>
-                            {{-- end br --}}
-
-                            {{-- bagian2 --}}
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                            <option value="7">7</option>
-                            <option value="8">8</option>
-                            <option value="9">9</option>
-                            <option value="10">10</option>
-                            <option value="11">11</option>
-                            <option value="12">12</option>
-                            <option value="13">13</option>
-                            <option value="14">14</option>
-                            <option value="15">15</option>
-                            <option value="16">16</option>
-                            <option value="17">17</option>
-                            <option value="18">18</option>
-                            <option value="19">19</option>
-                            <option value="20">20</option>
-                            <option value="21">21</option>
-                            <option value="22">22</option>
-                            <option value="23">23</option>
-                            <option value="24">24</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                            <option value="7">7</option>
-                            <option value="8">8</option>
-                            <option value="9">9</option>
-                            <option value="10">10</option>
-                            <option value="11">11</option>
-                            <option value="12">12</option>
-                            <option value="13">13</option>
-                            <option value="14">14</option>
-                            <option value="15">15</option>
-                            <option value="16">16</option>
-                            <option value="17">17</option>
-                            <option value="18">18</option>
-                            <option value="19">19</option>
-                            <option value="20">20</option>
-                            <option value="21">21</option>
-                            <option value="22">22</option>
-                            <option value="23">23</option>
-                            <option value="24">24</option>
-
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                            <option value="7">7</option>
-                            <option value="8">8</option>
-                            <option value="9">9</option>
-                            <option value="10">10</option>
-                            <option value="11">11</option>
-                            <option value="12">12</option>
-                            <option value="13">13</option>
-                            <option value="14">14</option>
-                            <option value="15">15</option>
-                            <option value="16">16</option>
-                            <option value="17">17</option>
-                            <option value="18">18</option>
-                            <option value="19">19</option>
-                            <option value="20">20</option>
-                            <option value="21">21</option>
-                            <option value="22">22</option>
-                            <option value="23">23</option>
-                            <option value="24">24</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                            <option value="7">7</option>
-                            <option value="8">8</option>
-                            <option value="9">9</option>
-                            <option value="10">10</option>
-                            <option value="11">11</option>
-                            <option value="12">12</option>
-                            <option value="13">13</option>
-                            <option value="14">14</option>
-                            <option value="15">15</option>
-                            <option value="16">16</option>
-                            <option value="17">17</option>
-                            <option value="18">18</option>
-                            <option value="19">19</option>
-                            <option value="20">20</option>
-                            <option value="21">21</option>
-                            <option value="22">22</option>
-                            <option value="23">23</option>
-                            <option value="24">24</option>
-
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                            <option value="7">7</option>
-                            <option value="8">8</option>
-                            <option value="9">9</option>
-                            <option value="10">10</option>
-                            <option value="11">11</option>
-                            <option value="12">12</option>
-                            <option value="13">13</option>
-                            <option value="14">14</option>
-                            <option value="15">15</option>
-                            <option value="16">16</option>
-                            <option value="17">17</option>
-                            <option value="18">18</option>
-                            <option value="19">19</option>
-                            <option value="20">20</option>
-                            <option value="21">21</option>
-                            <option value="22">22</option>
-                            <option value="23">23</option>
-                            <option value="24">24</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                            <option value="7">7</option>
-                            <option value="8">8</option>
-                            <option value="9">9</option>
-                            <option value="10">10</option>
-                            <option value="11">11</option>
-                            <option value="12">12</option>
-                            <option value="13">13</option>
-                            <option value="14">14</option>
-                            <option value="15">15</option>
-                            <option value="16">16</option>
-                            <option value="17">17</option>
-                            <option value="18">18</option>
-                            <option value="19">19</option>
-                            <option value="20">20</option>
-                            <option value="21">21</option>
-                            <option value="22">22</option>
-                            <option value="23">23</option>
-                            <option value="24">24</option>
-                            {{-- end bagian2 --}}
-
-                            {{-- bagian3 --}}
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                            <option value="7">7</option>
-                            <option value="8">8</option>
-                            <option value="9">9</option>
-                            <option value="10">10</option>
-                            <option value="11">11</option>
-                            <option value="12">12</option>
-                            <option value="13">13</option>
-                            <option value="14">14</option>
-                            <option value="15">15</option>
-                            <option value="16">16</option>
-                            <option value="17">17</option>
-                            <option value="18">18</option>
-                            <option value="19">19</option>
-                            <option value="20">20</option>
-                            <option value="21">21</option>
-                            <option value="22">22</option>
-                            <option value="23">23</option>
-                            <option value="24">24</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                            <option value="7">7</option>
-                            <option value="8">8</option>
-                            <option value="9">9</option>
-                            <option value="10">10</option>
-                            <option value="11">11</option>
-                            <option value="12">12</option>
-                            <option value="13">13</option>
-                            <option value="14">14</option>
-                            <option value="15">15</option>
-                            <option value="16">16</option>
-                            <option value="17">17</option>
-                            <option value="18">18</option>
-                            <option value="19">19</option>
-                            <option value="20">20</option>
-                            <option value="21">21</option>
-                            <option value="22">22</option>
-                            <option value="23">23</option>
-                            <option value="24">24</option>
-
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                            <option value="7">7</option>
-                            <option value="8">8</option>
-                            <option value="9">9</option>
-                            <option value="10">10</option>
-                            <option value="11">11</option>
-                            <option value="12">12</option>
-                            <option value="13">13</option>
-                            <option value="14">14</option>
-                            <option value="15">15</option>
-                            <option value="16">16</option>
-                            <option value="17">17</option>
-                            <option value="18">18</option>
-                            <option value="19">19</option>
-                            <option value="20">20</option>
-                            <option value="21">21</option>
-                            <option value="22">22</option>
-                            <option value="23">23</option>
-                            <option value="24">24</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                            <option value="7">7</option>
-                            <option value="8">8</option>
-                            <option value="9">9</option>
-                            <option value="10">10</option>
-                            <option value="11">11</option>
-                            <option value="12">12</option>
-                            <option value="13">13</option>
-                            <option value="14">14</option>
-                            <option value="15">15</option>
-                            <option value="16">16</option>
-                            <option value="17">17</option>
-                            <option value="18">18</option>
-                            <option value="19">19</option>
-                            <option value="20">20</option>
-                            <option value="21">21</option>
-                            <option value="22">22</option>
-                            <option value="23">23</option>
-                            <option value="24">24</option>
-
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                            <option value="7">7</option>
-                            <option value="8">8</option>
-                            <option value="9">9</option>
-                            <option value="10">10</option>
-                            <option value="11">11</option>
-                            <option value="12">12</option>
-                            <option value="13">13</option>
-                            <option value="14">14</option>
-                            <option value="15">15</option>
-                            <option value="16">16</option>
-                            <option value="17">17</option>
-                            <option value="18">18</option>
-                            <option value="19">19</option>
-                            <option value="20">20</option>
-                            <option value="21">21</option>
-                            <option value="22">22</option>
-                            <option value="23">23</option>
-                            <option value="24">24</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                            <option value="7">7</option>
-                            <option value="8">8</option>
-                            <option value="9">9</option>
-                            <option value="10">10</option>
-                            <option value="11">11</option>
-                            <option value="12">12</option>
-                            <option value="13">13</option>
-                            <option value="14">14</option>
-                            <option value="15">15</option>
-                            <option value="16">16</option>
-                            <option value="17">17</option>
-                            <option value="18">18</option>
-                            <option value="19">19</option>
-                            <option value="20">20</option>
-                            <option value="21">21</option>
-                            <option value="22">22</option>
-                            <option value="23">23</option>
-                            <option value="24">24</option>
-                            {{-- end bagian3 --}}
-
-                            {{-- bagian4 --}}
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                            <option value="7">7</option>
-                            <option value="8">8</option>
-                            <option value="9">9</option>
-                            <option value="10">10</option>
-                            <option value="11">11</option>
-                            <option value="12">12</option>
-                            <option value="13">13</option>
-                            <option value="14">14</option>
-                            <option value="15">15</option>
-                            <option value="16">16</option>
-                            <option value="17">17</option>
-                            <option value="18">18</option>
-                            <option value="19">19</option>
-                            <option value="20">20</option>
-                            <option value="21">21</option>
-                            <option value="22">22</option>
-                            <option value="23">23</option>
-                            <option value="24">24</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                            <option value="7">7</option>
-                            <option value="8">8</option>
-                            <option value="9">9</option>
-                            <option value="10">10</option>
-                            <option value="11">11</option>
-                            <option value="12">12</option>
-                            <option value="13">13</option>
-                            <option value="14">14</option>
-                            <option value="15">15</option>
-                            <option value="16">16</option>
-                            <option value="17">17</option>
-                            <option value="18">18</option>
-                            <option value="19">19</option>
-                            <option value="20">20</option>
-                            <option value="21">21</option>
-                            <option value="22">22</option>
-                            <option value="23">23</option>
-                            <option value="24">24</option>
-
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                            <option value="7">7</option>
-                            <option value="8">8</option>
-                            <option value="9">9</option>
-                            <option value="10">10</option>
-                            <option value="11">11</option>
-                            <option value="12">12</option>
-                            <option value="13">13</option>
-                            <option value="14">14</option>
-                            <option value="15">15</option>
-                            <option value="16">16</option>
-                            <option value="17">17</option>
-                            <option value="18">18</option>
-                            <option value="19">19</option>
-                            <option value="20">20</option>
-                            <option value="21">21</option>
-                            <option value="22">22</option>
-                            <option value="23">23</option>
-                            <option value="24">24</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                            <option value="7">7</option>
-                            <option value="8">8</option>
-                            <option value="9">9</option>
-                            <option value="10">10</option>
-                            <option value="11">11</option>
-                            <option value="12">12</option>
-                            <option value="13">13</option>
-                            <option value="14">14</option>
-                            <option value="15">15</option>
-                            <option value="16">16</option>
-                            <option value="17">17</option>
-                            <option value="18">18</option>
-                            <option value="19">19</option>
-                            <option value="20">20</option>
-                            <option value="21">21</option>
-                            <option value="22">22</option>
-                            <option value="23">23</option>
-                            <option value="24">24</option>
-
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                            <option value="7">7</option>
-                            <option value="8">8</option>
-                            <option value="9">9</option>
-                            <option value="10">10</option>
-                            <option value="11">11</option>
-                            <option value="12">12</option>
-                            <option value="13">13</option>
-                            <option value="14">14</option>
-                            <option value="15">15</option>
-                            <option value="16">16</option>
-                            <option value="17">17</option>
-                            <option value="18">18</option>
-                            <option value="19">19</option>
-                            <option value="20">20</option>
-                            <option value="21">21</option>
-                            <option value="22">22</option>
-                            <option value="23">23</option>
-                            <option value="24">24</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                            <option value="7">7</option>
-                            <option value="8">8</option>
-                            <option value="9">9</option>
-                            <option value="10">10</option>
-                            <option value="11">11</option>
-                            <option value="12">12</option>
-                            <option value="13">13</option>
-                            <option value="14">14</option>
-                            <option value="15">15</option>
-                            <option value="16">16</option>
-                            <option value="17">17</option>
-                            <option value="18">18</option>
-                            <option value="19">19</option>
-                            <option value="20">20</option>
-                            <option value="21">21</option>
-                            <option value="22">22</option>
-                            <option value="23">23</option>
-                            <option value="24">24</option>
-                            {{-- end bagian4 --}}
+                <form class="user" action="#" method="post">
+                    <div class="btn-group-vertical" role="group" aria-label="Basic checkbox toggle button group">
+                        <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group" >   
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck1" autocomplete="off" value="1">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck1"><i class="fas fa-tooth fa-xs"></i></label>
+                                
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck2" autocomplete="off" value="2">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck2"><i class="fas fa-tooth fa-xs"></i></label>
+                                
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck3" autocomplete="off" value="3">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck3"><i class="fas fa-tooth fa-xs"></i></label>
+                        </div>
+                        <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group" >   
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck4" autocomplete="off" value="4">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck4"><i class="fas fa-tooth fa-xs"></i></label>
                             
-
-                        </select>
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck5" autocomplete="off" value="5">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck5"><i class="fas fa-tooth fa-xs"></i></label>
+                                
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck6" autocomplete="off" value="6">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck6"><i class="fas fa-tooth fa-xs"></i></label>
+                        </div>
+                        <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group" >   
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck7" autocomplete="off" value="7">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck7"><i class="fas fa-tooth fa-xs"></i></label>
+                            
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck8" autocomplete="off" value="8">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck8"><i class="fas fa-tooth fa-xs"></i></label>
+                            
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck9" autocomplete="off" value="9">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck9"><i class="fas fa-tooth fa-xs"></i></label>
+                        </div>
+                    </div>
+                    <div class="btn-group-vertical" role="group" aria-label="Basic checkbox toggle button group">
+                        <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group" >   
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck1" autocomplete="off" value="1">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck1"><i class="fas fa-tooth fa-xs"></i></label>
+                                
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck2" autocomplete="off" value="2">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck2"><i class="fas fa-tooth fa-xs"></i></label>
+                                
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck3" autocomplete="off" value="3">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck3"><i class="fas fa-tooth fa-xs"></i></label>
+                        </div>
+                        <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group" >   
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck4" autocomplete="off" value="4">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck4"><i class="fas fa-tooth fa-xs"></i></label>
+                            
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck5" autocomplete="off" value="5">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck5"><i class="fas fa-tooth fa-xs"></i></label>
+                                
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck6" autocomplete="off" value="6">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck6"><i class="fas fa-tooth fa-xs"></i></label>
+                        </div>
+                        <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group" >   
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck7" autocomplete="off" value="7">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck7"><i class="fas fa-tooth fa-xs"></i></label>
+                            
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck8" autocomplete="off" value="8">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck8"><i class="fas fa-tooth fa-xs"></i></label>
+                            
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck9" autocomplete="off" value="9">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck9"><i class="fas fa-tooth fa-xs"></i></label>
+                        </div>
+                    </div>
+                    <div class="btn-group-vertical" role="group" aria-label="Basic checkbox toggle button group">
+                        <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group" >   
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck1" autocomplete="off" value="1">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck1"><i class="fas fa-tooth fa-xs"></i></label>
+                                
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck2" autocomplete="off" value="2">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck2"><i class="fas fa-tooth fa-xs"></i></label>
+                                
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck3" autocomplete="off" value="3">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck3"><i class="fas fa-tooth fa-xs"></i></label>
+                        </div>
+                        <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group" >   
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck4" autocomplete="off" value="4">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck4"><i class="fas fa-tooth fa-xs"></i></label>
+                            
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck5" autocomplete="off" value="5">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck5"><i class="fas fa-tooth fa-xs"></i></label>
+                                
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck6" autocomplete="off" value="6">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck6"><i class="fas fa-tooth fa-xs"></i></label>
+                        </div>
+                        <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group" >   
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck7" autocomplete="off" value="7">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck7"><i class="fas fa-tooth fa-xs"></i></label>
+                            
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck8" autocomplete="off" value="8">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck8"><i class="fas fa-tooth fa-xs"></i></label>
+                            
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck9" autocomplete="off" value="9">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck9"><i class="fas fa-tooth fa-xs"></i></label>
+                        </div>
+                    </div>
+                    <div class="btn-group-vertical" role="group" aria-label="Basic checkbox toggle button group">
+                        <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group" >   
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck1" autocomplete="off" value="1">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck1"><i class="fas fa-tooth fa-xs"></i></label>
+                                
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck2" autocomplete="off" value="2">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck2"><i class="fas fa-tooth fa-xs"></i></label>
+                                
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck3" autocomplete="off" value="3">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck3"><i class="fas fa-tooth fa-xs"></i></label>
+                        </div>
+                        <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group" >   
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck4" autocomplete="off" value="4">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck4"><i class="fas fa-tooth fa-xs"></i></label>
+                            
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck5" autocomplete="off" value="5">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck5"><i class="fas fa-tooth fa-xs"></i></label>
+                                
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck6" autocomplete="off" value="6">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck6"><i class="fas fa-tooth fa-xs"></i></label>
+                        </div>
+                        <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group" >   
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck7" autocomplete="off" value="7">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck7"><i class="fas fa-tooth fa-xs"></i></label>
+                            
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck8" autocomplete="off" value="8">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck8"><i class="fas fa-tooth fa-xs"></i></label>
+                            
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck9" autocomplete="off" value="9">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck9"><i class="fas fa-tooth fa-xs"></i></label>
+                        </div>
+                    </div>
+                    <div class="btn-group-vertical" role="group" aria-label="Basic checkbox toggle button group">
+                        <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group" >   
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck1" autocomplete="off" value="1">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck1"><i class="fas fa-tooth fa-xs"></i></label>
+                                
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck2" autocomplete="off" value="2">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck2"><i class="fas fa-tooth fa-xs"></i></label>
+                                
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck3" autocomplete="off" value="3">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck3"><i class="fas fa-tooth fa-xs"></i></label>
+                        </div>
+                        <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group" >   
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck4" autocomplete="off" value="4">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck4"><i class="fas fa-tooth fa-xs"></i></label>
+                            
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck5" autocomplete="off" value="5">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck5"><i class="fas fa-tooth fa-xs"></i></label>
+                                
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck6" autocomplete="off" value="6">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck6"><i class="fas fa-tooth fa-xs"></i></label>
+                        </div>
+                        <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group" >   
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck7" autocomplete="off" value="7">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck7"><i class="fas fa-tooth fa-xs"></i></label>
+                            
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck8" autocomplete="off" value="8">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck8"><i class="fas fa-tooth fa-xs"></i></label>
+                            
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck9" autocomplete="off" value="9">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck9"><i class="fas fa-tooth fa-xs"></i></label>
+                        </div>
+                    </div>
+                    <div class="btn-group-vertical" role="group" aria-label="Basic checkbox toggle button group">
+                        <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group" >   
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck1" autocomplete="off" value="1">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck1"><i class="fas fa-tooth fa-xs"></i></label>
+                                
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck2" autocomplete="off" value="2">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck2"><i class="fas fa-tooth fa-xs"></i></label>
+                                
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck3" autocomplete="off" value="3">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck3"><i class="fas fa-tooth fa-xs"></i></label>
+                        </div>
+                        <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group" >   
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck4" autocomplete="off" value="4">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck4"><i class="fas fa-tooth fa-xs"></i></label>
+                            
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck5" autocomplete="off" value="5">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck5"><i class="fas fa-tooth fa-xs"></i></label>
+                                
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck6" autocomplete="off" value="6">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck6"><i class="fas fa-tooth fa-xs"></i></label>
+                        </div>
+                        <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group" >   
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck7" autocomplete="off" value="7">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck7"><i class="fas fa-tooth fa-xs"></i></label>
+                            
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck8" autocomplete="off" value="8">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck8"><i class="fas fa-tooth fa-xs"></i></label>
+                            
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck9" autocomplete="off" value="9">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck9"><i class="fas fa-tooth fa-xs"></i></label>
+                        </div>
+                    </div>
+                    <div class="btn-group-vertical" role="group" aria-label="Basic checkbox toggle button group">
+                        <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group" >   
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck1" autocomplete="off" value="1">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck1"><i class="fas fa-tooth fa-xs"></i></label>
+                                
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck2" autocomplete="off" value="2">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck2"><i class="fas fa-tooth fa-xs"></i></label>
+                                
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck3" autocomplete="off" value="3">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck3"><i class="fas fa-tooth fa-xs"></i></label>
+                        </div>
+                        <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group" >   
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck4" autocomplete="off" value="4">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck4"><i class="fas fa-tooth fa-xs"></i></label>
+                            
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck5" autocomplete="off" value="5">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck5"><i class="fas fa-tooth fa-xs"></i></label>
+                                
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck6" autocomplete="off" value="6">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck6"><i class="fas fa-tooth fa-xs"></i></label>
+                        </div>
+                        <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group" >   
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck7" autocomplete="off" value="7">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck7"><i class="fas fa-tooth fa-xs"></i></label>
+                            
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck8" autocomplete="off" value="8">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck8"><i class="fas fa-tooth fa-xs"></i></label>
+                            
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck9" autocomplete="off" value="9">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck9"><i class="fas fa-tooth fa-xs"></i></label>
+                        </div>
+                    </div>
+                    <div class="btn-group-vertical" role="group" aria-label="Basic checkbox toggle button group">
+                        <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group" >   
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck1" autocomplete="off" value="1">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck1"><i class="fas fa-tooth fa-xs"></i></label>
+                                
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck2" autocomplete="off" value="2">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck2"><i class="fas fa-tooth fa-xs"></i></label>
+                                
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck3" autocomplete="off" value="3">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck3"><i class="fas fa-tooth fa-xs"></i></label>
+                        </div>
+                        <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group" >   
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck4" autocomplete="off" value="4">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck4"><i class="fas fa-tooth fa-xs"></i></label>
+                            
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck5" autocomplete="off" value="5">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck5"><i class="fas fa-tooth fa-xs"></i></label>
+                                
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck6" autocomplete="off" value="6">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck6"><i class="fas fa-tooth fa-xs"></i></label>
+                        </div>
+                        <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group" >   
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck7" autocomplete="off" value="7">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck7"><i class="fas fa-tooth fa-xs"></i></label>
+                            
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck8" autocomplete="off" value="8">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck8"><i class="fas fa-tooth fa-xs"></i></label>
+                            
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck9" autocomplete="off" value="9">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck9"><i class="fas fa-tooth fa-xs"></i></label>
+                        </div>
+                    </div>
+                    <div class="btn-group-vertical" role="group" aria-label="Basic checkbox toggle button group">
+                        <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group" >   
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck1" autocomplete="off" value="1">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck1"><i class="fas fa-tooth fa-xs"></i></label>
+                                
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck2" autocomplete="off" value="2">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck2"><i class="fas fa-tooth fa-xs"></i></label>
+                                
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck3" autocomplete="off" value="3">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck3"><i class="fas fa-tooth fa-xs"></i></label>
+                        </div>
+                        <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group" >   
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck4" autocomplete="off" value="4">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck4"><i class="fas fa-tooth fa-xs"></i></label>
+                            
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck5" autocomplete="off" value="5">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck5"><i class="fas fa-tooth fa-xs"></i></label>
+                                
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck6" autocomplete="off" value="6">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck6"><i class="fas fa-tooth fa-xs"></i></label>
+                        </div>
+                        <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group" >   
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck7" autocomplete="off" value="7">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck7"><i class="fas fa-tooth fa-xs"></i></label>
+                            
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck8" autocomplete="off" value="8">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck8"><i class="fas fa-tooth fa-xs"></i></label>
+                            
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck9" autocomplete="off" value="9">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck9"><i class="fas fa-tooth fa-xs"></i></label>
+                        </div>
+                    </div>
+                    <div class="btn-group-vertical" role="group" aria-label="Basic checkbox toggle button group">
+                        <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group" >   
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck1" autocomplete="off" value="1">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck1"><i class="fas fa-tooth fa-xs"></i></label>
+                                
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck2" autocomplete="off" value="2">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck2"><i class="fas fa-tooth fa-xs"></i></label>
+                                
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck3" autocomplete="off" value="3">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck3"><i class="fas fa-tooth fa-xs"></i></label>
+                        </div>
+                        <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group" >   
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck4" autocomplete="off" value="4">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck4"><i class="fas fa-tooth fa-xs"></i></label>
+                            
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck5" autocomplete="off" value="5">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck5"><i class="fas fa-tooth fa-xs"></i></label>
+                                
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck6" autocomplete="off" value="6">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck6"><i class="fas fa-tooth fa-xs"></i></label>
+                        </div>
+                        <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group" >   
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck7" autocomplete="off" value="7">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck7"><i class="fas fa-tooth fa-xs"></i></label>
+                            
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck8" autocomplete="off" value="8">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck8"><i class="fas fa-tooth fa-xs"></i></label>
+                            
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck9" autocomplete="off" value="9">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck9"><i class="fas fa-tooth fa-xs"></i></label>
+                        </div>
+                    </div>
+                    <div class="btn-group-vertical" role="group" aria-label="Basic checkbox toggle button group">
+                        <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group" >   
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck1" autocomplete="off" value="1">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck1"><i class="fas fa-tooth fa-xs"></i></label>
+                                
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck2" autocomplete="off" value="2">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck2"><i class="fas fa-tooth fa-xs"></i></label>
+                                
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck3" autocomplete="off" value="3">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck3"><i class="fas fa-tooth fa-xs"></i></label>
+                        </div>
+                        <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group" >   
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck4" autocomplete="off" value="4">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck4"><i class="fas fa-tooth fa-xs"></i></label>
+                            
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck5" autocomplete="off" value="5">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck5"><i class="fas fa-tooth fa-xs"></i></label>
+                                
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck6" autocomplete="off" value="6">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck6"><i class="fas fa-tooth fa-xs"></i></label>
+                        </div>
+                        <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group" >   
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck7" autocomplete="off" value="7">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck7"><i class="fas fa-tooth fa-xs"></i></label>
+                            
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck8" autocomplete="off" value="8">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck8"><i class="fas fa-tooth fa-xs"></i></label>
+                            
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck9" autocomplete="off" value="9">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck9"><i class="fas fa-tooth fa-xs"></i></label>
+                        </div>
+                    </div>
+                    <div class="btn-group-vertical" role="group" aria-label="Basic checkbox toggle button group">
+                        <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group" >   
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck1" autocomplete="off" value="1">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck1"><i class="fas fa-tooth fa-xs"></i></label>
+                                
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck2" autocomplete="off" value="2">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck2"><i class="fas fa-tooth fa-xs"></i></label>
+                                
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck3" autocomplete="off" value="3">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck3"><i class="fas fa-tooth fa-xs"></i></label>
+                        </div>
+                        <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group" >   
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck4" autocomplete="off" value="4">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck4"><i class="fas fa-tooth fa-xs"></i></label>
+                            
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck5" autocomplete="off" value="5">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck5"><i class="fas fa-tooth fa-xs"></i></label>
+                                
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck6" autocomplete="off" value="6">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck6"><i class="fas fa-tooth fa-xs"></i></label>
+                        </div>
+                        <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group" >   
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck7" autocomplete="off" value="7">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck7"><i class="fas fa-tooth fa-xs"></i></label>
+                            
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck8" autocomplete="off" value="8">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck8"><i class="fas fa-tooth fa-xs"></i></label>
+                            
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck9" autocomplete="off" value="9">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck9"><i class="fas fa-tooth fa-xs"></i></label>
+                        </div>
+                    </div>
+                    <div class="btn-group-vertical" role="group" aria-label="Basic checkbox toggle button group">
+                        <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group" >   
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck1" autocomplete="off" value="1">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck1"><i class="fas fa-tooth fa-xs"></i></label>
+                                
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck2" autocomplete="off" value="2">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck2"><i class="fas fa-tooth fa-xs"></i></label>
+                                
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck3" autocomplete="off" value="3">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck3"><i class="fas fa-tooth fa-xs"></i></label>
+                        </div>
+                        <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group" >   
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck4" autocomplete="off" value="4">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck4"><i class="fas fa-tooth fa-xs"></i></label>
+                            
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck5" autocomplete="off" value="5">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck5"><i class="fas fa-tooth fa-xs"></i></label>
+                                
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck6" autocomplete="off" value="6">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck6"><i class="fas fa-tooth fa-xs"></i></label>
+                        </div>
+                        <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group" >   
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck7" autocomplete="off" value="7">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck7"><i class="fas fa-tooth fa-xs"></i></label>
+                            
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck8" autocomplete="off" value="8">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck8"><i class="fas fa-tooth fa-xs"></i></label>
+                            
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck9" autocomplete="off" value="9">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck9"><i class="fas fa-tooth fa-xs"></i></label>
+                        </div>
+                    </div>
+                    <div class="btn-group-vertical" role="group" aria-label="Basic checkbox toggle button group">
+                        <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group" >   
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck1" autocomplete="off" value="1">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck1"><i class="fas fa-tooth fa-xs"></i></label>
+                                
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck2" autocomplete="off" value="2">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck2"><i class="fas fa-tooth fa-xs"></i></label>
+                                
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck3" autocomplete="off" value="3">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck3"><i class="fas fa-tooth fa-xs"></i></label>
+                        </div>
+                        <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group" >   
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck4" autocomplete="off" value="4">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck4"><i class="fas fa-tooth fa-xs"></i></label>
+                            
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck5" autocomplete="off" value="5">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck5"><i class="fas fa-tooth fa-xs"></i></label>
+                                
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck6" autocomplete="off" value="6">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck6"><i class="fas fa-tooth fa-xs"></i></label>
+                        </div>
+                        <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group" >   
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck7" autocomplete="off" value="7">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck7"><i class="fas fa-tooth fa-xs"></i></label>
+                            
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck8" autocomplete="off" value="8">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck8"><i class="fas fa-tooth fa-xs"></i></label>
+                            
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck9" autocomplete="off" value="9">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck9"><i class="fas fa-tooth fa-xs"></i></label>
+                        </div>
+                    </div>
+                    <div class="btn-group-vertical" role="group" aria-label="Basic checkbox toggle button group">
+                        <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group" >   
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck1" autocomplete="off" value="1">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck1"><i class="fas fa-tooth fa-xs"></i></label>
+                                
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck2" autocomplete="off" value="2">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck2"><i class="fas fa-tooth fa-xs"></i></label>
+                                
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck3" autocomplete="off" value="3">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck3"><i class="fas fa-tooth fa-xs"></i></label>
+                        </div>
+                        <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group" >   
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck4" autocomplete="off" value="4">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck4"><i class="fas fa-tooth fa-xs"></i></label>
+                            
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck5" autocomplete="off" value="5">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck5"><i class="fas fa-tooth fa-xs"></i></label>
+                                
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck6" autocomplete="off" value="6">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck6"><i class="fas fa-tooth fa-xs"></i></label>
+                        </div>
+                        <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group" >   
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck7" autocomplete="off" value="7">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck7"><i class="fas fa-tooth fa-xs"></i></label>
+                            
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck8" autocomplete="off" value="8">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck8"><i class="fas fa-tooth fa-xs"></i></label>
+                            
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck9" autocomplete="off" value="9">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck9"><i class="fas fa-tooth fa-xs"></i></label>
+                        </div>
+                    </div>
+                    <div class="btn-group-vertical" role="group" aria-label="Basic checkbox toggle button group">
+                        <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group" >   
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck1" autocomplete="off" value="1">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck1"><i class="fas fa-tooth fa-xs"></i></label>
+                                
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck2" autocomplete="off" value="2">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck2"><i class="fas fa-tooth fa-xs"></i></label>
+                                
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck3" autocomplete="off" value="3">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck3"><i class="fas fa-tooth fa-xs"></i></label>
+                        </div>
+                        <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group" >   
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck4" autocomplete="off" value="4">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck4"><i class="fas fa-tooth fa-xs"></i></label>
+                            
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck5" autocomplete="off" value="5">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck5"><i class="fas fa-tooth fa-xs"></i></label>
+                                
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck6" autocomplete="off" value="6">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck6"><i class="fas fa-tooth fa-xs"></i></label>
+                        </div>
+                        <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group" >   
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck7" autocomplete="off" value="7">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck7"><i class="fas fa-tooth fa-xs"></i></label>
+                            
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck8" autocomplete="off" value="8">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck8"><i class="fas fa-tooth fa-xs"></i></label>
+                            
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck9" autocomplete="off" value="9">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck9"><i class="fas fa-tooth fa-xs"></i></label>
+                        </div>
+                    </div>
+                    <div class="btn-group-vertical" role="group" aria-label="Basic checkbox toggle button group">
+                        <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group" >   
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck1" autocomplete="off" value="1">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck1"><i class="fas fa-tooth fa-xs"></i></label>
+                                
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck2" autocomplete="off" value="2">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck2"><i class="fas fa-tooth fa-xs"></i></label>
+                                
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck3" autocomplete="off" value="3">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck3"><i class="fas fa-tooth fa-xs"></i></label>
+                        </div>
+                        <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group" >   
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck4" autocomplete="off" value="4">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck4"><i class="fas fa-tooth fa-xs"></i></label>
+                            
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck5" autocomplete="off" value="5">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck5"><i class="fas fa-tooth fa-xs"></i></label>
+                                
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck6" autocomplete="off" value="6">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck6"><i class="fas fa-tooth fa-xs"></i></label>
+                        </div>
+                        <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group" >   
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck7" autocomplete="off" value="7">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck7"><i class="fas fa-tooth fa-xs"></i></label>
+                            
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck8" autocomplete="off" value="8">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck8"><i class="fas fa-tooth fa-xs"></i></label>
+                            
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck9" autocomplete="off" value="9">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck9"><i class="fas fa-tooth fa-xs"></i></label>
+                        </div>
+                    </div>
+                    <div class="btn-group-vertical" role="group" aria-label="Basic checkbox toggle button group">
+                        <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group" >   
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck1" autocomplete="off" value="1">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck1"><i class="fas fa-tooth fa-xs"></i></label>
+                                
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck2" autocomplete="off" value="2">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck2"><i class="fas fa-tooth fa-xs"></i></label>
+                                
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck3" autocomplete="off" value="3">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck3"><i class="fas fa-tooth fa-xs"></i></label>
+                        </div>
+                        <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group" >   
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck4" autocomplete="off" value="4">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck4"><i class="fas fa-tooth fa-xs"></i></label>
+                            
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck5" autocomplete="off" value="5">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck5"><i class="fas fa-tooth fa-xs"></i></label>
+                                
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck6" autocomplete="off" value="6">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck6"><i class="fas fa-tooth fa-xs"></i></label>
+                        </div>
+                        <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group" >   
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck7" autocomplete="off" value="7">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck7"><i class="fas fa-tooth fa-xs"></i></label>
+                            
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck8" autocomplete="off" value="8">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck8"><i class="fas fa-tooth fa-xs"></i></label>
+                            
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck9" autocomplete="off" value="9">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck9"><i class="fas fa-tooth fa-xs"></i></label>
+                        </div>
+                    </div>
+                    <div class="btn-group-vertical" role="group" aria-label="Basic checkbox toggle button group">
+                        <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group" >   
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck1" autocomplete="off" value="1">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck1"><i class="fas fa-tooth fa-xs"></i></label>
+                                
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck2" autocomplete="off" value="2">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck2"><i class="fas fa-tooth fa-xs"></i></label>
+                                
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck3" autocomplete="off" value="3">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck3"><i class="fas fa-tooth fa-xs"></i></label>
+                        </div>
+                        <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group" >   
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck4" autocomplete="off" value="4">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck4"><i class="fas fa-tooth fa-xs"></i></label>
+                            
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck5" autocomplete="off" value="5">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck5"><i class="fas fa-tooth fa-xs"></i></label>
+                                
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck6" autocomplete="off" value="6">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck6"><i class="fas fa-tooth fa-xs"></i></label>
+                        </div>
+                        <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group" >   
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck7" autocomplete="off" value="7">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck7"><i class="fas fa-tooth fa-xs"></i></label>
+                            
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck8" autocomplete="off" value="8">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck8"><i class="fas fa-tooth fa-xs"></i></label>
+                            
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck9" autocomplete="off" value="9">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck9"><i class="fas fa-tooth fa-xs"></i></label>
+                        </div>
+                    </div>
+                    <div class="btn-group-vertical" role="group" aria-label="Basic checkbox toggle button group">
+                        <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group" >   
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck1" autocomplete="off" value="1">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck1"><i class="fas fa-tooth fa-xs"></i></label>
+                                
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck2" autocomplete="off" value="2">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck2"><i class="fas fa-tooth fa-xs"></i></label>
+                                
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck3" autocomplete="off" value="3">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck3"><i class="fas fa-tooth fa-xs"></i></label>
+                        </div>
+                        <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group" >   
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck4" autocomplete="off" value="4">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck4"><i class="fas fa-tooth fa-xs"></i></label>
+                            
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck5" autocomplete="off" value="5">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck5"><i class="fas fa-tooth fa-xs"></i></label>
+                                
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck6" autocomplete="off" value="6">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck6"><i class="fas fa-tooth fa-xs"></i></label>
+                        </div>
+                        <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group" >   
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck7" autocomplete="off" value="7">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck7"><i class="fas fa-tooth fa-xs"></i></label>
+                            
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck8" autocomplete="off" value="8">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck8"><i class="fas fa-tooth fa-xs"></i></label>
+                            
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck9" autocomplete="off" value="9">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck9"><i class="fas fa-tooth fa-xs"></i></label>
+                        </div>
+                    </div>
+                    <div class="btn-group-vertical" role="group" aria-label="Basic checkbox toggle button group">
+                        <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group" >   
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck1" autocomplete="off" value="1">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck1"><i class="fas fa-tooth fa-xs"></i></label>
+                                
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck2" autocomplete="off" value="2">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck2"><i class="fas fa-tooth fa-xs"></i></label>
+                                
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck3" autocomplete="off" value="3">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck3"><i class="fas fa-tooth fa-xs"></i></label>
+                        </div>
+                        <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group" >   
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck4" autocomplete="off" value="4">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck4"><i class="fas fa-tooth fa-xs"></i></label>
+                            
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck5" autocomplete="off" value="5">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck5"><i class="fas fa-tooth fa-xs"></i></label>
+                                
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck6" autocomplete="off" value="6">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck6"><i class="fas fa-tooth fa-xs"></i></label>
+                        </div>
+                        <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group" >   
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck7" autocomplete="off" value="7">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck7"><i class="fas fa-tooth fa-xs"></i></label>
+                            
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck8" autocomplete="off" value="8">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck8"><i class="fas fa-tooth fa-xs"></i></label>
+                            
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck9" autocomplete="off" value="9">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck9"><i class="fas fa-tooth fa-xs"></i></label>
+                        </div>
+                    </div>
+                    <div class="btn-group-vertical" role="group" aria-label="Basic checkbox toggle button group">
+                        <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group" >   
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck1" autocomplete="off" value="1">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck1"><i class="fas fa-tooth fa-xs"></i></label>
+                                
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck2" autocomplete="off" value="2">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck2"><i class="fas fa-tooth fa-xs"></i></label>
+                                
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck3" autocomplete="off" value="3">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck3"><i class="fas fa-tooth fa-xs"></i></label>
+                        </div>
+                        <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group" >   
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck4" autocomplete="off" value="4">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck4"><i class="fas fa-tooth fa-xs"></i></label>
+                            
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck5" autocomplete="off" value="5">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck5"><i class="fas fa-tooth fa-xs"></i></label>
+                                
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck6" autocomplete="off" value="6">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck6"><i class="fas fa-tooth fa-xs"></i></label>
+                        </div>
+                        <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group" >   
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck7" autocomplete="off" value="7">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck7"><i class="fas fa-tooth fa-xs"></i></label>
+                            
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck8" autocomplete="off" value="8">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck8"><i class="fas fa-tooth fa-xs"></i></label>
+                            
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck9" autocomplete="off" value="9">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck9"><i class="fas fa-tooth fa-xs"></i></label>
+                        </div>
+                    </div>
+                    <div class="btn-group-vertical" role="group" aria-label="Basic checkbox toggle button group">
+                        <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group" >   
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck1" autocomplete="off" value="1">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck1"><i class="fas fa-tooth fa-xs"></i></label>
+                                
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck2" autocomplete="off" value="2">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck2"><i class="fas fa-tooth fa-xs"></i></label>
+                                
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck3" autocomplete="off" value="3">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck3"><i class="fas fa-tooth fa-xs"></i></label>
+                        </div>
+                        <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group" >   
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck4" autocomplete="off" value="4">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck4"><i class="fas fa-tooth fa-xs"></i></label>
+                            
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck5" autocomplete="off" value="5">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck5"><i class="fas fa-tooth fa-xs"></i></label>
+                                
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck6" autocomplete="off" value="6">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck6"><i class="fas fa-tooth fa-xs"></i></label>
+                        </div>
+                        <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group" >   
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck7" autocomplete="off" value="7">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck7"><i class="fas fa-tooth fa-xs"></i></label>
+                            
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck8" autocomplete="off" value="8">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck8"><i class="fas fa-tooth fa-xs"></i></label>
+                            
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck9" autocomplete="off" value="9">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck9"><i class="fas fa-tooth fa-xs"></i></label>
+                        </div>
+                    </div>
+                    <div class="btn-group-vertical" role="group" aria-label="Basic checkbox toggle button group">
+                        <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group" >   
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck1" autocomplete="off" value="1">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck1"><i class="fas fa-tooth fa-xs"></i></label>
+                                
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck2" autocomplete="off" value="2">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck2"><i class="fas fa-tooth fa-xs"></i></label>
+                                
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck3" autocomplete="off" value="3">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck3"><i class="fas fa-tooth fa-xs"></i></label>
+                        </div>
+                        <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group" >   
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck4" autocomplete="off" value="4">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck4"><i class="fas fa-tooth fa-xs"></i></label>
+                            
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck5" autocomplete="off" value="5">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck5"><i class="fas fa-tooth fa-xs"></i></label>
+                                
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck6" autocomplete="off" value="6">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck6"><i class="fas fa-tooth fa-xs"></i></label>
+                        </div>
+                        <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group" >   
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck7" autocomplete="off" value="7">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck7"><i class="fas fa-tooth fa-xs"></i></label>
+                            
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck8" autocomplete="off" value="8">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck8"><i class="fas fa-tooth fa-xs"></i></label>
+                            
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck9" autocomplete="off" value="9">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck9"><i class="fas fa-tooth fa-xs"></i></label>
+                        </div>
+                    </div>
+                    <div class="btn-group-vertical" role="group" aria-label="Basic checkbox toggle button group">
+                        <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group" >   
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck1" autocomplete="off" value="1">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck1"><i class="fas fa-tooth fa-xs"></i></label>
+                                
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck2" autocomplete="off" value="2">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck2"><i class="fas fa-tooth fa-xs"></i></label>
+                                
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck3" autocomplete="off" value="3">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck3"><i class="fas fa-tooth fa-xs"></i></label>
+                        </div>
+                        <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group" >   
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck4" autocomplete="off" value="4">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck4"><i class="fas fa-tooth fa-xs"></i></label>
+                            
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck5" autocomplete="off" value="5">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck5"><i class="fas fa-tooth fa-xs"></i></label>
+                                
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck6" autocomplete="off" value="6">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck6"><i class="fas fa-tooth fa-xs"></i></label>
+                        </div>
+                        <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group" >   
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck7" autocomplete="off" value="7">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck7"><i class="fas fa-tooth fa-xs"></i></label>
+                            
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck8" autocomplete="off" value="8">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck8"><i class="fas fa-tooth fa-xs"></i></label>
+                            
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck9" autocomplete="off" value="9">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck9"><i class="fas fa-tooth fa-xs"></i></label>
+                        </div>
+                    </div>
+                    <div class="btn-group-vertical" role="group" aria-label="Basic checkbox toggle button group">
+                        <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group" >   
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck1" autocomplete="off" value="1">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck1"><i class="fas fa-tooth fa-xs"></i></label>
+                                
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck2" autocomplete="off" value="2">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck2"><i class="fas fa-tooth fa-xs"></i></label>
+                                
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck3" autocomplete="off" value="3">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck3"><i class="fas fa-tooth fa-xs"></i></label>
+                        </div>
+                        <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group" >   
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck4" autocomplete="off" value="4">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck4"><i class="fas fa-tooth fa-xs"></i></label>
+                            
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck5" autocomplete="off" value="5">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck5"><i class="fas fa-tooth fa-xs"></i></label>
+                                
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck6" autocomplete="off" value="6">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck6"><i class="fas fa-tooth fa-xs"></i></label>
+                        </div>
+                        <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group" >   
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck7" autocomplete="off" value="7">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck7"><i class="fas fa-tooth fa-xs"></i></label>
+                            
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck8" autocomplete="off" value="8">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck8"><i class="fas fa-tooth fa-xs"></i></label>
+                            
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck9" autocomplete="off" value="9">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck9"><i class="fas fa-tooth fa-xs"></i></label>
+                        </div>
+                    </div>
+                    <div class="btn-group-vertical" role="group" aria-label="Basic checkbox toggle button group">
+                        <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group" >   
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck1" autocomplete="off" value="1">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck1"><i class="fas fa-tooth fa-xs"></i></label>
+                                
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck2" autocomplete="off" value="2">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck2"><i class="fas fa-tooth fa-xs"></i></label>
+                                
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck3" autocomplete="off" value="3">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck3"><i class="fas fa-tooth fa-xs"></i></label>
+                        </div>
+                        <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group" >   
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck4" autocomplete="off" value="4">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck4"><i class="fas fa-tooth fa-xs"></i></label>
+                            
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck5" autocomplete="off" value="5">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck5"><i class="fas fa-tooth fa-xs"></i></label>
+                                
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck6" autocomplete="off" value="6">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck6"><i class="fas fa-tooth fa-xs"></i></label>
+                        </div>
+                        <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group" >   
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck7" autocomplete="off" value="7">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck7"><i class="fas fa-tooth fa-xs"></i></label>
+                            
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck8" autocomplete="off" value="8">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck8"><i class="fas fa-tooth fa-xs"></i></label>
+                            
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck9" autocomplete="off" value="9">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck9"><i class="fas fa-tooth fa-xs"></i></label>
+                        </div>
+                    </div>
+                    <div class="btn-group-vertical" role="group" aria-label="Basic checkbox toggle button group">
+                        <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group" >   
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck1" autocomplete="off" value="1">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck1"><i class="fas fa-tooth fa-xs"></i></label>
+                                
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck2" autocomplete="off" value="2">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck2"><i class="fas fa-tooth fa-xs"></i></label>
+                                
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck3" autocomplete="off" value="3">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck3"><i class="fas fa-tooth fa-xs"></i></label>
+                        </div>
+                        <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group" >   
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck4" autocomplete="off" value="4">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck4"><i class="fas fa-tooth fa-xs"></i></label>
+                            
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck5" autocomplete="off" value="5">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck5"><i class="fas fa-tooth fa-xs"></i></label>
+                                
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck6" autocomplete="off" value="6">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck6"><i class="fas fa-tooth fa-xs"></i></label>
+                        </div>
+                        <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group" >   
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck7" autocomplete="off" value="7">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck7"><i class="fas fa-tooth fa-xs"></i></label>
+                            
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck8" autocomplete="off" value="8">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck8"><i class="fas fa-tooth fa-xs"></i></label>
+                            
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck9" autocomplete="off" value="9">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck9"><i class="fas fa-tooth fa-xs"></i></label>
+                        </div>
+                    </div>
+                    <div class="btn-group-vertical" role="group" aria-label="Basic checkbox toggle button group">
+                        <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group" >   
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck1" autocomplete="off" value="1">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck1"><i class="fas fa-tooth fa-xs"></i></label>
+                                
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck2" autocomplete="off" value="2">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck2"><i class="fas fa-tooth fa-xs"></i></label>
+                                
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck3" autocomplete="off" value="3">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck3"><i class="fas fa-tooth fa-xs"></i></label>
+                        </div>
+                        <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group" >   
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck4" autocomplete="off" value="4">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck4"><i class="fas fa-tooth fa-xs"></i></label>
+                            
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck5" autocomplete="off" value="5">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck5"><i class="fas fa-tooth fa-xs"></i></label>
+                                
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck6" autocomplete="off" value="6">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck6"><i class="fas fa-tooth fa-xs"></i></label>
+                        </div>
+                        <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group" >   
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck7" autocomplete="off" value="7">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck7"><i class="fas fa-tooth fa-xs"></i></label>
+                            
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck8" autocomplete="off" value="8">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck8"><i class="fas fa-tooth fa-xs"></i></label>
+                            
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck9" autocomplete="off" value="9">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck9"><i class="fas fa-tooth fa-xs"></i></label>
+                        </div>
+                    </div>
+                    <div class="btn-group-vertical" role="group" aria-label="Basic checkbox toggle button group">
+                        <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group" >   
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck1" autocomplete="off" value="1">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck1"><i class="fas fa-tooth fa-xs"></i></label>
+                                
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck2" autocomplete="off" value="2">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck2"><i class="fas fa-tooth fa-xs"></i></label>
+                                
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck3" autocomplete="off" value="3">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck3"><i class="fas fa-tooth fa-xs"></i></label>
+                        </div>
+                        <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group" >   
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck4" autocomplete="off" value="4">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck4"><i class="fas fa-tooth fa-xs"></i></label>
+                            
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck5" autocomplete="off" value="5">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck5"><i class="fas fa-tooth fa-xs"></i></label>
+                                
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck6" autocomplete="off" value="6">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck6"><i class="fas fa-tooth fa-xs"></i></label>
+                        </div>
+                        <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group" >   
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck7" autocomplete="off" value="7">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck7"><i class="fas fa-tooth fa-xs"></i></label>
+                            
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck8" autocomplete="off" value="8">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck8"><i class="fas fa-tooth fa-xs"></i></label>
+                            
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck9" autocomplete="off" value="9">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck9"><i class="fas fa-tooth fa-xs"></i></label>
+                        </div>
+                    </div>
+                    <div class="btn-group-vertical" role="group" aria-label="Basic checkbox toggle button group">
+                        <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group" >   
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck1" autocomplete="off" value="1">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck1"><i class="fas fa-tooth fa-xs"></i></label>
+                                
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck2" autocomplete="off" value="2">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck2"><i class="fas fa-tooth fa-xs"></i></label>
+                                
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck3" autocomplete="off" value="3">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck3"><i class="fas fa-tooth fa-xs"></i></label>
+                        </div>
+                        <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group" >   
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck4" autocomplete="off" value="4">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck4"><i class="fas fa-tooth fa-xs"></i></label>
+                            
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck5" autocomplete="off" value="5">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck5"><i class="fas fa-tooth fa-xs"></i></label>
+                                
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck6" autocomplete="off" value="6">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck6"><i class="fas fa-tooth fa-xs"></i></label>
+                        </div>
+                        <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group" >   
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck7" autocomplete="off" value="7">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck7"><i class="fas fa-tooth fa-xs"></i></label>
+                            
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck8" autocomplete="off" value="8">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck8"><i class="fas fa-tooth fa-xs"></i></label>
+                            
+                            <input type="checkbox" name="gigi[]" class="btn-check" id="btncheck9" autocomplete="off" value="9">
+                            <label class="btn btn-outline-danger px-1 py-0 mb-0" for="btncheck9"><i class="fas fa-tooth fa-xs"></i></label>
+                        </div>
                     </div>
 
+                    
+                    
+                    <P><INPUT class=btn name=submit value=check type=submit  onclick="validate()"></P>
+                </form>
+
                     <div class="form-group row">
-                      
+        
                     </div>
 
                     <div class="form-group row">
@@ -855,6 +1080,15 @@
     @include('layouts.footers.auth.footer')
 @endsection
 @section('js')
+<script type="text/javascript">
+    function validate() {
+        if (document.getElementById('btncheck1').checked) {
+            alert("checked");
+        } else {
+            alert("You didn't check it! Let me check it for you.");
+        }
+    }
+</script>
   <script type="text/javascript">
         class CustomSelect {
         constructor(originalSelect) {

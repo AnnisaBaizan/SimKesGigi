@@ -196,6 +196,7 @@
         </div>
         @include('layouts.footers.auth.footer')
     </div>
+    
 @endsection
 @section('js')
     @can('mahasiswa')
