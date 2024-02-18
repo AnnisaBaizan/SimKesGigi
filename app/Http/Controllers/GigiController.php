@@ -14,7 +14,10 @@ class GigiController extends Controller
      */
     public function index()
     {
-        //
+        return view('pages.gigi.index', [
+            'gigis' => Gigi::all()
+        ]);
+        // return view('pages.gigi.index');
     }
 
     /**

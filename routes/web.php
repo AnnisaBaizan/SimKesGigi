@@ -30,6 +30,9 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\PertanyaanController;
 use App\Http\Controllers\PengsiperiController;
 use App\Http\Controllers\EksplakkalController;
+use App\Http\Controllers\OdontogramController;
+use App\Http\Controllers\OhisController;
+use App\Http\Controllers\VitalitasController;
 
 
 
@@ -140,6 +143,41 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::post('importeksplakkal', [EksplakkalController::class, 'import'])->name('importeksplakkal')->middleware('mahasiswa');
     Route::get('exporteksplakkal', [EksplakkalController::class, 'export'])->name('exporteksplakkal')->middleware('mahasiswa');
 
+	// Route::resource('/odontogram', OdontogramController::class);
+	Route::get('/odontogram', [OdontogramController::class, 'index'])->name('odontogram.index');
+	Route::get('/odontogram/create', [OdontogramController::class, 'create'])->name('odontogram.create')->middleware('mahasiswa');
+	Route::post('/odontogram', [OdontogramController::class, 'store'])->name('odontogram.store')->middleware('mahasiswa');
+	Route::get('/odontogram/{odontogram}', [OdontogramController::class, 'show'])->name('odontogram.show');
+	Route::get('/odontogram/{odontogram}/edit', [OdontogramController::class, 'edit'])->name('odontogram.edit')->middleware('mahasiswa');
+	Route::put('/odontogram/{odontogram}', [OdontogramController::class, 'update'])->name('odontogram.update')->middleware('mahasiswa');
+	Route::Delete('/odontogram/{odontogram}', [OdontogramController::class, 'destroy'])->name('odontogram.destroy')->middleware('mahasiswa');
+
+	Route::post('importodontogram', [OdontogramController::class, 'import'])->name('importodontogram')->middleware('mahasiswa');
+    Route::get('exportodontogram', [OdontogramController::class, 'export'])->name('exportodontogram')->middleware('mahasiswa');
+
+	// Route::resource('/ohis', OhisController::class);
+	Route::get('/ohis', [OhisController::class, 'index'])->name('ohis.index');
+	Route::get('/ohis/create', [OhisController::class, 'create'])->name('ohis.create')->middleware('mahasiswa');
+	Route::post('/ohis', [OhisController::class, 'store'])->name('ohis.store')->middleware('mahasiswa');
+	Route::get('/ohis/{ohis}', [OhisController::class, 'show'])->name('ohis.show');
+	Route::get('/ohis/{ohis}/edit', [OhisController::class, 'edit'])->name('ohis.edit')->middleware('mahasiswa');
+	Route::put('/ohis/{ohis}', [OhisController::class, 'update'])->name('ohis.update')->middleware('mahasiswa');
+	Route::Delete('/ohis/{ohis}', [OhisController::class, 'destroy'])->name('ohis.destroy')->middleware('mahasiswa');
+
+	Route::post('importohis', [OhisController::class, 'import'])->name('importohis')->middleware('mahasiswa');
+    Route::get('exportohis', [OhisController::class, 'export'])->name('exportohis')->middleware('mahasiswa');
+
+	// Route::resource('/vitalitas', VitalitasController::class);
+	Route::get('/vitalitas', [VitalitasController::class, 'index'])->name('vitalitas.index');
+	Route::get('/vitalitas/create', [VitalitasController::class, 'create'])->name('vitalitas.create')->middleware('mahasiswa');
+	Route::post('/vitalitas', [VitalitasController::class, 'store'])->name('vitalitas.store')->middleware('mahasiswa');
+	Route::get('/vitalitas/{vitalitas}', [VitalitasController::class, 'show'])->name('vitalitas.show');
+	Route::get('/vitalitas/{vitalitas}/edit', [VitalitasController::class, 'edit'])->name('vitalitas.edit')->middleware('mahasiswa');
+	Route::put('/vitalitas/{vitalitas}', [VitalitasController::class, 'update'])->name('vitalitas.update')->middleware('mahasiswa');
+	Route::Delete('/vitalitas/{vitalitas}', [VitalitasController::class, 'destroy'])->name('vitalitas.destroy')->middleware('mahasiswa');
+
+	Route::post('importvitalitas', [VitalitasController::class, 'import'])->name('importvitalitas')->middleware('mahasiswa');
+    Route::get('exportvitalitas', [VitalitasController::class, 'export'])->name('exportvitalitas')->middleware('mahasiswa');
 
 	Route::get('/{page}', [PageController::class, 'index'])->name('page');
 	Route::post('logout', [LoginController::class, 'logout'])->name('logout');

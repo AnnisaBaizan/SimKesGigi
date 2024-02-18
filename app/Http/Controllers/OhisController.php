@@ -15,7 +15,10 @@ class OhisController extends Controller
      */
     public function index()
     {
-        //
+        return view('pages.ohis.index', [
+            'ohiss' => Ohis::all()
+        ]);
+        // return view('pages.ohis.index');
     }
 
     /**

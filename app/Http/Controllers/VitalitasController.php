@@ -15,7 +15,10 @@ class VitalitasController extends Controller
      */
     public function index()
     {
-        //
+        return view('pages.vitalitas.index', [
+            'vitalitass' => Vitalitas::all()
+        ]);
+        // return view('pages.vitalitas.index');
     }
 
     /**

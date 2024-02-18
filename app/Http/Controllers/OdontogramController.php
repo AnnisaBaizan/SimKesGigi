@@ -15,7 +15,10 @@ class OdontogramController extends Controller
      */
     public function index()
     {
-        //
+        return view('pages.odontogram.index', [
+            'odontograms' => Odontogram::all()
+        ]);
+        // return view('pages.odontogram.index');
     }
 
     /**
