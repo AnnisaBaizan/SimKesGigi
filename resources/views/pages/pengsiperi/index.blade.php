@@ -174,12 +174,48 @@
                                             <td>{{ $pengsiperi->nilai_peng }}</td>
                                             <td>{{ $pengsiperi->kriteria }}</td>
                                             {{-- Keterampilan --}}
-                                            <td>{{ $pengsiperi->labialbukal }}</td>
-                                            <td>{{ $pengsiperi->lingualpalatal }}</td>
-                                            <td>{{ $pengsiperi->kunyah }}</td>
-                                            <td>{{ $pengsiperi->interdental }}</td>
-                                            <td>{{ $pengsiperi->gerakan }}</td>
-                                            <td>{{ $pengsiperi->kesimpulan }}</td>
+                                            <td>{{ $pengsiperi->labialbukal }} 
+                                                @if ($pengsiperi->hasil_lb == "Benar")
+                                                    <span class="badge badge-sm bg-gradient-success">Benar</span>
+                                                @else
+                                                    <span class="badge badge-sm bg-gradient-danger">Salah</span>
+                                                @endif
+                                            </td>
+                                            <td>{{ $pengsiperi->lingualpalatal }}
+                                                @if ($pengsiperi->hasil_lp == "Benar")
+                                                    <span class="badge badge-sm bg-gradient-success">Benar</span>
+                                                @else
+                                                    <span class="badge badge-sm bg-gradient-danger">Salah</span>
+                                                @endif
+                                            </td>
+                                            <td>{{ $pengsiperi->kunyah }} 
+                                                @if ($pengsiperi->hasil_k == "Benar")
+                                                    <span class="badge badge-sm bg-gradient-success">Benar</span>
+                                                @else
+                                                    <span class="badge badge-sm bg-gradient-danger">Salah</span>
+                                                @endif
+                                            </td>
+                                            <td>{{ $pengsiperi->interdental }}
+                                                @if ($pengsiperi->hasil_i == "Benar")
+                                                    <span class="badge badge-sm bg-gradient-success">Benar</span>
+                                                @else
+                                                    <span class="badge badge-sm bg-gradient-danger">Salah</span>
+                                                @endif
+                                            </td>
+                                            <td>{{ $pengsiperi->gerakan }}
+                                                @if ($pengsiperi->hasil_g == "Benar")
+                                                    <span class="badge badge-sm bg-gradient-success">Benar</span>
+                                                @else
+                                                    <span class="badge badge-sm bg-gradient-danger">Salah</span>
+                                                @endif
+                                            </td>
+                                            <td>
+                                                @if ($pengsiperi->kesimpulan == "Terampil")
+                                                    <span class="badge badge-sm bg-gradient-success">Terampil</span>
+                                                @else
+                                                    <span class="badge badge-sm bg-gradient-danger">Kurang Terampil</span>
+                                                @endif
+                                            </td>
                                             {{-- Perilaku --}}
                                             <td>{{ $pengsiperi->perilaku }}</td>
                                             <td>{{ $pengsiperi->jumlah_yang_terpilih }} / {{ $pengsiperi->jumlah_pilihan }}</td>

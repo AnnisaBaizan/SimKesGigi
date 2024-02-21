@@ -9,7 +9,7 @@
               <h6 class="m-0 font-weight-bold text-primary">Pengetahuan, Keterampilan, Perilaku dan Peran Orang Tua</h6>
             </div>
             <div class="card-body">
-                <form class="user" action="{{route('pengsiperi.store')}}" method="post">
+            <form class="user" action="{{route('pengsiperi.store')}}" method="post">
                   @csrf
 
                   <div class="form-group row">
@@ -40,8 +40,8 @@
                         <label for="pengetahuan[]" class ="form-text">Pilih Pertanyaan yang Berhasil Dijawab dengan Benar :</label>
                     </div>
                     <div class="col-sm-7 mb-3">
-                        <select class="js-example-basic-multiple form-control @error('pengetahuan') is-invalid @enderror" data-live-search="true" id="pengetahuan" name="pengetahuan[]" placeholder="Pilih Pertanyaan yang berhasil dijawab dengan Benar" value="{{ old('pengetahuan') }}" multiple="multiple" required>
-                            @error('pengetahuan')
+                        <select class="js-example-basic-multiple form-control @error('pengetahuan') is-invalid @enderror" data-live-search="true" id="pengetahuan" name="pengetahuan[]" placeholder="Pilih Pertanyaan yang berhasil dijawab dengan Benar" value="{{ old('pengetahuan[]') }}" multiple="multiple" required>
+                            @error('pengetahuan[]')
                             <span class="invalid-feedback" role="alert">
                               <strong>{{ $message }}</strong>
                             </span>
@@ -236,8 +236,8 @@
                         <label for="perilaku" class ="form-text">Pilih Perilaku/Kebiasaan Pasien :</label>
                     </div>
                     <div class="col-sm-9 mb-3">
-                        <select class="js-example-basic-multiple form-control @error('perilaku') is-invalid @enderror" data-live-search="true" id="perilaku" name="perilaku[]" placeholder="Pilih Perilaku/Kebiasaan Pasien" value="{{ old('perilaku') }}" multiple="multiple" required>
-                            @error('perilaku')
+                        <select class="js-example-basic-multiple form-control @error('perilaku') is-invalid @enderror" data-live-search="true" id="perilaku" name="perilaku[]" placeholder="Pilih Perilaku/Kebiasaan Pasien" value="{{ old('perilaku[]') }}" multiple="multiple" required>
+                            @error('perilaku[]')
                             <span class="invalid-feedback" role="alert">
                               <strong>{{ $message }}</strong>
                             </span>
@@ -295,22 +295,22 @@
                         Peran Orang Tua
                     </div>
                     <div class="col-sm-3 mb-sm-0 text-center">
-                        <input type="checkbox" id="peran_ortu1" name="peran_ortu" value="1">
+                        <input type="checkbox" id="peran_ortu1" name="peran_ortu[]" value="1">
                         <label for="peran_ortu1">Mendampingi menggosok gigi</label>
                     </div>
                     <div class="col-sm-3 mb-sm-0 text-center">
-                        <input type="checkbox" id="peran_ortu2" name="peran_ortu" value="2">
+                        <input type="checkbox" id="peran_ortu2" name="peran_ortu[]" value="2">
                         <label for="peran_ortu2">Memerintahkan menggosok gigi</label>
                     </div>
                     <div class="col-sm-4 mb-sm-0 text-center">
-                        <input type="checkbox" id="peran_ortu3" name="peran_ortu" value="3">
+                        <input type="checkbox" id="peran_ortu3" name="peran_ortu[]" value="3">
                         <label for="peran_ortu3">Menganjurkan berkumur setiap makan manis-manis</label>
                     </div>
                 </div>
 
                     <div class="form-group row">
                         <div class="col-sm-6 d-grid gap-2">
-                            <a href="{{route('anamripasien.index')}}" class="btn btn-success btn-block btn">
+                            <a href="{{route('pengsiperi.index')}}" class="btn btn-success btn-block btn">
                                 <i class="fas fa-arrow-left fa-fw"></i> Kembali
                             </a>
                         </div>
@@ -320,7 +320,7 @@
                             </button>
                         </div>
                     </div>
-                </form>
+            </form>
             </div>
         </div>
 

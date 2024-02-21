@@ -11,6 +11,6 @@ class Pengsiperi extends Model
     protected $guarded = ['id'];
 
     public function kartupasien(){
-        return $this->belongsTo(kartupasien::class);
+        return $this->belongsTo(Kartupasien::class);
     }
 }
