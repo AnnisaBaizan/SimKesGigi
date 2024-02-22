@@ -84,12 +84,39 @@
                 </a>
             </li> --}}
             <li class="nav-item">
-                <a class="nav-link {{ Request::is('user*') ? 'active' : '' }}" href="{{ route('eksplakkal.index') }}">
+                <a class="nav-link {{ Request::is('eksplakal*') ? 'active' : '' }}" href="{{ route('eksplakkal.index') }}">
                     <div
                         class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="ni ni-vector text-success text-sm opacity-10"></i>
                     </div>
                     <span class="nav-link-text ms-1">Eksternal oral, Plak, Kalkulus</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {{ Request::is('ohis*') ? 'active' : '' }}" href="{{ route('ohis.index') }}">
+                    <div
+                        class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="ni ni-vector text-success text-sm opacity-10"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">OHI-S</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {{ Request::is('odontogram*') ? 'active' : '' }}" href="{{ route('odontogram.index') }}">
+                    <div
+                        class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="ni ni-vector text-success text-sm opacity-10"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">Odontogram</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {{ Request::is('vitalitas*') ? 'active' : '' }}" href="{{ route('vitalitas.index') }}">
+                    <div
+                        class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="ni ni-vector text-success text-sm opacity-10"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">Vitalitas</span>
                 </a>
             </li>
 

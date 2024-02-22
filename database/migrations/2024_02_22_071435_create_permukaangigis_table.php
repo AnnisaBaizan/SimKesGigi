@@ -13,9 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('gigis', function (Blueprint $table) {
+        Schema::create('permukaangigis', function (Blueprint $table) {
             $table->id();
             $table->string('kode');
+            $table->string('lokasi');
             $table->timestamps();
         });
     }
@@ -27,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('gigis');
+        Schema::dropIfExists('permukaangigis');
     }
 };

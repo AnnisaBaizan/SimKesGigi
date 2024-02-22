@@ -5,11 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Ohis extends Model
+class permukaangigi extends Model
 {
-    protected $table = 'ohis';
     use HasFactory;
-    public function kartupasien(){
-        return $this->belongsTo(Kartupasien::class);
-    }
 }

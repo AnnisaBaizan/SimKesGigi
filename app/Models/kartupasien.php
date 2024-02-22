@@ -17,4 +17,7 @@ class kartupasien extends Model
     public function pengsiperi(){
         return $this->hasMany(Pengsiperi::class);
     }
+    public function ohis(){
+        return $this->hasMany(Ohis::class);
+    }
 }

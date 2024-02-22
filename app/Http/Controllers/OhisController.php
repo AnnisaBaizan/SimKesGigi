@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Ohis;
-use App\Http\Requests\StoreOhisRequest;
-use App\Http\Requests\UpdateOhisRequest;
+use App\Models\Kartupasien;
+use App\Models\gigi;
+use Illuminate\Http\Request;
 
 class OhisController extends Controller
 {
@@ -28,7 +29,13 @@ class OhisController extends Controller
      */
     public function create()
     {
-        //
+        $kartupasiens = Kartupasien::all();
+        $gigis = Gigi::all();
+        
+        return view('pages.ohis.create')->with([
+            'kartupasiens' => $kartupasiens,
+            'gigis' => $gigis,
+        ]);
     }
 
     /**
@@ -37,7 +44,7 @@ class OhisController extends Controller
      * @param  \App\Http\Requests\StoreOhisRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreOhisRequest $request)
+    public function store(Request $request)
     {
         //
     }
@@ -50,7 +57,7 @@ class OhisController extends Controller
      */
     public function show(Ohis $ohis)
     {
-        //
+        return view('pages.ohis.show')->with('ohis', $ohis);
     }
 
     /**
@@ -61,7 +68,7 @@ class OhisController extends Controller
      */
     public function edit(Ohis $ohis)
     {
-        //
+        return view('pages.ohis.edit')->with('ohis', $ohis);
     }
 
     /**
@@ -71,7 +78,7 @@ class OhisController extends Controller
      * @param  \App\Models\Ohis  $ohis
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateOhisRequest $request, Ohis $ohis)
+    public function update(Request $request, Ohis $ohis)
     {
         //
     }
@@ -84,6 +91,7 @@ class OhisController extends Controller
      */
     public function destroy(Ohis $ohis)
     {
-        //
+        Ohis::destroy($ohis->id);
+        return back()->with('succes', 'Data Ohis berhasil dihapus');
     }
 }

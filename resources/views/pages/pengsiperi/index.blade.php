@@ -61,7 +61,7 @@
                 <div class="col-12">
                     <div class="card mb-4">
                         <div class="card-header d-sm-flex align-items-center justify-content-between py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Data data</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Data Pengetahuan, Keterampilan, Perilaku dan peran orang tua</h6>
                             @can('adminmahasiswa')
                             <a href="{{route('pengsiperi.create')}}" class="d-sm-inline-block btn btn-primary btn-sm shadow-sm">
                             <i class="fas fa-plus fa-sm"></i> Tambah data</a>
@@ -257,7 +257,98 @@
     @include('layouts.footers.auth.footer')
 @endsection
 @section('js')
-<script>
+    @can('mahasiswa')
+    <script type="text/javascript">
+    function handleDelete(id) {
+        let form = document.getElementById('deleteForm')
+        form.action = `./anamripasien/${id}`
+        console.log(form)
+        $('#deleteModal').modal('show')
+    }
+    </script>
+    @endcan
 
-</script>
+    @can('mahasiswa')
+    <script type="text/javascript">
+        $(document).ready( function () {
+        $('#dataTable').DataTable();
+        } );
+    </script>
+    @endcan
+
+    @can('adminpembimbing')
+    <script type="text/javascript">
+    $(document).ready( function () {
+        $.fn.dataTable.ext.search.push(
+            function( settings, data, dataIndex ) {
+                var min = minDate.val();
+                var max = maxDate.val();
+                // data[1] is the date column
+                var date = new Date( data[17] );
+
+                if (
+                    ( min === null && max === null ) ||
+                    ( min === null && date <= max ) ||
+                    ( min <= date  && max === null ) ||
+                    ( min <= date  && date <= max )
+                ) 
+                {
+                    return true;
+                }
+                    return false;
+                }
+            );
+
+            // Refilter the table
+            $('#min, #max').on('change', function () {
+                table.draw();
+            });
+
+            // Create date inputs
+            minDate = new DateTime($('#min'), {
+                format: 'DD MMM YYYY'
+            });
+            maxDate = new DateTime($('#max'), {
+                format: 'DD MMM YYYY'
+            });
+
+            var table = $('#dataTable').DataTable( {
+                dom: 'Bfrtip',
+                buttons: [
+                {
+                    extend: 'copyHtml5',
+                    exportOptions: {
+                        columns: [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17 ]
+                    }
+                },
+                {
+                    extend: 'print',
+                    exportOptions: {
+                        columns: [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17 ]
+                    }
+                },
+                {
+                    extend: 'excelHtml5',
+                    exportOptions: {
+                        columns: [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17 ]
+                    }
+                },
+                {
+                    extend: 'csvHtml5',
+                    exportOptions: {
+                        columns: [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17  ]
+                    }
+                },
+                {
+                    extend: 'pdfHtml5',
+                    exportOptions: {
+                        columns: [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17  ]
+                    }
+                },
+                'colvis'
+            ]
+            } );
+        } );
+  </script>
+  @endcan
 @endsection
