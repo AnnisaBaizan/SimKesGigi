@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Odontogram;
-use App\Http\Requests\StoreOdontogramRequest;
-use App\Http\Requests\UpdateOdontogramRequest;
+use App\Models\Kartupasien;
+use Illuminate\Http\Request;
 
 class OdontogramController extends Controller
 {
@@ -28,7 +28,11 @@ class OdontogramController extends Controller
      */
     public function create()
     {
-        //
+        $kartupasiens = Kartupasien::all();
+        
+        return view('pages.odontogram.create')->with([
+            'kartupasiens' => $kartupasiens,
+        ]);
     }
 
     /**
@@ -37,9 +41,27 @@ class OdontogramController extends Controller
      * @param  \App\Http\Requests\StoreOdontogramRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreOdontogramRequest $request)
+    public function store(Request $request)
     {
-        //
+        
+        $validatedData = $request->validate([
+            'no_kartu'=> 'required|max:9999999999999|min:1|numeric',
+            'nama' => 'required|max:40|min:4',
+            'no_iden' => 'required|max:20',
+            'tgl_lhr' => 'required|max:20|date',
+            'umur' => 'required|max:999|min:1|numeric',
+            'jk' => 'required|max:10',
+            'suku' => 'required|max:40',
+            'pekerjaan' => 'required|max:100',
+            'hub' => 'required|max:50',
+            'no_hp' => 'required|max:9999999999999|min:1|numeric',
+            'no_tlpn' => 'required|max:9999999999999|min:1|numeric',
+            'alamat' =>'required|max:255'
+        ]);
+
+        Odontogram::create($validatedData);
+
+        return redirect('/kartupasien')->with('succes', 'Data Odontogram Berhasil Dibuat');
     }
 
     /**
@@ -50,7 +72,7 @@ class OdontogramController extends Controller
      */
     public function show(Odontogram $odontogram)
     {
-        //
+        return view('pages.odontogram.show')->with('odontogram', $odontogram);
     }
 
     /**
@@ -61,7 +83,7 @@ class OdontogramController extends Controller
      */
     public function edit(Odontogram $odontogram)
     {
-        //
+        return view('pages.odontogram.edit')->with('odontogram', $odontogram);
     }
 
     /**
@@ -71,9 +93,16 @@ class OdontogramController extends Controller
      * @param  \App\Models\Odontogram  $odontogram
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateOdontogramRequest $request, Odontogram $odontogram)
+    public function update(Request $request, Odontogram $odontogram)
     {
-        //
+        $validatedData = $request->validate([
+            'kode' => 'required|max:9999999999999|digits_between:1,4|numeric',
+            'soal' =>'required'
+        ]);
+        Odontogram::where('id', $odontogram->id)
+            ->update($validatedData);
+
+        return back()->with('succes', 'Data Odontogram berhasil diubah');
     }
 
     /**
@@ -84,6 +113,7 @@ class OdontogramController extends Controller
      */
     public function destroy(Odontogram $odontogram)
     {
-        //
+        Odontogram::destroy($odontogram->id);
+        return back()->with('succes', 'Data Odontogram berhasil dihapus');
     }
 }

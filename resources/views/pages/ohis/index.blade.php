@@ -165,23 +165,25 @@
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $ohis->kartupasien->id }}</td>
                                             {{-- pengetahuan --}}
-                                            <td>{{ $ohis->di_1 }} {{ $ohis->lokasi_di_1 }}</td>
-                                            <td>{{ $ohis->di_2 }} {{ $ohis->lokasi_di_2 }}</td>
-                                            <td>{{ $ohis->di_3 }} {{ $ohis->lokasi_di_3 }}</td>
-                                            <td>{{ $ohis->di_4 }} {{ $ohis->lokasi_di_4 }}</td>
-                                            <td>{{ $ohis->di_5 }} {{ $ohis->lokasi_di_5 }}</td>
-                                            <td>{{ $ohis->di_6}} {{ $ohis->lokasi_di_6}}</td>
+                                            <td>{{ $ohis->di_1 }} </td>
+                                            <td>{{ $ohis->di_2 }} </td>
+                                            <td>{{ $ohis->di_3 }} </td>
+                                            <td>{{ $ohis->di_4 }} </td>
+                                            <td>{{ $ohis->di_5 }}</td>
+                                            <td>{{ $ohis->di_6}}</td>
+                                            <td>{{ $ohis->jumlah_nilai_di}} / {{ $ohis->jumlah_gigi_di}}</td>
                                             <td>{{ $ohis->score_di }}</td> 
                                            
                                             
-                                            <td>{{ $ohis->ci_1 }} {{ $ohis->lokasi_ci_1 }}</td>
-                                            <td>{{ $ohis->ci_2 }} {{ $ohis->lokasi_ci_2 }}</td>
-                                            <td>{{ $ohis->ci_3 }} {{ $ohis->lokasi_ci_3 }}</td>
-                                            <td>{{ $ohis->ci_4 }} {{ $ohis->lokasi_ci_4 }}</td>
-                                            <td>{{ $ohis->ci_5 }} {{ $ohis->lokasi_ci_5 }}</td>
-                                            <td>{{ $ohis->ci_6}} {{ $ohis->lokasi_ci_6}}</td>
+                                            <td>{{ $ohis->ci_1 }}</td>
+                                            <td>{{ $ohis->ci_2 }}</td>
+                                            <td>{{ $ohis->ci_3 }}</td>
+                                            <td>{{ $ohis->ci_4 }}</td>
+                                            <td>{{ $ohis->ci_5 }}</td>
+                                            <td>{{ $ohis->ci_6}}</td>
+                                            <td>{{ $ohis->jumlah_nilai_ci}} / {{ $ohis->jumlah_gigi_ci}}</td>
                                             <td>{{ $ohis->score_ci }}</td> 
-                                            <td>{{ $ohis->kriteria_ohis }}</td> 
+                                            <td>{{ $ohis->nilai_kriteria_ohis }} {{ $ohis->kriteria_ohis }}</td> 
                                             
                                             <td>{{ date_format($ohis->created_at, "d M Y") }}</td>
                                             <td>

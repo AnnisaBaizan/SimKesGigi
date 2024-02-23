@@ -20,4 +20,13 @@ class kartupasien extends Model
     public function ohis(){
         return $this->hasMany(Ohis::class);
     }
+    public function odontogram(){
+        return $this->hasMany(Odontogram::class);
+    }
+    public function vitalitas(){
+        return $this->hasMany(Vitalitas::class);
+    }
+    public function eksplakkal(){
+        return $this->hasMany(Eksplakkal::class);
+    }
 }
