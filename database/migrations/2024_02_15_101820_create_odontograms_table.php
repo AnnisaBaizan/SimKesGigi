@@ -78,9 +78,10 @@ return new class extends Migration
                         $table->tinyInteger('jumlah_tetap_f');
                         $table->tinyInteger('dmf_t');
                         $table->tinyInteger('jumlah_susu_d');
-                        $table->tinyInteger('jumlah_susu_m');
+                        $table->tinyInteger('jumlah_susu_e');
                         $table->tinyInteger('jumlah_susu_f');
                         $table->tinyInteger('def_t');
+                        $table->string('gigi_karies');
             $table->timestamps();
         });
     }

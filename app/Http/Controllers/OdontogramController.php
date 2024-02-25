@@ -61,7 +61,7 @@ class OdontogramController extends Controller
 
         Odontogram::create($validatedData);
 
-        return redirect('/kartupasien')->with('succes', 'Data Odontogram Berhasil Dibuat');
+        return redirect('/vitalitas')->with('succes', 'Data Odontogram Berhasil Dibuat');
     }
 
     /**
