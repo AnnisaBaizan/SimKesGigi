@@ -222,7 +222,7 @@
     <script type="text/javascript">
     function handleDelete(id) {
         let form = document.getElementById('deleteForm')
-        form.action = `./anamripasien/${id}`
+        form.action = `./ohis/${id}`
         console.log(form)
         $('#deleteModal').modal('show')
     }

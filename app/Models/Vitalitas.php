@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Vitalitas extends Model
 {
+    protected $table = 'vitalitas';
     use HasFactory;
     protected $guarded = ['id'];
 

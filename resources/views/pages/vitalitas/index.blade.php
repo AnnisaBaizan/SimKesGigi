@@ -9,7 +9,7 @@
             <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title" id="deleteModalLabel">Hapus OHI-S</h5>
+                  <h5 class="modal-title" id="deleteModalLabel">Hapus Vitalitas</h5>
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -37,7 +37,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ route('importohis') }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('importvitalitas') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group">
                         <label for="importpertanyaan">Import File</label>
@@ -61,16 +61,16 @@
                 <div class="col-12">
                     <div class="card mb-4">
                         <div class="card-header d-sm-flex align-items-center justify-content-between py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Data OHI-S</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Data Vitalitas</h6>
                             @can('adminmahasiswa')
-                            <a href="{{route('ohis.create')}}" class="d-sm-inline-block btn btn-primary btn-sm shadow-sm">
+                            <a href="{{route('vitalitas.create')}}" class="d-sm-inline-block btn btn-primary btn-sm shadow-sm">
                             <i class="fas fa-plus fa-sm"></i> Tambah data</a>
                             @endcan
                         </div>
     
                         <div class="card-header d-sm-flex align-items-center">
                             @can('adminpembimbing')
-                            <a href="{{route('exportohis')}}" class="d-sm-inline-block btn btn-primary btn-sm shadow-sm me-3">
+                            <a href="{{route('exportvitalitas')}}" class="d-sm-inline-block btn btn-primary btn-sm shadow-sm me-3">
                             <i class="fas fa-file-export fa-sm"></i>  Format Import</a>
     
                             {{-- <a href="javascript:;" data-toggle="modal" onclick="importData()" data-target="#ImportModal" class="d-sm-inline-block btn btn-success btn-sm shadow-sm">
@@ -128,7 +128,7 @@
                                             <th>CI-6</th>
                                             <th>Score CI</th>
                                             
-                                            <th>Kreteria Ohis</th>
+                                            <th>Kreteria vitalitas</th>
                                             <th>Dibuat</th>
                                             <th>Tindakan</th>
                                         </tr>
@@ -154,52 +154,52 @@
                                             <th>CI-6</th>
                                             <th>Score CI</th>
                                             
-                                            <th>Kreteria Ohis</th>
+                                            <th>Kreteria vitalitas</th>
                                             <th>Dibuat</th>
                                             <th>Tindakan</th>
                                         </tr>
                                       </tfoot>
                                     <tbody>
-                                        @foreach ($ohiss as $ohis)
+                                        @foreach ($vitalitass as $vitalitas)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $ohis->kartupasien->id }}</td>
+                                            <td>{{ $vitalitas->kartupasien->id }}</td>
                                             {{-- pengetahuan --}}
-                                            <td>{{ $ohis->di_1 }} </td>
-                                            <td>{{ $ohis->di_2 }} </td>
-                                            <td>{{ $ohis->di_3 }} </td>
-                                            <td>{{ $ohis->di_4 }} </td>
-                                            <td>{{ $ohis->di_5 }}</td>
-                                            <td>{{ $ohis->di_6}}</td>
-                                            <td>{{ $ohis->jumlah_nilai_di}} / {{ $ohis->jumlah_gigi_di}}</td>
-                                            <td>{{ $ohis->score_di }}</td> 
+                                            <td>{{ $vitalitas->di_1 }} </td>
+                                            <td>{{ $vitalitas->di_2 }} </td>
+                                            <td>{{ $vitalitas->di_3 }} </td>
+                                            <td>{{ $vitalitas->di_4 }} </td>
+                                            <td>{{ $vitalitas->di_5 }}</td>
+                                            <td>{{ $vitalitas->di_6}}</td>
+                                            <td>{{ $vitalitas->jumlah_nilai_di}} / {{ $vitalitas->jumlah_gigi_di}}</td>
+                                            <td>{{ $vitalitas->score_di }}</td> 
                                            
                                             
-                                            <td>{{ $ohis->ci_1 }}</td>
-                                            <td>{{ $ohis->ci_2 }}</td>
-                                            <td>{{ $ohis->ci_3 }}</td>
-                                            <td>{{ $ohis->ci_4 }}</td>
-                                            <td>{{ $ohis->ci_5 }}</td>
-                                            <td>{{ $ohis->ci_6}}</td>
-                                            <td>{{ $ohis->jumlah_nilai_ci}} / {{ $ohis->jumlah_gigi_ci}}</td>
-                                            <td>{{ $ohis->score_ci }}</td> 
-                                            <td>{{ $ohis->nilai_kriteria_ohis }} {{ $ohis->kriteria_ohis }}</td> 
+                                            <td>{{ $vitalitas->ci_1 }}</td>
+                                            <td>{{ $vitalitas->ci_2 }}</td>
+                                            <td>{{ $vitalitas->ci_3 }}</td>
+                                            <td>{{ $vitalitas->ci_4 }}</td>
+                                            <td>{{ $vitalitas->ci_5 }}</td>
+                                            <td>{{ $vitalitas->ci_6}}</td>
+                                            <td>{{ $vitalitas->jumlah_nilai_ci}} / {{ $vitalitas->jumlah_gigi_ci}}</td>
+                                            <td>{{ $vitalitas->score_ci }}</td> 
+                                            <td>{{ $vitalitas->nilai_kriteria_vitalitas }} {{ $vitalitas->kriteria_vitalitas }}</td> 
                                             
-                                            <td>{{ date_format($ohis->created_at, "d M Y") }}</td>
+                                            <td>{{ date_format($vitalitas->created_at, "d M Y") }}</td>
                                             <td>
                                                 
-                                                <a href ="{{route('ohis.show', $ohis->id)}}" title="show" class="btn btn-sm btn-icon-split btn-primary">
+                                                <a href ="{{route('vitalitas.show', $vitalitas->id)}}" title="show" class="btn btn-sm btn-icon-split btn-primary">
                                                     <span class="icon"><i class="fas fa-eye text-white" style="padding-top: 4px;"></i></span><span class="text">Lihat</span>
                                                 </a>
                                                 {{-- <a data-toggle="modal" id="smallButton" data-target="#smallModal"
-                                                    data-attr="{{ route('anamriohis.show', $project->id) }}" title="show">
+                                                    data-attr="{{ route('anamrivitalitas.show', $project->id) }}" title="show">
                                                     <i class="fas fa-eye text-success  fa-lg"></i>
                                                 </a> --}}
                                                 @can('adminmahasiswa')
-                                                <a href ="{{route('ohis.edit', $ohis->id)}}" title="Edit" class="btn btn-sm btn-icon-split btn-warning">
+                                                <a href ="{{route('vitalitas.edit', $vitalitas->id)}}" title="Edit" class="btn btn-sm btn-icon-split btn-warning">
                                                     <span class="icon"><i class="fas fa-pen text-white" style="padding-top: 4px;"></i></span><span class="text">Edit</span>
                                                 </a>
-                                                <a href="javascript:;" data-toggle="modal" onclick="handleDelete({{$ohis->id}})" data-target="#DeleteModal" class="btn btn-sm btn-icon-split btn-danger">
+                                                <a href="javascript:;" data-toggle="modal" onclick="handleDelete({{$vitalitas->id}})" data-target="#DeleteModal" class="btn btn-sm btn-icon-split btn-danger">
                                                     <span class="icon"><i class="fa fa-trash text-white" style="padding-top: 4px;"></i></span><span class="text">Hapus</span>
                                                 </a>
                                                 @endcan
@@ -222,7 +222,7 @@
 <script type="text/javascript">
 function handleDelete(id) {
     let form = document.getElementById('deleteForm')
-    form.action = `./anamripasien/${id}`
+    form.action = `./vitalitas/${id}`
     console.log(form)
     $('#deleteModal').modal('show')
 }
