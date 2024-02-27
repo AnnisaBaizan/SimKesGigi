@@ -203,14 +203,18 @@
         // Logika untuk menentukan masalah
         if (inspeksi == 1 && thermis == 0 && sondasi == 1 && perkusi == 0 && druk == 0 && mobility == 0) {
             masalahElement.value = "Karies Mencapai Email (KME)";
+            masalahElement.style.backgroundColor = "";
         } else if (inspeksi == 1 && thermis == 1 && sondasi == 1 && perkusi == 0 && druk == 0 && mobility == 0) {
             masalahElement.value = "Karies Mencapai Dentin (KMD)";
+            masalahElement.style.backgroundColor = "";
         } else if (inspeksi == 1 && thermis == 1 && sondasi == 1 && perkusi == 1 && druk == 0 && mobility == 0) {
             masalahElement.value = "Karies Mencapai Pulpa (KMP)";
+            masalahElement.style.backgroundColor = "";
         } else if ((inspeksi == 1 && thermis == 1 && sondasi == 1 && perkusi == 1 && druk == 1 && mobility == 0) ||
                    (inspeksi == 1 && thermis == 1 && sondasi == 1 && perkusi == 1 && druk == 0 && mobility == 1) ||
                    (inspeksi == 1 && thermis == 1 && sondasi == 1 && perkusi == 1 && druk == 1 && mobility == 1)) {
             masalahElement.value = "Karies Mencapai Pulpa Vital (KMP Vital)";
+            masalahElement.style.backgroundColor = "";
         } else if ((inspeksi == 1 && thermis == 0 && sondasi == 0 && perkusi == 0 && druk == 0 && mobility == 0) ||
                    (inspeksi == 1 && thermis == 0 && sondasi == 0 && perkusi == 0 && druk == 0 && mobility == 1) ||
                    (inspeksi == 1 && thermis == 0 && sondasi == 0 && perkusi == 0 && druk == 1 && mobility == 0) ||
@@ -218,13 +222,18 @@
                    (inspeksi == 1 && thermis == 0 && sondasi == 0 && perkusi == 1 && druk == 0 && mobility == 1) ||
                    (inspeksi == 1 && thermis == 0 && sondasi == 0 && perkusi == 1 && druk == 1 && mobility == 1)) {
             masalahElement.value = "Sisa Akar";
+            masalahElement.style.backgroundColor = "";
         } else if ((inspeksi == 1 && thermis == 0 && sondasi == 0 && perkusi == 1 && druk == 0 && mobility == 0) ||
                    (inspeksi == 1 && thermis == 0 && sondasi == 0 && perkusi == 1 && druk == 1 && mobility == 0)) {
             masalahElement.value = "Karies Mencapai Pulpa Non Vital (KMP Non Vital)";
+            masalahElement.style.backgroundColor = "";
         } else if (inspeksi == 0 && thermis == 0 && sondasi == 0 && perkusi == 0 && druk == 0 && mobility == 1) {
             masalahElement.value = "Peradangan";
-        } else {
-            masalahElement.value = "";
+            masalahElement.style.backgroundColor = "";
+        } 
+        else {
+            masalahElement.value = "Tidak ditemukan";
+            masalahElement.style.backgroundColor = "red";
         }
     }
 
