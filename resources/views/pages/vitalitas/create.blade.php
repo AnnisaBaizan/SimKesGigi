@@ -163,8 +163,496 @@
                                 <label for="masalah">Masalah</label>
                                 <input type="text" class="form-control text-center" id="masalah" name="masalah" value="" readonly>
                             </div>
-
                         </div>
+
+                        <div class="col-sm-12 mb-3 mb-sm-0 text-center bg-gradient-faded-info-vertical">
+                            <marquee><h6 class="m-0 font-weight-bold text-dark text-bold">Anomali Gigi</h6></marquee>
+                        </div>
+                        
+                        <div class="form-group row">
+                            <div class="col-sm-6">
+                                <label for="occlusi" class ="form-text">Occlusi :</label>
+                                <select class="form-control @error('occlusi') is-invalid @enderror" id="occlusi" name="occlusi" placeholder="pilih" value="{{ old('occlusi') }}" required>
+                                        @error('occlusi')
+                                        <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
+                                    <option value="" selected disabled>pilih</option>
+                                    <option value="Normal bite">Normal bite</option>
+                                    <option value="Cross bite">Cross bite</option>
+                                    <option value="Steep bite">Steep bite</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-6">
+                                <label for="bentuk" class ="form-text">Bentuk :</label>
+                                <select class="form-control @error('bentuk') is-invalid @enderror" id="bentuk" name="bentuk" placeholder="pilih" value="{{ old('bentuk') }}" required>
+                                        @error('bentuk')
+                                        <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
+                                    <option value="" selected disabled>pilih</option>
+                                    <option value="Normal">Normal</option>
+                                    <option value="Abnormal">Abnormal</option>
+                                </select>
+                            </div>
+                        </div>                        
+                        <div class="form-group row">
+                            <div class="col-sm-6">
+                                <label for="warna" class ="form-text">Warna :</label>
+                                <select class="form-control @error('warna') is-invalid @enderror" id="warna" name="warna" placeholder="pilih" value="{{ old('warna') }}" required>
+                                        @error('warna')
+                                        <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
+                                    <option value="" selected disabled>pilih</option>
+                                    <option value="Normal">Normal</option>
+                                    <option value="Abnormal">Abnormal</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-6">
+                                <label for="posisi" class ="form-text">Posisi :</label>
+                                <select class="form-control @error('posisi') is-invalid @enderror" id="posisi" name="posisi" placeholder="pilih" value="{{ old('posisi') }}" required>
+                                        @error('posisi')
+                                        <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
+                                    <option value="" selected disabled>pilih</option>
+                                    <option value="Normal">Normal</option>
+                                    <option value="Abnormal">Abnormal</option>
+                                </select>
+                            </div>
+                        </div>                        
+                        <div class="form-group row">
+                            <div class="col-sm-6">
+                                <label for="ukuran" class ="form-text">Ukuran :</label>
+                                <select class="form-control @error('ukuran') is-invalid @enderror" id="ukuran" name="ukuran" placeholder="pilih" value="{{ old('ukuran') }}" required>
+                                        @error('ukuran')
+                                        <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
+                                    <option value="" selected disabled>pilih</option>
+                                    <option value="Normal">Normal</option>
+                                    <option value="Abnormal">Abnormal</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-6">
+                                <label for="struktur" class ="form-text">Struktur :</label>
+                                <select class="form-control @error('struktur') is-invalid @enderror" id="struktur" name="struktur" placeholder="pilih" value="{{ old('struktur') }}" required>
+                                        @error('struktur')
+                                        <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
+                                    <option value="" selected disabled>pilih</option>
+                                    <option value="Normal">Normal</option>
+                                    <option value="Abnormal">Abnormal</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12 mb-3 mb-sm-0 text-center bg-gradient-faded-info-vertical">
+                            <marquee><h6 class="m-0 font-weight-bold text-dark text-bold">Mukosa Mulut</h6></marquee>
+                        </div>
+                        <div class="col-sm-12 mb-3 mb-sm-0 text-center">
+                            {{-- <center> --}}
+                            <h6 class="col-sm-12 mb-3 m-0 font-weight-bold text-dark text-bold bg-gradient-faded-secondary-vertical"> - Lidah - </h6>
+                            {{-- </center> --}}
+                        </div>
+                            <div class="form-group row">
+                              <div class="col-sm-6 mb-3">
+                                <label for="warna_l" class ="form-text">Perubahan Warna :</label>
+                                <select class="form-control @error('warna_l') is-invalid @enderror" id="warna_l" name="warna_l" placeholder="Pilih" value="{{ old('warna_l') }}" required>
+                                        @error('warna_l')
+                                        <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
+                                    <option value="" selected disabled>Perubahan Warna</option>
+                                    <option value="Ada">Ada</option>
+                                    <option value="Tidak Ada">Tidak Ada</option>
+                                </select>
+                              </div>
+                              <div class="col-sm-6 mb-3 mb-sm-0">
+                                <label for="daerah_wl" class ="form-text">Daerah Mana :</label>
+                                <input type="text" class="form-control @error('daerah_wl') is-invalid @enderror" id="daerah_wl" name="daerah_wl" placeholder="Tuliskan Nama Daerah-nya" value="{{ old('daerah_wl') }}" disabled>
+                                    @error('daerah_wl')
+                                    <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                              </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-6 mb-3">
+                                  <label for="inflamasi_l" class ="form-text">Inflamasi :</label>
+                                  <select class="form-control @error('inflamasi_l') is-invalid @enderror" id="inflamasi_l" name="inflamasi_l" placeholder="pilih" value="{{ old('inflamasi_l') }}" required>
+                                          @error('inflamasi_l')
+                                          <span class="invalid-feedback" role="alert">
+                                          <strong>{{ $message }}</strong>
+                                          </span>
+                                          @enderror
+                                      <option value="" selected disabled>Inflamasi</option>
+                                      <option value="Ada">Ada</option>
+                                      <option value="Tidak Ada">Tidak Ada</option>
+                                  </select>
+                                </div>
+                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                  <label for="daerah_il" class ="form-text">Daerah Mana :</label>
+                                  <input type="text" class="form-control @error('daerah_il') is-invalid @enderror" id="daerah_il" name="daerah_il" placeholder="Tuliskan Nama Daerah-nya" value="{{ old('daerah_il') }}" disabled>
+                                      @error('daerah_il')
+                                      <span class="invalid-feedback" role="alert">
+                                      <strong>{{ $message }}</strong>
+                                      </span>
+                                      @enderror
+                                </div>
+                              </div>
+                              <div class="form-group row">
+                                  <div class="col-sm-6 mb-3">
+                                    <label for="ulserasi_l" class ="form-text">Ulserasi :</label>
+                                    <select class="form-control @error('ulserasi_l') is-invalid @enderror" id="ulserasi_l" name="ulserasi_l" placeholder="pilih" value="{{ old('ulserasi_l') }}" required>
+                                            @error('ulserasi_l')
+                                            <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                            </span>
+                                            @enderror
+                                        <option value="" selected disabled>Ulserasi</option>
+                                        <option value="Ada">Ada</option>
+                                        <option value="Tidak Ada">Tidak Ada</option>
+                                    </select>
+                                  </div>
+                                  <div class="col-sm-6 mb-3 mb-sm-0">
+                                    <label for="daerah_ul" class ="form-text">Daerah Mana :</label>
+                                    <input type="text" class="form-control @error('daerah_ul') is-invalid @enderror" id="daerah_ul" name="daerah_ul" placeholder="Tuliskan Nama Daerah-nya" value="{{ old('daerah_ul') }}" disabled>
+                                        @error('daerah_ul')
+                                        <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
+                                  </div>
+                                </div>
+                              
+
+                                
+                        <div class="col-sm-12 mb-3 mb-sm-0 text-center">
+                            {{-- <center> --}}
+                            <h6 class="col-sm-12 mb-3 m-0 font-weight-bold text-dark text-bold bg-gradient-faded-secondary-vertical"> - Lidah - </h6>
+                            {{-- </center> --}}
+                        </div>
+                            <div class="form-group row">
+                              <div class="col-sm-6 mb-3">
+                                <label for="warna_l" class ="form-text">Perubahan Warna :</label>
+                                <select class="form-control @error('warna_l') is-invalid @enderror" id="warna_l" name="warna_l" placeholder="Pilih" value="{{ old('warna_l') }}" required>
+                                        @error('warna_l')
+                                        <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
+                                    <option value="" selected disabled>Perubahan Warna</option>
+                                    <option value="Ada">Ada</option>
+                                    <option value="Tidak Ada">Tidak Ada</option>
+                                </select>
+                              </div>
+                              <div class="col-sm-6 mb-3 mb-sm-0">
+                                <label for="daerah_wl" class ="form-text">Daerah Mana :</label>
+                                <input type="text" class="form-control @error('daerah_wl') is-invalid @enderror" id="daerah_wl" name="daerah_wl" placeholder="Tuliskan Nama Daerah-nya" value="{{ old('daerah_wl') }}" disabled>
+                                    @error('daerah_wl')
+                                    <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                              </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-6 mb-3">
+                                  <label for="inflamasi_l" class ="form-text">Inflamasi :</label>
+                                  <select class="form-control @error('inflamasi_l') is-invalid @enderror" id="inflamasi_l" name="inflamasi_l" placeholder="pilih" value="{{ old('inflamasi_l') }}" required>
+                                          @error('inflamasi_l')
+                                          <span class="invalid-feedback" role="alert">
+                                          <strong>{{ $message }}</strong>
+                                          </span>
+                                          @enderror
+                                      <option value="" selected disabled>Inflamasi</option>
+                                      <option value="Ada">Ada</option>
+                                      <option value="Tidak Ada">Tidak Ada</option>
+                                  </select>
+                                </div>
+                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                  <label for="daerah_il" class ="form-text">Daerah Mana :</label>
+                                  <input type="text" class="form-control @error('daerah_il') is-invalid @enderror" id="daerah_il" name="daerah_il" placeholder="Tuliskan Nama Daerah-nya" value="{{ old('daerah_il') }}" disabled>
+                                      @error('daerah_il')
+                                      <span class="invalid-feedback" role="alert">
+                                      <strong>{{ $message }}</strong>
+                                      </span>
+                                      @enderror
+                                </div>
+                              </div>
+                              <div class="form-group row">
+                                  <div class="col-sm-6 mb-3">
+                                    <label for="ulserasi_l" class ="form-text">Ulserasi :</label>
+                                    <select class="form-control @error('ulserasi_l') is-invalid @enderror" id="ulserasi_l" name="ulserasi_l" placeholder="pilih" value="{{ old('ulserasi_l') }}" required>
+                                            @error('ulserasi_l')
+                                            <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                            </span>
+                                            @enderror
+                                        <option value="" selected disabled>Ulserasi</option>
+                                        <option value="Ada">Ada</option>
+                                        <option value="Tidak Ada">Tidak Ada</option>
+                                    </select>
+                                  </div>
+                                  <div class="col-sm-6 mb-3 mb-sm-0">
+                                    <label for="daerah_ul" class ="form-text">Daerah Mana :</label>
+                                    <input type="text" class="form-control @error('daerah_ul') is-invalid @enderror" id="daerah_ul" name="daerah_ul" placeholder="Tuliskan Nama Daerah-nya" value="{{ old('daerah_ul') }}" disabled>
+                                        @error('daerah_ul')
+                                        <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
+                                  </div>
+                                </div>
+
+
+
+                                <div class="col-sm-12 mb-3 mb-sm-0 text-center">
+                                    {{-- <center> --}}
+                                    <h6 class="col-sm-12 mb-3 m-0 font-weight-bold text-dark text-bold bg-gradient-faded-secondary-vertical"> - Lidah - </h6>
+                                    {{-- </center> --}}
+                                </div>
+                                    <div class="form-group row">
+                                      <div class="col-sm-6 mb-3">
+                                        <label for="warna_l" class ="form-text">Perubahan Warna :</label>
+                                        <select class="form-control @error('warna_l') is-invalid @enderror" id="warna_l" name="warna_l" placeholder="Pilih" value="{{ old('warna_l') }}" required>
+                                                @error('warna_l')
+                                                <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                                </span>
+                                                @enderror
+                                            <option value="" selected disabled>Perubahan Warna</option>
+                                            <option value="Ada">Ada</option>
+                                            <option value="Tidak Ada">Tidak Ada</option>
+                                        </select>
+                                      </div>
+                                      <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <label for="daerah_wl" class ="form-text">Daerah Mana :</label>
+                                        <input type="text" class="form-control @error('daerah_wl') is-invalid @enderror" id="daerah_wl" name="daerah_wl" placeholder="Tuliskan Nama Daerah-nya" value="{{ old('daerah_wl') }}" disabled>
+                                            @error('daerah_wl')
+                                            <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                            </span>
+                                            @enderror
+                                      </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-sm-6 mb-3">
+                                          <label for="inflamasi_l" class ="form-text">Inflamasi :</label>
+                                          <select class="form-control @error('inflamasi_l') is-invalid @enderror" id="inflamasi_l" name="inflamasi_l" placeholder="pilih" value="{{ old('inflamasi_l') }}" required>
+                                                  @error('inflamasi_l')
+                                                  <span class="invalid-feedback" role="alert">
+                                                  <strong>{{ $message }}</strong>
+                                                  </span>
+                                                  @enderror
+                                              <option value="" selected disabled>Inflamasi</option>
+                                              <option value="Ada">Ada</option>
+                                              <option value="Tidak Ada">Tidak Ada</option>
+                                          </select>
+                                        </div>
+                                        <div class="col-sm-6 mb-3 mb-sm-0">
+                                          <label for="daerah_il" class ="form-text">Daerah Mana :</label>
+                                          <input type="text" class="form-control @error('daerah_il') is-invalid @enderror" id="daerah_il" name="daerah_il" placeholder="Tuliskan Nama Daerah-nya" value="{{ old('daerah_il') }}" disabled>
+                                              @error('daerah_il')
+                                              <span class="invalid-feedback" role="alert">
+                                              <strong>{{ $message }}</strong>
+                                              </span>
+                                              @enderror
+                                        </div>
+                                      </div>
+                                      <div class="form-group row">
+                                          <div class="col-sm-6 mb-3">
+                                            <label for="ulserasi_l" class ="form-text">Ulserasi :</label>
+                                            <select class="form-control @error('ulserasi_l') is-invalid @enderror" id="ulserasi_l" name="ulserasi_l" placeholder="pilih" value="{{ old('ulserasi_l') }}" required>
+                                                    @error('ulserasi_l')
+                                                    <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                    </span>
+                                                    @enderror
+                                                <option value="" selected disabled>Ulserasi</option>
+                                                <option value="Ada">Ada</option>
+                                                <option value="Tidak Ada">Tidak Ada</option>
+                                            </select>
+                                          </div>
+                                          <div class="col-sm-6 mb-3 mb-sm-0">
+                                            <label for="daerah_ul" class ="form-text">Daerah Mana :</label>
+                                            <input type="text" class="form-control @error('daerah_ul') is-invalid @enderror" id="daerah_ul" name="daerah_ul" placeholder="Tuliskan Nama Daerah-nya" value="{{ old('daerah_ul') }}" disabled>
+                                                @error('daerah_ul')
+                                                <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                                </span>
+                                                @enderror
+                                          </div>
+                                        </div>
+
+                                        
+                        <div class="col-sm-12 mb-3 mb-sm-0 text-center">
+                            {{-- <center> --}}
+                            <h6 class="col-sm-12 mb-3 m-0 font-weight-bold text-dark text-bold bg-gradient-faded-secondary-vertical"> - Lidah - </h6>
+                            {{-- </center> --}}
+                        </div>
+                            <div class="form-group row">
+                              <div class="col-sm-6 mb-3">
+                                <label for="warna_l" class ="form-text">Perubahan Warna :</label>
+                                <select class="form-control @error('warna_l') is-invalid @enderror" id="warna_l" name="warna_l" placeholder="Pilih" value="{{ old('warna_l') }}" required>
+                                        @error('warna_l')
+                                        <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
+                                    <option value="" selected disabled>Perubahan Warna</option>
+                                    <option value="Ada">Ada</option>
+                                    <option value="Tidak Ada">Tidak Ada</option>
+                                </select>
+                              </div>
+                              <div class="col-sm-6 mb-3 mb-sm-0">
+                                <label for="daerah_wl" class ="form-text">Daerah Mana :</label>
+                                <input type="text" class="form-control @error('daerah_wl') is-invalid @enderror" id="daerah_wl" name="daerah_wl" placeholder="Tuliskan Nama Daerah-nya" value="{{ old('daerah_wl') }}" disabled>
+                                    @error('daerah_wl')
+                                    <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                              </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-6 mb-3">
+                                  <label for="inflamasi_l" class ="form-text">Inflamasi :</label>
+                                  <select class="form-control @error('inflamasi_l') is-invalid @enderror" id="inflamasi_l" name="inflamasi_l" placeholder="pilih" value="{{ old('inflamasi_l') }}" required>
+                                          @error('inflamasi_l')
+                                          <span class="invalid-feedback" role="alert">
+                                          <strong>{{ $message }}</strong>
+                                          </span>
+                                          @enderror
+                                      <option value="" selected disabled>Inflamasi</option>
+                                      <option value="Ada">Ada</option>
+                                      <option value="Tidak Ada">Tidak Ada</option>
+                                  </select>
+                                </div>
+                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                  <label for="daerah_il" class ="form-text">Daerah Mana :</label>
+                                  <input type="text" class="form-control @error('daerah_il') is-invalid @enderror" id="daerah_il" name="daerah_il" placeholder="Tuliskan Nama Daerah-nya" value="{{ old('daerah_il') }}" disabled>
+                                      @error('daerah_il')
+                                      <span class="invalid-feedback" role="alert">
+                                      <strong>{{ $message }}</strong>
+                                      </span>
+                                      @enderror
+                                </div>
+                              </div>
+                              <div class="form-group row">
+                                  <div class="col-sm-6 mb-3">
+                                    <label for="ulserasi_l" class ="form-text">Ulserasi :</label>
+                                    <select class="form-control @error('ulserasi_l') is-invalid @enderror" id="ulserasi_l" name="ulserasi_l" placeholder="pilih" value="{{ old('ulserasi_l') }}" required>
+                                            @error('ulserasi_l')
+                                            <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                            </span>
+                                            @enderror
+                                        <option value="" selected disabled>Ulserasi</option>
+                                        <option value="Ada">Ada</option>
+                                        <option value="Tidak Ada">Tidak Ada</option>
+                                    </select>
+                                  </div>
+                                  <div class="col-sm-6 mb-3 mb-sm-0">
+                                    <label for="daerah_ul" class ="form-text">Daerah Mana :</label>
+                                    <input type="text" class="form-control @error('daerah_ul') is-invalid @enderror" id="daerah_ul" name="daerah_ul" placeholder="Tuliskan Nama Daerah-nya" value="{{ old('daerah_ul') }}" disabled>
+                                        @error('daerah_ul')
+                                        <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
+                                  </div>
+                                </div>
+                                
+                                        
+                        <div class="col-sm-12 mb-3 mb-sm-0 text-center">
+                            {{-- <center> --}}
+                            <h6 class="col-sm-12 mb-3 m-0 font-weight-bold text-dark text-bold bg-gradient-faded-secondary-vertical"> - Lidah - </h6>
+                            {{-- </center> --}}
+                        </div>
+                            <div class="form-group row">
+                              <div class="col-sm-6 mb-3">
+                                <label for="warna_l" class ="form-text">Perubahan Warna :</label>
+                                <select class="form-control @error('warna_l') is-invalid @enderror" id="warna_l" name="warna_l" placeholder="Pilih" value="{{ old('warna_l') }}" required>
+                                        @error('warna_l')
+                                        <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
+                                    <option value="" selected disabled>Perubahan Warna</option>
+                                    <option value="Ada">Ada</option>
+                                    <option value="Tidak Ada">Tidak Ada</option>
+                                </select>
+                              </div>
+                              <div class="col-sm-6 mb-3 mb-sm-0">
+                                <label for="daerah_wl" class ="form-text">Daerah Mana :</label>
+                                <input type="text" class="form-control @error('daerah_wl') is-invalid @enderror" id="daerah_wl" name="daerah_wl" placeholder="Tuliskan Nama Daerah-nya" value="{{ old('daerah_wl') }}" disabled>
+                                    @error('daerah_wl')
+                                    <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                              </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-6 mb-3">
+                                  <label for="inflamasi_l" class ="form-text">Inflamasi :</label>
+                                  <select class="form-control @error('inflamasi_l') is-invalid @enderror" id="inflamasi_l" name="inflamasi_l" placeholder="pilih" value="{{ old('inflamasi_l') }}" required>
+                                          @error('inflamasi_l')
+                                          <span class="invalid-feedback" role="alert">
+                                          <strong>{{ $message }}</strong>
+                                          </span>
+                                          @enderror
+                                      <option value="" selected disabled>Inflamasi</option>
+                                      <option value="Ada">Ada</option>
+                                      <option value="Tidak Ada">Tidak Ada</option>
+                                  </select>
+                                </div>
+                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                  <label for="daerah_il" class ="form-text">Daerah Mana :</label>
+                                  <input type="text" class="form-control @error('daerah_il') is-invalid @enderror" id="daerah_il" name="daerah_il" placeholder="Tuliskan Nama Daerah-nya" value="{{ old('daerah_il') }}" disabled>
+                                      @error('daerah_il')
+                                      <span class="invalid-feedback" role="alert">
+                                      <strong>{{ $message }}</strong>
+                                      </span>
+                                      @enderror
+                                </div>
+                              </div>
+                              <div class="form-group row">
+                                  <div class="col-sm-6 mb-3">
+                                    <label for="ulserasi_l" class ="form-text">Ulserasi :</label>
+                                    <select class="form-control @error('ulserasi_l') is-invalid @enderror" id="ulserasi_l" name="ulserasi_l" placeholder="pilih" value="{{ old('ulserasi_l') }}" required>
+                                            @error('ulserasi_l')
+                                            <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                            </span>
+                                            @enderror
+                                        <option value="" selected disabled>Ulserasi</option>
+                                        <option value="Ada">Ada</option>
+                                        <option value="Tidak Ada">Tidak Ada</option>
+                                    </select>
+                                  </div>
+                                  <div class="col-sm-6 mb-3 mb-sm-0">
+                                    <label for="daerah_ul" class ="form-text">Daerah Mana :</label>
+                                    <input type="text" class="form-control @error('daerah_ul') is-invalid @enderror" id="daerah_ul" name="daerah_ul" placeholder="Tuliskan Nama Daerah-nya" value="{{ old('daerah_ul') }}" disabled>
+                                        @error('daerah_ul')
+                                        <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
+                                  </div>
+                                </div>
                             
                         <div class="form-group row">
                             <div class="col-sm-6 d-grid gap-2">
@@ -247,6 +735,15 @@
 </script>
 
 <script>
-
+$('#warna_l').change(function() {
+  if ($(this).val() == "Tidak Ada" ) {
+    $('#daerah_wl').attr("disabled", "disabled");
+    document.getElementById("daerah_wl").placeholder = "Tidak Perlu Diisi";
+  } else {
+    $('#daerah_wl').removeAttr("disabled");
+    $('#daerah_wl').attr("required", "required");
+    document.getElementById("daerah_wl").placeholder = "Tuliskan Nama Daerah-nya";
+  }
+}).trigger("change");
 </script>
 @endsection
