@@ -18,12 +18,12 @@ return new class extends Migration
             $table->foreignId('kartupasien_id');
             //anomali
             // $table->foreignId('gigi_id');
-            $table->tinyInteger('occlusi');
-            $table->tinyInteger('bentuk');
-            $table->tinyInteger('warna');
-            $table->tinyInteger('posisi');
-            $table->tinyInteger('ukuran');
-            $table->tinyInteger('struktur');
+            $table->string('occlusi');
+            $table->string('bentuk');
+            $table->string('warna');
+            $table->string('posisi');
+            $table->string('ukuran');
+            $table->string('struktur');
 
             //mukosa mulut
             

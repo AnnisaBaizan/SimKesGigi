@@ -110,24 +110,22 @@
                                     <tr>
                                         <th>No</th>
                                         <th>Nama</th>
-                                        {{-- DI --}}
-                                        <th>DI-1</th>
-                                        <th>DI-2</th>
-                                        <th>DI-3</th>
-                                        <th>DI-4</th>
-                                        <th>DI-5</th>
-                                        <th>DI-6</th>
-                                        <th>Score DI</th>
-                                        {{-- CI --}}
-                                        <th>CI-1</th>
-                                        <th>CI-2</th>
-                                        <th>CI-3</th>
-                                        <th>CI-4</th>
-                                        <th>CI-5</th>
-                                        <th>CI-6</th>
-                                        <th>Score CI</th>
-                                        
-                                        <th>Kreteria eksplakkal</th>
+                                        {{-- Eksternal Oral--}}
+                                        <th>Muka</th>
+                                        <th>limpe Kanan Teraba</th>
+                                        <th>Limpe Kanan Texture</th>
+                                        <th>Limpe Kanan Sakit</th>
+                                        <th>limpe Kiri Teraba</th>
+                                        <th>Limpe Kiri Texture</th>
+                                        <th>Limpe Kiri Sakit</th>
+                                        {{-- Internal Oral Plak--}}
+                                        <th>Gigi dengan Plak</th>
+                                        <th>Nilai</th>
+                                        <th>Score</th>
+                                        <th>Kriteria</th>
+                                        {{-- Internal Oral Kalkulus--}}
+                                        <th>Kalkulus Supragingiva</th>
+                                        <th>Kalkulus subgingiva</th>
                                         <th>Dibuat</th>
                                         <th>Tindakan</th>
                                     </tr>
@@ -136,24 +134,22 @@
                                     <tr>
                                         <th>No</th>
                                         <th>Nama</th>
-                                        {{-- DI --}}
-                                        <th>DI-1</th>
-                                        <th>DI-2</th>
-                                        <th>DI-3</th>
-                                        <th>DI-4</th>
-                                        <th>DI-5</th>
-                                        <th>DI-6</th>
-                                        <th>Score DI</th>
-                                        {{-- CI --}}
-                                        <th>CI-1</th>
-                                        <th>CI-2</th>
-                                        <th>CI-3</th>
-                                        <th>CI-4</th>
-                                        <th>CI-5</th>
-                                        <th>CI-6</th>
-                                        <th>Score CI</th>
-                                        
-                                        <th>Kreteria eksplakkal</th>
+                                        {{-- Eksternal Oral--}}
+                                        <th>Muka</th>
+                                        <th>limpe Kanan Teraba</th>
+                                        <th>Limpe Kanan Texture</th>
+                                        <th>Limpe Kanan Sakit</th>
+                                        <th>limpe Kiri Teraba</th>
+                                        <th>Limpe Kiri Texture</th>
+                                        <th>Limpe Kiri Sakit</th>
+                                        {{-- Internal Oral Plak--}}
+                                        <th>Gigi dengan Plak</th>
+                                        <th>Nilai</th>
+                                        <th>Score</th>
+                                        <th>Kriteria</th>
+                                        {{-- Internal Oral Kalkulus--}}
+                                        <th>Kalkulus Supragingiva</th>
+                                        <th>Kalkulus subgingiva</th>
                                         <th>Dibuat</th>
                                         <th>Tindakan</th>
                                     </tr>
@@ -163,26 +159,25 @@
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $eksplakkal->kartupasien->id }}</td>
-                                        {{-- pengetahuan --}}
-                                        <td>{{ $eksplakkal->di_1 }} </td>
-                                        <td>{{ $eksplakkal->di_2 }} </td>
-                                        <td>{{ $eksplakkal->di_3 }} </td>
-                                        <td>{{ $eksplakkal->di_4 }} </td>
-                                        <td>{{ $eksplakkal->di_5 }}</td>
-                                        <td>{{ $eksplakkal->di_6}}</td>
-                                        <td>{{ $eksplakkal->jumlah_nilai_di}} / {{ $eksplakkal->jumlah_gigi_di}}</td>
-                                        <td>{{ $eksplakkal->score_di }}</td> 
-                                       
                                         
-                                        <td>{{ $eksplakkal->ci_1 }}</td>
-                                        <td>{{ $eksplakkal->ci_2 }}</td>
-                                        <td>{{ $eksplakkal->ci_3 }}</td>
-                                        <td>{{ $eksplakkal->ci_4 }}</td>
-                                        <td>{{ $eksplakkal->ci_5 }}</td>
-                                        <td>{{ $eksplakkal->ci_6}}</td>
-                                        <td>{{ $eksplakkal->jumlah_nilai_ci}} / {{ $eksplakkal->jumlah_gigi_ci}}</td>
-                                        <td>{{ $eksplakkal->score_ci }}</td> 
-                                        <td>{{ $eksplakkal->nilai_kriteria_eksplakkal }} {{ $eksplakkal->kriteria_eksplakkal }}</td> 
+                                        {{-- Eksternal Oral--}}
+                                        <td>{{ $eksplakkal->muka }} </td>
+                                        <td>{{ $eksplakkal->limpe_kanan_teraba }} </td>
+                                        <td>{{ $eksplakkal->limpe_kanan_texture }} </td>
+                                        <td>{{ $eksplakkal->limpe_kanan_sakit }} </td>
+                                        <td>{{ $eksplakkal->limpe_kiri_teraba }}</td>
+                                        <td>{{ $eksplakkal->limpe_kiri_texture}}</td>
+                                        <td>{{ $eksplakkal->limpe_kiri_sakit}} </td>
+                                        
+                                        {{-- Internal Oral Plak--}}
+                                        <td>{{ $eksplakkal->plak }}</td>
+                                        <td>{{ $eksplakkal->jumlah_tidak_plak}} / {{ $eksplakkal->jumlah_permukaan}}</td>
+                                        <td>{{ $eksplakkal->plaque_score }}</td>
+                                        <td>{{ $eksplakkal->kriteria }}</td>
+                                        
+                                        {{-- Internal Oral Kalkulus--}}
+                                        <td>{{ $eksplakkal->supragingiva }}</td>
+                                        <td>{{ $eksplakkal->subgingiva }}</td>
                                         
                                         <td>{{ date_format($eksplakkal->created_at, "d M Y") }}</td>
                                         <td>

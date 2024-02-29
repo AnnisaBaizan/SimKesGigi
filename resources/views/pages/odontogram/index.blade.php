@@ -175,6 +175,7 @@
                                             <th>Gigi Susu E</th>
                                             <th>Gigi Susu F</th>
                                             <th>DEF-T </th>
+                                            <th>Gigi Karies </th>
                                             <th>Dibuat</th>
                                             <th>Tindakan</th>
                                         </tr>
@@ -247,6 +248,7 @@
                                             <th>Gigi Susu E</th>
                                             <th>Gigi Susu F</th>
                                             <th>DEF-T </th>
+                                            <th>Gigi Karies </th>
                                             <th>Dibuat</th>
                                             <th>Tindakan</th>
                                         </tr>
@@ -327,6 +329,7 @@ kode_
                                             <td>{{ $odontogram->jumlah_susu_m }}</td>
                                             <td>{{ $odontogram->jumlah_susu_f }}</td>
                                             <td>{{ $odontogram->def_t }}</td>
+                                            <td>{{ $odontogram->gigi_karies }}</td>
                                             <td>{{ date_format($odontogram->created_at, "d M Y") }}</td>
                                             <td>
                                                 

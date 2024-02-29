@@ -111,24 +111,33 @@
                                         <tr>
                                             <th>No</th>
                                             <th>Nama</th>
-                                            {{-- DI --}}
-                                            <th>DI-1</th>
-                                            <th>DI-2</th>
-                                            <th>DI-3</th>
-                                            <th>DI-4</th>
-                                            <th>DI-5</th>
-                                            <th>DI-6</th>
-                                            <th>Score DI</th>
-                                            {{-- CI --}}
-                                            <th>CI-1</th>
-                                            <th>CI-2</th>
-                                            <th>CI-3</th>
-                                            <th>CI-4</th>
-                                            <th>CI-5</th>
-                                            <th>CI-6</th>
-                                            <th>Score CI</th>
-                                            
-                                            <th>Kreteria anomalimukosa</th>
+                                            {{-- Anomali --}}
+                                            <th>Occlusi</th>
+                                            <th>bentuk</th>
+                                            <th>warna</th>
+                                            <th>ukuran</th>
+                                            <th>struktur</th>
+                                            {{-- Mukosa --}}
+                                            {{-- Lidah --}}
+                                            <th>Warna lidah</th>
+                                            <th>lidah Inflamasi</th>
+                                            <th>lidah Ulserasi</th>
+                                            {{-- Pipi --}}
+                                            <th>Warna Pipi</th>
+                                            <th>Pipi Inflamasi</th>
+                                            <th>Pipi Ulserasi</th>
+                                            {{-- Palatum --}}
+                                            <th>Warna Palatum</th>
+                                            <th>Palatum Inflamasi</th>
+                                            <th>Palatum Ulserasi</th>
+                                            {{-- Gingiva --}}
+                                            <th>Warna Gingiva</th>
+                                            <th>Gingiva Inflamasi</th>
+                                            <th>Gingiva Ulserasi</th>
+                                            {{-- Bibir --}}
+                                            <th>Warna Bibir</th>
+                                            <th>Bibir Inflamasi</th>
+                                            <th>Bibir Ulserasi</th>
                                             <th>Dibuat</th>
                                             <th>Tindakan</th>
                                         </tr>
@@ -137,24 +146,33 @@
                                         <tr>
                                             <th>No</th>
                                             <th>Nama</th>
-                                            {{-- DI --}}
-                                            <th>DI-1</th>
-                                            <th>DI-2</th>
-                                            <th>DI-3</th>
-                                            <th>DI-4</th>
-                                            <th>DI-5</th>
-                                            <th>DI-6</th>
-                                            <th>Score DI</th>
-                                            {{-- CI --}}
-                                            <th>CI-1</th>
-                                            <th>CI-2</th>
-                                            <th>CI-3</th>
-                                            <th>CI-4</th>
-                                            <th>CI-5</th>
-                                            <th>CI-6</th>
-                                            <th>Score CI</th>
-                                            
-                                            <th>Kreteria anomalimukosa</th>
+                                            {{-- Anomali --}}
+                                            <th>Occlusi</th>
+                                            <th>bentuk</th>
+                                            <th>warna</th>
+                                            <th>ukuran</th>
+                                            <th>struktur</th>
+                                            {{-- Mukosa --}}
+                                            {{-- Lidah --}}
+                                            <th>Warna lidah</th>
+                                            <th>lidah Inflamasi</th>
+                                            <th>lidah Ulserasi</th>
+                                            {{-- Pipi --}}
+                                            <th>Warna Pipi</th>
+                                            <th>Pipi Inflamasi</th>
+                                            <th>Pipi Ulserasi</th>
+                                            {{-- Palatum --}}
+                                            <th>Warna Palatum</th>
+                                            <th>Palatum Inflamasi</th>
+                                            <th>Palatum Ulserasi</th>
+                                            {{-- Gingiva --}}
+                                            <th>Warna Gingiva</th>
+                                            <th>Gingiva Inflamasi</th>
+                                            <th>Gingiva Ulserasi</th>
+                                            {{-- Bibir --}}
+                                            <th>Warna Bibir</th>
+                                            <th>Bibir Inflamasi</th>
+                                            <th>Bibir Ulserasi</th>
                                             <th>Dibuat</th>
                                             <th>Tindakan</th>
                                         </tr>
@@ -164,26 +182,34 @@
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $anomalimukosa->kartupasien->id }}</td>
-                                            {{-- pengetahuan --}}
-                                            <td>{{ $anomalimukosa->di_1 }} </td>
-                                            <td>{{ $anomalimukosa->di_2 }} </td>
-                                            <td>{{ $anomalimukosa->di_3 }} </td>
-                                            <td>{{ $anomalimukosa->di_4 }} </td>
-                                            <td>{{ $anomalimukosa->di_5 }}</td>
-                                            <td>{{ $anomalimukosa->di_6}}</td>
-                                            <td>{{ $anomalimukosa->jumlah_nilai_di}} / {{ $anomalimukosa->jumlah_gigi_di}}</td>
-                                            <td>{{ $anomalimukosa->score_di }}</td> 
-                                           
-                                            
-                                            <td>{{ $anomalimukosa->ci_1 }}</td>
-                                            <td>{{ $anomalimukosa->ci_2 }}</td>
-                                            <td>{{ $anomalimukosa->ci_3 }}</td>
-                                            <td>{{ $anomalimukosa->ci_4 }}</td>
-                                            <td>{{ $anomalimukosa->ci_5 }}</td>
-                                            <td>{{ $anomalimukosa->ci_6}}</td>
-                                            <td>{{ $anomalimukosa->jumlah_nilai_ci}} / {{ $anomalimukosa->jumlah_gigi_ci}}</td>
-                                            <td>{{ $anomalimukosa->score_ci }}</td> 
-                                            <td>{{ $anomalimukosa->nilai_kriteria_anomalimukosa }} {{ $anomalimukosa->kriteria_anomalimukosa }}</td> 
+                                            {{-- Anomali --}}
+                                            <td>{{ $anomalimukosa->occlusi }} </td>
+                                            <td>{{ $anomalimukosa->bentuk }} </td>
+                                            <td>{{ $anomalimukosa->warna }} </td>
+                                            <td>{{ $anomalimukosa->posisi }} </td>
+                                            <td>{{ $anomalimukosa->ukuran }}</td>
+                                            <td>{{ $anomalimukosa->struktur}}</td>
+                                            {{-- Mukosa --}}
+                                            {{-- Lidah --}}
+                                            <td>{{ $anomalimukosa->w_lidah}} ( {{ $anomalimukosa->dw_lidah}} )</td>
+                                            <td>{{ $anomalimukosa->i_lidah}} ( {{ $anomalimukosa->di_lidah}} )</td>
+                                            <td>{{ $anomalimukosa->u_lidah}} ( {{ $anomalimukosa->du_lidah}} )</td>
+                                            {{-- pipi --}}
+                                            <td>{{ $anomalimukosa->w_pipi}} ( {{ $anomalimukosa->dw_pipi}} )</td>
+                                            <td>{{ $anomalimukosa->i_pipi}} ( {{ $anomalimukosa->di_pipi}} )</td>
+                                            <td>{{ $anomalimukosa->u_pipi}} ( {{ $anomalimukosa->du_pipi}} )</td>
+                                            {{-- palatum --}}
+                                            <td>{{ $anomalimukosa->w_palatum}} ( {{ $anomalimukosa->dw_palatum}} )</td>
+                                            <td>{{ $anomalimukosa->i_palatum}} ( {{ $anomalimukosa->di_palatum}} )</td>
+                                            <td>{{ $anomalimukosa->u_palatum}} ( {{ $anomalimukosa->du_palatum}} )</td>
+                                            {{-- gingiva --}}
+                                            <td>{{ $anomalimukosa->w_gingiva}} ( {{ $anomalimukosa->dw_gingiva}} )</td>
+                                            <td>{{ $anomalimukosa->i_gingiva}} ( {{ $anomalimukosa->di_gingiva}} )</td>
+                                            <td>{{ $anomalimukosa->u_gingiva}} ( {{ $anomalimukosa->du_gingiva}} )</td>
+                                            {{-- gigir --}}
+                                            <td>{{ $anomalimukosa->w_gigir}} ( {{ $anomalimukosa->dw_gigir}} )</td>
+                                            <td>{{ $anomalimukosa->i_gigir}} ( {{ $anomalimukosa->di_gigir}} )</td>
+                                            <td>{{ $anomalimukosa->u_gigir}} ( {{ $anomalimukosa->du_gigir}} )</td>
                                             
                                             <td>{{ date_format($anomalimukosa->created_at, "d M Y") }}</td>
                                             <td>

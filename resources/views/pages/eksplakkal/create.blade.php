@@ -60,7 +60,7 @@
                     }
                 </style>
     
-        <form class="user" action="{{route('ohis.store')}}" method="post">
+        <form class="user" action="{{route('eksplakkal.store')}}" method="post">
             @csrf
 
             <div class="form-group row">
@@ -169,17 +169,17 @@
 
             <div class="row mt-3 text-center">
                 <!-- Kolom Pertama - di_1, di_2, di_3 -->
-                <div class="col-sm-6">
+                <div class="col-sm-12">
                     <div class="col-sm-12 mb-3 mb-sm-0 text-center bg-gradient-faded-info-vertical">
                         <h6 class="m-0 font-weight-bold text-dark text-bold">Plak</h6>
                     </div>
                     <!-- Baris Pertama - di_1, di_2, di_3 -->
                     
-                  <div class="form-group row mt-3">
+                  <div class="form-group row">
                     {{-- <div class="col-sm-5 mb-3">
                         <label for="plak[]" class ="form-text">Pilih Pertanyaan yang Berhasil Dijawab dengan Benar :</label>
                     </div> --}}
-                    <div class="col-sm-12 mb-3">
+                    <div class="col-sm-12 mt-3">
                         <select class="js-example-basic-multiple form-control @error('plak') is-invalid @enderror" data-live-search="true" id="plak" name="plak[]" placeholder="Pilih Pertanyaan yang berhasil dijawab dengan Benar" value="{{ old('plak[]') }}" multiple="multiple" required>
                             @error('plak[]')
                             <span class="invalid-feedback" role="alert">
@@ -195,25 +195,25 @@
                   </div>
                     
                     <div class="row mb-3">
-                      <div class="col-sm-6 mb-3 mb-sm-0">
+                      <div class="col-sm-3 mb-3 mb-sm-0">
                         <label for="jumlah_permukaan" class ="form-text">Jumlah Permukaan yang Diperiksa :</label>
-                        <input type="number" class="form-control @error('jumlah_permukaan') is-invalid @enderror" id="jumlah_permukaan" name="jumlah_permukaan" placeholder="Tuliskan Jumlah Permukaan yang Diperiksa" value="{{ old('jumlah_permukaan') }}">
+                        <input type="number" class="form-control @error('jumlah_permukaan') is-invalid @enderror" id="jumlah_permukaan" name="jumlah_permukaan" placeholder="Permukaan yang Diperiksa" value="{{ old('jumlah_permukaan') }}">
                             @error('jumlah_permukaan')
                             <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                             </span>
                             @enderror
                       </div>
-                      <div class="col-sm-6 mb-3 mb-sm-0">
+                      <div class="col-sm-3 mb-3 mb-sm-0">
                         <label for="jumlah_tidak_plak" class ="form-text">Jumlah yang Tidak Ada Plak :</label>
-                        <input type="text" class="form-control @error('jumlah_tidak_plak') is-invalid @enderror" id="jumlah_tidak_plak" name="jumlah_tidak_plak" placeholder="Tuliskan Jumlah yang Tidak Ada Plak" value="{{ old('jumlah_tidak_plak') }}" readonly>
+                        <input type="text" class="form-control @error('jumlah_tidak_plak') is-invalid @enderror" id="jumlah_tidak_plak" name="jumlah_tidak_plak" placeholder="Tidak Ada Plak" value="{{ old('jumlah_tidak_plak') }}" readonly>
                             @error('jumlah_tidak_plak')
                             <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                             </span>
                             @enderror
                       </div>
-                      <div class="col-sm-6 mb-3 mb-sm-0">
+                      <div class="col-sm-3 mb-3 mb-sm-0">
                         <label for="plaque_score" class ="form-text">Plaque Score :</label>
                         <input type="text" class="form-control @error('plaque_score') is-invalid @enderror" id="plaque_score" name="plaque_score" placeholder="Plaque Score" value="{{ old('plaque_score') }}" readonly>
                             @error('plaque_score')
@@ -222,7 +222,7 @@
                             </span>
                             @enderror
                       </div>
-                      <div class="col-sm-6 mb-3 mb-sm-0">
+                      <div class="col-sm-3 mb-3 mb-sm-0">
                         <label for="kriteria" class ="form-text">Kriteria :</label>
                         <input type="text" class="form-control @error('kriteria') is-invalid @enderror" id="kriteria" name="kriteria" placeholder="kriteria" value="{{ old('kriteria') }}" readonly>
                             @error('kriteria')
@@ -235,47 +235,49 @@
                 </div>
             
                 <!-- Kolom Kedua - ci_1, ci_2, ci_3 -->
-                <div class="col-sm-6">
+                <div class="col-sm-12">
                     <div class="col-sm-12 mb-3 mb-sm-0 text-center bg-gradient-faded-info-vertical">
                         <h6 class="m-0 font-weight-bold text-dark text-bold">Kalkulus</h6>
                     </div>
                     <!-- Baris Pertama - ci_1, ci_2, ci_3 -->
                     
-                  <div class="col-sm-12 mb-3">
-                        <label for="supragingiva[]" class ="form-text">Supragingiva :</label>
-                        <select class="js-example-basic-multiple form-control @error('supragingiva') is-invalid @enderror" data-live-search="true" id="supragingiva" name="supragingiva[]" placeholder="Pilih Pertanyaan yang berhasil dijawab dengan Benar" value="{{ old('supragingiva[]') }}" multiple="multiple" required>
-                            @error('supragingiva[]')
-                            <span class="invalid-feedback" role="alert">
-                              <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
-                            {{-- <option value="" selected disabled>Pilih Gigi</option> --}}
-                            @foreach ($permukaangigis as $permukaangigi)
-                            <option value="{{ $permukaangigi->id }}">{{ $permukaangigi->kode }} {{ $permukaangigi->lokasi }}</option>
-                            @endforeach
-                        </select>
-                    </div>  
-                    <div class="col-sm-12 mb-3">
-                          <label for="subgingiva[]" class ="form-text">subgingiva :</label>
-                          <select class="js-example-basic-multiple form-control @error('subgingiva') is-invalid @enderror" data-live-search="true" id="subgingiva" name="subgingiva[]" placeholder="Pilih Pertanyaan yang berhasil dijawab dengan Benar" value="{{ old('subgingiva[]') }}" multiple="multiple" required>
-                              @error('subgingiva[]')
-                              <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                              </span>
-                              @enderror
-                              {{-- <option value="" selected disabled>Pilih Gigi</option> --}}
-                              @foreach ($permukaangigis as $permukaangigi)
-                              <option value="{{ $permukaangigi->id }}">{{ $permukaangigi->kode }} {{ $permukaangigi->lokasi }}</option>
-                              @endforeach
-                          </select>
-                      </div>
-                  </div>
+                    <div class="row mb-3">
+                        <div class="col-sm-6 mb-3 mb-sm-0">
+                            <label for="supragingiva[]" class ="form-text">Supragingiva :</label>
+                            <select class="js-example-basic-multiple form-control @error('supragingiva') is-invalid @enderror" data-live-search="true" id="supragingiva" name="supragingiva[]" placeholder="Pilih Pertanyaan yang berhasil dijawab dengan Benar" value="{{ old('supragingiva[]') }}" multiple="multiple" required>
+                                @error('supragingiva[]')
+                                <span class="invalid-feedback" role="alert">
+                                  <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                                {{-- <option value="" selected disabled>Pilih Gigi</option> --}}
+                                @foreach ($permukaangigis as $permukaangigi)
+                                <option value="{{ $permukaangigi->id }}">{{ $permukaangigi->kode }} {{ $permukaangigi->lokasi }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col-sm-6 mb-3 mb-sm-0">
+                            <label for="subgingiva[]" class ="form-text">subgingiva :</label>
+                            <select class="js-example-basic-multiple form-control @error('subgingiva') is-invalid @enderror" data-live-search="true" id="subgingiva" name="subgingiva[]" placeholder="Pilih Pertanyaan yang berhasil dijawab dengan Benar" value="{{ old('subgingiva[]') }}" multiple="multiple" required>
+                                @error('subgingiva[]')
+                                <span class="invalid-feedback" role="alert">
+                                  <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                                {{-- <option value="" selected disabled>Pilih Gigi</option> --}}
+                                @foreach ($permukaangigis as $permukaangigi)
+                                <option value="{{ $permukaangigi->id }}">{{ $permukaangigi->kode }} {{ $permukaangigi->lokasi }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                </div>
             </div>
             
 
             <div class="form-group row">
                 <div class="col-sm-6 d-grid gap-2">
-                    <a href="{{route('ohis.index')}}" class="btn btn-success btn-block btn">
+                    <a href="{{route('eksplakkal.index')}}" class="btn btn-success btn-block btn">
                         <i class="fas fa-arrow-left fa-fw"></i> Kembali
                     </a>
                 </div>
