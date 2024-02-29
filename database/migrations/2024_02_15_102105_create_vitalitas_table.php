@@ -26,6 +26,8 @@ return new class extends Migration
             $table->string('druk');
             $table->string('mobility');
             $table->string('masalah');
+            
+
             $table->timestamps();
         });
     }

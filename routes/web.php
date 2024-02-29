@@ -33,6 +33,7 @@ use App\Http\Controllers\EksplakkalController;
 use App\Http\Controllers\OdontogramController;
 use App\Http\Controllers\OhisController;
 use App\Http\Controllers\VitalitasController;
+use App\Http\Controllers\AnomalimukosaController;
 
 
 
@@ -178,6 +179,18 @@ Route::group(['middleware' => 'auth'], function () {
 
 	Route::post('importvitalitas', [VitalitasController::class, 'import'])->name('importvitalitas')->middleware('mahasiswa');
     Route::get('exportvitalitas', [VitalitasController::class, 'export'])->name('exportvitalitas')->middleware('mahasiswa');
+
+	// Route::resource('/anomalimukosa', AnomalimukosaController::class);
+	Route::get('/anomalimukosa', [AnomalimukosaController::class, 'index'])->name('anomalimukosa.index');
+	Route::get('/anomalimukosa/create', [AnomalimukosaController::class, 'create'])->name('anomalimukosa.create')->middleware('mahasiswa');
+	Route::post('/anomalimukosa', [AnomalimukosaController::class, 'store'])->name('anomalimukosa.store')->middleware('mahasiswa');
+	Route::get('/anomalimukosa/{anomalimukosa}', [AnomalimukosaController::class, 'show'])->name('anomalimukosa.show');
+	Route::get('/anomalimukosa/{anomalimukosa}/edit', [AnomalimukosaController::class, 'edit'])->name('anomalimukosa.edit')->middleware('mahasiswa');
+	Route::put('/anomalimukosa/{anomalimukosa}', [AnomalimukosaController::class, 'update'])->name('anomalimukosa.update')->middleware('mahasiswa');
+	Route::Delete('/anomalimukosa/{anomalimukosa}', [AnomalimukosaController::class, 'destroy'])->name('anomalimukosa.destroy')->middleware('mahasiswa');
+
+	Route::post('importanomalimukosa', [AnomalimukosaController::class, 'import'])->name('importanomalimukosa')->middleware('mahasiswa');
+    Route::get('exportanomalimukosa', [AnomalimukosaController::class, 'export'])->name('exportanomalimukosa')->middleware('mahasiswa');
 
 	Route::get('/{page}', [PageController::class, 'index'])->name('page');
 	Route::post('logout', [LoginController::class, 'logout'])->name('logout');

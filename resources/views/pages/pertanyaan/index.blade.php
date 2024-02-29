@@ -110,6 +110,7 @@
                                         <tr>
                                             <th>No</th>
                                             <th>Jenis</th>
+                                            <th>Pertanyaan</th>
                                             <th>Dibuat</th>
                                             <th>Tindakan</th>
                                         </tr>
@@ -118,6 +119,7 @@
                                         <tr>
                                             <th>No</th>
                                             <th>Jenis</th>
+                                            <th>Pertanyaan</th>
                                             <th>Dibuat</th>
                                             <th>Tindakan</th>
                                         </tr>
@@ -126,7 +128,8 @@
                                         @foreach ($pertanyaans as $pertanyaan)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $pertanyaan->soal == 1 ? 'Pengetahuan':'Perilaku' }}</td>
+                                            <td>{{ $pertanyaan->kode == 1 ? 'Pengetahuan':'Perilaku' }}</td>
+                                            <td>{{ $pertanyaan->soal }}</td>
                                             <td>{{ date_format($pertanyaan->created_at, "d M Y") }}</td>
                                             <td>
                                                 

@@ -26,6 +26,8 @@
         @media (min-width: 576px) {
             .custom-col-sm-1 { width: 6.25%; }
             .custom-col-sm-2 { width: 18.75%; }
+            .custom-col-sm-3 { width: 12%; }
+            .custom-col-sm-4 { width: 28%; }
             /* .custom-col-sm-3 { width: 6.25%; }
             .custom-col-sm-4 { width: 6.25%; }
             .custom-col-sm-5 { width: 6.25%; }
@@ -1135,6 +1137,7 @@
 
     // Display gigi_karies in the HTML element
     document.getElementById('gigi_karies').value = gigi_karies.join(',');
+
   }
 
   // Call the updateCounts function whenever a dropdown changes
@@ -1145,6 +1148,7 @@
   // Initial calculation on page load
   updateCounts();
 </script>
+
 
   
 @endsection

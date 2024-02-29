@@ -26,40 +26,43 @@ return new class extends Migration
             $table->tinyInteger('struktur');
 
             //mukosa mulut
-            $table->tinyInteger('warna_lidah');
-            $table->string('daerah_warna_lidah')->nullable();
-            $table->tinyInteger('inflamasi_lidah');
-            $table->string('daerah_inflamasi_lidah')->nullable();
-            $table->tinyInteger('ulserasi_lidah');
-            $table->string('daerah_ulserasi_lidah')->nullable();
             
-            $table->tinyInteger('warna_pipi');
-            $table->string('daerah_warna_pipi')->nullable();
-            $table->tinyInteger('inflamasi_pipi');
-            $table->string('daerah_inflamasi_pipi')->nullable();
-            $table->tinyInteger('ulserasi_pipi');
-            $table->string('daerah_ulserasi_pipi')->nullable();
-            
-            $table->tinyInteger('warna_palatum');
-            $table->string('daerah_warna_palatum')->nullable();
-            $table->tinyInteger('inflamasi_palatum');
-            $table->string('daerah_inflamasi_palatum')->nullable();
-            $table->tinyInteger('ulserasi_palatum');
-            $table->string('daerah_ulserasi_palatum')->nullable();
-            
-            $table->tinyInteger('warna_gingiva');
-            $table->string('daerah_warna_gingiva')->nullable();
-            $table->tinyInteger('inflamasi_gingiva');
-            $table->string('daerah_inflamasi_gingiva')->nullable();
-            $table->tinyInteger('ulserasi_gingiva');
-            $table->string('daerah_ulserasi_gingiva')->nullable();
-            
-            $table->tinyInteger('warna_bibir');
-            $table->string('daerah_warna_bibir')->nullable();
-            $table->tinyInteger('inflamasi_bibir');
-            $table->string('daerah_inflamasi_bibir')->nullable();
-            $table->tinyInteger('ulserasi_bibir');
-            $table->string('daerah_ulserasi_bibir')->nullable();
+            // lidah
+            $table->string('w_lidah');
+            $table->string('dw_lidah')->nullable();
+            $table->string('i_lidah');
+            $table->string('di_lidah')->nullable();
+            $table->string('u_lidah');
+            $table->string('du_lidah')->nullable();
+            // pipi
+            $table->string('w_pipi');
+            $table->string('dw_pipi')->nullable();
+            $table->string('i_pipi');
+            $table->string('di_pipi')->nullable();
+            $table->string('u_pipi');
+            $table->string('du_pipi')->nullable();
+            // palatum
+            $table->string('w_palatum');
+            $table->string('dw_palatum')->nullable();
+            $table->string('i_palatum');
+            $table->string('di_palatum')->nullable();
+            $table->string('u_palatum');
+            $table->string('du_palatum')->nullable();
+            // gingiva
+            $table->string('w_gingiva');
+            $table->string('dw_gingiva')->nullable();
+            $table->string('i_gingiva');
+            $table->string('di_gingiva')->nullable();
+            $table->string('u_gingiva');
+            $table->string('du_gingiva')->nullable();
+            // bibir
+            $table->string('w_bibir');
+            $table->string('dw_bibir')->nullable();
+            $table->string('i_bibir');
+            $table->string('di_bibir')->nullable();
+            $table->string('u_bibir');
+            $table->string('du_bibir')->nullable();
+
             $table->timestamps();
         });
     }

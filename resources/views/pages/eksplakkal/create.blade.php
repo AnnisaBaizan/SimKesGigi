@@ -83,244 +83,193 @@
             </div>
 
             <div class="col-sm-12 mb-3 mb-sm-0 text-center bg-gradient-faded-info-vertical">
-            <marquee><h6 class="m-0 font-weight-bold text-dark text-bold">DI (Debris Index) & CI (Calculus Index)</h6></marquee>
+                <marquee><h6 class="m-0 font-weight-bold text-dark text-bold">Eksternal Oral</h6></marquee>
             </div>
+
+            <div class="form-group row mt-3">
+                <div class="col-sm-3">
+                    <label for="muka" class ="form-text">Muka :</label>
+                </div>
+                <div class="col-sm-9 mb-3">
+                  <select class="form-control @error('muka') is-invalid @enderror" id="muka" name="muka" placeholder="pilih" value="{{ old('muka') }}" required>
+                          @error('muka')
+                          <span class="invalid-feedback" role="alert">
+                          <strong>{{ $message }}</strong>
+                          </span>
+                          @enderror
+                      <option value="" selected disabled>Pilih</option>
+                      <option value="Simetris">Simetris</option>
+                      <option value="Tidak Simetris">Tidak Simetris</option>
+                  </select>
+                </div>
+            </div>
+
+            <div class="col-sm-12 mb-sm-0 text-center bg-gradient-faded-info-vertical">
+                <h6 class="m-0 font-weight-bold text-dark text-bold">Kelenjar Limpe</h6>
+            </div>
+            <div class="row mt-2">
+                <div class="col-sm-6">
+                    <div class="col-sm-12 mb-sm-0 text-center bg-gradient-faded-secondary-vertical">
+                        <h6 class="m-0 font-weight-bold text-dark text-bold">Kanan</h6>
+                    </div>
+                    <div class="col-sm-12 mb-3 mt-3 text-center">
+                        <input type="radio" class="@error('limpe_kanan_teraba') is-invalid @enderror" id="limpe_kanan_teraba1" value="{{ old('limpe_kanan_teraba') }}" name="limpe_kanan_teraba" value="Teraba" require>
+                        <label for="limpe_kanan_teraba1" class="me-5">Teraba</label>
+                        <input type="radio" class="ms-5 @error('limpe_kanan_teraba') is-invalid @enderror" id="limpe_kanan_teraba2" value="{{ old('limpe_kanan_teraba') }}" name="limpe_kanan_teraba" value="Tidak Teraba" require>
+                        <label for="limpe_kanan_teraba2">Tidak Teraba</label>
+                    </div>
+                    <div class="col-sm-12 mb-3 text-center">
+                        <input type="radio" class="@error('limpe_kanan_texture') is-invalid @enderror" id="limpe_kanan_texture1" value="{{ old('limpe_kanan_texture') }}" name="limpe_kanan_texture" value="Keras" require>
+                        <label for="limpe_kanan_texture1" class="me-5">Keras</label>
+                        <input type="radio" class="ms-5 @error('limpe_kanan_texture') is-invalid @enderror" id="limpe_kanan_texture2" value="{{ old('limpe_kanan_texture') }}" name="limpe_kanan_texture" value="Lunak" require>
+                        <label for="limpe_kanan_texture2">Lunak</label>
+                    </div>
+                    <div class="col-sm-12 mb-3 text-center">
+                        <input type="radio" class="@error('limpe_kanan_sakit') is-invalid @enderror" id="limpe_kanan_sakit1" value="{{ old('limpe_kanan_sakit') }}" name="limpe_kanan_sakit" value="Sakit" require>
+                        <label for="limpe_kanan_sakit1" class="me-5">Sakit</label>
+                        <input type="radio" class="ms-5 @error('limpe_kanan_sakit') is-invalid @enderror" id="limpe_kanan_sakit2" value="{{ old('limpe_kanan_sakit') }}" name="limpe_kanan_sakit" value="Tidak Sakit" require>
+                        <label for="limpe_kanan_sakit2">Tidak Sakit</label>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="col-sm-12 mb-sm-0 text-center bg-gradient-faded-secondary-vertical">
+                        <h6 class="m-0 font-weight-bold text-dark text-bold">Kiri</h6>
+                    </div>
+                    <div class="col-sm-12 mb-3 mt-3 text-center">
+                        <input type="radio" class="@error('limpe_kiri_teraba') is-invalid @enderror" id="limpe_kiri_teraba1" value="{{ old('limpe_kiri_teraba') }}" name="limpe_kiri_teraba" value="Teraba" require>
+                        <label for="limpe_kiri_teraba1" class="me-5">Teraba</label>
+                        <input type="radio" class="ms-5 @error('limpe_kiri_teraba') is-invalid @enderror" id="limpe_kiri_teraba2" value="{{ old('limpe_kiri_teraba') }}" name="limpe_kiri_teraba" value="Tidak Teraba" require>
+                        <label for="limpe_kiri_teraba2">Tidak Teraba</label>
+                    </div>
+                    <div class="col-sm-12 mb-3 text-center">
+                        <input type="radio" class="@error('limpe_kiri_texture') is-invalid @enderror" id="limpe_kiri_texture1" value="{{ old('limpe_kiri_texture') }}" name="limpe_kiri_texture" value="Keras" require>
+                        <label for="limpe_kiri_texture1" class="me-5">Keras</label>
+                        <input type="radio" class="ms-5 @error('limpe_kiri_texture') is-invalid @enderror" id="limpe_kiri_texture2" value="{{ old('limpe_kiri_texture') }}" name="limpe_kiri_texture" value="Lunak" require>
+                        <label for="limpe_kiri_texture2">Lunak</label>
+                    </div>
+                    <div class="col-sm-12 mb-3 text-center">
+                        <input type="radio" class="@error('limpe_kiri_sakit') is-invalid @enderror" id="limpe_kiri_sakit1" value="{{ old('limpe_kiri_sakit') }}" name="limpe_kiri_sakit" value="Sakit" require>
+                        <label for="limpe_kiri_sakit1" class="me-5">Sakit</label>
+                        <input type="radio" class="ms-5 @error('limpe_kiri_sakit') is-invalid @enderror" id="limpe_kiri_sakit2" value="{{ old('limpe_kiri_sakit') }}" name="limpe_kiri_sakit" value="Tidak Sakit" require>
+                        <label for="limpe_kiri_sakit2">Tidak Sakit</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-12 mb-3 mb-sm-0 text-center bg-gradient-faded-info-vertical">
+            <marquee><h6 class="m-0 font-weight-bold text-dark text-bold">Internal Oral</h6></marquee>
+            </div>
+
+            <div class="col-sm-12 mb-3 mb-sm-0 text-center">
+                <img class="mb-3 img-fluid max-width: 150%; height: 50%;" src="{!! asset('/img/odontogram.jpeg') !!}">
+            </div>
+
+            {{-- <img src="{!! asset('/img/odontogram.jpeg') !!}"  width="2000px" height="500px"> --}}
             {{--  --}}
 
             <div class="row mt-3 text-center">
                 <!-- Kolom Pertama - di_1, di_2, di_3 -->
                 <div class="col-sm-6">
                     <div class="col-sm-12 mb-3 mb-sm-0 text-center bg-gradient-faded-info-vertical">
-                        <h6 class="m-0 font-weight-bold text-dark text-bold">DI (Debris Index)</h6>
+                        <h6 class="m-0 font-weight-bold text-dark text-bold">Plak</h6>
                     </div>
                     <!-- Baris Pertama - di_1, di_2, di_3 -->
-                    <div class="row">
-                        <div class="col-sm-4">
-                            <label for="di_1">DI 1</label>
-                            <select class="form-control @error('di_1') is-invalid @enderror" id="di_1" name="di_1" placeholder="Tidak Ada" value="{{ old('di_1') }}">
-                                @error('di_1')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                                <option value="" selected>Tidak Ada</option>
-                                @for ($j = 0; $j < 4; $j++)
-                                    <option value="{{ $j }}">{{ $j }}</option>
-                                @endfor
-                            </select>
-                        </div>
-                        <div class="col-sm-4">
-                            <label for="di_2">DI 2</label>
-                            <select class="form-control @error('di_2') is-invalid @enderror" id="di_2" name="di_2" placeholder="Tidak Ada" value="{{ old('di_2') }}">
-                                @error('di_2')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                                <option value="" selected>Tidak Ada</option>
-                                @for ($j = 0; $j < 4; $j++)
-                                    <option value="{{ $j }}">{{ $j }}</option>
-                                @endfor
-                            </select>
-                        </div>
-                        <div class="col-sm-4">
-                            <label for="di_3">DI 3</label>
-                            <select class="form-control @error('di_3') is-invalid @enderror" id="di_3" name="di_3" placeholder="Tidak Ada" value="{{ old('di_3') }}">
-                                @error('di_3')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                                <option value="" selected>Tidak Ada</option>
-                                @for ($j = 0; $j < 4; $j++)
-                                    <option value="{{ $j }}">{{ $j }}</option>
-                                @endfor
-                            </select>
-                        </div>
-                    </div>
-            
-                    <!-- Baris Kedua - di_4, di_5, di_6 -->
-                    <div class="row mb-3">
-                        <div class="col-sm-4">
-                            <label for="di_4">DI 4</label>
-                            <select class="form-control @error('di_4') is-invalid @enderror" id="di_4" name="di_4" placeholder="Tidak Ada" value="{{ old('di_4') }}">
-                                @error('di_4')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                                <option value="" selected>Tidak Ada</option>
-                                @for ($j = 0; $j < 4; $j++)
-                                    <option value="{{ $j }}">{{ $j }}</option>
-                                @endfor
-                            </select>
-                        </div>
-                        <div class="col-sm-4">
-                            <label for="di_5">DI 5</label>
-                            <select class="form-control @error('di_5') is-invalid @enderror" id="di_5" name="di_5" placeholder="Tidak Ada" value="{{ old('di_5') }}">
-                                @error('di_5')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                                <option value="" selected>Tidak Ada</option>
-                                @for ($j = 0; $j < 4; $j++)
-                                    <option value="{{ $j }}">{{ $j }}</option>
-                                @endfor
-                            </select>
-                        </div>
-                        <div class="col-sm-4">
-                            <label for="di_6">DI 6</label>
-                            <select class="form-control @error('di_6') is-invalid @enderror" id="di_6" name="di_6" placeholder="Tidak Ada" value="{{ old('di_6') }}">
-                                @error('di_6')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                                <option value="" selected>Tidak Ada</option>
-                                @for ($j = 0; $j < 4; $j++)
-                                    <option value="{{ $j }}">{{ $j }}</option>
-                                @endfor
-                            </select>
-                        </div>
-                    </div>
                     
-                    <div class="row">
-                        <div class="col-sm-4 mb-3">
-                            <label for="jumlah_nilai_di">Jumlah Nilai DI</label>
-                            <input type="text" name="jumlah_nilai_di" id="jumlah_nilai_di" value="0" class="form-control text-center" readonly required>
-                        </div>
-                        <div class="col-sm-4 mb-3">
-                            <label for="jumlah_gigi_di">Jumlah Gigi DI</label>
-                            <input type="text" name="jumlah_gigi_di" id="jumlah_gigi_di" value="0" class="form-control text-center" readonly required>
-                        </div>
-                        <div class="col-sm-4 mb-3">
-                            <label for="score_di">Score DI</label>
-                            <input type="text" name="score_di" id="score_di" value="0" class="form-control text-center" readonly required>
-                        </div>
+                  <div class="form-group row mt-3">
+                    {{-- <div class="col-sm-5 mb-3">
+                        <label for="plak[]" class ="form-text">Pilih Pertanyaan yang Berhasil Dijawab dengan Benar :</label>
+                    </div> --}}
+                    <div class="col-sm-12 mb-3">
+                        <select class="js-example-basic-multiple form-control @error('plak') is-invalid @enderror" data-live-search="true" id="plak" name="plak[]" placeholder="Pilih Pertanyaan yang berhasil dijawab dengan Benar" value="{{ old('plak[]') }}" multiple="multiple" required>
+                            @error('plak[]')
+                            <span class="invalid-feedback" role="alert">
+                              <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                            {{-- <option value="" selected disabled>Pilih Pertanyaan yang berhasil dijawab dengan Benar</option> --}}
+                            @foreach ($permukaangigis as $permukaangigi)
+                            <option value="{{ $permukaangigi->id }}">{{ $permukaangigi->kode }} {{ $permukaangigi->lokasi }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                  </div>
+                    
+                    <div class="row mb-3">
+                      <div class="col-sm-6 mb-3 mb-sm-0">
+                        <label for="jumlah_permukaan" class ="form-text">Jumlah Permukaan yang Diperiksa :</label>
+                        <input type="number" class="form-control @error('jumlah_permukaan') is-invalid @enderror" id="jumlah_permukaan" name="jumlah_permukaan" placeholder="Tuliskan Jumlah Permukaan yang Diperiksa" value="{{ old('jumlah_permukaan') }}">
+                            @error('jumlah_permukaan')
+                            <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                      </div>
+                      <div class="col-sm-6 mb-3 mb-sm-0">
+                        <label for="jumlah_tidak_plak" class ="form-text">Jumlah yang Tidak Ada Plak :</label>
+                        <input type="text" class="form-control @error('jumlah_tidak_plak') is-invalid @enderror" id="jumlah_tidak_plak" name="jumlah_tidak_plak" placeholder="Tuliskan Jumlah yang Tidak Ada Plak" value="{{ old('jumlah_tidak_plak') }}" readonly>
+                            @error('jumlah_tidak_plak')
+                            <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                      </div>
+                      <div class="col-sm-6 mb-3 mb-sm-0">
+                        <label for="plaque_score" class ="form-text">Plaque Score :</label>
+                        <input type="text" class="form-control @error('plaque_score') is-invalid @enderror" id="plaque_score" name="plaque_score" placeholder="Plaque Score" value="{{ old('plaque_score') }}" readonly>
+                            @error('plaque_score')
+                            <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                      </div>
+                      <div class="col-sm-6 mb-3 mb-sm-0">
+                        <label for="kriteria" class ="form-text">Kriteria :</label>
+                        <input type="text" class="form-control @error('kriteria') is-invalid @enderror" id="kriteria" name="kriteria" placeholder="kriteria" value="{{ old('kriteria') }}" readonly>
+                            @error('kriteria')
+                            <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                      </div>
                     </div>
                 </div>
             
                 <!-- Kolom Kedua - ci_1, ci_2, ci_3 -->
                 <div class="col-sm-6">
                     <div class="col-sm-12 mb-3 mb-sm-0 text-center bg-gradient-faded-info-vertical">
-                        <h6 class="m-0 font-weight-bold text-dark text-bold">CI (Calculus Index)</h6>
+                        <h6 class="m-0 font-weight-bold text-dark text-bold">Kalkulus</h6>
                     </div>
                     <!-- Baris Pertama - ci_1, ci_2, ci_3 -->
-                    <div class="row">
-                        <div class="col-sm-4">
-                            <label for="ci_1">CI 1</label>
-                            <select class="form-control @error('ci_1') is-invalid @enderror" id="ci_1" name="ci_1" placeholder="Tidak Ada" value="{{ old('ci_1') }}">
-                                @error('ci_1')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                                <option value="" selected>Tidak Ada</option>
-                                @for ($j = 0; $j < 4; $j++)
-                                    <option value="{{ $j }}">{{ $j }}</option>
-                                @endfor
-                            </select>
-                        </div>
-                        <div class="col-sm-4">
-                            <label for="ci_2">CI 2</label>
-                            <select class="form-control @error('ci_2') is-invalid @enderror" id="ci_2" name="ci_2" placeholder="Tidak Ada" value="{{ old('ci_2') }}">
-                                @error('ci_2')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                                <option value="" selected>Tidak Ada</option>
-                                @for ($j = 0; $j < 4; $j++)
-                                    <option value="{{ $j }}">{{ $j }}</option>
-                                @endfor
-                            </select>
-                        </div>
-                        <div class="col-sm-4">
-                            <label for="ci_3">CI 3</label>
-                            <select class="form-control @error('ci_3') is-invalid @enderror" id="ci_3" name="ci_3" placeholder="Tidak Ada" value="{{ old('ci_3') }}">
-                                @error('ci_3')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                                <option value="" selected>Tidak Ada</option>
-                                @for ($j = 0; $j < 4; $j++)
-                                    <option value="{{ $j }}">{{ $j }}</option>
-                                @endfor
-                            </select>
-                        </div>
-                    </div>
-            
-                    <!-- Baris Kedua - ci_4, ci_5, ci_6 -->
-                    <div class="row mb-3">
-                        <div class="col-sm-4">
-                            <label for="ci_4">CI 4</label>
-                            <select class="form-control @error('ci_4') is-invalid @enderror" id="ci_4" name="ci_4" placeholder="Tidak Ada" value="{{ old('ci_4') }}">
-                                @error('ci_4')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                                <option value="" selected>Tidak Ada</option>
-                                @for ($j = 0; $j < 4; $j++)
-                                    <option value="{{ $j }}">{{ $j }}</option>
-                                @endfor
-                            </select>
-                        </div>
-                        <div class="col-sm-4">
-                            <label for="ci_5">CI 5</label>
-                            <select class="form-control @error('ci_5') is-invalid @enderror" id="ci_5" name="ci_5" placeholder="Tidak Ada" value="{{ old('ci_5') }}">
-                                @error('ci_5')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                                <option value="" selected>Tidak Ada</option>
-                                @for ($j = 0; $j < 4; $j++)
-                                    <option value="{{ $j }}">{{ $j }}</option>
-                                @endfor
-                            </select>
-                        </div>
-                        <div class="col-sm-4">
-                            <label for="ci_6">CI 6</label>
-                            <select class="form-control @error('ci_6') is-invalid @enderror" id="ci_6" name="ci_6" placeholder="Tidak Ada" value="{{ old('ci_6') }}">
-                                @error('ci_6')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                                <option value="" selected>Tidak Ada</option>
-                                @for ($j = 0; $j < 4; $j++)
-                                    <option value="{{ $j }}">{{ $j }}</option>
-                                @endfor
-                            </select>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-4 mb-3">
-                            <label for="jumlah_nilai_ci">Jumlah Nilai CI</label>
-                            <input type="text" name="jumlah_nilai_ci" id="jumlah_nilai_ci" value="0" class="form-control text-center" readonly required>
-                        </div>
-                        <div class="col-sm-4 mb-3">
-                            <label for="jumlah_gigi_ci">Jumlah Gigi CI</label>
-                            <input type="text" name="jumlah_gigi_ci" id="jumlah_gigi_ci" value="0" class="form-control text-center" readonly required>
-                        </div>
-                        <div class="col-sm-4 mb-3">
-                            <label for="score_ci">Score CI</label>
-                            <input type="text" name="score_ci" id="score_ci" value="0" class="form-control text-center" readonly required>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <label for="kriteria_ohis" class="text-center">Kriteria OHI-S</label>
-                <div class="col-sm-6 mb-3">
-                    <input type="text" name="nilai_kriteria_ohis" id="nilai_kriteria_ohis" value="0" class="form-control text-center" readonly required>
-                </div>
-                <div class="col-sm-6 mb-3">
-                    <input type="text" name="kriteria_ohis" id="kriteria_ohis" value="Buruk" class="form-control text-center" readonly required>
-                </div>
+                    
+                  <div class="col-sm-12 mb-3">
+                        <label for="supragingiva[]" class ="form-text">Supragingiva :</label>
+                        <select class="js-example-basic-multiple form-control @error('supragingiva') is-invalid @enderror" data-live-search="true" id="supragingiva" name="supragingiva[]" placeholder="Pilih Pertanyaan yang berhasil dijawab dengan Benar" value="{{ old('supragingiva[]') }}" multiple="multiple" required>
+                            @error('supragingiva[]')
+                            <span class="invalid-feedback" role="alert">
+                              <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                            {{-- <option value="" selected disabled>Pilih Gigi</option> --}}
+                            @foreach ($permukaangigis as $permukaangigi)
+                            <option value="{{ $permukaangigi->id }}">{{ $permukaangigi->kode }} {{ $permukaangigi->lokasi }}</option>
+                            @endforeach
+                        </select>
+                    </div>  
+                    <div class="col-sm-12 mb-3">
+                          <label for="subgingiva[]" class ="form-text">subgingiva :</label>
+                          <select class="js-example-basic-multiple form-control @error('subgingiva') is-invalid @enderror" data-live-search="true" id="subgingiva" name="subgingiva[]" placeholder="Pilih Pertanyaan yang berhasil dijawab dengan Benar" value="{{ old('subgingiva[]') }}" multiple="multiple" required>
+                              @error('subgingiva[]')
+                              <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                              </span>
+                              @enderror
+                              {{-- <option value="" selected disabled>Pilih Gigi</option> --}}
+                              @foreach ($permukaangigis as $permukaangigi)
+                              <option value="{{ $permukaangigi->id }}">{{ $permukaangigi->kode }} {{ $permukaangigi->lokasi }}</option>
+                              @endforeach
+                          </select>
+                      </div>
+                  </div>
             </div>
             
 
@@ -345,7 +294,13 @@
         </div>
 @endsection
 @section('js')
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script>
-
+$(document).ready(function() {
+    $('.js-example-basic-single').select2();
+});
+$(document).ready(function() {
+    $('.js-example-basic-multiple').select2();
+});
 </script>
 @endsection

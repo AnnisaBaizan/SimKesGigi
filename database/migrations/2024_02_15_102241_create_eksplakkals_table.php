@@ -18,24 +18,24 @@ return new class extends Migration
             $table->foreignId('kartupasien_id');
             
             //eksternal
-            $table->tinyInteger('muka');
-            $table->tinyInteger('limpe_kanan_teraba');
-            $table->tinyInteger('limpe_kanan_texture');
-            $table->tinyInteger('limpe_kanan_sakit');
-            $table->tinyInteger('limpe_kiri_teraba');
-            $table->tinyInteger('limpe_kiri_texture');
-            $table->tinyInteger('limpe_kiri_sakit');
+            $table->string('muka');
+            $table->string('limpe_kanan_teraba');
+            $table->string('limpe_kanan_texture');
+            $table->string('limpe_kanan_sakit');
+            $table->string('limpe_kiri_teraba');
+            $table->string('limpe_kiri_texture');
+            $table->string('limpe_kiri_sakit');
 
             //pengukuran plak
-            $table->string('gigi_yang_dipilih');
+            $table->string('plak');
             $table->tinyInteger('jumlah_permukaan');
             $table->tinyInteger('jumlah_tidak_plak');
             $table->string('plaque_score');
             $table->string('kriteria');
 
             //kalkulus
-            $table->string('gigi_supragingiva');
-            $table->string('gigi_subgingiva');
+            $table->string('supragingiva');
+            $table->string('subgingiva');
 
             $table->timestamps();
         });

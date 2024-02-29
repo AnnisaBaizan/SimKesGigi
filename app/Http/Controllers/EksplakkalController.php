@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Eksplakkal;
 use App\Models\Kartupasien;
+use App\Models\permukaangigi;
 use Illuminate\Http\Request;
 
 class EksplakkalController extends Controller
@@ -29,9 +30,11 @@ class EksplakkalController extends Controller
     public function create()
     {
         $kartupasiens = Kartupasien::all();
+        $permukaangigis = permukaangigi::all();
         
         return view('pages.eksplakkal.create')->with([
             'kartupasiens' => $kartupasiens,
+            'permukaangigis' => $permukaangigis,
         ]);
     }
 
