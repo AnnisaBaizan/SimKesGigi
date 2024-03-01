@@ -12,6 +12,31 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    public function kartupasien(){
+        return $this->hasMany(kartupasien::class);
+    }
+    public function anamripasien(){
+        return $this->hasMany(anamripasien::class);
+    }
+    public function anomalimukosa(){
+        return $this->hasMany(Anomalimukosa::class);
+    }
+    public function eksplakkal(){
+        return $this->hasMany(Eksplakkal::class);
+    }
+    public function odontogram(){
+        return $this->hasMany(Odontogram::class);
+    }
+    public function ohis(){
+        return $this->hasMany(Ohis::class);
+    }
+    public function pengsiperi(){
+        return $this->hasMany(Pengsiperi::class);
+    }
+    public function vitalitas(){
+        return $this->hasMany(Vitalitas::class);
+    }
+
     /**
      * The attributes that are mass assignable.
      *

@@ -15,6 +15,8 @@ return new class extends Migration
     {
         Schema::create('anomalimukosas', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id');
+            $table->tinyInteger('pembimbing');
             $table->foreignId('kartupasien_id');
             //anomali
             // $table->foreignId('gigi_id');

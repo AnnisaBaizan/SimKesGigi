@@ -15,6 +15,8 @@ return new class extends Migration
     {
         Schema::create('kartupasiens', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id');
+            $table->tinyInteger('pembimbing');
             $table->string('no_kartu')->unique();
             $table->string('nama');
             $table->string('no_iden')->unique();

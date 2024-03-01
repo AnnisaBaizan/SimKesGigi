@@ -15,6 +15,8 @@ return new class extends Migration
     {
         Schema::create('pengsiperis', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id');
+            $table->tinyInteger('pembimbing');
             $table->foreignId('kartupasien_id');
             //pengetahuan
             $table->string('pengetahuan');

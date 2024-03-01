@@ -110,7 +110,7 @@
                                     </tr>
                                         <tr>
                                             <th>No</th>
-                                            <th>Nama</th>
+                                            <th>No_Kartu & Nama Pasien</th>
                                             {{-- DI --}}
                                             <th>DI-1</th>
                                             <th>DI-2</th>
@@ -136,7 +136,7 @@
                                       <tfoot>
                                         <tr>
                                             <th>No</th>
-                                            <th>Nama</th>
+                                            <th>No_Kartu & Nama Pasien</th>
                                             {{-- DI --}}
                                             <th>DI-1</th>
                                             <th>DI-2</th>
@@ -163,7 +163,7 @@
                                         @foreach ($ohiss as $ohis)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $ohis->kartupasien->id }}</td>
+                                            <td>{{ $ohis->kartupasien->no_kartu }} | {{ $ohis->kartupasien->nama }}</td>
                                             {{-- pengetahuan --}}
                                             <td>{{ $ohis->di_1 }} </td>
                                             <td>{{ $ohis->di_2 }} </td>

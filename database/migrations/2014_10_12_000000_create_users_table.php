@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('password');
             $table->tinyInteger('role');
             $table->string('avatar')->nullable();
+            $table->tinyInteger('pembimbing')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

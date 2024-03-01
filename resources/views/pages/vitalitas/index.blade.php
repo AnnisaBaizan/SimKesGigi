@@ -110,7 +110,7 @@
                                     </tr>
                                         <tr>
                                             <th>No</th>
-                                            <th>Nama</th>
+                                            <th>No_Kartu & Nama Pasien</th>
                                             {{-- DI --}}
                                             <th>DI-1</th>
                                             <th>DI-2</th>
@@ -136,7 +136,7 @@
                                       <tfoot>
                                         <tr>
                                             <th>No</th>
-                                            <th>Nama</th>
+                                            <th>No_Kartu & Nama Pasien</th>
                                             {{-- DI --}}
                                             <th>DI-1</th>
                                             <th>DI-2</th>
@@ -163,7 +163,7 @@
                                         @foreach ($vitalitass as $vitalitas)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $vitalitas->kartupasien->id }}</td>
+                                            <td>{{ $vitalitas->kartupasien->no_kartu }} | {{ $vitalitas->kartupasien->nama }}</td>
                                             {{-- pengetahuan --}}
                                             <td>{{ $vitalitas->di_1 }} </td>
                                             <td>{{ $vitalitas->di_2 }} </td>

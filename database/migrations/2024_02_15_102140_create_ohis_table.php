@@ -15,6 +15,8 @@ return new class extends Migration
     {
         Schema::create('ohis', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id');
+            $table->tinyInteger('pembimbing');
             $table->foreignId('kartupasien_id');
             $table->tinyInteger('di_1')->nullable();
             $table->tinyInteger('di_2')->nullable();

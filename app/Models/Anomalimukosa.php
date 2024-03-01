@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Anomalimukosa extends Model
 {
     use HasFactory;
+    protected $guarded = ['id'];
+
+    public function kartupasien(){
+        return $this->belongsTo(kartupasien::class);
+    }
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
 }

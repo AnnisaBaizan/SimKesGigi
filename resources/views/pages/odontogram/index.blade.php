@@ -110,7 +110,7 @@
                                     </tr>
                                         <tr>
                                             <th>No</th>
-                                            <th>Nama</th>
+                                            <th>No_Kartu & Nama Pasien</th>
                                             <th>11</th>
                                             <th>21</th>
                                             <th>12</th>
@@ -183,7 +183,7 @@
                                       <tfoot>
                                         <tr>
                                             <th>No</th>
-                                            <th>Nama</th>
+                                            <th>No_Kartu & Nama Pasien</th>
                                             <th>11</th>
                                             <th>21</th>
                                             <th>12</th>
@@ -257,7 +257,7 @@
                                         @foreach ($odontograms as $odontogram)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $odontogram->kartupasien->id }}</td>
+                                            <td>{{ $odontogram->kartupasien->no_kartu }} | {{ $odontogram->kartupasien->nama }}</td>
                                             <!-- Kolom 1 -->
                                             <td>{{ $odontogram->kode_11 }}</td>
                                             <td>{{ $odontogram->kode_21 }}</td>

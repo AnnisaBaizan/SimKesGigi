@@ -15,6 +15,8 @@ return new class extends Migration
     {
         Schema::create('odontograms', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id');
+            $table->tinyInteger('pembimbing');
                         //kelainan Gigi
                         $table->foreignId('kartupasien_id');
                         $table->string('kode_11')->nullable();

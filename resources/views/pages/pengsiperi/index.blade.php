@@ -110,7 +110,7 @@
                                     </tr>
                                         <tr>
                                             <th>No</th>
-                                            <th>Nama</th>
+                                            <th>No_Kartu & Nama Pasien</th>
                                             {{-- Pengetahuan --}}
                                             <th>Jawaban Benar</th>
                                             <th>Benar</th>
@@ -138,7 +138,7 @@
                                       <tfoot>
                                         <tr>
                                             <th>No</th>
-                                            <th>Nama</th>
+                                            <th>No_Kartu & Nama Pasien</th>
                                             {{-- Pengetahuan --}}
                                             <th>Jawaban Benar</th>
                                             <th>Benar</th>
@@ -167,7 +167,7 @@
                                         @foreach ($pengsiperis as $pengsiperi)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $pengsiperi->kartupasien->id }}</td>
+                                            <td>{{ $pengsiperi->kartupasien->no_kartu }} | {{ $pengsiperi->kartupasien->nama }}</td>
                                             {{-- pengetahuan --}}
                                             <td>{{ $pengsiperi->pengetahuan }}</td>
                                             <td>{{ $pengsiperi->jawaban_benar_peng }} / {{ $pengsiperi->jumlah_pertanyaan_peng }}</td>

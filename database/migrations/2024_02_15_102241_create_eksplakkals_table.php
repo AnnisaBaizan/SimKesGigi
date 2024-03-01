@@ -15,6 +15,8 @@ return new class extends Migration
     {
         Schema::create('eksplakkals', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id');
+            $table->tinyInteger('pembimbing');
             $table->foreignId('kartupasien_id');
             
             //eksternal
@@ -28,6 +30,7 @@ return new class extends Migration
 
             //pengukuran plak
             $table->string('plak');
+            $table->tinyInteger('jumlah_plak');
             $table->tinyInteger('jumlah_permukaan');
             $table->tinyInteger('jumlah_tidak_plak');
             $table->string('plaque_score');

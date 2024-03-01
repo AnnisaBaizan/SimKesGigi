@@ -110,7 +110,7 @@
                                     </tr>
                                         <tr>
                                             <th>No</th>
-                                            <th>Nama</th>
+                                            <th>No_Kartu & Nama Pasien</th>
                                             {{-- Anomali --}}
                                             <th>Occlusi</th>
                                             <th>bentuk</th>
@@ -145,7 +145,7 @@
                                       <tfoot>
                                         <tr>
                                             <th>No</th>
-                                            <th>Nama</th>
+                                            <th>No_Kartu & Nama Pasien</th>
                                             {{-- Anomali --}}
                                             <th>Occlusi</th>
                                             <th>bentuk</th>
@@ -181,7 +181,7 @@
                                         @foreach ($anomalimukosas as $anomalimukosa)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $anomalimukosa->kartupasien->id }}</td>
+                                            <td>{{ $anomalimukosa->kartupasien->no_kartu }} | {{ $anomalimukosa->kartupasien->nama }}</td>
                                             {{-- Anomali --}}
                                             <td>{{ $anomalimukosa->occlusi }} </td>
                                             <td>{{ $anomalimukosa->bentuk }} </td>

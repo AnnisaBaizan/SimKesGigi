@@ -109,7 +109,7 @@
                                 </tr>
                                     <tr>
                                         <th>No</th>
-                                        <th>Nama</th>
+                                        <th>No_Kartu & Nama Pasien</th>
                                         {{-- Eksternal Oral--}}
                                         <th>Muka</th>
                                         <th>limpe Kanan Teraba</th>
@@ -119,7 +119,8 @@
                                         <th>Limpe Kiri Texture</th>
                                         <th>Limpe Kiri Sakit</th>
                                         {{-- Internal Oral Plak--}}
-                                        <th>Gigi dengan Plak</th>
+                                        <th>Gigi lokasi Plak</th>
+                                        <th>Gigi Ada Plak</th>
                                         <th>Nilai</th>
                                         <th>Score</th>
                                         <th>Kriteria</th>
@@ -143,6 +144,7 @@
                                         <th>Limpe Kiri Texture</th>
                                         <th>Limpe Kiri Sakit</th>
                                         {{-- Internal Oral Plak--}}
+                                        <th>Gigi lokasi Plak</th>
                                         <th>Gigi dengan Plak</th>
                                         <th>Nilai</th>
                                         <th>Score</th>
@@ -158,7 +160,7 @@
                                     @foreach ($eksplakkals as $eksplakkal)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $eksplakkal->kartupasien->id }}</td>
+                                        <td>{{ $eksplakkal->kartupasien->no_kartu }} | {{ $eksplakkal->kartupasien->nama }}</td>
                                         
                                         {{-- Eksternal Oral--}}
                                         <td>{{ $eksplakkal->muka }} </td>
@@ -171,6 +173,7 @@
                                         
                                         {{-- Internal Oral Plak--}}
                                         <td>{{ $eksplakkal->plak }}</td>
+                                        <td>{{ $eksplakkal->jumlah_plak}}</td>
                                         <td>{{ $eksplakkal->jumlah_tidak_plak}} / {{ $eksplakkal->jumlah_permukaan}}</td>
                                         <td>{{ $eksplakkal->plaque_score }}</td>
                                         <td>{{ $eksplakkal->kriteria }}</td>

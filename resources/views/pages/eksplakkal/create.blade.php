@@ -188,23 +188,31 @@
                             @enderror
                             {{-- <option value="" selected disabled>Pilih Pertanyaan yang berhasil dijawab dengan Benar</option> --}}
                             @foreach ($permukaangigis as $permukaangigi)
-                            <option value="{{ $permukaangigi->id }}">{{ $permukaangigi->kode }} {{ $permukaangigi->lokasi }}</option>
+                            <option value="{{ $permukaangigi->id }}">{{ $permukaangigi->kode }} {{ ucfirst($permukaangigi->lokasi) }}</option>
                             @endforeach
                         </select>
                     </div>
                   </div>
-                    
-                    <div class="row mb-3">
-                      <div class="col-sm-3 mb-3 mb-sm-0">
-                        <label for="jumlah_permukaan" class ="form-text">Jumlah Permukaan yang Diperiksa :</label>
-                        <input type="number" class="form-control @error('jumlah_permukaan') is-invalid @enderror" id="jumlah_permukaan" name="jumlah_permukaan" placeholder="Permukaan yang Diperiksa" value="{{ old('jumlah_permukaan') }}">
+                    <div class="row mb-2">
+                        <div class="col-sm-2 mb-3 mb-sm-0">
+                          <label for="jumlah_plak" class ="form-text">Jumlah yang Ada Plak :</label>
+                          <input type="text" class="form-control @error('jumlah_plak') is-invalid @enderror" id="jumlah_plak" name="jumlah_plak" placeholder="Ada Plak" value="{{ old('jumlah_plak') }}" readonly>
+                              @error('jumlah_plak')
+                              <span class="invalid-feedback" role="alert">
+                              <strong>{{ $message }}</strong>
+                              </span>
+                              @enderror
+                        </div>
+                      <div class="col-sm-2 mb-3 mb-sm-0">
+                        <label for="jumlah_permukaan" class ="form-text">Jumlah Permukaan Diperiksa :</label>
+                        <input type="number" class="form-control @error('jumlah_permukaan') is-invalid @enderror" id="jumlah_permukaan" name="jumlah_permukaan" placeholder="Permukaan Diperiksa" value="{{ old('jumlah_permukaan') }}">
                             @error('jumlah_permukaan')
                             <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                             </span>
                             @enderror
                       </div>
-                      <div class="col-sm-3 mb-3 mb-sm-0">
+                      <div class="col-sm-2 mb-3 mb-sm-0">
                         <label for="jumlah_tidak_plak" class ="form-text">Jumlah yang Tidak Ada Plak :</label>
                         <input type="text" class="form-control @error('jumlah_tidak_plak') is-invalid @enderror" id="jumlah_tidak_plak" name="jumlah_tidak_plak" placeholder="Tidak Ada Plak" value="{{ old('jumlah_tidak_plak') }}" readonly>
                             @error('jumlah_tidak_plak')
@@ -213,7 +221,7 @@
                             </span>
                             @enderror
                       </div>
-                      <div class="col-sm-3 mb-3 mb-sm-0">
+                      <div class="col-sm-2 mb-3 mb-sm-0">
                         <label for="plaque_score" class ="form-text">Plaque Score :</label>
                         <input type="text" class="form-control @error('plaque_score') is-invalid @enderror" id="plaque_score" name="plaque_score" placeholder="Plaque Score" value="{{ old('plaque_score') }}" readonly>
                             @error('plaque_score')
@@ -222,7 +230,7 @@
                             </span>
                             @enderror
                       </div>
-                      <div class="col-sm-3 mb-3 mb-sm-0">
+                      <div class="col-sm-4 mb-3 mb-sm-0">
                         <label for="kriteria" class ="form-text">Kriteria :</label>
                         <input type="text" class="form-control @error('kriteria') is-invalid @enderror" id="kriteria" name="kriteria" placeholder="kriteria" value="{{ old('kriteria') }}" readonly>
                             @error('kriteria')
@@ -252,7 +260,7 @@
                                 @enderror
                                 {{-- <option value="" selected disabled>Pilih Gigi</option> --}}
                                 @foreach ($permukaangigis as $permukaangigi)
-                                <option value="{{ $permukaangigi->id }}">{{ $permukaangigi->kode }} {{ $permukaangigi->lokasi }}</option>
+                                <option value="{{ $permukaangigi->id }}">{{ $permukaangigi->kode }} {{ ucfirst($permukaangigi->lokasi) }}</p></option>
                                 @endforeach
                             </select>
                         </div>
@@ -266,7 +274,7 @@
                                 @enderror
                                 {{-- <option value="" selected disabled>Pilih Gigi</option> --}}
                                 @foreach ($permukaangigis as $permukaangigi)
-                                <option value="{{ $permukaangigi->id }}">{{ $permukaangigi->kode }} {{ $permukaangigi->lokasi }}</option>
+                                <option value="{{ $permukaangigi->id }}">{{ $permukaangigi->kode }} {{ ucfirst($permukaangigi->lokasi) }}</p></option>
                                 @endforeach
                             </select>
                         </div>
@@ -304,5 +312,46 @@ $(document).ready(function() {
 $(document).ready(function() {
     $('.js-example-basic-multiple').select2();
 });
+</script>
+<script>
+$(document).ready(function() {
+    function hitungPlak() {
+        var selectPlak = $("#plak");
+        var inputJumlahPermukaan = $("#jumlah_permukaan");
+        var outputJumlahPlak = $("#jumlah_plak");
+        var outputJumlahTidakPlak = $("#jumlah_tidak_plak");
+        var outputPlaqueScore = $("#plaque_score");
+        var outputKriteria = $("#kriteria");
+
+        var jumlahPlak = selectPlak.val().length;
+        var jumlahPermukaan = parseInt(inputJumlahPermukaan.val()) || 0;
+        var jumlahTidakPlak = jumlahPermukaan - jumlahPlak;
+        var plaqueScore = (jumlahTidakPlak / jumlahPermukaan) * 100;
+
+        outputJumlahPlak.val(jumlahPlak);
+        outputJumlahTidakPlak.val(jumlahTidakPlak);
+        outputPlaqueScore.val(plaqueScore.toFixed(2));
+
+        if (plaqueScore >= 85) {
+            outputKriteria.val('Baik').removeClass('bg-danger').addClass('bg-success');
+        } else {
+            outputKriteria.val('Buruk').removeClass('bg-success').addClass('bg-danger');
+        }
+    }
+
+    // Add change event listener for the 'plak' select
+    $("#plak").on('change', function() {
+        hitungPlak();
+    });
+
+    // Add input event listener for the 'jumlah_permukaan' input
+    $("#jumlah_permukaan").on('input', function() {
+        hitungPlak();
+    });
+
+    // Trigger initial calculation
+    hitungPlak();
+});
+
 </script>
 @endsection
