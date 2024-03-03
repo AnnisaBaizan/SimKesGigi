@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('vitalitas', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id');
-            $table->tinyInteger('pembimbing');
+            $table->string('pembimbing');
             $table->foreignId('kartupasien_id');
                         //kondisi dan vitalitas gigi
             // $table->foreignId('gigi_id');

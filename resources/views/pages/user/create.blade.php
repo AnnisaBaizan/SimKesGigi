@@ -90,6 +90,25 @@
                               </select>
                             </div>
                         </div>
+
+                        <div class="form-group row" id="pembimbingContainer" style="display: none;">
+                          <div class="col-sm-4">
+                              <label for="pembimbing" class ="form-text">Pilih Pembimbing :</label>
+                          </div>
+                          <div class="col-sm-8">
+                              <select class="js-example-basic-single form-control @error('pembimbing') is-invalid @enderror" data-live-search="true" id="pembimbing" name="pembimbing" placeholder="Pilih Pasien" value="{{ old('pembimbing') }}" required>
+                                  @error('pembimbing')
+                                  <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                  </span>
+                                  @enderror
+                                  <option value="" selected disabled>Pilih Pembimbing</option>
+                                  @foreach ($pembimbings as $pembimbing)
+                                  <option value="{{ $pembimbing->nimnip }}">{{ $pembimbing->nimnip }} | {{ $pembimbing->username }}</option>
+                                  @endforeach
+                              </select>
+                          </div>
+                        </div>
                     </div>
                     
                     <div class="form-group row">
@@ -141,5 +160,21 @@
     function previewImage(){
             frame.src=URL.createObjectURL(event.target.files[0])
         }
+</script>
+<script>
+  $(document).ready(function () {
+      // Menangani perubahan nilai pada select dengan id "role"
+      $("#role").change(function () {
+          // Mendapatkan nilai yang dipilih pada select "role"
+          var selectedRole = $(this).val();
+
+          // Menampilkan atau menyembunyikan select "pembimbingContainer" berdasarkan nilai "role"
+          if (selectedRole === "3") {
+              $("#pembimbingContainer").show();
+          } else {
+              $("#pembimbingContainer").hide();
+          }
+      });
+  });
 </script>
 @endsection

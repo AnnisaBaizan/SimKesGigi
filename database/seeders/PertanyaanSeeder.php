@@ -74,12 +74,12 @@ class PertanyaanSeeder extends Seeder
     private function getSoalKode2($index)
     {
         $soal = [
-            "Menggosok gigi setelah makan pagi/ sarapan",
-            "Menggosok gigi sebelum tidur",
-            "1 sikat gigi digunakan sendiri saja",
-            "Makan sayur/ buah",
+            "Tidak menggosok gigi setelah makan pagi/sarapan",
+            "Tidak menggosok gigi sebelum tidur",
+            "1 sikat gigi digunakan bersama",
+            "Tidak Makan sayur/ buah",
             "Makan coklat/ bergula",
-            "Sesudah makan manis dan lengket selalu kumur",
+            "Sesudah makan manis dan lengket tidak kumur-kumur",
             "Sering minum bersoda",
             "Setiap hari minum teh/ kopi",
             "Setiap hari merokok/ mengunyah sirih /tembakau",

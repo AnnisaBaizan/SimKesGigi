@@ -34,7 +34,10 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('pages.user.create');
+        return view('pages.user.create', [
+            'pembimbings' => User::where('role', '2')->get()
+        ]);
+        // return view('pages.user.create');
     }
 
     /**
@@ -51,6 +54,7 @@ class UserController extends Controller
             'email' => 'required|email|max:255|unique:users,email',
             'password' => 'required|min:5|max:255',
             'role' => 'required',
+            'pembimbing' => 'max:18|min:12',
             'avatar' => 'sometimes|image|mimes:jpeg,png,jpg,gif,svg|max:1024',
             'terms' => 'required'
         ]);
@@ -78,7 +82,12 @@ class UserController extends Controller
      */
     public function show(user $user)
     {
-        return view('pages.user.show')->with('user', $user);
+        
+        return view('pages.user.show', [
+            'pembimbings' => User::where('role', '2')->get(),
+            'user' => $user
+        ]);
+        // return view('pages.user.show')->with('user', $user);
     }
 
     /**
@@ -90,8 +99,11 @@ class UserController extends Controller
     public function edit(user $user)
     {
         // dd($user);
-
-        return view('pages.user.edit')->with('user', $user);
+        return view('pages.user.edit', [
+            'pembimbings' => User::where('role', '2')->get(),
+            'user' => $user
+        ]);
+        // return view('pages.user.edit')->with('user', $user);
     }
 
     /**
@@ -109,7 +121,8 @@ class UserController extends Controller
             'username' => 'required|max:255|min:2',
             'email' => ['required', 'email', 'max:255',  Rule::unique('users')->ignore($user->id),],
             'password' => 'nullable|confirmed|min:6',
-            'role' => '',
+            'role' => 'required',
+            'pembimbing' => 'max:18|min:12',
             'avatar' => 'sometimes|image|mimes:jpeg,png,jpg,gif,svg|max:1024',
         ]);
 
@@ -146,7 +159,8 @@ class UserController extends Controller
                 'nimnip' => $request['nimnip'],
                 'username' => $request['username'],
                 'email' => $request['email'],
-                'role' => $request['role']
+                'role' => $request['role'],
+                'pembimbing' => $request['pembimbing'],
             ]);
 
             // dd($attributes);

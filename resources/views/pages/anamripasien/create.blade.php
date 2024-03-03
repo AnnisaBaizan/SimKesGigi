@@ -27,23 +27,21 @@
                   </div> --}}
 
                   <div class="form-group row">
-                    <div class="col-sm-6 mb-3">
-                      <label for="kartupasien_id" class ="form-text">Pilih Pasien :</label>
-                      <select class="form-control  @error('kartupasien_id') is-invalid @enderror" data-live-search="true" id="kartupasien_id" name="kartupasien_id" placeholder="Pilih Pasien" value="{{ old('kartupasien_id') }}" required>
-                              @error('kartupasien_id')
-                              <span class="invalid-feedback" role="alert">
-                              <strong>{{ $message }}</strong>
-                              </span>
-                              @enderror
-                          <option value="" selected disabled>Pilih Pasien</option>
-                          @foreach ($kartupasiens as $kartupasien)
-                          <option value="{{ $kartupasien->id }}">{{ $kartupasien->no_kartu }} | {{ $kartupasien->nama }}</option>
-                          @endforeach
-                      </select>
+                    <div class="col-sm-3">
+                        <label for="kartupasien_id" class ="form-text">Pilih Pasien :</label>
                     </div>
-                    <div class="col-sm-6 mb-3 mb-sm-0">
-                      <i class="fas fa-search"></i> <label for="kartupasien_id" class ="form-text">Cari Pasien :</label>
-                      <input type="text" class="form-control @error('search') is-invalid @enderror" id="search" name="search" placeholder="Masukan Nama/No Kartu" value="{{ old('search') }}">
+                    <div class="col-sm-9">
+                        <select class="js-example-basic-single form-control @error('kartupasien_id') is-invalid @enderror" data-live-search="true" id="kartupasien_id" name="kartupasien_id" placeholder="Pilih Pasien" value="{{ old('kartupasien_id') }}" required>
+                            @error('kartupasien_id')
+                            <span class="invalid-feedback" role="alert">
+                              <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                            <option value="" selected disabled>Pilih Pasien</option>
+                            @foreach ($kartupasiens as $kartupasien)
+                            <option value="{{ $kartupasien->id }}">{{ $kartupasien->no_kartu }} | {{ $kartupasien->nama }}</option>
+                            @endforeach
+                        </select>
                     </div>
                   </div>
 
@@ -332,6 +330,15 @@
     @include('layouts.footers.auth.footer')
 @endsection
 @section('js')
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script>
+$(document).ready(function() {
+    $('.js-example-basic-single').select2();
+});
+$(document).ready(function() {
+    $('.js-example-basic-multiple').select2();
+});
+</script>
 <script type="text/javascript">
 // $('#kartupasien_id').selectpicker();
 // $("#kartupasien_id").select2();

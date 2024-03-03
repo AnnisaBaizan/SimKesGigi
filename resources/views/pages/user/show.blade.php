@@ -102,6 +102,27 @@
                             </div>
                         </div>
                     </div>
+
+                    @if($user->role == 3)
+                        <div class="form-group row" id="pembimbingContainer">
+                            <div class="col-sm-4">
+                                <label for="pembimbing" class ="form-text">Pembimbing :</label>
+                            </div>
+                            <div class="col-sm-8">
+                                <select class="js-example-basic-single form-control @error('pembimbing') is-invalid @enderror" data-live-search="true" id="pembimbing" name="pembimbing" placeholder="Pilih Pembimbing" value="{{ old('pembimbing') }}" required disabled readonly>
+                                    @error('pembimbing')
+                                    <span class="invalid-feedback" role="alert">
+                                      <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                    <option value="" selected disabled>Pembimbing</option>
+                                    @foreach ($pembimbings as $pembimbing)
+                                    <option value="{{ $pembimbing->nimnip }}" {{$user->pembimbing == $pembimbing->nimnip ? 'selected':''}}>{{ $pembimbing->nimnip }} | {{ $pembimbing->username }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                    @endif
                     
                     <div class="form-group row">
                         <div class="col-sm-4 mb-3 mb-sm-0">

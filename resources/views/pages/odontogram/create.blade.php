@@ -1006,8 +1006,14 @@
     @include('layouts.footers.auth.footer')
 @endsection
 @section('js')
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script>
-
+$(document).ready(function() {
+    $('.js-example-basic-single').select2();
+});
+$(document).ready(function() {
+    $('.js-example-basic-multiple').select2();
+});
 </script>
 {{-- <script>
     // Fungsi untuk menghitung jumlah selected option dengan nilai tertentu

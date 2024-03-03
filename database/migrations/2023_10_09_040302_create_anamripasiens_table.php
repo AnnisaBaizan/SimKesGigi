@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('anamripasiens', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id');
-            $table->tinyInteger('pembimbing');
+            $table->string('pembimbing');
             $table->foreignId('kartupasien_id');
             $table->text('klhn_utama');
             $table->text('klhn_tmbhn');

@@ -188,7 +188,7 @@
                             @enderror
                             {{-- <option value="" selected disabled>Pilih Pertanyaan yang berhasil dijawab dengan Benar</option> --}}
                             @foreach ($permukaangigis as $permukaangigi)
-                            <option value="{{ $permukaangigi->id }}">{{ $permukaangigi->kode }} {{ ucfirst($permukaangigi->lokasi) }}</option>
+                            <option value="{{ $permukaangigi->kode }} {{ ucfirst($permukaangigi->lokasi) }}">{{ $permukaangigi->kode }} {{ ucfirst($permukaangigi->lokasi) }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -260,7 +260,7 @@
                                 @enderror
                                 {{-- <option value="" selected disabled>Pilih Gigi</option> --}}
                                 @foreach ($permukaangigis as $permukaangigi)
-                                <option value="{{ $permukaangigi->id }}">{{ $permukaangigi->kode }} {{ ucfirst($permukaangigi->lokasi) }}</p></option>
+                                <option value="{{ $permukaangigi->kode }} {{ ucfirst($permukaangigi->lokasi) }}">{{ $permukaangigi->kode }} {{ ucfirst($permukaangigi->lokasi) }}</p></option>
                                 @endforeach
                             </select>
                         </div>
@@ -274,7 +274,7 @@
                                 @enderror
                                 {{-- <option value="" selected disabled>Pilih Gigi</option> --}}
                                 @foreach ($permukaangigis as $permukaangigi)
-                                <option value="{{ $permukaangigi->id }}">{{ $permukaangigi->kode }} {{ ucfirst($permukaangigi->lokasi) }}</p></option>
+                                <option value="{{ $permukaangigi->kode }} {{ ucfirst($permukaangigi->lokasi) }}">{{ $permukaangigi->kode }} {{ ucfirst($permukaangigi->lokasi) }}</p></option>
                                 @endforeach
                             </select>
                         </div>
@@ -326,7 +326,7 @@ $(document).ready(function() {
         var jumlahPlak = selectPlak.val().length;
         var jumlahPermukaan = parseInt(inputJumlahPermukaan.val()) || 0;
         var jumlahTidakPlak = jumlahPermukaan - jumlahPlak;
-        var plaqueScore = (jumlahTidakPlak / jumlahPermukaan) * 100;
+        var plaqueScore = (jumlahTidakPlak / jumlahPermukaan) * 100 || 0;
 
         outputJumlahPlak.val(jumlahPlak);
         outputJumlahTidakPlak.val(jumlahTidakPlak);
