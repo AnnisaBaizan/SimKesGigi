@@ -26,11 +26,59 @@
                     </select>
                   </div> --}}
 
+                  @can('admin')
                   <div class="form-group row">
-                    <div class="col-sm-3">
+                    <div class="col-sm-4">
+                        <label for="user_id" class="form-text">Pilih Mahasiswa :</label>
+                    </div>
+                    <div class="col-sm-4">
+                        <select class="js-example-basic-single form-control @error('user_id') is-invalid @enderror" data-live-search="true" id="user_id" name="user_id" placeholder="Pilih Mahasiswa" value="{{ old('user_id') }}" required>
+                            @error('user_id')
+                            <span class="invalid-feedback" role="alert">
+                              <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                            <option value="" selected disabled>Pilih Mahasiswa</option>
+                            @foreach ($users as $user)
+                            <option value="{{ $user->id }}" data-pembimbing="{{ $user->pembimbing }}"> {{ ucwords($user->username) }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control @error('pembimbing') is-invalid_max @enderror" id="pembimbing" name="pembimbing" placeholder="pembimbing" readonly required>
+                        @error('pembimbing')
+                        <span class="invalid-feedback" role="alert">
+                          <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+                </div>
+                  @endcan
+                  
+                  @can('mahasiswa')
+                  <div class="col-sm-6">
+                    <input type="hidden" class="form-control @error('user_id') is-invalid_max @enderror" id="user_id" name="user_id" placeholder="user_id" value="{{ auth()->user()->id }}" required>
+                            @error('user_id')
+                            <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                  </div>
+                  <div class="col-sm-6">
+                    <input type="hidden" class="form-control @error('pembimbing') is-invalid_max @enderror" id="pembimbing" name="pembimbing" placeholder="pembimbing" value="{{ auth()->user()->pembimbing }}" required>
+                            @error('pembimbing')
+                            <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                  </div>
+                  @endcan
+
+                  <div class="form-group row">
+                    <div class="col-sm-4">
                         <label for="kartupasien_id" class ="form-text">Pilih Pasien :</label>
                     </div>
-                    <div class="col-sm-9">
+                    <div class="col-sm-8">
                         <select class="js-example-basic-single form-control @error('kartupasien_id') is-invalid @enderror" data-live-search="true" id="kartupasien_id" name="kartupasien_id" placeholder="Pilih Pasien" value="{{ old('kartupasien_id') }}" required>
                             @error('kartupasien_id')
                             <span class="invalid-feedback" role="alert">
@@ -362,6 +410,7 @@ $('#pnykt_ln').change(function() {
   if ($(this).val() == "Tidak Ada" ) {
     $('#nm_pnykt_ln').attr("disabled", "disabled");
     document.getElementById("nm_pnykt_ln").placeholder = "Tidak Perlu diisi";
+        document.getElementById("nm_pnykt_ln").value = null;
   } else {
     $('#nm_pnykt_ln').removeAttr("disabled");
     $('#nm_pnykt_ln').attr("required", "required");
@@ -373,6 +422,7 @@ $('#alergi_obat').change(function() {
   if ($(this).val() == "Tidak Ada" ) {
     $('#nm_obat').attr("disabled", "disabled");
     document.getElementById("nm_obat").placeholder = "Tidak Perlu diisi";
+        document.getElementById("nm_obat").value = null;
   } else {
     $('#nm_obat').removeAttr("disabled");
     $('#nm_obat').attr("required", "required");
@@ -384,6 +434,7 @@ $('#alergi_mkn').change(function() {
   if ($(this).val() == "Tidak Ada" ) {
     $('#nm_mkn').attr("disabled", "disabled");
     document.getElementById("nm_mkn").placeholder = "Tidak Perlu diisi";
+        document.getElementById("nm_mkn").value = null;
   } else {
     $('#nm_mkn').removeAttr("disabled");
     $('#nm_mkn').attr("required", "required");
@@ -391,5 +442,14 @@ $('#alergi_mkn').change(function() {
   }
 }).trigger("change");
 
+</script>
+<script>
+ $(document).ready(function() {
+        $('#user_id').change(function() {
+            var selectedOption = $(this).find(':selected');
+            var pembimbingValue = selectedOption.data('pembimbing');
+            $('#pembimbing').val(pembimbingValue);
+        });
+    });
 </script>
 @endsection

@@ -68,19 +68,10 @@
                             @endcan
                         </div>
     
-                        <div class="card-header d-sm-flex align-items-center">
+                        {{-- <div class="card-header d-sm-flex align-items-center">
                             @can('adminpembimbing')
                             <a href="{{route('exportohis')}}" class="d-sm-inline-block btn btn-primary btn-sm shadow-sm me-3">
                             <i class="fas fa-file-export fa-sm"></i>  Format Import</a>
-    
-                            {{-- <a href="javascript:;" data-toggle="modal" onclick="importData()" data-target="#ImportModal" class="d-sm-inline-block btn btn-success btn-sm shadow-sm">
-                                <span class="icon">
-                                    <i class="fas fa-file-import fa-sm text-white"></i>
-                                </span>
-                                <span class="text">Import pertanyaan</span>
-                            </a> --}}
-    
-                            <!-- Button trigger modal -->
                             <button type="button" class="d-sm-inline-block btn btn-success btn-sm shadow-sm" data-bs-toggle="modal" data-bs-target="#importModal">
                                 <span class="icon">
                                     <i class="fas fa-file-import fa-sm text-white"></i>
@@ -88,7 +79,8 @@
                                 <span class="text">Import data</span>
                             </button>
                             @endcan
-                        </div>
+                        </div> --}}
+
                         <div class="card-body px-0 pt-0 pb-2">
                             <div class="table-responsive mt-4 ms-5 me-5 mb-4">
                                 @can('adminpembimbing')
@@ -110,6 +102,16 @@
                                     </tr>
                                         <tr>
                                             <th>No</th>
+                                            @can('admin')
+                                              <th>Mahasiswa</th>
+                                              <th>Pembimbing</th>
+                                            @endcan
+                                            @can('mahasiswa')
+                                              <th>Pembimbing</th>
+                                            @endcan
+                                            @can('pembimbing')
+                                              <th>Mahasiswa</th>
+                                            @endcan
                                             <th>No_Kartu & Nama Pasien</th>
                                             {{-- DI --}}
                                             <th>DI-1</th>
@@ -136,6 +138,16 @@
                                       <tfoot>
                                         <tr>
                                             <th>No</th>
+                                            @can('admin')
+                                              <th>Mahasiswa</th>
+                                              <th>Pembimbing</th>
+                                            @endcan
+                                            @can('mahasiswa')
+                                              <th>Pembimbing</th>
+                                            @endcan
+                                            @can('pembimbing')
+                                              <th>Mahasiswa</th>
+                                            @endcan
                                             <th>No_Kartu & Nama Pasien</th>
                                             {{-- DI --}}
                                             <th>DI-1</th>
@@ -163,6 +175,16 @@
                                         @foreach ($ohiss as $ohis)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
+                                            @can('admin')
+                                                <td>{{ $ohis->user->username }}</td>
+                                                <td>{{ ucwords(get_v('users', 'nimnip', $ohis->user->pembimbing, 'username')[0]->username ?? "") }}</td>
+                                            @endcan
+                                            @can('mahasiswa')
+                                                <td>{{ ucwords(get_v('users', 'nimnip', $ohis->user->pembimbing, 'username')[0]->username ?? "") }}</td>
+                                            @endcan
+                                            @can('pembimbing')
+                                                <td>{{ $ohis->user->username }}</td>
+                                            @endcan
                                             <td>{{ $ohis->kartupasien->no_kartu }} | {{ $ohis->kartupasien->nama }}</td>
                                             {{-- pengetahuan --}}
                                             <td>{{ $ohis->di_1 }} </td>

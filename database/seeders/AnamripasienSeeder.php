@@ -17,6 +17,8 @@ class AnamripasienSeeder extends Seeder
     {
         // ANAMNESA DAN RIWAYAT PASIEN
         DB::table('anamripasiens')->insert([
+            'user_id'=> 3,
+            'pembimbing'=> '1234567890122341',
             'kartupasien_id' => 1,
             'klhn_utama' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque nostrum neque veritatis, praesentium porro eligendi! Cumque provident sed deleniti veritatis.',
             'klhn_tmbhn' => 'Odio at vero error sapiente. Est qui veniam iusto eum.',
@@ -38,6 +40,8 @@ class AnamripasienSeeder extends Seeder
             'updated_at' => '2023-10-05 07:16:48',
         ]);
         DB::table('anamripasiens')->insert([
+            'user_id'=> 3,
+            'pembimbing'=> '1234567890122341',
             'kartupasien_id' => 2,
             'klhn_utama' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque nostrum neque veritatis, praesentium porro eligendi! Cumque provident sed deleniti veritatis.',
             'klhn_tmbhn' => 'Odio at vero error sapiente. Est qui veniam iusto eum.',
@@ -61,6 +65,8 @@ class AnamripasienSeeder extends Seeder
             'updated_at' => '2022-11-25 07:00:00'
         ]);
         DB::table('anamripasiens')->insert([
+            'user_id'=> 3,
+            'pembimbing'=> '1234567890122341',
             'kartupasien_id' => 3,
             'klhn_utama' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque nostrum neque veritatis, praesentium porro eligendi! Cumque provident sed deleniti veritatis.',
             'klhn_tmbhn' => 'Odio at vero error sapiente. Est qui veniam iusto eum.',
@@ -84,6 +90,8 @@ class AnamripasienSeeder extends Seeder
             'updated_at' => '2021-03-06 07:00:00'
         ]);
         DB::table('anamripasiens')->insert([
+            'user_id'=> 6,
+            'pembimbing'=> '0926374816237653',
             'kartupasien_id' => 4,
             'klhn_utama' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque nostrum neque veritatis, praesentium porro eligendi! Cumque provident sed deleniti veritatis.',
             'klhn_tmbhn' => 'Odio at vero error sapiente. Est qui veniam iusto eum.',
@@ -105,6 +113,8 @@ class AnamripasienSeeder extends Seeder
             'updated_at' => '2023-02-10 07:16:48',
         ]);
         DB::table('anamripasiens')->insert([
+            'user_id'=> 6,
+            'pembimbing'=> '0926374816237653',
             'kartupasien_id' => 5,
             'klhn_utama' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque nostrum neque veritatis, praesentium porro eligendi! Cumque provident sed deleniti veritatis.',
             'klhn_tmbhn' => 'Odio at vero error sapiente. Est qui veniam iusto eum.',
@@ -128,6 +138,8 @@ class AnamripasienSeeder extends Seeder
             'updated_at' => '2022-12-20 07:00:00'
         ]);
         DB::table('anamripasiens')->insert([
+            'user_id'=> 6,
+            'pembimbing'=> '0926374816237653',
             'kartupasien_id' => 6,
             'klhn_utama' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque nostrum neque veritatis, praesentium porro eligendi! Cumque provident sed deleniti veritatis.',
             'klhn_tmbhn' => 'Odio at vero error sapiente. Est qui veniam iusto eum.',
@@ -151,6 +163,8 @@ class AnamripasienSeeder extends Seeder
             'updated_at' => '2021-01-12 07:00:00'
         ]);
         DB::table('anamripasiens')->insert([
+            'user_id'=> 9,
+            'pembimbing'=> '1234567890127634',
             'kartupasien_id' => 7,
             'klhn_utama' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque nostrum neque veritatis, praesentium porro eligendi! Cumque provident sed deleniti veritatis.',
             'klhn_tmbhn' => 'Odio at vero error sapiente. Est qui veniam iusto eum.',
@@ -172,6 +186,8 @@ class AnamripasienSeeder extends Seeder
             'updated_at' => '2023-06-13 07:16:48',
         ]);
         DB::table('anamripasiens')->insert([
+            'user_id'=> 9,
+            'pembimbing'=> '1234567890127634',
             'kartupasien_id' => 8,
             'klhn_utama' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque nostrum neque veritatis, praesentium porro eligendi! Cumque provident sed deleniti veritatis.',
             'klhn_tmbhn' => 'Odio at vero error sapiente. Est qui veniam iusto eum.',
@@ -195,6 +211,8 @@ class AnamripasienSeeder extends Seeder
             'updated_at' => '2022-08-19 07:00:00'
         ]);
         DB::table('anamripasiens')->insert([
+            'user_id'=> 9,
+            'pembimbing'=> '1234567890127634',
             'kartupasien_id' => 9,
             'klhn_utama' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque nostrum neque veritatis, praesentium porro eligendi! Cumque provident sed deleniti veritatis.',
             'klhn_tmbhn' => 'Odio at vero error sapiente. Est qui veniam iusto eum.',
@@ -218,6 +236,8 @@ class AnamripasienSeeder extends Seeder
             'updated_at' => '2021-05-16 07:00:00'
         ]);
         DB::table('anamripasiens')->insert([
+            'user_id'=> 12,
+            'pembimbing'=> '0926374816232387',
             'kartupasien_id' => 10,
             'klhn_utama' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque nostrum neque veritatis, praesentium porro eligendi! Cumque provident sed deleniti veritatis.',
             'klhn_tmbhn' => 'Odio at vero error sapiente. Est qui veniam iusto eum.',
@@ -239,6 +259,8 @@ class AnamripasienSeeder extends Seeder
             'updated_at' => '2023-07-08 07:16:48',
         ]);
         DB::table('anamripasiens')->insert([
+            'user_id'=> 12,
+            'pembimbing'=> '0926374816232387',
             'kartupasien_id' => 11,
             'klhn_utama' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque nostrum neque veritatis, praesentium porro eligendi! Cumque provident sed deleniti veritatis.',
             'klhn_tmbhn' => 'Odio at vero error sapiente. Est qui veniam iusto eum.',
@@ -262,6 +284,8 @@ class AnamripasienSeeder extends Seeder
             'updated_at' => '2022-09-11 07:00:00'
         ]);
         DB::table('anamripasiens')->insert([
+            'user_id'=> 12,
+            'pembimbing'=> '0926374816232387',
             'kartupasien_id' => 12,
             'klhn_utama' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque nostrum neque veritatis, praesentium porro eligendi! Cumque provident sed deleniti veritatis.',
             'klhn_tmbhn' => 'Odio at vero error sapiente. Est qui veniam iusto eum.',

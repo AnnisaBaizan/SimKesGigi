@@ -16,9 +16,21 @@ class OhisController extends Controller
      */
     public function index()
     {
-        return view('pages.ohis.index', [
-            'ohiss' => Ohis::all()
-        ]);
+        if (auth()->user()->role === 1) {
+            $ohiss = ohis::all();
+        } 
+        elseif (auth()->user()->role === 2) {
+            $ohiss = ohis::where('pembimbing', auth()->user()->nimnip)->get();
+        } 
+        else {
+            $ohiss = ohis::where('user_id', auth()->id())->get();
+        }
+
+        return view('pages.ohis.index')->with('ohiss', $ohiss);
+
+        // return view('pages.ohis.index', [
+        //     'ohiss' => Ohis::all()
+        // ]);
         // return view('pages.ohis.index');
     }
 
@@ -29,7 +41,18 @@ class OhisController extends Controller
      */
     public function create()
     {
-        $kartupasiens = Kartupasien::all();
+        
+        if (auth()->user()->role === 1) {
+            $kartupasiens = kartupasien::all();
+        } 
+        elseif (auth()->user()->role === 2) {
+            $kartupasiens = kartupasien::where('pembimbing', auth()->user()->nimnip)->get();
+        } 
+        else {
+            $kartupasiens = kartupasien::where('user_id', auth()->id())->get();
+        }
+
+        // $kartupasiens = kartupasien::all();
         $gigis = Gigi::all();
         
         return view('pages.ohis.create')->with([
@@ -68,7 +91,17 @@ class OhisController extends Controller
      */
     public function edit(Ohis $ohis)
     {
-        return view('pages.ohis.edit')->with('ohis', $ohis);
+        if (auth()->user()->role === 1) {
+            $kartupasiens = kartupasien::all();
+        } 
+        elseif (auth()->user()->role === 2) {
+            $kartupasiens = kartupasien::where('pembimbing', auth()->user()->nimnip)->get();
+        } 
+        else {
+            $kartupasiens = kartupasien::where('user_id', auth()->id())->get();
+        }
+
+        return view('pages.ohis.edit', compact('kartupasiens'))->with('ohis', $ohis);
     }
 
     /**

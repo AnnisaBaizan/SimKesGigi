@@ -15,9 +15,21 @@ class VitalitasController extends Controller
      */
     public function index()
     {
-        return view('pages.vitalitas.index', [
-            'vitalitass' => Vitalitas::all()
-        ]);
+        if (auth()->user()->role === 1) {
+            $vitalitass = Vitalitas::all();
+        } 
+        elseif (auth()->user()->role === 2) {
+            $vitalitass = Vitalitas::where('pembimbing', auth()->user()->nimnip)->get();
+        } 
+        else {
+            $vitalitass = Vitalitas::where('user_id', auth()->id())->get();
+        }
+
+        return view('pages.vitalitas.index')->with('vitalitass', $vitalitass);
+        
+        // return view('pages.vitalitas.index', [
+        //     'vitalitass' => Vitalitas::all()
+        // ]);
         // return view('pages.vitalitas.index');
     }
 
@@ -28,11 +40,22 @@ class VitalitasController extends Controller
      */
     public function create()
     {
-        $kartupasiens = Kartupasien::all();
+        if (auth()->user()->role === 1) {
+            $kartupasiens = kartupasien::all();
+        } 
+        elseif (auth()->user()->role === 2) {
+            $kartupasiens = kartupasien::where('pembimbing', auth()->user()->nimnip)->get();
+        } 
+        else {
+            $kartupasiens = kartupasien::where('user_id', auth()->id())->get();
+        }
+
+        // $kartupasiens = Kartupasien::all();
+        return view('pages.vitalitas.create')->with('kartupasiens', $kartupasiens);
         
-        return view('pages.vitalitas.create')->with([
-            'kartupasiens' => $kartupasiens,
-        ]);
+        // return view('pages.vitalitas.create')->with([
+        //     'kartupasiens' => $kartupasiens,
+        // ]);
     }
 
     /**
@@ -83,7 +106,17 @@ class VitalitasController extends Controller
      */
     public function edit(Vitalitas $vitalitas)
     {
-        return view('pages.vitalitas.edit')->with('vitalitas', $vitalitas);
+        if (auth()->user()->role === 1) {
+            $kartupasiens = kartupasien::all();
+        } 
+        elseif (auth()->user()->role === 2) {
+            $kartupasiens = kartupasien::where('pembimbing', auth()->user()->nimnip)->get();
+        } 
+        else {
+            $kartupasiens = kartupasien::where('user_id', auth()->id())->get();
+        }
+
+        return view('pages.vitalitas.edit', compact('kartupasiens'))->with('vitalitas', $vitalitas);
     }
 
     /**

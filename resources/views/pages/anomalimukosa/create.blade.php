@@ -592,15 +592,195 @@ $(document).ready(function() {
 </script>
 
 <script>
-$('#warna_l').change(function() {
-  if ($(this).val() == "Tidak Ada" ) {
-    $('#daerah_wl').attr("disabled", "disabled");
-    document.getElementById("daerah_wl").placeholder = "Tidak Perlu Diisi";
-  } else {
-    $('#daerah_wl').removeAttr("disabled");
-    $('#daerah_wl').attr("required", "required");
-    document.getElementById("daerah_wl").placeholder = "Tuliskan Nama Daerah-nya";
-  }
-}).trigger("change");
+    $('#w_gingiva').change(function() {
+      if ($(this).val() == "Tidak Ada" ) {
+        $('#dw_gingiva').attr("disabled", "disabled");
+        document.getElementById("dw_gingiva").placeholder = "Tidak Perlu Diisi";
+        document.getElementById("dw_gingiva").value = null;
+      } else {
+        $('#dw_gingiva').removeAttr("disabled");
+        $('#dw_gingiva').attr("required", "required");
+        document.getElementById("dw_gingiva").placeholder = "Tuliskan Nama Daerah-nya";
+      }
+    }).trigger("change");
+    
+    $('#i_gingiva').change(function() {
+      if ($(this).val() == "Tidak Ada" ) {
+        $('#di_gingiva').attr("disabled", "disabled");
+        document.getElementById("di_gingiva").placeholder = "Tidak Perlu Diisi";
+        document.getElementById("di_gingiva").value = null;
+      } else {
+        $('#di_gingiva').removeAttr("disabled");
+        $('#di_gingiva').attr("required", "required");
+        document.getElementById("di_gingiva").placeholder = "Tuliskan Nama Daerah-nya";
+      }
+    }).trigger("change");
+    
+    $('#u_gingiva').change(function() {
+      if ($(this).val() == "Tidak Ada" ) {
+        $('#du_gingiva').attr("disabled", "disabled");
+        document.getElementById("du_gingiva").placeholder = "Tidak Perlu Diisi";
+        document.getElementById("du_gingiva").value = null;
+      } else {
+        $('#du_gingiva').removeAttr("disabled");
+        $('#du_gingiva').attr("required", "required");
+        document.getElementById("du_gingiva").placeholder = "Tuliskan Nama Daerah-nya";
+      }
+    }).trigger("change");
+
+
+
+    $('#w_palatum').change(function() {
+      if ($(this).val() == "Tidak Ada" ) {
+        $('#dw_palatum').attr("disabled", "disabled");
+        document.getElementById("dw_palatum").placeholder = "Tidak Perlu Diisi";
+        document.getElementById("dw_palatum").value = null;
+      } else {
+        $('#dw_palatum').removeAttr("disabled");
+        $('#dw_palatum').attr("required", "required");
+        document.getElementById("dw_palatum").placeholder = "Tuliskan Nama Daerah-nya";
+      }
+    }).trigger("change");
+    
+    $('#i_palatum').change(function() {
+      if ($(this).val() == "Tidak Ada" ) {
+        $('#di_palatum').attr("disabled", "disabled");
+        document.getElementById("di_palatum").placeholder = "Tidak Perlu Diisi";
+        document.getElementById("di_palatum").value = null;
+      } else {
+        $('#di_palatum').removeAttr("disabled");
+        $('#di_palatum').attr("required", "required");
+        document.getElementById("di_palatum").placeholder = "Tuliskan Nama Daerah-nya";
+      }
+    }).trigger("change");
+    
+    $('#u_palatum').change(function() {
+      if ($(this).val() == "Tidak Ada" ) {
+        $('#du_palatum').attr("disabled", "disabled");
+        document.getElementById("du_palatum").placeholder = "Tidak Perlu Diisi";
+        document.getElementById("du_palatum").value = null;
+      } else {
+        $('#du_palatum').removeAttr("disabled");
+        $('#du_palatum').attr("required", "required");
+        document.getElementById("du_palatum").placeholder = "Tuliskan Nama Daerah-nya";
+      }
+    }).trigger("change");
+
+
+    
+    $('#w_pipi').change(function() {
+    if ($(this).val() == "Tidak Ada" ) {
+        $('#dw_pipi').attr("disabled", "disabled");
+        document.getElementById("dw_pipi").placeholder = "Tidak Perlu Diisi";
+        document.getElementById("dw_pipi").value = null;
+    } else {
+        $('#dw_pipi').removeAttr("disabled");
+        $('#dw_pipi').attr("required", "required");
+        document.getElementById("dw_pipi").placeholder = "Tuliskan Nama Daerah-nya";
+    }
+    }).trigger("change");
+
+    $('#i_pipi').change(function() {
+    if ($(this).val() == "Tidak Ada" ) {
+        $('#di_pipi').attr("disabled", "disabled");
+        document.getElementById("di_pipi").placeholder = "Tidak Perlu Diisi";
+        document.getElementById("di_pipi").value = null;
+    } else {
+        $('#di_pipi').removeAttr("disabled");
+        $('#di_pipi').attr("required", "required");
+        document.getElementById("di_pipi").placeholder = "Tuliskan Nama Daerah-nya";
+    }
+    }).trigger("change");
+
+    $('#u_pipi').change(function() {
+    if ($(this).val() == "Tidak Ada" ) {
+        $('#du_pipi').attr("disabled", "disabled");
+        document.getElementById("du_pipi").placeholder = "Tidak Perlu Diisi";
+        document.getElementById("du_pipi").value = null;
+    } else {
+        $('#du_pipi').removeAttr("disabled");
+        $('#du_pipi').attr("required", "required");
+        document.getElementById("du_pipi").placeholder = "Tuliskan Nama Daerah-nya";
+    }
+    }).trigger("change");
+
+
+
+    $('#w_lidah').change(function() {
+    if ($(this).val() == "Tidak Ada" ) {
+        $('#dw_lidah').attr("disabled", "disabled");
+        document.getElementById("dw_lidah").placeholder = "Tidak Perlu Diisi";
+        document.getElementById("dw_lidah").value = null;
+    } else {
+        $('#dw_lidah').removeAttr("disabled");
+        $('#dw_lidah').attr("required", "required");
+        document.getElementById("dw_lidah").placeholder = "Tuliskan Nama Daerah-nya";
+    }
+    }).trigger("change");
+
+    $('#i_lidah').change(function() {
+    if ($(this).val() == "Tidak Ada" ) {
+        $('#di_lidah').attr("disabled", "disabled");
+        document.getElementById("di_lidah").placeholder = "Tidak Perlu Diisi";
+        document.getElementById("di_lidah").value = null;
+    } else {
+        $('#di_lidah').removeAttr("disabled");
+        $('#di_lidah').attr("required", "required");
+        document.getElementById("di_lidah").placeholder = "Tuliskan Nama Daerah-nya";
+    }
+    }).trigger("change");
+
+    $('#u_lidah').change(function() {
+    if ($(this).val() == "Tidak Ada" ) {
+        $('#du_lidah').attr("disabled", "disabled");
+        document.getElementById("du_lidah").placeholder = "Tidak Perlu Diisi";
+        document.getElementById("du_lidah").value = null;
+    } else {
+        $('#du_lidah').removeAttr("disabled");
+        $('#du_lidah').attr("required", "required");
+        document.getElementById("du_lidah").placeholder = "Tuliskan Nama Daerah-nya";
+    }
+    }).trigger("change");
+
+
+
+    $('#w_bibir').change(function() {
+    if ($(this).val() == "Tidak Ada" ) {
+        $('#dw_bibir').attr("disabled", "disabled");
+        document.getElementById("dw_bibir").placeholder = "Tidak Perlu Diisi";
+        document.getElementById("dw_bibir").value = null;
+    } else {
+        $('#dw_bibir').removeAttr("disabled");
+        $('#dw_bibir').attr("required", "required");
+        document.getElementById("dw_bibir").placeholder = "Tuliskan Nama Daerah-nya";
+    }
+    }).trigger("change");
+
+    $('#i_bibir').change(function() {
+    if ($(this).val() == "Tidak Ada" ) {
+        $('#di_bibir').attr("disabled", "disabled");
+        document.getElementById("di_bibir").placeholder = "Tidak Perlu Diisi";
+        document.getElementById("di_bibir").value = null;
+    } else {
+        $('#di_bibir').removeAttr("disabled");
+        $('#di_bibir').attr("required", "required");
+        document.getElementById("di_bibir").placeholder = "Tuliskan Nama Daerah-nya";
+    }
+    }).trigger("change");
+
+    $('#u_bibir').change(function() {
+    if ($(this).val() == "Tidak Ada" ) {
+        $('#du_bibir').attr("disabled", "disabled");
+        document.getElementById("du_bibir").placeholder = "Tidak Perlu Diisi";
+        document.getElementById("du_bibir").value = null;
+    } else {
+        $('#du_bibir').removeAttr("disabled");
+        $('#du_bibir').attr("required", "required");
+        document.getElementById("du_bibir").placeholder = "Tuliskan Nama Daerah-nya";
+    }
+    }).trigger("change");
+
+
+
 </script>
 @endsection

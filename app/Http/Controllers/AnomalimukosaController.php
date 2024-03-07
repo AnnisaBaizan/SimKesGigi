@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Anomalimukosa;
-use App\Models\Kartupasien;
+use App\Models\kartupasien;
 use Illuminate\Http\Request;
 
 class AnomalimukosaController extends Controller
@@ -15,9 +15,21 @@ class AnomalimukosaController extends Controller
      */
     public function index()
     {
-        return view('pages.anomalimukosa.index', [
-            'anomalimukosas' => Anomalimukosa::all()
-        ]);
+        if (auth()->user()->role === 1) {
+            $anomalimukosas = Anomalimukosa::all();
+        } 
+        elseif (auth()->user()->role === 2) {
+            $anomalimukosas = Anomalimukosa::where('pembimbing', auth()->user()->nimnip)->get();
+        } 
+        else {
+            $anomalimukosas = Anomalimukosa::where('user_id', auth()->id())->get();
+        }
+
+        return view('pages.anomalimukosa.index')->with('anomalimukosas', $anomalimukosas);
+
+        // return view('pages.anomalimukosa.index', [
+        //     'anomalimukosas' => Anomalimukosa::all()
+        // ]);
         // return view('pages.anomalimukosa.index');
     }
 
@@ -28,7 +40,17 @@ class AnomalimukosaController extends Controller
      */
     public function create()
     {
-        $kartupasiens = Kartupasien::all();
+        if (auth()->user()->role === 1) {
+            $kartupasiens = kartupasien::all();
+        } 
+        elseif (auth()->user()->role === 2) {
+            $kartupasiens = kartupasien::where('pembimbing', auth()->user()->nimnip)->get();
+        } 
+        else {
+            $kartupasiens = kartupasien::where('user_id', auth()->id())->get();
+        }
+
+        // $kartupasiens = kartupasien::all();
         
         return view('pages.anomalimukosa.create')->with([
             'kartupasiens' => $kartupasiens,
@@ -83,7 +105,17 @@ class AnomalimukosaController extends Controller
      */
     public function edit(Anomalimukosa $anomalimukosa)
     {
-        return view('pages.anomalimukosa.edit')->with('anomalimukosa', $anomalimukosa);
+        if (auth()->user()->role === 1) {
+            $kartupasiens = kartupasien::all();
+        } 
+        elseif (auth()->user()->role === 2) {
+            $kartupasiens = kartupasien::where('pembimbing', auth()->user()->nimnip)->get();
+        } 
+        else {
+            $kartupasiens = kartupasien::where('user_id', auth()->id())->get();
+        }
+        
+        return view('pages.anomalimukosa.edit', compact('kartupasiens'))->with('anomalimukosa', $anomalimukosa);
     }
 
     /**

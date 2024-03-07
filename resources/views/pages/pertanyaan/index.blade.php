@@ -67,19 +67,10 @@
                             @endcan
                         </div>
     
-                        <div class="card-header d-sm-flex align-items-center">
+                        {{-- <div class="card-header d-sm-flex align-items-center">
                             @can('adminpembimbing')
                             <a href="{{route('exportpertanyaan')}}" class="d-sm-inline-block btn btn-primary btn-sm shadow-sm me-3">
                             <i class="fas fa-file-export fa-sm"></i>  Format Import</a>
-    
-                            {{-- <a href="javascript:;" data-toggle="modal" onclick="importData()" data-target="#ImportModal" class="d-sm-inline-block btn btn-success btn-sm shadow-sm">
-                                <span class="icon">
-                                    <i class="fas fa-file-import fa-sm text-white"></i>
-                                </span>
-                                <span class="text">Import pertanyaan</span>
-                            </a> --}}
-    
-                            <!-- Button trigger modal -->
                             <button type="button" class="d-sm-inline-block btn btn-success btn-sm shadow-sm" data-bs-toggle="modal" data-bs-target="#importModal">
                                 <span class="icon">
                                     <i class="fas fa-file-import fa-sm text-white"></i>
@@ -87,7 +78,8 @@
                                 <span class="text">Import Kartu pertanyaan</span>
                             </button>
                             @endcan
-                        </div>
+                        </div> --}}
+
                         <div class="card-body px-0 pt-0 pb-2">
                             <div class="table-responsive mt-4 ms-5 me-5 mb-4">
                                 @can('adminpembimbing')

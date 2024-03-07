@@ -16,9 +16,21 @@ class PengsiperiController extends Controller
      */
     public function index()
     {
-        return view('pages.pengsiperi.index', [
-            'pengsiperis' => Pengsiperi::all()
-        ]);
+        if (auth()->user()->role === 1) {
+            $pengsiperis = Pengsiperi::all();
+        } 
+        elseif (auth()->user()->role === 2) {
+            $pengsiperis = Pengsiperi::where('pembimbing', auth()->user()->nimnip)->get();
+        } 
+        else {
+            $pengsiperis = Pengsiperi::where('user_id', auth()->id())->get();
+        }
+        
+        return view('pages.pengsiperi.index')->with('pengsiperis', $pengsiperis);
+
+        // return view('pages.pengsiperi.index', [
+        //     'pengsiperis' => Pengsiperi::all()
+        // ]);
         // return view('pages.pengsiperi.index');
     }
 
@@ -29,7 +41,17 @@ class PengsiperiController extends Controller
      */
     public function create()
     {
-        $kartupasiens = Kartupasien::all();
+        if (auth()->user()->role === 1) {
+            $kartupasiens = kartupasien::all();
+        } 
+        elseif (auth()->user()->role === 2) {
+            $kartupasiens = kartupasien::where('pembimbing', auth()->user()->nimnip)->get();
+        } 
+        else {
+            $kartupasiens = kartupasien::where('user_id', auth()->id())->get();
+        }
+
+        // $kartupasiens = kartupasien::all();
         $pengetahuans = Pertanyaan::where('kode', 1)->get();
         $perilakus = Pertanyaan::where('kode', 2)->get();
         
@@ -141,7 +163,17 @@ class PengsiperiController extends Controller
      */
     public function edit(Pengsiperi $pengsiperi)
     {
-        return view('pages.pengsiperi.edit')->with('pengsiperi', $pengsiperi);
+        if (auth()->user()->role === 1) {
+            $kartupasiens = kartupasien::all();
+        } 
+        elseif (auth()->user()->role === 2) {
+            $kartupasiens = kartupasien::where('pembimbing', auth()->user()->nimnip)->get();
+        } 
+        else {
+            $kartupasiens = kartupasien::where('user_id', auth()->id())->get();
+        }
+
+        return view('pages.pengsiperi.edit', compact('kartupasiens'))->with('pengsiperi', $pengsiperi);
     }
 
     /**

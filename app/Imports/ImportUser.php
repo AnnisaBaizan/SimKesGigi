@@ -21,6 +21,7 @@ class ImportUser implements ToModel
             'email' => $row[2],
             'password' => $row[3],
             'role' => $row[4],
+            'pembimbing' => $row[5],
             'avatar' => "AvatarDefault.jpg"
         ]);
     }

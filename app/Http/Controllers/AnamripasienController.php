@@ -6,6 +6,7 @@ use App\Exports\ExportAnamRiPasien;
 use App\Imports\ImportAnamRiPasien;
 use App\Models\kartupasien;
 use App\Models\anamripasien;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -18,9 +19,21 @@ class AnamripasienController extends Controller
      */
     public function index()
     {
-        return view('pages.anamripasien.index', [
-            'anamripasiens' => anamripasien::all()
-        ]);
+        if (auth()->user()->role === 1) {
+            $anamripasiens = anamripasien::all();
+        } 
+        elseif (auth()->user()->role === 2) {
+            $anamripasiens = anamripasien::where('pembimbing', auth()->user()->nimnip)->get();
+        } 
+        else {
+            $anamripasiens = anamripasien::where('user_id', auth()->id())->get();
+        }
+
+        return view('pages.anamripasien.index')->with('anamripasiens', $anamripasiens);
+
+        // return view('pages.anamripasien.index', [
+        //     'anamripasiens' => anamripasien::all()
+        // ]);
         // return view('pages.anamripasien.index');
     }
 
@@ -31,8 +44,23 @@ class AnamripasienController extends Controller
      */
     public function create()
     {
-        $kartupasiens = Kartupasien::all();
-        return view('pages.anamripasien.create')->with('kartupasiens', $kartupasiens);
+        
+        if (auth()->user()->role === 1) {
+            $kartupasiens = kartupasien::all();
+            $users = User::where('role', 3)->get();
+        } 
+        elseif (auth()->user()->role === 2) {
+            $kartupasiens = kartupasien::where('pembimbing', auth()->user()->nimnip)->get();
+        } 
+        else {
+            $kartupasiens = kartupasien::where('user_id', auth()->id())->get();
+        }
+
+        // $kartupasiens = kartupasien::all();
+        return view('pages.anamripasien.create')->with([
+            'kartupasiens' => $kartupasiens,
+            'users' => $users ?? null, // Tambahkan ini untuk mengatasi masalah variable undefined
+        ]);
     }
 
     /**
@@ -79,7 +107,7 @@ class AnamripasienController extends Controller
      */
     public function show(anamripasien $anamripasien)
     {
-        $kartupasiens = Kartupasien::all();
+        $kartupasiens = kartupasien::all();
         return view('pages.anamripasien.show', compact('kartupasiens'))->with('anamripasien', $anamripasien);
     }
 
@@ -91,7 +119,18 @@ class AnamripasienController extends Controller
      */
     public function edit(anamripasien $anamripasien)
     {
-        $kartupasiens = Kartupasien::all();
+        
+        if (auth()->user()->role === 1) {
+            $kartupasiens = kartupasien::all();
+        } 
+        elseif (auth()->user()->role === 2) {
+            $kartupasiens = kartupasien::where('pembimbing', auth()->user()->nimnip)->get();
+        } 
+        else {
+            $kartupasiens = kartupasien::where('user_id', auth()->id())->get();
+        }
+
+        // $kartupasiens = kartupasien::all();
         return view('pages.anamripasien.edit', compact('kartupasiens'))->with('anamripasien', $anamripasien);
     }
 

@@ -13,6 +13,6 @@ class ExportUser implements FromCollection
     public function collection()
     {
         // return User::all()->only('nimnip', 'username', 'email', 'password','role');
-        return User::select('nimnip', 'username', 'email', 'password', 'role')->get();
+        return User::select('nimnip', 'username', 'email', 'password', 'role', 'pembimbing')->get();
     }
 }

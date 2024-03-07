@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Eksplakkal;
-use App\Models\Kartupasien;
+use App\Models\kartupasien;
 use App\Models\permukaangigi;
 use Illuminate\Http\Request;
 
@@ -16,9 +16,21 @@ class EksplakkalController extends Controller
      */
     public function index()
     {
-        return view('pages.eksplakkal.index', [
-            'eksplakkals' => Eksplakkal::all()
-        ]);
+        if (auth()->user()->role === 1) {
+            $eksplakkals = Eksplakkal::all();
+        } 
+        elseif (auth()->user()->role === 2) {
+            $eksplakkals = Eksplakkal::where('pembimbing', auth()->user()->nimnip)->get();
+        } 
+        else {
+            $eksplakkals = Eksplakkal::where('user_id', auth()->id())->get();
+        }
+
+        return view('pages.eksplakkal.index')->with('eksplakkals', $eksplakkals);
+
+        // return view('pages.eksplakkal.index', [
+        //     'eksplakkals' => Eksplakkal::all()
+        // ]);
         // return view('pages.eksplakkal.index');
     }
 
@@ -29,7 +41,18 @@ class EksplakkalController extends Controller
      */
     public function create()
     {
-        $kartupasiens = Kartupasien::all();
+        if (auth()->user()->role === 1) {
+            $kartupasiens = kartupasien::all();
+        } 
+        elseif (auth()->user()->role === 2) {
+            $kartupasiens = kartupasien::where('pembimbing', auth()->user()->nimnip)->get();
+        } 
+        else {
+            $kartupasiens = kartupasien::where('user_id', auth()->id())->get();
+        }
+
+        // $kartupasiens = kartupasien::all();
+        
         $permukaangigis = permukaangigi::all();
         
         return view('pages.eksplakkal.create')->with([
@@ -87,7 +110,17 @@ class EksplakkalController extends Controller
      */
     public function edit(Eksplakkal $eksplakkal)
     {
-        return view('pages.eksplakkal.edit')->with('eksplakkal', $eksplakkal);
+        if (auth()->user()->role === 1) {
+            $kartupasiens = kartupasien::all();
+        } 
+        elseif (auth()->user()->role === 2) {
+            $kartupasiens = kartupasien::where('pembimbing', auth()->user()->nimnip)->get();
+        } 
+        else {
+            $kartupasiens = kartupasien::where('user_id', auth()->id())->get();
+        }
+
+        return view('pages.eksplakkal.edit', compact('kartupasiens'))->with('eksplakkal', $eksplakkal);
     }
 
     /**

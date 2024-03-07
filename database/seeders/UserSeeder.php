@@ -42,6 +42,7 @@ class UserSeeder extends Seeder
             'email' => 'mahasiswa@gmail.com',
             'role' => 3,
             'avatar' => 'AvatarDefault.jpg',
+            'pembimbing'=>'1234567890122341',
             'password' => bcrypt('mahasiswa'),
             'created_at' =>'2022-09-11 07:00:00',
             'updated_at' => '2022-09-11 07:00:00'
@@ -72,6 +73,7 @@ class UserSeeder extends Seeder
             'email' => 'user3@gmail.com',
             'role' => 3,
             'avatar' => 'AvatarDefault.jpg',
+            'pembimbing'=>'0926374816237653',
             'password' => bcrypt('user3user3'),
             'created_at' =>'2021-03-06 07:00:00',
             'updated_at' => '2021-03-06 07:00:00'
@@ -102,6 +104,7 @@ class UserSeeder extends Seeder
             'email' => 'user6@gmail.com',
             'role' => 3,
             'avatar' => 'AvatarDefault.jpg',
+            'pembimbing'=>'1234567890127634',
             'password' => bcrypt('user6user6'),
             'created_at' =>'2022-08-19 07:00:00',
             'updated_at' => '2022-08-19 07:00:00'
@@ -132,6 +135,7 @@ class UserSeeder extends Seeder
             'email' => 'user9@gmail.com',
             'role' => 3,
             'avatar' => 'AvatarDefault.jpg',
+            'pembimbing'=>'0926374816232387',
             'password' => bcrypt('user9user9'),
             'created_at' =>'2021-01-12 07:00:00',
             'updated_at' => '2021-01-12 07:00:00'

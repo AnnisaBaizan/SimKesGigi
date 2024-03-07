@@ -66,19 +66,10 @@
                         @endcan
                     </div>
 
-                    <div class="card-header d-sm-flex align-items-center">
+                    {{-- <div class="card-header d-sm-flex align-items-center">
                         @can('adminpembimbing')
                         <a href="{{route('exportpasien')}}" class="d-sm-inline-block btn btn-primary btn-sm shadow-sm me-3">
                         <i class="fas fa-file-export fa-sm"></i>  Format Import</a>
-
-                        {{-- <a href="javascript:;" data-toggle="modal" onclick="importData()" data-target="#ImportModal" class="d-sm-inline-block btn btn-success btn-sm shadow-sm">
-                            <span class="icon">
-                                <i class="fas fa-file-import fa-sm text-white"></i>
-                            </span>
-                            <span class="text">Import Pasien</span>
-                        </a> --}}
-
-                        <!-- Button trigger modal -->
                         <button type="button" class="d-sm-inline-block btn btn-success btn-sm shadow-sm" data-bs-toggle="modal" data-bs-target="#importModal">
                             <span class="icon">
                                 <i class="fas fa-file-import fa-sm text-white"></i>
@@ -86,7 +77,8 @@
                             <span class="text">Import Kartu Pasien</span>
                         </button>
                         @endcan
-                    </div>
+                    </div> --}}
+
                     <div class="card-body px-0 pt-0 pb-2">
                         <div class="table-responsive mt-4 ms-5 me-5 mb-4">
                             @can('adminpembimbing')
@@ -108,6 +100,16 @@
                                 </tr>
                                     <tr>
                                         <th>No</th>
+                                        @can('admin')
+                                          <th>Mahasiswa</th>
+                                          <th>Pembimbing</th>
+                                        @endcan
+                                        @can('mahasiswa')
+                                          <th>Pembimbing</th>
+                                        @endcan
+                                        @can('pembimbing')
+                                          <th>Mahasiswa</th>
+                                        @endcan
                                         <th>No Kartu</th>
                                         <th>Nama Lengkap</th>
                                         <th>No Identitas</th>
@@ -127,6 +129,16 @@
                                   <tfoot>
                                     <tr>
                                         <th>No</th>
+                                        @can('admin')
+                                          <th>Mahasiswa</th>
+                                          <th>Pembimbing</th>
+                                        @endcan
+                                        @can('mahasiswa')
+                                          <th>Pembimbing</th>
+                                        @endcan
+                                        @can('pembimbing')
+                                          <th>Mahasiswa</th>
+                                        @endcan
                                         <th>No Kartu</th>
                                         <th>Nama Lengkap</th>
                                         <th>No Identitas</th>
@@ -147,6 +159,16 @@
                                     @foreach ($kartupasiens as $kartupasien)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
+                                        @can('admin')
+                                            <td>{{ $kartupasien->user->username }}</td>
+                                            <td>{{ ucwords(get_v('users', 'nimnip', $kartupasien->user->pembimbing, 'username')[0]->username ?? "") }}</td>
+                                        @endcan
+                                        @can('mahasiswa')
+                                            <td>{{ ucwords(get_v('users', 'nimnip', $kartupasien->user->pembimbing, 'username')[0]->username ?? "") }}</td>
+                                        @endcan
+                                        @can('pembimbing')
+                                            <td>{{ $kartupasien->user->username }}</td>
+                                        @endcan
                                         <td>{{ $kartupasien->no_kartu }}</td>
                                         <td>{{ $kartupasien->nama }}</td>
                                         <td>{{ $kartupasien->no_iden }}</td>

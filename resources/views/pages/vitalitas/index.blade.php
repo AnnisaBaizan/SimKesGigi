@@ -68,19 +68,10 @@
                             @endcan
                         </div>
     
-                        <div class="card-header d-sm-flex align-items-center">
+                        {{-- <div class="card-header d-sm-flex align-items-center">
                             @can('adminpembimbing')
                             <a href="{{route('exportvitalitas')}}" class="d-sm-inline-block btn btn-primary btn-sm shadow-sm me-3">
                             <i class="fas fa-file-export fa-sm"></i>  Format Import</a>
-    
-                            {{-- <a href="javascript:;" data-toggle="modal" onclick="importData()" data-target="#ImportModal" class="d-sm-inline-block btn btn-success btn-sm shadow-sm">
-                                <span class="icon">
-                                    <i class="fas fa-file-import fa-sm text-white"></i>
-                                </span>
-                                <span class="text">Import pertanyaan</span>
-                            </a> --}}
-    
-                            <!-- Button trigger modal -->
                             <button type="button" class="d-sm-inline-block btn btn-success btn-sm shadow-sm" data-bs-toggle="modal" data-bs-target="#importModal">
                                 <span class="icon">
                                     <i class="fas fa-file-import fa-sm text-white"></i>
@@ -88,7 +79,8 @@
                                 <span class="text">Import data</span>
                             </button>
                             @endcan
-                        </div>
+                        </div> --}}
+
                         <div class="card-body px-0 pt-0 pb-2">
                             <div class="table-responsive mt-4 ms-5 me-5 mb-4">
                                 @can('adminpembimbing')
@@ -110,25 +102,25 @@
                                     </tr>
                                         <tr>
                                             <th>No</th>
+                                            @can('admin')
+                                              <th>Mahasiswa</th>
+                                              <th>Pembimbing</th>
+                                            @endcan
+                                            @can('mahasiswa')
+                                              <th>Pembimbing</th>
+                                            @endcan
+                                            @can('pembimbing')
+                                              <th>Mahasiswa</th>
+                                            @endcan
                                             <th>No_Kartu & Nama Pasien</th>
-                                            {{-- DI --}}
-                                            <th>DI-1</th>
-                                            <th>DI-2</th>
-                                            <th>DI-3</th>
-                                            <th>DI-4</th>
-                                            <th>DI-5</th>
-                                            <th>DI-6</th>
-                                            <th>Score DI</th>
-                                            {{-- CI --}}
-                                            <th>CI-1</th>
-                                            <th>CI-2</th>
-                                            <th>CI-3</th>
-                                            <th>CI-4</th>
-                                            <th>CI-5</th>
-                                            <th>CI-6</th>
-                                            <th>Score CI</th>
-                                            
-                                            <th>Kreteria vitalitas</th>
+                                            <th>Elemen Gigi</th>
+                                            <th>Inspeksi</th>
+                                            <th>Thermis</th>
+                                            <th>Sondasi</th>
+                                            <th>Perkusi</th>
+                                            <th>Druk</th>
+                                            <th>Mobility</th>
+                                            <th>Masalah</th>
                                             <th>Dibuat</th>
                                             <th>Tindakan</th>
                                         </tr>
@@ -136,25 +128,25 @@
                                       <tfoot>
                                         <tr>
                                             <th>No</th>
+                                            @can('admin')
+                                              <th>Mahasiswa</th>
+                                              <th>Pembimbing</th>
+                                            @endcan
+                                            @can('mahasiswa')
+                                              <th>Pembimbing</th>
+                                            @endcan
+                                            @can('pembimbing')
+                                              <th>Mahasiswa</th>
+                                            @endcan
                                             <th>No_Kartu & Nama Pasien</th>
-                                            {{-- DI --}}
-                                            <th>DI-1</th>
-                                            <th>DI-2</th>
-                                            <th>DI-3</th>
-                                            <th>DI-4</th>
-                                            <th>DI-5</th>
-                                            <th>DI-6</th>
-                                            <th>Score DI</th>
-                                            {{-- CI --}}
-                                            <th>CI-1</th>
-                                            <th>CI-2</th>
-                                            <th>CI-3</th>
-                                            <th>CI-4</th>
-                                            <th>CI-5</th>
-                                            <th>CI-6</th>
-                                            <th>Score CI</th>
-                                            
-                                            <th>Kreteria vitalitas</th>
+                                            <th>Elemen Gigi</th>
+                                            <th>Inspeksi</th>
+                                            <th>Thermis</th>
+                                            <th>Sondasi</th>
+                                            <th>Perkusi</th>
+                                            <th>Druk</th>
+                                            <th>Mobility</th>
+                                            <th>Masalah</th>
                                             <th>Dibuat</th>
                                             <th>Tindakan</th>
                                         </tr>
@@ -163,28 +155,26 @@
                                         @foreach ($vitalitass as $vitalitas)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
+                                            @can('admin')
+                                                <td>{{ $vitalitas->user->username }}</td>
+                                                <td>{{ ucwords(get_v('users', 'nimnip', $vitalitas->user->pembimbing, 'username')[0]->username ?? "") }}</td>
+                                            @endcan
+                                            @can('mahasiswa')
+                                                <td>{{ ucwords(get_v('users', 'nimnip', $vitalitas->user->pembimbing, 'username')[0]->username ?? "") }}</td>
+                                            @endcan
+                                            @can('pembimbing')
+                                                <td>{{ $vitalitas->user->username }}</td>
+                                            @endcan
                                             <td>{{ $vitalitas->kartupasien->no_kartu }} | {{ $vitalitas->kartupasien->nama }}</td>
                                             {{-- pengetahuan --}}
-                                            <td>{{ $vitalitas->di_1 }} </td>
-                                            <td>{{ $vitalitas->di_2 }} </td>
-                                            <td>{{ $vitalitas->di_3 }} </td>
-                                            <td>{{ $vitalitas->di_4 }} </td>
-                                            <td>{{ $vitalitas->di_5 }}</td>
-                                            <td>{{ $vitalitas->di_6}}</td>
-                                            <td>{{ $vitalitas->jumlah_nilai_di}} / {{ $vitalitas->jumlah_gigi_di}}</td>
-                                            <td>{{ $vitalitas->score_di }}</td> 
-                                           
-                                            
-                                            <td>{{ $vitalitas->ci_1 }}</td>
-                                            <td>{{ $vitalitas->ci_2 }}</td>
-                                            <td>{{ $vitalitas->ci_3 }}</td>
-                                            <td>{{ $vitalitas->ci_4 }}</td>
-                                            <td>{{ $vitalitas->ci_5 }}</td>
-                                            <td>{{ $vitalitas->ci_6}}</td>
-                                            <td>{{ $vitalitas->jumlah_nilai_ci}} / {{ $vitalitas->jumlah_gigi_ci}}</td>
-                                            <td>{{ $vitalitas->score_ci }}</td> 
-                                            <td>{{ $vitalitas->nilai_kriteria_vitalitas }} {{ $vitalitas->kriteria_vitalitas }}</td> 
-                                            
+                                            <td>{{ $vitalitas->elemen_gigi }} </td>
+                                            <td>{{ $vitalitas->inspeksi }} </td>
+                                            <td>{{ $vitalitas->thermis }} </td>
+                                            <td>{{ $vitalitas->sondasi }} </td>
+                                            <td>{{ $vitalitas->perkusi }}</td>
+                                            <td>{{ $vitalitas->druk}}</td>
+                                            <td>{{ $vitalitas->mobility }}</td> 
+                                            <td>{{ $vitalitas->masalah }}</td>
                                             <td>{{ date_format($vitalitas->created_at, "d M Y") }}</td>
                                             <td>
                                                 

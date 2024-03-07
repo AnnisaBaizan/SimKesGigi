@@ -15,9 +15,22 @@ class OdontogramController extends Controller
      */
     public function index()
     {
-        return view('pages.odontogram.index', [
-            'odontograms' => Odontogram::all()
-        ]);
+        if (auth()->user()->role === 1) {
+            $odontograms = odontogram::all();
+        } 
+        elseif (auth()->user()->role === 2) {
+            $odontograms = odontogram::where('pembimbing', auth()->user()->nimnip)->get();
+        } 
+        else {
+            $odontograms = odontogram::where('user_id', auth()->id())->get();
+        }
+
+        return view('pages.odontogram.index')->with('odontograms', $odontograms);
+
+
+        // return view('pages.odontogram.index', [
+        //     'odontograms' => Odontogram::all()
+        // ]);
         // return view('pages.odontogram.index');
     }
 
@@ -28,11 +41,19 @@ class OdontogramController extends Controller
      */
     public function create()
     {
-        $kartupasiens = Kartupasien::all();
+        if (auth()->user()->role === 1) {
+            $kartupasiens = kartupasien::all();
+        } 
+        elseif (auth()->user()->role === 2) {
+            $kartupasiens = kartupasien::where('pembimbing', auth()->user()->nimnip)->get();
+        } 
+        else {
+            $kartupasiens = kartupasien::where('user_id', auth()->id())->get();
+        }
+
+        // $kartupasiens = Kartupasien::all();
         
-        return view('pages.odontogram.create')->with([
-            'kartupasiens' => $kartupasiens,
-        ]);
+        return view('pages.odontogram.create')->with('kartupasiens', $kartupasiens);
     }
 
     /**
@@ -83,7 +104,17 @@ class OdontogramController extends Controller
      */
     public function edit(Odontogram $odontogram)
     {
-        return view('pages.odontogram.edit')->with('odontogram', $odontogram);
+        if (auth()->user()->role === 1) {
+            $kartupasiens = kartupasien::all();
+        } 
+        elseif (auth()->user()->role === 2) {
+            $kartupasiens = kartupasien::where('pembimbing', auth()->user()->nimnip)->get();
+        } 
+        else {
+            $kartupasiens = kartupasien::where('user_id', auth()->id())->get();
+        }
+
+        return view('pages.odontogram.edit', compact('kartupasiens'))->with('odontogram', $odontogram);
     }
 
     /**

@@ -81,9 +81,9 @@
                         
                         <div class="row text-center custom-container">
                             <div class="custom-col-sm-1 mb-3">
-                                <label for="inspeksi">Inspeksi</label>
-                                <select class="form-control @error('inspeksi') is-invalid @enderror" id="inspeksi" name="inspeksi" placeholder="75" value="{{ old('inspeksi') }}">
-                                    @error('inspeksi')
+                                <label for="inspeksi[]">Inspeksi</label>
+                                <select class="form-control @error('inspeksi[]') is-invalid @enderror" id="inspeksi[]" name="inspeksi[]" placeholder="75" value="{{ old('inspeksi[]') }}">
+                                    @error('inspeksi[]')
                                     <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                     </span>
@@ -94,9 +94,9 @@
                                 </select>
                             </div>
                             <div class="custom-col-sm-1 mb-3">
-                                <label for="thermis">Thermis</label>
-                                <select class="form-control @error('thermis') is-invalid @enderror" id="thermis" name="thermis" placeholder="75" value="{{ old('thermis') }}">
-                                    @error('thermis')
+                                <label for="thermis[]">Thermis</label>
+                                <select class="form-control @error('thermis[]') is-invalid @enderror" id="thermis[]" name="thermis[]" placeholder="75" value="{{ old('thermis[]') }}">
+                                    @error('thermis[]')
                                     <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                     </span>
@@ -107,9 +107,9 @@
                                 </select>
                             </div>
                             <div class="custom-col-sm-1 mb-3">
-                                <label for="sondasi">Sondasi</label>
-                                <select class="form-control @error('sondasi') is-invalid @enderror" id="sondasi" name="sondasi" placeholder="75" value="{{ old('sondasi') }}">
-                                    @error('sondasi')
+                                <label for="sondasi[]">Sondasi</label>
+                                <select class="form-control @error('sondasi[]') is-invalid @enderror" id="sondasi[]" name="sondasi[]" placeholder="75" value="{{ old('sondasi[]') }}">
+                                    @error('sondasi[]')
                                     <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                     </span>
@@ -120,9 +120,9 @@
                                 </select>
                             </div>
                             <div class="custom-col-sm-1 mb-3">
-                                <label for="perkusi">Perkusi</label>
-                                <select class="form-control @error('perkusi') is-invalid @enderror" id="perkusi" name="perkusi" placeholder="75" value="{{ old('perkusi') }}">
-                                    @error('perkusi')
+                                <label for="perkusi[]">Perkusi</label>
+                                <select class="form-control @error('perkusi[]') is-invalid @enderror" id="perkusi[]" name="perkusi[]" placeholder="75" value="{{ old('perkusi[]') }}">
+                                    @error('perkusi[]')
                                     <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                     </span>
@@ -133,9 +133,9 @@
                                 </select>
                             </div>
                             <div class="custom-col-sm-1 mb-3">
-                                <label for="druk">Druk</label>
-                                <select class="form-control @error('druk') is-invalid @enderror" id="druk" name="druk" placeholder="75" value="{{ old('druk') }}">
-                                    @error('druk')
+                                <label for="druk[]">Druk</label>
+                                <select class="form-control @error('druk[]') is-invalid @enderror" id="druk[]" name="druk[]" placeholder="75" value="{{ old('druk[]') }}">
+                                    @error('druk[]')
                                     <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                     </span>
@@ -146,9 +146,9 @@
                                 </select>
                             </div>
                             <div class="custom-col-sm-1 mb-3">
-                                <label for="mobility">Mobility</label>
-                                <select class="form-control @error('mobility') is-invalid @enderror" id="mobility" name="mobility" placeholder="75" value="{{ old('mobility') }}">
-                                    @error('mobility')
+                                <label for="mobility[]">Mobility</label>
+                                <select class="form-control @error('mobility[]') is-invalid @enderror" id="mobility[]" name="mobility[]" placeholder="75" value="{{ old('mobility[]') }}">
+                                    @error('mobility[]')
                                     <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                     </span>
@@ -159,8 +159,8 @@
                                 </select>
                             </div>
                             <div class="custom-col-sm-2 mb-3">
-                                <label for="masalah">Masalah</label>
-                                <input type="text" class="form-control text-center" id="masalah" name="masalah" value="" readonly>
+                                <label for="masalah[]">Masalah</label>
+                                <input type="text" class="form-control text-center" id="masalah[]" name="masalah[]" readonly>
                             </div>
                         </div>
                                 

@@ -17,6 +17,8 @@ class KartupasienSeeder extends Seeder
     {
         // KARTU PASIEN
         DB::table('kartupasiens')->insert([
+            'user_id'=> 3,
+            'pembimbing'=> '1234567890122341',
             'no_kartu'=> '2302000000001',
             'nama' => 'Annisa Baizan',
             'no_iden' => '1234567890123456',
@@ -33,6 +35,8 @@ class KartupasienSeeder extends Seeder
             'updated_at' => '2023-10-05 07:16:48'
         ]);
         DB::table('kartupasiens')->insert([
+            'user_id'=> 3,
+            'pembimbing'=> '1234567890122341',
             'no_kartu'=> '2201000000002',
             'nama' => 'Baizan Annisa',
             'no_iden' => '6543210987654321',
@@ -49,6 +53,8 @@ class KartupasienSeeder extends Seeder
             'updated_at' => '2022-11-25 07:00:00'
         ]);
         DB::table('kartupasiens')->insert([
+            'user_id'=> 3,
+            'pembimbing'=> '1234567890122341',
             'no_kartu'=> '2102000000003',
             'nama' => 'Annisut',
             'no_iden' => '5678905432156784',
@@ -65,6 +71,8 @@ class KartupasienSeeder extends Seeder
             'updated_at' => '2021-03-06 07:00:00'
         ]);
         DB::table('kartupasiens')->insert([
+            'user_id'=> 6,
+            'pembimbing'=> '0926374816237653',
             'no_kartu'=> '2302000000004',
             'nama' => 'Lorem ipsum',
             'no_iden' => '9827384019283743',
@@ -81,6 +89,8 @@ class KartupasienSeeder extends Seeder
             'updated_at' => '2023-09-15 07:16:48'
         ]);
         DB::table('kartupasiens')->insert([
+            'user_id'=> 6,
+            'pembimbing'=> '0926374816237653',
             'no_kartu'=> '2201000000005',
             'nama' => 'dolor sit amet',
             'no_iden' => '836470923748576',
@@ -97,6 +107,8 @@ class KartupasienSeeder extends Seeder
             'updated_at' => '2022-05-13 07:00:00'
         ]);
         DB::table('kartupasiens')->insert([
+            'user_id'=> 6,
+            'pembimbing'=> '0926374816237653',
             'no_kartu'=> '2102000000006',
             'nama' => 'consectetur adipisicing',
             'no_iden' => '2637491027346573',
@@ -113,6 +125,8 @@ class KartupasienSeeder extends Seeder
             'updated_at' => '2021-09-27 07:00:00'
         ]);
         DB::table('kartupasiens')->insert([
+            'user_id'=> 9,
+            'pembimbing'=> '1234567890127634',
             'no_kartu'=> '2302000000007',
             'nama' => 'elit. Necessitatibus',
             'no_iden' => '453093847129374',
@@ -129,6 +143,8 @@ class KartupasienSeeder extends Seeder
             'updated_at' => '2023-10-05 07:16:48'
         ]);
         DB::table('kartupasiens')->insert([
+            'user_id'=> 9,
+            'pembimbing'=> '1234567890127634',
             'no_kartu'=> '2201000000008',
             'nama' => 'quaerat assumenda',
             'no_iden' => '731930284561',
@@ -145,6 +161,8 @@ class KartupasienSeeder extends Seeder
             'updated_at' => '2022-11-25 07:00:00'
         ]);
         DB::table('kartupasiens')->insert([
+            'user_id'=> 9,
+            'pembimbing'=> '1234567890127634',
             'no_kartu'=> '2102000000009',
             'nama' => 'corrupti quia',
             'no_iden' => '9483201946573829',
@@ -161,6 +179,8 @@ class KartupasienSeeder extends Seeder
             'updated_at' => '2021-03-06 07:00:00'
         ]);
         DB::table('kartupasiens')->insert([
+            'user_id'=> 12,
+            'pembimbing'=> '0926374816232387',
             'no_kartu'=> '2302000000010',
             'nama' => 'tempora vel nihil',
             'no_iden' => '09364718293475612',
@@ -177,6 +197,8 @@ class KartupasienSeeder extends Seeder
             'updated_at' => '2023-09-15 07:16:48'
         ]);
         DB::table('kartupasiens')->insert([
+            'user_id'=> 12,
+            'pembimbing'=> '0926374816232387',
             'no_kartu'=> '2201000000011',
             'nama' => 'ratione iusto',
             'no_iden' => '6512847365098765',
@@ -193,6 +215,8 @@ class KartupasienSeeder extends Seeder
             'updated_at' => '2022-05-13 07:00:00'
         ]);
         DB::table('kartupasiens')->insert([
+            'user_id'=> 12,
+            'pembimbing'=> '0926374816232387',
             'no_kartu'=> '2102000000012',
             'nama' => 'eligendi! Ipsam',
             'no_iden' => '0912637451847392',

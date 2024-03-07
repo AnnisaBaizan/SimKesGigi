@@ -17,9 +17,21 @@ class KartupasienController extends Controller
      */
     public function index()
     {
-        return view('pages.kartupasien.index', [
-            'kartupasiens' => kartupasien::all()
-        ]);
+        if (auth()->user()->role === 1) {
+            $kartupasiens = kartupasien::all();
+        } 
+        elseif (auth()->user()->role === 2) {
+            $kartupasiens = kartupasien::where('pembimbing', auth()->user()->nimnip)->get();
+        } 
+        else {
+            $kartupasiens = kartupasien::where('user_id', auth()->id())->get();
+        }
+
+        return view('pages.kartupasien.index')->with('kartupasiens', $kartupasiens);
+
+        // return view('pages.kartupasien.index', [
+        //     'kartupasiens' => kartupasien::all()
+        // ]);
         // return view('pages.kartupasien.index');
     }
 
@@ -30,7 +42,7 @@ class KartupasienController extends Controller
      */
     public function create()
     {
-        $id_max = sprintf("%09d", Kartupasien::max('id') + 1);
+        $id_max = sprintf("%09d", kartupasien::max('id') + 1);
         return view('pages.kartupasien.create', compact('id_max'));
     }
 
@@ -125,7 +137,7 @@ class KartupasienController extends Controller
      */
     public function destroy(kartupasien $kartupasien)
     {
-        Kartupasien::destroy($kartupasien->id);
+        kartupasien::destroy($kartupasien->id);
         return back()->with('succes', 'Kartu Pasien berhasil dihapus');
     }
 
