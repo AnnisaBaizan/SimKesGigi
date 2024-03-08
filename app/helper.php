@@ -1,4 +1,5 @@
 <?php
+
 use Illuminate\Support\Facades\DB;
 
     function get_v($tabel,$name,$id,$col) {

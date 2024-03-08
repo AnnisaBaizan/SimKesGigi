@@ -202,4 +202,17 @@ class AnamripasienController extends Controller
         Excel::import(new ImportAnamRiPasien, request()->file('importanamripasien'));
         return back()->with('succes', 'Data Anamnesa dan Riwayat Pasien Berhasil di import');
     }
+
+    public function getPatients(Request $request) {
+        $user_id = $request->input('user_id');
+        $pembimbing = $request->input('pembimbing');
+    
+        // Query database untuk mendapatkan data pasien berdasarkan kriteria
+        $patients = kartupasien::where('user_id', $user_id)
+                                ->where('pembimbing', $pembimbing)
+                                ->get();
+    
+        // Kembalikan data dalam format JSON
+        return response($patients);
+    }
 }

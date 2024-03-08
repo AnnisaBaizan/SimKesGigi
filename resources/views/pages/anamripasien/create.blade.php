@@ -53,6 +53,21 @@
                         @enderror
                     </div>
                 </div>
+                <div class="form-group row">
+                  <div class="col-sm-4">
+                      <label for="kartupasien_id" class="form-text">Pilih Pasien :</label>
+                  </div>
+                  <div class="col-sm-8">
+                      <select class="js-example-basic-single form-control @error('kartupasien_id') is-invalid @enderror" data-live-search="true" id="kartupasien_id" name="kartupasien_id" placeholder="Pilih Pasien" value="{{ old('kartupasien_id') }}" required>
+                          @error('kartupasien_id')
+                              <span class="invalid-feedback" role="alert">
+                                  <strong>{{ $message }}</strong>
+                              </span>
+                          @enderror
+                          <option value="" selected disabled>Pilih Pasien</option>
+                      </select>
+                  </div>
+              </div>
                   @endcan
                   
                   @can('mahasiswa')
@@ -72,8 +87,6 @@
                             </span>
                             @enderror
                   </div>
-                  @endcan
-
                   <div class="form-group row">
                     <div class="col-sm-4">
                         <label for="kartupasien_id" class ="form-text">Pilih Pasien :</label>
@@ -92,6 +105,9 @@
                         </select>
                     </div>
                   </div>
+                  @endcan
+
+                  
 
                   <div class="col-sm-12 mb-3 mb-sm-0 text-center bg-gradient-faded-info-vertical">
                     <marquee><h6 class="m-0 font-weight-bold text-dark text-bold">Anamnesa</h6></marquee>
@@ -452,4 +468,88 @@ $('#alergi_mkn').change(function() {
         });
     });
 </script>
+
+{{-- <script>
+    $(document).ready(function() {
+        $('#user_id').change(function() {
+            var user_id = $(this).val();
+            var pembimbing = $('#pembimbing').val();
+
+            // Menggunakan Ajax untuk mengambil data pasien dari server
+            $.ajax({
+                type: 'GET',
+                url: '/get-patients',
+                data: { user_id: user_id, pembimbing: pembimbing },
+                dataType: 'json',
+                success: function(response) {
+                    // Memperbarui dropdown dengan data pasien yang diterima
+                    updatePatientsDropdown(response);
+
+                    
+                // Setelah Ajax selesai, isi variabel patients dengan data yang diterima
+                // patients = response;
+
+                // Tampilkan variabel patients di console log
+                // console.log('Patients:', patients);
+                },
+                error: function(error) {
+                    console.error('Error fetching patients:', error);
+                }
+            });
+        });
+
+        function updatePatientsDropdown(patients) {
+            var kartupasienDropdown = $('#kartupasien_id');
+            kartupasienDropdown.empty();
+
+            // Menambahkan opsi ke dropdown berdasarkan data yang diterima
+            $.each(patients, function(index, patient) {
+                kartupasienDropdown.append('<option value="' + patient.id + '">' + patient.no_kartu + ' | ' + patient.nama + '</option>');
+            });
+
+            // Memperbarui tampilan selectpicker setelah mengisi ulang dropdown
+            kartupasienDropdown.selectpicker('refresh');
+        }
+    });
+</script> --}}
+<script>
+  $(document).ready(function() {
+      // Fungsi untuk memuat data pasien berdasarkan mahasiswa dan pembimbing yang dipilih
+      function loadPatients() {
+          var selectedUserId = $("#user_id").val();
+          var selectedPembimbing = $("#pembimbing").val();
+
+          // Lakukan permintaan AJAX ke server untuk mendapatkan data pasien berdasarkan kriteria tertentu
+          $.ajax({
+              url: '/getPatients', // Gantilah dengan rute yang sesuai di Laravel Anda
+              type: 'GET',
+              data: {
+                  user_id: selectedUserId,
+                  pembimbing: selectedPembimbing
+              },
+              success: function(data) {
+                  // Bersihkan dan isi ulang dropdown "Pilih Pasien"
+                  $("#kartupasien_id").empty().append('<option value="" selected disabled>Pilih Pasien</option>');
+
+                  // Iterasi melalui data dan tambahkan opsi ke dropdown
+                  $.each(data, function(key, value) {
+                      $("#kartupasien_id").append('<option value="' + value.id + '">' + value.no_kartu + ' | ' + value.nama + '</option>');
+                  });
+              },
+              error: function(error) {
+                  console.log(error);
+              }
+          });
+      }
+
+      // Panggil fungsi saat nilai "Pilih Mahasiswa" atau "Pembimbing" berubah
+      $("#user_id, #pembimbing").change(function() {
+          loadPatients(); // Muat ulang data pasien saat terjadi perubahan
+      });
+
+      // Panggil fungsi saat halaman dimuat untuk memuat data awal (jika diperlukan)
+      loadPatients();
+  });
+</script>
+
 @endsection
