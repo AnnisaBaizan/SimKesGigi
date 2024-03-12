@@ -59,7 +59,7 @@ class AnamripasienController extends Controller
         // $kartupasiens = kartupasien::all();
         return view('pages.anamripasien.create')->with([
             'kartupasiens' => $kartupasiens,
-            'users' => $users ?? null, // Tambahkan ini untuk mengatasi masalah variable undefined
+            'users' => $users ?? null
         ]);
     }
 
@@ -122,6 +122,7 @@ class AnamripasienController extends Controller
         
         if (auth()->user()->role === 1) {
             $kartupasiens = kartupasien::all();
+            $users = User::where('role', 3)->get();
         } 
         elseif (auth()->user()->role === 2) {
             $kartupasiens = kartupasien::where('pembimbing', auth()->user()->nimnip)->get();
@@ -131,7 +132,11 @@ class AnamripasienController extends Controller
         }
 
         // $kartupasiens = kartupasien::all();
-        return view('pages.anamripasien.edit', compact('kartupasiens'))->with('anamripasien', $anamripasien);
+        return view('pages.anamripasien.edit')->with([
+            'anamripasien' => $anamripasien,
+            'kartupasiens' => $kartupasiens,
+            'users' => $users ?? null
+        ]);
     }
 
     /**
@@ -201,18 +206,5 @@ class AnamripasienController extends Controller
         request()->file('importanamripasien');
         Excel::import(new ImportAnamRiPasien, request()->file('importanamripasien'));
         return back()->with('succes', 'Data Anamnesa dan Riwayat Pasien Berhasil di import');
-    }
-
-    public function getPatients(Request $request) {
-        $user_id = $request->input('user_id');
-        $pembimbing = $request->input('pembimbing');
-    
-        // Query database untuk mendapatkan data pasien berdasarkan kriteria
-        $patients = kartupasien::where('user_id', $user_id)
-                                ->where('pembimbing', $pembimbing)
-                                ->get();
-    
-        // Kembalikan data dalam format JSON
-        return response($patients);
     }
 }

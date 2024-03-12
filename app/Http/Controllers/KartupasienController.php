@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Exports\ExportKartuPasien;
 use App\Imports\ImportKartuPasien;
 use App\Models\kartupasien;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -42,8 +43,14 @@ class KartupasienController extends Controller
      */
     public function create()
     {
+        $users = User::where('role', 3)->get();
         $id_max = sprintf("%09d", kartupasien::max('id') + 1);
-        return view('pages.kartupasien.create', compact('id_max'));
+
+        return view('pages.kartupasien.create')->with([
+            'id_max' => $id_max,
+            'users' => $users ?? null
+        ]);
+        // return view('pages.kartupasien.create', compact('id_max'));
     }
 
     /**

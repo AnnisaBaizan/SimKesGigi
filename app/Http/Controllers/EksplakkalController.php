@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Eksplakkal;
 use App\Models\kartupasien;
 use App\Models\permukaangigi;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class EksplakkalController extends Controller
@@ -43,6 +44,7 @@ class EksplakkalController extends Controller
     {
         if (auth()->user()->role === 1) {
             $kartupasiens = kartupasien::all();
+            $users = User::where('role', 3)->get();
         } 
         elseif (auth()->user()->role === 2) {
             $kartupasiens = kartupasien::where('pembimbing', auth()->user()->nimnip)->get();
@@ -58,6 +60,7 @@ class EksplakkalController extends Controller
         return view('pages.eksplakkal.create')->with([
             'kartupasiens' => $kartupasiens,
             'permukaangigis' => $permukaangigis,
+            'users' => $users ?? null
         ]);
     }
 
@@ -112,6 +115,7 @@ class EksplakkalController extends Controller
     {
         if (auth()->user()->role === 1) {
             $kartupasiens = kartupasien::all();
+            $users = User::where('role', 3)->get();
         } 
         elseif (auth()->user()->role === 2) {
             $kartupasiens = kartupasien::where('pembimbing', auth()->user()->nimnip)->get();
@@ -120,7 +124,12 @@ class EksplakkalController extends Controller
             $kartupasiens = kartupasien::where('user_id', auth()->id())->get();
         }
 
-        return view('pages.eksplakkal.edit', compact('kartupasiens'))->with('eksplakkal', $eksplakkal);
+        
+        return view('pages.eksplakkal.create')->with([
+            'kartupasiens' => $kartupasiens,
+            'eksplakkal'=> $eksplakkal,
+            'users' => $users ?? null
+        ]);
     }
 
     /**

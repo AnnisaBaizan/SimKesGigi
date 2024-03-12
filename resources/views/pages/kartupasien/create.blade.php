@@ -13,7 +13,58 @@
                 <div id="alert">
                     @include('components.alert')
                 </div>
-                
+                @can('admin')
+                <div class="form-group row justify-content-center">
+                        <label for="user_id" class="form-text text-center">Pilih Mahasiswa :</label>
+                        <div class="col-sm-4">
+                        <select class="js-example-basic-single form-control @error('user_id') is-invalid @enderror"
+                            data-live-search="true" id="user_id" name="user_id" placeholder="Pilih Mahasiswa"
+                            value="{{ old('user_id') }}" required>
+                            @error('user_id')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                            <option value="" selected disabled>Pilih Mahasiswa</option>
+                            @foreach ($users as $user)
+                                <option value="{{ $user->id }}" data-pembimbing="{{ $user->pembimbing }}">
+                                    {{ ucwords($user->username) }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control @error('pembimbing') is-invalid_max @enderror"
+                            id="pembimbing" name="pembimbing" placeholder="pembimbing" readonly required>
+                        @error('pembimbing')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                </div>
+            @endcan
+
+            @can('mahasiswa')
+                <div class="col-sm-6">
+                    <input type="hidden" class="form-control @error('user_id') is-invalid_max @enderror" id="user_id"
+                        name="user_id" placeholder="user_id" value="{{ auth()->user()->id }}" required>
+                    @error('user_id')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+                <div class="col-sm-6">
+                    <input type="hidden" class="form-control @error('pembimbing') is-invalid_max @enderror"
+                        id="pembimbing" name="pembimbing" placeholder="pembimbing"
+                        value="{{ auth()->user()->pembimbing }}" required>
+                    @error('pembimbing')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+            @endcan
                 <div class="form-group row justify-content-center">
                     <div class="col-sm-4">
                         <center><label for="no_kartu" class ="form-text text-center">No kartu Pasien :</label></center>
@@ -211,4 +262,13 @@
         });
     });
 </script>
+<script>
+    $(document).ready(function() {
+        $('#user_id').change(function() {
+            var selectedOption = $(this).find(':selected');
+            var pembimbingValue = selectedOption.data('pembimbing');
+            $('#pembimbing').val(pembimbingValue);
+        });
+    });
+  </script>
 @endsection

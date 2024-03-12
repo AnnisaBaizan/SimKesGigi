@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Ohis;
 use App\Models\Kartupasien;
 use App\Models\gigi;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class OhisController extends Controller
@@ -44,6 +45,7 @@ class OhisController extends Controller
         
         if (auth()->user()->role === 1) {
             $kartupasiens = kartupasien::all();
+            $users = User::where('role', 3)->get();
         } 
         elseif (auth()->user()->role === 2) {
             $kartupasiens = kartupasien::where('pembimbing', auth()->user()->nimnip)->get();
@@ -53,11 +55,11 @@ class OhisController extends Controller
         }
 
         // $kartupasiens = kartupasien::all();
-        $gigis = Gigi::all();
+        // $gigis = Gigi::all();
         
         return view('pages.ohis.create')->with([
             'kartupasiens' => $kartupasiens,
-            'gigis' => $gigis,
+            'users' => $users ?? null
         ]);
     }
 
@@ -93,6 +95,7 @@ class OhisController extends Controller
     {
         if (auth()->user()->role === 1) {
             $kartupasiens = kartupasien::all();
+            $users = User::where('role', 3)->get();
         } 
         elseif (auth()->user()->role === 2) {
             $kartupasiens = kartupasien::where('pembimbing', auth()->user()->nimnip)->get();
@@ -101,7 +104,11 @@ class OhisController extends Controller
             $kartupasiens = kartupasien::where('user_id', auth()->id())->get();
         }
 
-        return view('pages.ohis.edit', compact('kartupasiens'))->with('ohis', $ohis);
+        return view('pages.ohis.edit')->with([
+            'kartupasiens' => $kartupasiens,
+            'ohis' => $ohis,
+            'users' => $users ?? null
+        ]);
     }
 
     /**

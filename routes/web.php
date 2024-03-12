@@ -34,9 +34,7 @@ use App\Http\Controllers\OdontogramController;
 use App\Http\Controllers\OhisController;
 use App\Http\Controllers\VitalitasController;
 use App\Http\Controllers\AnomalimukosaController;
-
-
-
+use Illuminate\Http\Request;
 
 Route::get('/', function () {
 	return redirect('/dashboard');
@@ -195,20 +193,13 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/{page}', [PageController::class, 'index'])->name('page');
 	Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 
+	Route::post('/getPatients', function (Request $request) {
+		$user_id = $request->input('user_id');
+		$pembimbing = $request->input('pembimbing');
 	
-
-	// Route::get('/get-patients', function () {
-	// 	$user_id = request()->input('user_id');
-	// 	$pembimbing = request()->input('pembimbing');
-
-	// 	// Gantilah dengan logika query sesuai dengan model dan tabel yang Anda miliki
-	// 	$patients = DB::table('kartupasien')
-	// 		->where('user_id', $user_id)
-	// 		->where('pembimbing', $pembimbing)
-	// 		->get();
-
-	// 	return response()->json($patients);
-	// });
-
-	Route::get('/getPatients', 'AnamripasienController@getPatients');
+		$options = getPatients($user_id, $pembimbing);
+	
+		return response()->json($options);
+	});
+	
 });

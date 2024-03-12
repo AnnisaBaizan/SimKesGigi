@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Anomalimukosa;
 use App\Models\kartupasien;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class AnomalimukosaController extends Controller
@@ -42,6 +43,7 @@ class AnomalimukosaController extends Controller
     {
         if (auth()->user()->role === 1) {
             $kartupasiens = kartupasien::all();
+            $users = User::where('role', 3)->get();
         } 
         elseif (auth()->user()->role === 2) {
             $kartupasiens = kartupasien::where('pembimbing', auth()->user()->nimnip)->get();
@@ -54,6 +56,7 @@ class AnomalimukosaController extends Controller
         
         return view('pages.anomalimukosa.create')->with([
             'kartupasiens' => $kartupasiens,
+            'users' => $users ?? null
         ]);
     }
 
@@ -107,6 +110,7 @@ class AnomalimukosaController extends Controller
     {
         if (auth()->user()->role === 1) {
             $kartupasiens = kartupasien::all();
+            $users = User::where('role', 3)->get();
         } 
         elseif (auth()->user()->role === 2) {
             $kartupasiens = kartupasien::where('pembimbing', auth()->user()->nimnip)->get();
@@ -115,7 +119,11 @@ class AnomalimukosaController extends Controller
             $kartupasiens = kartupasien::where('user_id', auth()->id())->get();
         }
         
-        return view('pages.anomalimukosa.edit', compact('kartupasiens'))->with('anomalimukosa', $anomalimukosa);
+        return view('pages.anomalimukosa.edit')->with([
+            'kartupasiens' => $kartupasiens,
+            'anomalimukosa'=>$anomalimukosa,
+            'users' => $users ?? null
+        ]);
     }
 
     /**

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Odontogram;
 use App\Models\Kartupasien;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class OdontogramController extends Controller
@@ -43,6 +44,7 @@ class OdontogramController extends Controller
     {
         if (auth()->user()->role === 1) {
             $kartupasiens = kartupasien::all();
+            $users = User::where('role', 3)->get();
         } 
         elseif (auth()->user()->role === 2) {
             $kartupasiens = kartupasien::where('pembimbing', auth()->user()->nimnip)->get();
@@ -52,8 +54,11 @@ class OdontogramController extends Controller
         }
 
         // $kartupasiens = Kartupasien::all();
+        return view('pages.odontogram.create')->with([
+            'kartupasiens' => $kartupasiens,
+            'users' => $users ?? null
+        ]);
         
-        return view('pages.odontogram.create')->with('kartupasiens', $kartupasiens);
     }
 
     /**
@@ -82,7 +87,7 @@ class OdontogramController extends Controller
 
         Odontogram::create($validatedData);
 
-        return redirect('/vitalitas')->with('succes', 'Data Odontogram Berhasil Dibuat');
+        return redirect('/odontogram')->with('succes', 'Data Odontogram Berhasil Dibuat');
     }
 
     /**
@@ -106,6 +111,7 @@ class OdontogramController extends Controller
     {
         if (auth()->user()->role === 1) {
             $kartupasiens = kartupasien::all();
+            $users = User::where('role', 3)->get();
         } 
         elseif (auth()->user()->role === 2) {
             $kartupasiens = kartupasien::where('pembimbing', auth()->user()->nimnip)->get();
@@ -113,8 +119,11 @@ class OdontogramController extends Controller
         else {
             $kartupasiens = kartupasien::where('user_id', auth()->id())->get();
         }
-
-        return view('pages.odontogram.edit', compact('kartupasiens'))->with('odontogram', $odontogram);
+        return view('pages.odontogram.edit')->with([
+            'odontogram' => $odontogram,
+            'kartupasiens' => $kartupasiens,
+            'users' => $users ?? null
+        ]);
     }
 
     /**

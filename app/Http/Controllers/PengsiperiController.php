@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Pengsiperi;
 use App\Models\Kartupasien;
 use App\Models\Pertanyaan;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class PengsiperiController extends Controller
@@ -43,6 +44,7 @@ class PengsiperiController extends Controller
     {
         if (auth()->user()->role === 1) {
             $kartupasiens = kartupasien::all();
+            $users = User::where('role', 3)->get();
         } 
         elseif (auth()->user()->role === 2) {
             $kartupasiens = kartupasien::where('pembimbing', auth()->user()->nimnip)->get();
@@ -59,6 +61,7 @@ class PengsiperiController extends Controller
             'kartupasiens' => $kartupasiens,
             'pengetahuans' => $pengetahuans,
             'perilakus' => $perilakus,
+            'users' => $users ?? null
         ]);
     }
 
@@ -173,6 +176,17 @@ class PengsiperiController extends Controller
             $kartupasiens = kartupasien::where('user_id', auth()->id())->get();
         }
 
+        // $kartupasiens = kartupasien::all();
+        $pengetahuans = Pertanyaan::where('kode', 1)->get();
+        $perilakus = Pertanyaan::where('kode', 2)->get();
+        
+        return view('pages.pengsiperi.edit')->with([
+            'pengsiperi' => $pengsiperi,
+            'kartupasiens' => $kartupasiens,
+            'pengetahuans' => $pengetahuans,
+            'perilakus' => $perilakus,
+            'users' => $users ?? null
+        ]);
         return view('pages.pengsiperi.edit', compact('kartupasiens'))->with('pengsiperi', $pengsiperi);
     }
 

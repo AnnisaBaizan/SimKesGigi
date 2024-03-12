@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Vitalitas;
 use App\Models\Kartupasien;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class VitalitasController extends Controller
@@ -42,6 +43,7 @@ class VitalitasController extends Controller
     {
         if (auth()->user()->role === 1) {
             $kartupasiens = kartupasien::all();
+            $users = User::where('role', 3)->get();
         } 
         elseif (auth()->user()->role === 2) {
             $kartupasiens = kartupasien::where('pembimbing', auth()->user()->nimnip)->get();
@@ -50,12 +52,12 @@ class VitalitasController extends Controller
             $kartupasiens = kartupasien::where('user_id', auth()->id())->get();
         }
 
-        // $kartupasiens = Kartupasien::all();
-        return view('pages.vitalitas.create')->with('kartupasiens', $kartupasiens);
         
-        // return view('pages.vitalitas.create')->with([
-        //     'kartupasiens' => $kartupasiens,
-        // ]);
+        return view('pages.vitalitas.create')->with([
+            'kartupasiens' => $kartupasiens,
+            'users' => $users ?? null
+        ]);
+
     }
 
     /**
@@ -108,6 +110,7 @@ class VitalitasController extends Controller
     {
         if (auth()->user()->role === 1) {
             $kartupasiens = kartupasien::all();
+            $users = User::where('role', 3)->get();
         } 
         elseif (auth()->user()->role === 2) {
             $kartupasiens = kartupasien::where('pembimbing', auth()->user()->nimnip)->get();
@@ -116,7 +119,12 @@ class VitalitasController extends Controller
             $kartupasiens = kartupasien::where('user_id', auth()->id())->get();
         }
 
-        return view('pages.vitalitas.edit', compact('kartupasiens'))->with('vitalitas', $vitalitas);
+        
+        return view('pages.vitalitas.edit')->with([
+            'vitalitas' => $vitalitas,
+            'kartupasiens' => $kartupasiens,
+            'users' => $users ?? null
+        ]);
     }
 
     /**
