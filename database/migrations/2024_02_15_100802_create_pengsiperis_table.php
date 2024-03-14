@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('pengetahuan');
             $table->tinyInteger('jumlah_pertanyaan_peng');
             $table->tinyInteger('jawaban_benar_peng');
-            $table->tinyInteger('nilai_peng');
+            $table->string('nilai_peng');
             $table->string('kriteria');
 
             //keterampilan
@@ -42,7 +42,7 @@ return new class extends Migration
             $table->string('perilaku');
             $table->tinyInteger('jumlah_pilihan');
             $table->tinyInteger('jumlah_yang_terpilih');
-            $table->tinyInteger('nilai_peri');
+            $table->string('nilai_peri');
             $table->string('berperilaku');
 
             //peran orang tua

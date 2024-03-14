@@ -114,19 +114,19 @@
                                             @endcan
                                             <th>No_Kartu & Nama Pasien</th>
                                             {{-- Pengetahuan --}}
-                                            <th>Jawaban Benar</th>
+                                            {{-- <th>Jawaban Benar</th> --}}
                                             <th>Benar</th>
                                             <th>Nilai Pengetahuan</th>
                                             <th>Kriteria</th>
                                             {{-- Keterampilan --}}
                                             <th>Labial/Bukal</th>
                                             <th>Lingual/Palatal</th>
-                                            <th>kunyah</th>
-                                            <th>interdental</th>
-                                            <th>gerakan</th>
+                                            <th>Kunyah</th>
+                                            <th>Interdental</th>
+                                            <th>Gerakan</th>
                                             <th>Kesimpulan</th>
                                             {{-- Perilaku --}}
-                                            <th>Perilaku</th>
+                                            {{-- <th>Perilaku</th> --}}
                                             <th>Terpilih</th>
                                             <th>Nilai Perilaku</th>
                                             <th>Berperilaku</th>
@@ -152,19 +152,19 @@
                                             @endcan
                                             <th>No_Kartu & Nama Pasien</th>
                                             {{-- Pengetahuan --}}
-                                            <th>Jawaban Benar</th>
+                                            {{-- <th>Jawaban Benar</th> --}}
                                             <th>Benar</th>
                                             <th>Nilai Pengetahuan</th>
                                             <th>Kriteria</th>
                                             {{-- Keterampilan --}}
                                             <th>Labial/Bukal</th>
                                             <th>Lingual/Palatal</th>
-                                            <th>kunyah</th>
-                                            <th>interdental</th>
-                                            <th>gerakan</th>
+                                            <th>Kunyah</th>
+                                            <th>Interdental</th>
+                                            <th>Gerakan</th>
                                             <th>Kesimpulan</th>
                                             {{-- Perilaku --}}
-                                            <th>Perilaku</th>
+                                            {{-- <th>Perilaku</th> --}}
                                             <th>Terpilih</th>
                                             <th>Nilai Perilaku</th>
                                             <th>Berperilaku</th>
@@ -191,40 +191,88 @@
                                             @endcan
                                             <td>{{ $pengsiperi->kartupasien->no_kartu }} | {{ $pengsiperi->kartupasien->nama }}</td>
                                             {{-- pengetahuan --}}
-                                            <td>{{ $pengsiperi->pengetahuan }}</td>
+                                            {{-- <td>{{ $pengsiperi->pengetahuan }}</td> --}}
                                             <td>{{ $pengsiperi->jawaban_benar_peng }} / {{ $pengsiperi->jumlah_pertanyaan_peng }}</td>
                                             <td>{{ $pengsiperi->nilai_peng }}</td>
                                             <td>{{ $pengsiperi->kriteria }}</td>
                                             {{-- Keterampilan --}}
-                                            <td>{{ $pengsiperi->labialbukal }} 
+                                            <td>
+                                                @if ($pengsiperi->labialbukal == "1")
+                                                    <span>Vertikal</span>
+                                                @elseif ($pengsiperi->labialbukal == "2")
+                                                    <span>Horizontal</span>
+                                                @elseif ($pengsiperi->labialbukal == "3")
+                                                    <span>Roll</span>
+                                                @else
+                                                    <span>Tidak disikat</span>
+                                                @endif
+
                                                 @if ($pengsiperi->hasil_lb == "Benar")
                                                     <span class="badge badge-sm bg-gradient-success">Benar</span>
                                                 @else
                                                     <span class="badge badge-sm bg-gradient-danger">Salah</span>
                                                 @endif
                                             </td>
-                                            <td>{{ $pengsiperi->lingualpalatal }}
+                                            <td>
+                                                @if ($pengsiperi->lingualpalatal == "1")
+                                                    <span>Vertikal</span>
+                                                @elseif ($pengsiperi->lingualpalatal == "2")
+                                                    <span>Horizontal</span>
+                                                @elseif ($pengsiperi->lingualpalatal == "3")
+                                                    <span>Roll</span>
+                                                @else
+                                                    <span>Tidak disikat</span>
+                                                @endif
+
                                                 @if ($pengsiperi->hasil_lp == "Benar")
                                                     <span class="badge badge-sm bg-gradient-success">Benar</span>
                                                 @else
                                                     <span class="badge badge-sm bg-gradient-danger">Salah</span>
                                                 @endif
                                             </td>
-                                            <td>{{ $pengsiperi->kunyah }} 
+                                            <td>
+                                                @if ($pengsiperi->kunyah == "1")
+                                                    <span>Vertikal</span>
+                                                @elseif ($pengsiperi->kunyah == "2")
+                                                    <span>Horizontal</span>
+                                                @elseif ($pengsiperi->kunyah == "3")
+                                                    <span>Roll</span>
+                                                @else
+                                                    <span>Tidak disikat</span>
+                                                @endif
+
                                                 @if ($pengsiperi->hasil_k == "Benar")
                                                     <span class="badge badge-sm bg-gradient-success">Benar</span>
                                                 @else
                                                     <span class="badge badge-sm bg-gradient-danger">Salah</span>
                                                 @endif
                                             </td>
-                                            <td>{{ $pengsiperi->interdental }}
+                                            <td>
+                                                @if ($pengsiperi->interdental == "1")
+                                                    <span>Vertikal</span>
+                                                @elseif ($pengsiperi->interdental == "2")
+                                                    <span>Horizontal</span>
+                                                @elseif ($pengsiperi->interdental == "3")
+                                                    <span>Roll</span>
+                                                @else
+                                                    <span>Tidak disikat</span>
+                                                @endif
+
                                                 @if ($pengsiperi->hasil_i == "Benar")
                                                     <span class="badge badge-sm bg-gradient-success">Benar</span>
                                                 @else
                                                     <span class="badge badge-sm bg-gradient-danger">Salah</span>
                                                 @endif
                                             </td>
-                                            <td>{{ $pengsiperi->gerakan }}
+                                            <td>
+                                                @if ($pengsiperi->gerakan == "1")
+                                                    <span>Cepat</span>
+                                                @elseif ($pengsiperi->gerakan == "2")
+                                                    <span>Lambat</span>
+                                                @else
+                                                    <span>Cukup</span>
+                                                @endif
+
                                                 @if ($pengsiperi->hasil_g == "Benar")
                                                     <span class="badge badge-sm bg-gradient-success">Benar</span>
                                                 @else
@@ -239,7 +287,7 @@
                                                 @endif
                                             </td>
                                             {{-- Perilaku --}}
-                                            <td>{{ $pengsiperi->perilaku }}</td>
+                                            {{-- <td>{{ $pengsiperi->perilaku }}</td> --}}
                                             <td>{{ $pengsiperi->jumlah_yang_terpilih }} / {{ $pengsiperi->jumlah_pilihan }}</td>
                                             <td>{{ $pengsiperi->nilai_peri }}</td>
                                             <td>{{ $pengsiperi->berperilaku }}</td>
@@ -279,7 +327,7 @@
     @include('layouts.footers.auth.footer')
 @endsection
 @section('js')
-    @can('mahasiswa')
+    @can('adminmahasiswa')
     <script type="text/javascript">
     function handleDelete(id) {
         let form = document.getElementById('deleteForm')
@@ -298,7 +346,7 @@
     </script>
     @endcan
 
-    @can('adminpembimbing')
+    @can('admin')
     <script type="text/javascript">
     $(document).ready( function () {
         $.fn.dataTable.ext.search.push(
@@ -340,31 +388,31 @@
                 {
                     extend: 'copyHtml5',
                     exportOptions: {
-                        columns: [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17 ]
+                        columns: [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14 ]
                     }
                 },
                 {
                     extend: 'print',
                     exportOptions: {
-                        columns: [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17 ]
+                        columns: [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14 ]
                     }
                 },
                 {
                     extend: 'excelHtml5',
                     exportOptions: {
-                        columns: [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17 ]
+                        columns: [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14 ]
                     }
                 },
                 {
                     extend: 'csvHtml5',
                     exportOptions: {
-                        columns: [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17  ]
+                        columns: [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14  ]
                     }
                 },
                 {
                     extend: 'pdfHtml5',
                     exportOptions: {
-                        columns: [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17  ]
+                        columns: [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14  ]
                     }
                 },
                 'colvis'
@@ -373,4 +421,79 @@
         } );
   </script>
   @endcan
+  @can('pembimbing')
+  <script type="text/javascript">
+  $(document).ready( function () {
+      $.fn.dataTable.ext.search.push(
+          function( settings, data, dataIndex ) {
+              var min = minDate.val();
+              var max = maxDate.val();
+              // data[1] is the date column
+              var date = new Date( data[16] );
+
+              if (
+                  ( min === null && max === null ) ||
+                  ( min === null && date <= max ) ||
+                  ( min <= date  && max === null ) ||
+                  ( min <= date  && date <= max )
+              ) 
+              {
+                  return true;
+              }
+                  return false;
+              }
+          );
+
+          // Refilter the table
+          $('#min, #max').on('change', function () {
+              table.draw();
+          });
+
+          // Create date inputs
+          minDate = new DateTime($('#min'), {
+              format: 'DD MMM YYYY'
+          });
+          maxDate = new DateTime($('#max'), {
+              format: 'DD MMM YYYY'
+          });
+
+          var table = $('#dataTable').DataTable( {
+              dom: 'Bfrtip',
+              buttons: [
+              {
+                  extend: 'copyHtml5',
+                  exportOptions: {
+                      columns: [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14 ]
+                  }
+              },
+              {
+                  extend: 'print',
+                  exportOptions: {
+                      columns: [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14 ]
+                  }
+              },
+              {
+                  extend: 'excelHtml5',
+                  exportOptions: {
+                      columns: [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14 ]
+                  }
+              },
+              {
+                  extend: 'csvHtml5',
+                  exportOptions: {
+                      columns: [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14  ]
+                  }
+              },
+              {
+                  extend: 'pdfHtml5',
+                  exportOptions: {
+                      columns: [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14  ]
+                  }
+              },
+              'colvis'
+          ]
+          } );
+      } );
+</script>
+@endcan
 @endsection

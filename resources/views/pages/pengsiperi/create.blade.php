@@ -2,7 +2,7 @@
 
 @section('content')
     @include('layouts.navbars.auth.topnav', [
-        'title' => 'Pengetahuan, Keterampilan, Perilaku dan Peran Orang Tua',
+        'title' => 'Tambahan Pengetahuan, Keterampilan, Perilaku dan Peran Orang Tua',
     ])
 
     <div class="container-fluid py-4">
@@ -15,99 +15,99 @@
                     @csrf
 
                     @can('admin')
-                    <div class="form-group row">
-                        <div class="col-sm-4">
-                            <label for="user_id" class="form-text">Pilih Mahasiswa :</label>
-                        </div>
-                        <div class="col-sm-4">
-                            <select class="js-example-basic-single form-control @error('user_id') is-invalid @enderror"
-                                data-live-search="true" id="user_id" name="user_id" placeholder="Pilih Mahasiswa"
-                                value="{{ old('user_id') }}" required>
-                                @error('user_id')
+                        <div class="form-group row">
+                            <div class="col-sm-4">
+                                <label for="user_id" class="form-text">Pilih Mahasiswa :</label>
+                            </div>
+                            <div class="col-sm-4">
+                                <select class="js-example-basic-single form-control @error('user_id') is-invalid @enderror"
+                                    data-live-search="true" id="user_id" name="user_id" placeholder="Pilih Mahasiswa"
+                                    value="{{ old('user_id') }}" required>
+                                    @error('user_id')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                    <option value="" selected disabled>Pilih Mahasiswa</option>
+                                    @foreach ($users as $user)
+                                        <option value="{{ $user->id }}" data-pembimbing="{{ $user->pembimbing }}">
+                                            {{ ucwords($user->username) }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control @error('pembimbing') is-invalid_max @enderror"
+                                    id="pembimbing" name="pembimbing" placeholder="pembimbing" readonly required>
+                                @error('pembimbing')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
-                                <option value="" selected disabled>Pilih Mahasiswa</option>
-                                @foreach ($users as $user)
-                                    <option value="{{ $user->id }}" data-pembimbing="{{ $user->pembimbing }}">
-                                        {{ ucwords($user->username) }}</option>
-                                @endforeach
-                            </select>
+                            </div>
                         </div>
-                        <div class="col-sm-4">
-                            <input type="text" class="form-control @error('pembimbing') is-invalid_max @enderror"
-                                id="pembimbing" name="pembimbing" placeholder="pembimbing" readonly required>
+                        <div class="form-group row">
+                            <div class="col-sm-4">
+                                <label for="kartupasien_id" class="form-text">Pilih Pasien :</label>
+                            </div>
+                            <div class="col-sm-8">
+                                <select
+                                    class="js-example-basic-single form-control @error('kartupasien_id') is-invalid @enderror"
+                                    data-live-search="true" id="kartupasien_id" name="kartupasien_id" placeholder="Pilih Pasien"
+                                    value="{{ old('kartupasien_id') }}" required>
+                                    @error('kartupasien_id')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                    <option value="" selected disabled>Pilih Pasien</option>
+                                </select>
+                            </div>
+                        </div>
+                    @endcan
+
+                    @can('mahasiswa')
+                        <div class="col-sm-6">
+                            <input type="hidden" class="form-control @error('user_id') is-invalid_max @enderror" id="user_id"
+                                name="user_id" placeholder="user_id" value="{{ auth()->user()->id }}" required>
+                            @error('user_id')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                        <div class="col-sm-6">
+                            <input type="hidden" class="form-control @error('pembimbing') is-invalid_max @enderror"
+                                id="pembimbing" name="pembimbing" placeholder="pembimbing"
+                                value="{{ auth()->user()->pembimbing }}" required>
                             @error('pembimbing')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
                         </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-sm-4">
-                            <label for="kartupasien_id" class="form-text">Pilih Pasien :</label>
+                        <div class="form-group row">
+                            <div class="col-sm-4">
+                                <label for="kartupasien_id" class ="form-text">Pilih Pasien :</label>
+                            </div>
+                            <div class="col-sm-8">
+                                <select
+                                    class="js-example-basic-single form-control @error('kartupasien_id') is-invalid @enderror"
+                                    data-live-search="true" id="kartupasien_id" name="kartupasien_id" placeholder="Pilih Pasien"
+                                    value="{{ old('kartupasien_id') }}" required>
+                                    @error('kartupasien_id')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                    <option value="" selected disabled>Pilih Pasien</option>
+                                    @foreach ($kartupasiens as $kartupasien)
+                                        <option value="{{ $kartupasien->id }}">{{ $kartupasien->no_kartu }} |
+                                            {{ $kartupasien->nama }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
                         </div>
-                        <div class="col-sm-8">
-                            <select
-                                class="js-example-basic-single form-control @error('kartupasien_id') is-invalid @enderror"
-                                data-live-search="true" id="kartupasien_id" name="kartupasien_id" placeholder="Pilih Pasien"
-                                value="{{ old('kartupasien_id') }}" required>
-                                @error('kartupasien_id')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                                <option value="" selected disabled>Pilih Pasien</option>
-                            </select>
-                        </div>
-                    </div>
-                @endcan
-
-                @can('mahasiswa')
-                    <div class="col-sm-6">
-                        <input type="hidden" class="form-control @error('user_id') is-invalid_max @enderror" id="user_id"
-                            name="user_id" placeholder="user_id" value="{{ auth()->user()->id }}" required>
-                        @error('user_id')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-                    <div class="col-sm-6">
-                        <input type="hidden" class="form-control @error('pembimbing') is-invalid_max @enderror"
-                            id="pembimbing" name="pembimbing" placeholder="pembimbing"
-                            value="{{ auth()->user()->pembimbing }}" required>
-                        @error('pembimbing')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-sm-4">
-                            <label for="kartupasien_id" class ="form-text">Pilih Pasien :</label>
-                        </div>
-                        <div class="col-sm-8">
-                            <select
-                                class="js-example-basic-single form-control @error('kartupasien_id') is-invalid @enderror"
-                                data-live-search="true" id="kartupasien_id" name="kartupasien_id" placeholder="Pilih Pasien"
-                                value="{{ old('kartupasien_id') }}" required>
-                                @error('kartupasien_id')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                                <option value="" selected disabled>Pilih Pasien</option>
-                                @foreach ($kartupasiens as $kartupasien)
-                                    <option value="{{ $kartupasien->id }}">{{ $kartupasien->no_kartu }} |
-                                        {{ $kartupasien->nama }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
-                @endcan
+                    @endcan
 
                     <div class="col-sm-12 mb-3 mb-sm-0 text-center bg-gradient-faded-info-vertical">
                         <marquee>
@@ -117,7 +117,7 @@
 
                     <div class="form-group row mt-3">
                         <div class="col-sm-5 mb-3">
-                            <label for="pengetahuan[]" class ="form-text">Pilih Pertanyaan yang Berhasil Dijawab dengan
+                            <label for="pengetahuan" class ="form-text">Pilih Pertanyaan yang Berhasil Dijawab dengan
                                 Benar :</label>
                         </div>
                         <div class="col-sm-7 mb-3">
@@ -350,7 +350,8 @@
                             <label for="jumlah_pilihan" class="form-text">Jumlah Pilihan :</label>
                         </div>
                         <div class="col-sm-9 mb-3">
-                            <input type="text" name="jumlah_pilihan" value="" class="form-control" readonly>
+                            <input type="text" id="jumlah_pilihan" name="jumlah_pilihan" value=""
+                                class="form-control" readonly>
                         </div>
                     </div>
 
@@ -359,8 +360,8 @@
                             <label for="jumlah_yang_terpilih" class="form-text">Jumlah yang Terpilih :</label>
                         </div>
                         <div class="col-sm-9 mb-3">
-                            <input type="text" name="jumlah_yang_terpilih" value="" class="form-control"
-                                readonly>
+                            <input type="text" id="jumlah_yang_terpilih" name="jumlah_yang_terpilih" value=""
+                                class="form-control" readonly>
                         </div>
                     </div>
 
@@ -369,7 +370,8 @@
                             <label for="nilai_peri" class="form-text">Nilai Perilaku :</label>
                         </div>
                         <div class="col-sm-9 mb-3">
-                            <input type="text" name="nilai_peri" value="" class="form-control" readonly>
+                            <input type="text" id="nilai_peri" name="nilai_peri" value="" class="form-control"
+                                readonly>
                         </div>
                     </div>
 
@@ -378,8 +380,8 @@
                             <label for="berperilaku" class="form-text">Pasien Berperilaku :</label>
                         </div>
                         <div class="col-sm-9 mb-3">
-                            <input type="text" name="berperilaku" value="" class="form-control bg-success"
-                                readonly>
+                            <input type="text" id="berperilaku" name="berperilaku" value=""
+                                class="form-control bg-success" readonly>
                         </div>
                     </div>
 
@@ -460,7 +462,7 @@
                 // Set nilai dan background color pada input dengan name="kriteria"
                 $('input[name="kriteria"]').val(kriteria);
                 $('input[name="kriteria"]').removeClass(
-                'bg-success bg-warning bg-danger'); // Hapus kelas background color sebelum mengganti
+                    'bg-success bg-warning bg-danger'); // Hapus kelas background color sebelum mengganti
                 $('input[name="kriteria"]').addClass('bg-' + bgColor); // Tambahkan kelas background color
             }
 
@@ -625,7 +627,7 @@
                 // Set nilai dan background color pada input dengan name="berperilaku"
                 $('input[name="berperilaku"]').val(kriteriaPeri);
                 $('input[name="berperilaku"]').removeClass(
-                'bg-success bg-danger'); // Hapus kelas background color sebelum mengganti
+                    'bg-success bg-danger'); // Hapus kelas background color sebelum mengganti
                 $('input[name="berperilaku"]').addClass('bg-' + bgColorPeri); // Tambahkan kelas background color
             }
 
@@ -716,11 +718,11 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
-      
+
             $('#user_id').on('change', function() {
                 var user_id = $("#user_id").val();
                 var pembimbing = $("#pembimbing").val();
-      
+
                 $.ajax({
                     url: '/getPatients',
                     type: 'POST',
@@ -729,16 +731,16 @@
                         pembimbing: pembimbing
                     },
                     cache: false,
-      
+
                     success: function(msg) {
                         $("#kartupasien_id").html(msg);
                     },
-      
+
                     error: function(data) {
                         console.log('error:', data);
                     }
                 });
             });
         });
-      </script>
+    </script>
 @endsection

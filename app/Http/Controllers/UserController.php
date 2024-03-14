@@ -71,7 +71,7 @@ class UserController extends Controller
 
         user::create($attributes);
 
-        return redirect('/user')->with('succes', 'User Berhasil Dibuat');
+        return redirect('/user')->with('success', 'User Berhasil Dibuat');
     }
 
     /**
@@ -166,7 +166,7 @@ class UserController extends Controller
             // dd($attributes);
             // user::where('id', $user->id)->update($attributes);
             
-        return back()->with('succes', 'Data User succesfully updated');
+        return back()->with('success', 'Data User succesfully updated');
     }
 
     /**
@@ -181,12 +181,12 @@ class UserController extends Controller
             Storage::delete('avatars/'. $user->avatar);
         }
         user::destroy($user->id);
-        return back()->with('succes', 'User berhasil dihapus');
+        return back()->with('success', 'User berhasil dihapus');
     }
 
     public function export(){
         return Excel::download(new ExportUser, 'Data_User.xlsx');
-        return back()->with('succes', 'Data User Berhasil di eksport');
+        return back()->with('success', 'Data User Berhasil di eksport');
     }
 
     public function import(Request $request) 
@@ -200,6 +200,6 @@ class UserController extends Controller
 
         request()->file('importuser');
         Excel::import(new ImportUser, request()->file('importuser'));
-        return back()->with('succes', 'Data User Berhasil di import');
+        return back()->with('success', 'Data User Berhasil di import');
     }
 }

@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Pengsiperi;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -22,5 +23,6 @@ class DatabaseSeeder extends Seeder
         $this->call(KartupasienSeeder::class);
         $this->call(AnamripasienSeeder::class);
         $this->call(PertanyaanSeeder::class);
+        $this->call(PengsiperiSeeder::class);
     }  
 }

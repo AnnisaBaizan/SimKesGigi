@@ -72,6 +72,8 @@ class AnamripasienController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
+            'user_id' => 'required',
+            'pembimbing' => 'required',
             'kartupasien_id' => 'required|max:9999999999999|min:1|numeric',
             'klhn_utama' => 'required|max:255',
             'klhn_tmbhn' => 'required|max:255',
@@ -149,6 +151,8 @@ class AnamripasienController extends Controller
     public function update(Request $request, anamripasien $anamripasien)
     {
         $validatedData = $request->validate([
+            'user_id' => 'required',
+            'pembimbing' => 'required',
             'kartupasien_id' => 'required|max:9999999999999|min:1|numeric',
             'klhn_utama' => 'required|max:255',
             'klhn_tmbhn' => 'required|max:255',

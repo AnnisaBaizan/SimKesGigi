@@ -62,6 +62,8 @@ class KartupasienController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
+            'user_id' => 'required',
+            'pembimbing' => 'required',
             'no_kartu'=> 'required|max:9999999999999|min:1|numeric',
             'nama' => 'required|max:40|min:4',
             'no_iden' => 'required|max:20',
@@ -116,6 +118,8 @@ class KartupasienController extends Controller
     public function update(Request $request, kartupasien $kartupasien)
     {
         $validatedData = $request->validate([
+            'user_id' => 'required',
+            'pembimbing' => 'required',
             'no_kartu'=> 'required|max:9999999999999|min:1|numeric',
             'nama' => 'required|max:40|min:4',
             'no_iden' => 'required|max:20',

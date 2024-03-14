@@ -73,7 +73,10 @@ class PengsiperiController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request);
         $validatedData = $request->validate([
+            'user_id' => 'required',
+            'pembimbing' => 'required',
             'kartupasien_id' => 'required|max:9999999999999|min:1|numeric',
             //pengetahuan
             'pengetahuan' => 'required|array',
@@ -114,6 +117,10 @@ class PengsiperiController extends Controller
 
         // Simpan data ke dalam database
         $pengsiperi = new Pengsiperi();
+        // dd($pengsiperi);
+
+        $pengsiperi->user_id = $validatedData['user_id'];
+        $pengsiperi->pembimbing = $validatedData['pembimbing'];
         $pengsiperi->kartupasien_id = $validatedData['kartupasien_id'];
 
         $pengsiperi->pengetahuan = $pengetahuan;
@@ -144,7 +151,7 @@ class PengsiperiController extends Controller
         
         $pengsiperi->save();
 
-        return redirect('/pengsiperi')->with('succes', 'Pengetahuan, Keterampilan, Perilaku dan peran orang tua Berhasil Dibuat');
+        return redirect()->route('pengsiperi.index')->with('success', 'Pengetahuan, Keterampilan, Perilaku dan peran orang tua Berhasil Dibuat');
     }
 
     /**
@@ -167,7 +174,11 @@ class PengsiperiController extends Controller
     public function edit(Pengsiperi $pengsiperi)
     {
         if (auth()->user()->role === 1) {
-            $kartupasiens = kartupasien::all();
+            $kartupasiens = kartupasien::where('user_id', $pengsiperi->user_id)
+                                    ->where('pembimbing', $pengsiperi->pembimbing)
+                                    ->get();
+            // $kartupasiens = kartupasien::all();
+            $users = User::where('role', 3)->get();
         } 
         elseif (auth()->user()->role === 2) {
             $kartupasiens = kartupasien::where('pembimbing', auth()->user()->nimnip)->get();
@@ -200,13 +211,75 @@ class PengsiperiController extends Controller
     public function update(Request $request, Pengsiperi $pengsiperi)
     {
         $validatedData = $request->validate([
-            'kode' => 'required|max:9999999999999|digits_between:1,4|numeric',
-            'soal' =>'required'
+            'user_id' => 'required',
+            'pembimbing' => 'required',
+            'kartupasien_id' => 'required|max:9999999999999|min:1|numeric',
+            //pengetahuan
+            'pengetahuan' => 'required|array',
+            'pengetahuan.*' => 'numeric',
+            'jumlah_pertanyaan_peng' => 'required|max:3|min:1',
+            'jawaban_benar_peng' => 'required|max:3|min:1',
+            'nilai_peng' => 'required|max:5|min:4',
+            'kriteria' => 'required|max:255',
+            //keterampilan
+            'labialbukal' => 'required|max:3|min:1',
+            'hasil_lb' => 'max:255',
+            'lingualpalatal' => 'required|max:3|min:1',
+            'hasil_lp' => 'max:255',
+            'kunyah' => 'required|max:3|min:1',
+            'hasil_k' => 'max:255',
+            'interdental' => 'required|max:3|min:1',
+            'hasil_i' => 'max:255',
+            'gerakan' => 'required|max:3|min:1',
+            'hasil_g' => 'max:255',
+            'kesimpulan' => 'max:255',
+            //perilaku
+            'perilaku' => 'required|array',
+            'perilaku.*' => 'numeric',
+            'jumlah_pilihan' => 'required|max:3|min:1',
+            'jumlah_yang_terpilih' => 'required|max:3|min:1',
+            'nilai_peri' => 'required|max:5|min:4',
+            'berperilaku' => 'max:255',
+            //ortu
+            'peran_ortu' => 'required|array',
+            'peran_ortu.*' => 'numeric',
         ]);
-        Pengsiperi::where('id', $pengsiperi->id)
-            ->update($validatedData);
-
-        return back()->with('succes', 'Pengetahuan, Keterampilan, Perilaku dan peran orang tua berhasil diubah');
+    
+        // If no checkboxes are checked, set lokasi to an empty array
+        $pengetahuan = $request->has('pengetahuan') ? implode(',', $validatedData['pengetahuan']) : '';
+        $perilaku = $request->has('perilaku') ? implode(',', $validatedData['perilaku']) : '';
+        $peran_ortu = $request->has('peran_ortu') ? implode(',', $validatedData['peran_ortu']) : '';
+    
+        // Update data di database
+        $pengsiperi->update([
+            'user_id' => $validatedData['user_id'],
+            'pembimbing' => $validatedData['pembimbing'],
+            'kartupasien_id' => $validatedData['kartupasien_id'],
+            'pengetahuan' => $pengetahuan,
+            'jumlah_pertanyaan_peng' => $validatedData['jumlah_pertanyaan_peng'],
+            'jawaban_benar_peng' => $validatedData['jawaban_benar_peng'],
+            'nilai_peng' => $validatedData['nilai_peng'],
+            'kriteria' => $validatedData['kriteria'],
+            'labialbukal' => $validatedData['labialbukal'],
+            'hasil_lb' => $validatedData['hasil_lb'],
+            'lingualpalatal' => $validatedData['lingualpalatal'],
+            'hasil_lp' => $validatedData['hasil_lp'],
+            'kunyah' => $validatedData['kunyah'],
+            'hasil_k' => $validatedData['hasil_k'],
+            'interdental' => $validatedData['interdental'],
+            'hasil_i' => $validatedData['hasil_i'],
+            'gerakan' => $validatedData['gerakan'],
+            'hasil_g' => $validatedData['hasil_g'],
+            'kesimpulan' => $validatedData['kesimpulan'],
+            'perilaku' => $perilaku,
+            'jumlah_pilihan' => $validatedData['jumlah_pilihan'],
+            'jumlah_yang_terpilih' => $validatedData['jumlah_yang_terpilih'],
+            'nilai_peri' => $validatedData['nilai_peri'],
+            'berperilaku' => $validatedData['berperilaku'],
+            'peran_ortu' => $peran_ortu,
+        ]);
+    
+        return redirect()->route('pengsiperi.index')->with('success', 'Pengetahuan, Keterampilan, Perilaku, dan peran orang tua Berhasil Diperbarui');
     }
 
     /**
@@ -218,6 +291,6 @@ class PengsiperiController extends Controller
     public function destroy(Pengsiperi $pengsiperi)
     {
         Pengsiperi::destroy($pengsiperi->id);
-        return back()->with('succes', 'Pengetahuan, Keterampilan, Perilaku dan peran orang tua berhasil dihapus');
+        return back()->with('success', 'Pengetahuan, Keterampilan, Perilaku dan peran orang tua berhasil dihapus');
     }
 }
