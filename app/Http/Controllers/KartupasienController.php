@@ -80,7 +80,7 @@ class KartupasienController extends Controller
 
         kartupasien::create($validatedData);
 
-        return redirect('/kartupasien')->with('succes', 'Kartu Pasien Berhasil Dibuat');
+        return redirect()->route('kartupasien.index')->with('success', 'Kartu Pasien Berhasil Dibuat');
     }
 
     /**
@@ -103,9 +103,15 @@ class KartupasienController extends Controller
     public function edit(kartupasien $kartupasien)
     {
         // dd($kartupasien);
-
+        $users = User::where('role', 3)->get();
         $id_max = sprintf("%09d", $kartupasien->id);
-        return view('pages.kartupasien.edit', compact('id_max'))->with('kartupasien', $kartupasien);
+        
+        return view('pages.kartupasien.edit')->with([
+            'kartupasien'=> $kartupasien,
+            'id_max' => $id_max,
+            'users' => $users ?? null
+        ]);
+        // return view('pages.kartupasien.edit', compact('id_max'))->with('kartupasien', $kartupasien);
     }
 
     /**
@@ -137,7 +143,7 @@ class KartupasienController extends Controller
         kartupasien::where('id', $kartupasien->id)
             ->update($validatedData);
 
-        return back()->with('succes', 'Kartu Pasien berhasil diubah');
+        return back()->with('success', 'Kartu Pasien berhasil diubah');
     }
 
     /**
@@ -149,12 +155,12 @@ class KartupasienController extends Controller
     public function destroy(kartupasien $kartupasien)
     {
         kartupasien::destroy($kartupasien->id);
-        return back()->with('succes', 'Kartu Pasien berhasil dihapus');
+        return back()->with('success', 'Kartu Pasien berhasil dihapus');
     }
 
     public function export(){
         return Excel::download(new ExportKartuPasien, 'Data_Kartu_Pasien.xlsx');
-        return back()->with('succes', 'Data Kartu Pasien Berhasil di eksport');
+        return back()->with('success', 'Data Kartu Pasien Berhasil di eksport');
     }
 
     public function import(Request $request) 
@@ -168,6 +174,6 @@ class KartupasienController extends Controller
 
         request()->file('importpasien');
         Excel::import(new ImportKartuPasien, request()->file('importpasien'));
-        return back()->with('succes', 'Data Kartu Pasien Berhasil di import');
+        return back()->with('success', 'Data Kartu Pasien Berhasil di import');
     }
 }

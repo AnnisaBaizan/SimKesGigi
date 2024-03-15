@@ -212,32 +212,26 @@
                             </div>
                             <div class="col-sm-12 mb-3 mt-3 text-center">
                                 <input type="radio" class="@error('limpe_kanan_teraba') is-invalid @enderror"
-                                    id="limpe_kanan_teraba1" value="{{ old('limpe_kanan_teraba') }}"
-                                    name="limpe_kanan_teraba" value="Teraba" require>
+                                    id="limpe_kanan_teraba1" value="Teraba" name="limpe_kanan_teraba" required>
                                 <label for="limpe_kanan_teraba1" class="me-5">Teraba</label>
                                 <input type="radio" class="ms-5 @error('limpe_kanan_teraba') is-invalid @enderror"
-                                    id="limpe_kanan_teraba2" value="{{ old('limpe_kanan_teraba') }}"
-                                    name="limpe_kanan_teraba" value="Tidak Teraba" require>
+                                    id="limpe_kanan_teraba2" value="Tidak Teraba" name="limpe_kanan_teraba" required>
                                 <label for="limpe_kanan_teraba2">Tidak Teraba</label>
                             </div>
                             <div class="col-sm-12 mb-3 text-center">
                                 <input type="radio" class="@error('limpe_kanan_texture') is-invalid @enderror"
-                                    id="limpe_kanan_texture1" value="{{ old('limpe_kanan_texture') }}"
-                                    name="limpe_kanan_texture" value="Keras" require>
+                                    id="limpe_kanan_texture1" value="Keras" name="limpe_kanan_texture" required>
                                 <label for="limpe_kanan_texture1" class="me-5">Keras</label>
                                 <input type="radio" class="ms-5 @error('limpe_kanan_texture') is-invalid @enderror"
-                                    id="limpe_kanan_texture2" value="{{ old('limpe_kanan_texture') }}"
-                                    name="limpe_kanan_texture" value="Lunak" require>
+                                    id="limpe_kanan_texture2" value="Lunak" name="limpe_kanan_texture" required>
                                 <label for="limpe_kanan_texture2">Lunak</label>
                             </div>
                             <div class="col-sm-12 mb-3 text-center">
                                 <input type="radio" class="@error('limpe_kanan_sakit') is-invalid @enderror"
-                                    id="limpe_kanan_sakit1" value="{{ old('limpe_kanan_sakit') }}" name="limpe_kanan_sakit"
-                                    value="Sakit" require>
+                                    id="limpe_kanan_sakit1" value="Sakit" name="limpe_kanan_sakit" required>
                                 <label for="limpe_kanan_sakit1" class="me-5">Sakit</label>
                                 <input type="radio" class="ms-5 @error('limpe_kanan_sakit') is-invalid @enderror"
-                                    id="limpe_kanan_sakit2" value="{{ old('limpe_kanan_sakit') }}" name="limpe_kanan_sakit"
-                                    value="Tidak Sakit" require>
+                                    id="limpe_kanan_sakit2" value="Tidak Sakit" name="limpe_kanan_sakit" required>
                                 <label for="limpe_kanan_sakit2">Tidak Sakit</label>
                             </div>
                         </div>
@@ -247,36 +241,31 @@
                             </div>
                             <div class="col-sm-12 mb-3 mt-3 text-center">
                                 <input type="radio" class="@error('limpe_kiri_teraba') is-invalid @enderror"
-                                    id="limpe_kiri_teraba1" value="{{ old('limpe_kiri_teraba') }}"
-                                    name="limpe_kiri_teraba" value="Teraba" require>
+                                    id="limpe_kiri_teraba1" value="Teraba" name="limpe_kiri_teraba" required>
                                 <label for="limpe_kiri_teraba1" class="me-5">Teraba</label>
                                 <input type="radio" class="ms-5 @error('limpe_kiri_teraba') is-invalid @enderror"
-                                    id="limpe_kiri_teraba2" value="{{ old('limpe_kiri_teraba') }}"
-                                    name="limpe_kiri_teraba" value="Tidak Teraba" require>
+                                    id="limpe_kiri_teraba2" value="Tidak Teraba" name="limpe_kiri_teraba" required>
                                 <label for="limpe_kiri_teraba2">Tidak Teraba</label>
                             </div>
                             <div class="col-sm-12 mb-3 text-center">
                                 <input type="radio" class="@error('limpe_kiri_texture') is-invalid @enderror"
-                                    id="limpe_kiri_texture1" value="{{ old('limpe_kiri_texture') }}"
-                                    name="limpe_kiri_texture" value="Keras" require>
+                                    id="limpe_kiri_texture1" value="Keras" name="limpe_kiri_texture" required>
                                 <label for="limpe_kiri_texture1" class="me-5">Keras</label>
                                 <input type="radio" class="ms-5 @error('limpe_kiri_texture') is-invalid @enderror"
-                                    id="limpe_kiri_texture2" value="{{ old('limpe_kiri_texture') }}"
-                                    name="limpe_kiri_texture" value="Lunak" require>
+                                    id="limpe_kiri_texture2" value="Lunak" name="limpe_kiri_texture" required>
                                 <label for="limpe_kiri_texture2">Lunak</label>
                             </div>
                             <div class="col-sm-12 mb-3 text-center">
                                 <input type="radio" class="@error('limpe_kiri_sakit') is-invalid @enderror"
-                                    id="limpe_kiri_sakit1" value="{{ old('limpe_kiri_sakit') }}" name="limpe_kiri_sakit"
-                                    value="Sakit" require>
+                                    id="limpe_kiri_sakit1" value="Sakit" name="limpe_kiri_sakit" required>
                                 <label for="limpe_kiri_sakit1" class="me-5">Sakit</label>
                                 <input type="radio" class="ms-5 @error('limpe_kiri_sakit') is-invalid @enderror"
-                                    id="limpe_kiri_sakit2" value="{{ old('limpe_kiri_sakit') }}" name="limpe_kiri_sakit"
-                                    value="Tidak Sakit" require>
+                                    id="limpe_kiri_sakit2" value="Tidak Sakit" name="limpe_kiri_sakit" required>
                                 <label for="limpe_kiri_sakit2">Tidak Sakit</label>
                             </div>
                         </div>
                     </div>
+                    
 
                     <div class="col-sm-12 mb-3 mb-sm-0 text-center bg-gradient-faded-info-vertical">
                         <marquee>

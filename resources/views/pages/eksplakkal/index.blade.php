@@ -198,7 +198,13 @@
                                         <td>{{ $eksplakkal->jumlah_plak}}</td>
                                         <td>{{ $eksplakkal->jumlah_tidak_plak}} / {{ $eksplakkal->jumlah_permukaan}}</td>
                                         <td>{{ $eksplakkal->plaque_score }}</td>
-                                        <td>{{ $eksplakkal->kriteria }}</td>
+                                        <td>
+                                            @if ($eksplakkal->kriteria == "Baik")
+                                                <span class="badge badge-sm bg-gradient-success">Baik</span>
+                                            @else
+                                                <span class="badge badge-sm bg-gradient-danger">Buruk</span>
+                                            @endif
+                                        </td>
                                         
                                         {{-- Internal Oral Kalkulus--}}
                                         <td>{{ $eksplakkal->supragingiva }}</td>
@@ -238,11 +244,11 @@
 @endsection
 @section('js')
 
-@can('mahasiswa')
+@can('adminmahasiswa')
 <script type="text/javascript">
 function handleDelete(id) {
     let form = document.getElementById('deleteForm')
-    form.action = `./eskplakkal/${id}`
+    form.action = `./eksplakkal/${id}`
     console.log(form)
     $('#deleteModal').modal('show')
 }

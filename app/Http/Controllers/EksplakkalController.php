@@ -72,26 +72,68 @@ class EksplakkalController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request);
         $validatedData = $request->validate([
-            'no_kartu'=> 'required|max:9999999999999|min:1|numeric',
-            'nama' => 'required|max:40|min:4',
-            'no_iden' => 'required|max:20',
-            'tgl_lhr' => 'required|max:20|date',
-            'umur' => 'required|max:999|min:1|numeric',
-            'jk' => 'required|max:10',
-            'suku' => 'required|max:40',
-            'pekerjaan' => 'required|max:100',
-            'hub' => 'required|max:50',
-            'no_hp' => 'required|max:9999999999999|min:1|numeric',
-            'no_tlpn' => 'required|max:9999999999999|min:1|numeric',
-            'alamat' =>'required|max:255'
+            'user_id' => 'required',
+            'pembimbing' => 'required',
+            'kartupasien_id' => 'required|max:9999999999999|min:1|numeric',
+            
+            //eksternal
+            'muka'=>'required',
+            'limpe_kanan_teraba'=>'required',
+            'limpe_kanan_texture'=>'required',
+            'limpe_kanan_sakit'=>'required',
+            'limpe_kiri_teraba'=>'required',
+            'limpe_kiri_texture'=>'required',
+            'limpe_kiri_sakit'=>'required',
+
+            //pengukuran plak
+            'plak' => 'required|array',
+            'plak.*' => 'string',
+            'jumlah_plak'=>'required',
+            'jumlah_permukaan'=>'required',
+            'jumlah_tidak_plak'=>'required',
+            'plaque_score'=>'required',
+            'kriteria'=>'required',
+
+            //kalkulus
+            'supragingiva' => 'required|array',
+            'supragingiva.*' => 'string',
+            'subgingiva' => 'required|array',
+            'subgingiva.*' => 'string'
+            
         ]);
 
-        Eksplakkal::create($validatedData);
+        // If no checkboxes are checked, set lokasi to an empty array
+        $plak = $request->has('plak') ? implode(',', $validatedData['plak']) : '';
+        $supragingiva = $request->has('supragingiva') ? implode(',', $validatedData['supragingiva']) : '';
+        $subgingiva = $request->has('subgingiva') ? implode(',', $validatedData['subgingiva']) : '';
 
-        return redirect('/eksplakkal')->with('succes', 'Data Eskternal & Internal Oral (Plak & Kalkulus)
+        // Simpan data ke dalam database
+        $eksplakkal = new Eksplakkal();
 
-        Eskternal & Internal Oral (Plak & Kalkulus) Berhasil Dibuat');
+        $eksplakkal->user_id = $validatedData['user_id'];
+        $eksplakkal->pembimbing = $validatedData['pembimbing'];
+        $eksplakkal->kartupasien_id = $validatedData['kartupasien_id'];
+        $eksplakkal->muka = $validatedData['muka'];
+        $eksplakkal->limpe_kanan_teraba = $validatedData['limpe_kanan_teraba'];
+        $eksplakkal->limpe_kanan_texture = $validatedData['limpe_kanan_texture'];
+        $eksplakkal->limpe_kanan_sakit = $validatedData['limpe_kanan_sakit'];
+        $eksplakkal->limpe_kiri_teraba = $validatedData['limpe_kiri_teraba'];
+        $eksplakkal->limpe_kiri_texture = $validatedData['limpe_kiri_texture'];
+        $eksplakkal->limpe_kiri_sakit = $validatedData['limpe_kiri_sakit'];
+        $eksplakkal->plak = $plak;
+        $eksplakkal->jumlah_plak = $validatedData['jumlah_plak'];
+        $eksplakkal->jumlah_permukaan = $validatedData['jumlah_permukaan'];
+        $eksplakkal->jumlah_tidak_plak = $validatedData['jumlah_tidak_plak'];
+        $eksplakkal->plaque_score = $validatedData['plaque_score'];
+        $eksplakkal->kriteria = $validatedData['kriteria'];
+        $eksplakkal->supragingiva = $supragingiva;
+        $eksplakkal->subgingiva = $subgingiva;
+
+        $eksplakkal->save();
+
+        return redirect()->route('eksplakkal.index')->with('success', 'Data Eskternal & Internal Oral (Plak & Kalkulus) Eskternal & Internal Oral (Plak & Kalkulus) Berhasil Dibuat');
     }
 
     /**
@@ -114,7 +156,10 @@ class EksplakkalController extends Controller
     public function edit(Eksplakkal $eksplakkal)
     {
         if (auth()->user()->role === 1) {
-            $kartupasiens = kartupasien::all();
+            $kartupasiens = kartupasien::where('user_id', $eksplakkal->user_id)
+                                    ->where('pembimbing', $eksplakkal->pembimbing)
+                                    ->get();
+            // $kartupasiens = kartupasien::all();
             $users = User::where('role', 3)->get();
         } 
         elseif (auth()->user()->role === 2) {
@@ -125,8 +170,11 @@ class EksplakkalController extends Controller
         }
 
         
-        return view('pages.eksplakkal.create')->with([
+        $permukaangigis = permukaangigi::all();
+        
+        return view('pages.eksplakkal.edit')->with([
             'kartupasiens' => $kartupasiens,
+            'permukaangigis' => $permukaangigis,
             'eksplakkal'=> $eksplakkal,
             'users' => $users ?? null
         ]);
@@ -141,15 +189,64 @@ class EksplakkalController extends Controller
      */
     public function update(Request $request, Eksplakkal $eksplakkal)
     {
-        
         $validatedData = $request->validate([
-            'kode' => 'required|max:9999999999999|digits_between:1,4|numeric',
-            'soal' =>'required'
+            'user_id' => 'required',
+            'pembimbing' => 'required',
+            'kartupasien_id' => 'required|max:9999999999999|min:1|numeric',
+            
+            //eksternal
+            'muka'=>'required',
+            'limpe_kanan_teraba'=>'required',
+            'limpe_kanan_texture'=>'required',
+            'limpe_kanan_sakit'=>'required',
+            'limpe_kiri_teraba'=>'required',
+            'limpe_kiri_texture'=>'required',
+            'limpe_kiri_sakit'=>'required',
+    
+            //pengukuran plak
+            'plak' => 'required|array',
+            'plak.*' => 'string',
+            'jumlah_plak'=>'required',
+            'jumlah_permukaan'=>'required',
+            'jumlah_tidak_plak'=>'required',
+            'plaque_score'=>'required',
+            'kriteria'=>'required',
+    
+            //kalkulus
+            'supragingiva' => 'required|array',
+            'supragingiva.*' => 'string',
+            'subgingiva' => 'required|array',
+            'subgingiva.*' => 'string',
         ]);
-        Eksplakkal::where('id', $eksplakkal->id)
-            ->update($validatedData);
-
-        return back()->with('succes', 'Data Eskternal & Internal Oral (Plak & Kalkulus) Eskternal & Internal Oral (Plak & Kalkulus) berhasil diubah');
+    
+        // If no checkboxes are checked, set lokasi to an empty array
+        $plak = $request->has('plak') ? implode(',', $validatedData['plak']) : '';
+        $supragingiva = $request->has('supragingiva') ? implode(',', $validatedData['supragingiva']) : '';
+        $subgingiva = $request->has('subgingiva') ? implode(',', $validatedData['subgingiva']) : '';
+    
+        // Update data di database
+        $eksplakkal->update([
+            'user_id' => $validatedData['user_id'],
+            'pembimbing' => $validatedData['pembimbing'],
+            'kartupasien_id' => $validatedData['kartupasien_id'],
+            'muka' => $validatedData['muka'],
+            'limpe_kanan_teraba' => $validatedData['limpe_kanan_teraba'],
+            'limpe_kanan_texture' => $validatedData['limpe_kanan_texture'],
+            'limpe_kanan_sakit' => $validatedData['limpe_kanan_sakit'],
+            'limpe_kiri_teraba' => $validatedData['limpe_kiri_teraba'],
+            'limpe_kiri_texture' => $validatedData['limpe_kiri_texture'],
+            'limpe_kiri_sakit' => $validatedData['limpe_kiri_sakit'],
+            'plak' => $plak,
+            'jumlah_plak' => $validatedData['jumlah_plak'],
+            'jumlah_permukaan' => $validatedData['jumlah_permukaan'],
+            'jumlah_tidak_plak' => $validatedData['jumlah_tidak_plak'],
+            'plaque_score' => $validatedData['plaque_score'],
+            'kriteria' => $validatedData['kriteria'],
+            'supragingiva' => $supragingiva,
+            'subgingiva' => $subgingiva
+        ]);
+    
+        return back()->with('success', 'Data Eskternal & Internal Oral (Plak & Kalkulus) Berhasil Diperbarui');
     }
 
     /**
@@ -161,6 +258,6 @@ class EksplakkalController extends Controller
     public function destroy(Eksplakkal $eksplakkal)
     {
         Eksplakkal::destroy($eksplakkal->id);
-        return back()->with('succes', 'Data Eskternal & Internal Oral (Plak & Kalkulus) Eskternal & Internal Oral (Plak & Kalkulus) berhasil dihapus');
+        return back()->with('success', 'Data Eskternal & Internal Oral (Plak & Kalkulus) Eskternal & Internal Oral (Plak & Kalkulus) berhasil dihapus');
     }
 }

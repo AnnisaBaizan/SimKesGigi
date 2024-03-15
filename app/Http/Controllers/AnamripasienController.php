@@ -98,7 +98,7 @@ class AnamripasienController extends Controller
 
         anamripasien::create($validatedData);
 
-        return redirect('/anamripasien')->with('succes', 'Anamnesa dan Riwayat Pasien Berhasil Dibuat');
+        return redirect()->route('anamripasien.index')->with('success', 'Anamnesa dan Riwayat Pasien Berhasil Dibuat');
     }
 
     /**
@@ -123,7 +123,10 @@ class AnamripasienController extends Controller
     {
         
         if (auth()->user()->role === 1) {
-            $kartupasiens = kartupasien::all();
+            $kartupasiens = kartupasien::where('user_id', $anamripasien->user_id)
+                                    ->where('pembimbing', $anamripasien->pembimbing)
+                                    ->get();
+            // $kartupasiens = kartupasien::all();
             $users = User::where('role', 3)->get();
         } 
         elseif (auth()->user()->role === 2) {
@@ -178,7 +181,7 @@ class AnamripasienController extends Controller
         anamripasien::where('id', $anamripasien->id)
             ->update($validatedData);
 
-        return back()->with('succes', 'Anamnesa dan Riwayat Pasien berhasil diubah');
+        return back()->with('success', 'Anamnesa dan Riwayat Pasien berhasil diubah');
     }
 
     /**
@@ -190,12 +193,12 @@ class AnamripasienController extends Controller
     public function destroy(anamripasien $anamripasien)
     {
         anamripasien::destroy($anamripasien->id);
-        return back()->with('succes', 'Anamnesa dan Riwayat Pasien berhasil dihapus');
+        return back()->with('success', 'Anamnesa dan Riwayat Pasien berhasil dihapus');
     }
 
     public function export(){
         return Excel::download(new ExportAnamRiPasien, 'Data_Anamnesa_Riwayat_Pasien.xlsx');
-        return back()->with('succes', 'Data Anamnesa dan Riwayat Pasien Berhasil di eksport');
+        return back()->with('success', 'Data Anamnesa dan Riwayat Pasien Berhasil di eksport');
     }
 
     public function import(Request $request) 
@@ -209,6 +212,6 @@ class AnamripasienController extends Controller
 
         request()->file('importanamripasien');
         Excel::import(new ImportAnamRiPasien, request()->file('importanamripasien'));
-        return back()->with('succes', 'Data Anamnesa dan Riwayat Pasien Berhasil di import');
+        return back()->with('success', 'Data Anamnesa dan Riwayat Pasien Berhasil di import');
     }
 }

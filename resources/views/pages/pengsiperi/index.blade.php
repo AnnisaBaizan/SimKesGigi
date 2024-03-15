@@ -194,7 +194,16 @@
                                             {{-- <td>{{ $pengsiperi->pengetahuan }}</td> --}}
                                             <td>{{ $pengsiperi->jawaban_benar_peng }} / {{ $pengsiperi->jumlah_pertanyaan_peng }}</td>
                                             <td>{{ $pengsiperi->nilai_peng }}</td>
-                                            <td>{{ $pengsiperi->kriteria }}</td>
+                                            <td>
+                                                @if ($pengsiperi->kriteria == "Baik")
+                                                    <span class="badge badge-sm bg-gradient-success">Baik</span>
+                                                @elseif ($pengsiperi->kriteria == "Sedang")
+                                                <span class="badge badge-sm bg-gradient-warning">Sedang</span>
+                                                @else
+                                                    <span class="badge badge-sm bg-gradient-danger">Buruk</span>
+                                                @endif
+                                            
+                                            </td>
                                             {{-- Keterampilan --}}
                                             <td>
                                                 @if ($pengsiperi->labialbukal == "1")
@@ -290,7 +299,12 @@
                                             {{-- <td>{{ $pengsiperi->perilaku }}</td> --}}
                                             <td>{{ $pengsiperi->jumlah_yang_terpilih }} / {{ $pengsiperi->jumlah_pilihan }}</td>
                                             <td>{{ $pengsiperi->nilai_peri }}</td>
-                                            <td>{{ $pengsiperi->berperilaku }}</td>
+                                            <td>
+                                                @if ($pengsiperi->berperilaku == "Positif")
+                                                    <span class="badge badge-sm bg-gradient-success">Positif</span>
+                                                @else
+                                                    <span class="badge badge-sm bg-gradient-danger">Negatif</span>
+                                                @endif</td>
 
                                             <td>{{ $pengsiperi->peran_ortu }}</td>
                                             

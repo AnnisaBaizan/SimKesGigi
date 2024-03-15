@@ -279,7 +279,7 @@ class PengsiperiController extends Controller
             'peran_ortu' => $peran_ortu,
         ]);
     
-        return redirect()->route('pengsiperi.index')->with('success', 'Pengetahuan, Keterampilan, Perilaku, dan peran orang tua Berhasil Diperbarui');
+        return back()->with('success', 'Pengetahuan, Keterampilan, Perilaku, dan peran orang tua Berhasil Diperbarui');
     }
 
     /**

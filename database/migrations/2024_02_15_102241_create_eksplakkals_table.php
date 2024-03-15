@@ -30,9 +30,9 @@ return new class extends Migration
 
             //pengukuran plak
             $table->string('plak');
-            $table->tinyInteger('jumlah_plak');
-            $table->tinyInteger('jumlah_permukaan');
-            $table->tinyInteger('jumlah_tidak_plak');
+            $table->Integer('jumlah_plak');
+            $table->Integer('jumlah_permukaan');
+            $table->Integer('jumlah_tidak_plak');
             $table->string('plaque_score');
             $table->string('kriteria');
 

@@ -14,40 +14,104 @@
                 <div id="alert">
                     @include('components.alert')
                 </div>
-                {{-- <div class="col-sm-12 mb-3">
-                    <label for="kartupasien_id" class ="form-text">Pilih Pasien :</label>
-                    <select id="kartupasien_id" name="kartupasien_id" class="form-control selectpicker" data-mdb-filter="true" multiple aria-label="Default select example" data-live-search="true" required>
-                      @error('kartupasien_id')
-                      <span class="invalid-feedback" role="alert">
-                      <strong>{{ $message }}</strong>
-                      </span>
-                      @enderror
-                        @foreach ($kartupasiens as $kartupasien)
-                          <option value ="{{old('kartupasien_id', $kartupasien->id)}}">{{ $kartupasien->no_kartu }} | {{ $kartupasien->nama }}</option>
-                        @endforeach
-                    </select>
-                  </div> --}}
 
-                  <div class="form-group row">
-                    <div class="col-sm-6 mb-3">
-                      <label for="kartupasien_id" class ="form-text">Pilih Pasien :</label>
-                      <select class="form-control  @error('kartupasien_id') is-invalid @enderror" data-live-search="true" id="kartupasien_id" name="kartupasien_id" placeholder="Pilih Pasien" value="{{ old('kartupasien_id') }}" required>
-                              @error('kartupasien_id')
-                              <span class="invalid-feedback" role="alert">
-                              <strong>{{ $message }}</strong>
-                              </span>
-                              @enderror
-                          <option value="" selected disabled>Pilih Pasien</option>
-                          @foreach ($kartupasiens as $kartupasien)
-                          <option value="{{ $kartupasien->id }}" {{$anamripasien->kartupasien_id == $kartupasien->id ? 'selected':''}}>{{ $kartupasien->no_kartu }} | {{ $kartupasien->nama }}</option>
-                          @endforeach
-                      </select>
-                    </div>
-                    <div class="col-sm-6 mb-3 mb-sm-0">
-                      <i class="fas fa-search"></i> <label for="kartupasien_id" class ="form-text">Cari Pasien :</label>
-                      <input type="text" class="form-control @error('search') is-invalid @enderror" id="search" name="search" placeholder="Masukan Nama/No Kartu" value="{{ old('search') }}">
-                    </div>
-                  </div>
+                @can('admin')
+                        <div class="form-group row">
+                            <div class="col-sm-4">
+                                <label for="user_id" class="form-text">Pilih Mahasiswa :</label>
+                            </div>
+                            <div class="col-sm-4">
+                                <select class="js-example-basic-single form-control @error('user_id') is-invalid @enderror"
+                                    data-live-search="true" id="user_id" name="user_id" placeholder="Pilih Mahasiswa"
+                                    value="{{ old('user_id') }}" required>
+                                    @error('user_id')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                    <option value="" selected disabled>Pilih Mahasiswa</option>
+                                    @foreach ($users as $user)
+                                        <option value="{{ $user->id }}" {{ $anamripasien->user_id == $user->id ? 'selected' : '' }} data-pembimbing="{{ $user->pembimbing }}">
+                                            {{ ucwords($user->username) }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control @error('pembimbing') is-invalid_max @enderror"
+                                    id="pembimbing" name="pembimbing" placeholder="pembimbing" value="{{ $anamripasien->pembimbing }}" readonly required>
+                                @error('pembimbing')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-4">
+                                <label for="kartupasien_id" class="form-text">Pilih Pasien :</label>
+                            </div>
+                            <div class="col-sm-8">
+                                <select
+                                    class="js-example-basic-single form-control @error('kartupasien_id') is-invalid @enderror"
+                                    data-live-search="true" id="kartupasien_id" name="kartupasien_id" placeholder="Pilih Pasien"
+                                    value="{{ old('kartupasien_id', $anamripasien->kartupasien_id) }}" required>
+                                    @error('kartupasien_id')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                    @foreach ($kartupasiens as $kartupasien)
+                                    <option value="{{ $anamripasien->kartupasien_id }}" {{ $anamripasien->kartupasien_id == $kartupasien->id ? 'selected' : '' }}>{{ $kartupasien->no_kartu }} |
+                                        {{ $kartupasien->nama }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                    @endcan
+
+                    @can('mahasiswa')
+                        <div class="col-sm-6">
+                            <input type="hidden" class="form-control @error('user_id') is-invalid_max @enderror" id="user_id"
+                                name="user_id" placeholder="user_id" value="{{ auth()->user()->id }}" required>
+                            @error('user_id')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                        <div class="col-sm-6">
+                            <input type="hidden" class="form-control @error('pembimbing') is-invalid_max @enderror"
+                                id="pembimbing" name="pembimbing" placeholder="pembimbing"
+                                value="{{ auth()->user()->pembimbing }}" required>
+                            @error('pembimbing')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-4">
+                                <label for="kartupasien_id" class ="form-text">Pilih Pasien :</label>
+                            </div>
+                            <div class="col-sm-8">
+                                <select
+                                    class="js-example-basic-single form-control @error('kartupasien_id') is-invalid @enderror"
+                                    data-live-search="true" id="kartupasien_id" name="kartupasien_id" placeholder="Pilih Pasien"
+                                    value="{{ old('kartupasien_id') }}" required>
+                                    @error('kartupasien_id')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                    <option value="" selected disabled>Pilih Pasien</option>
+                                    @foreach ($kartupasiens as $kartupasien)
+                                        <option value="{{ $kartupasien->id }}" {{ $anamripasien->kartupasien_id == $kartupasien->id ? 'selected' : '' }}>{{ $kartupasien->no_kartu }} |
+                                            {{ $kartupasien->nama }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                    @endcan
 
                   <div class="col-sm-12 mb-3 mb-sm-0 text-center bg-gradient-faded-info-vertical">
                     <marquee><h6 class="m-0 font-weight-bold text-dark text-bold">Anamnesa</h6></marquee>
@@ -334,6 +398,15 @@
     @include('layouts.footers.auth.footer')
 @endsection
 @section('js')
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('.js-example-basic-single').select2();
+    });
+    $(document).ready(function() {
+        $('.js-example-basic-multiple').select2();
+    });
+</script>
 <script type="text/javascript">
 // $('#kartupasien_id').selectpicker();
 // $("#kartupasien_id").select2();
@@ -390,4 +463,44 @@ $('#alergi_mkn').change(function() {
 }).trigger("change");
 
 </script>
+<script>
+  $(document).ready(function() {
+      $('#user_id').change(function() {
+          var selectedOption = $(this).find(':selected');
+          var pembimbingValue = selectedOption.data('pembimbing');
+          $('#pembimbing').val(pembimbingValue);
+      });
+  });
+  $(function() {
+      $.ajaxSetup({
+          headers: {
+              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          }
+      });
+
+      $('#user_id').on('change', function() {
+          var user_id = $("#user_id").val();
+          var pembimbing = $("#pembimbing").val();
+
+          $.ajax({
+              url: '/getPatients',
+              type: 'POST',
+              data: {
+                  user_id: user_id,
+                  pembimbing: pembimbing
+              },
+              cache: false,
+
+              success: function(msg) {
+                  $("#kartupasien_id").html(msg);
+              },
+
+              error: function(data) {
+                  console.log('error:', data);
+              }
+          });
+      });
+  });
+</script>
 @endsection
+
