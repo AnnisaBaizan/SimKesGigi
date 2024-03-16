@@ -74,7 +74,7 @@ class AnamripasienController extends Controller
         $validatedData = $request->validate([
             'user_id' => 'required',
             'pembimbing' => 'required',
-            'kartupasien_id' => 'required|max:9999999999999|min:1|numeric',
+            'kartupasien_id' => 'required',
             'klhn_utama' => 'required|max:255',
             'klhn_tmbhn' => 'required|max:255',
             'goldar' => 'required|max:2|min:1',
@@ -156,7 +156,7 @@ class AnamripasienController extends Controller
         $validatedData = $request->validate([
             'user_id' => 'required',
             'pembimbing' => 'required',
-            'kartupasien_id' => 'required|max:9999999999999|min:1|numeric',
+            'kartupasien_id' => 'required',
             'klhn_utama' => 'required|max:255',
             'klhn_tmbhn' => 'required|max:255',
             'goldar' => 'required|max:2|min:1',

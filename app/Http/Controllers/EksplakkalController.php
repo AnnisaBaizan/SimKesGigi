@@ -76,7 +76,7 @@ class EksplakkalController extends Controller
         $validatedData = $request->validate([
             'user_id' => 'required',
             'pembimbing' => 'required',
-            'kartupasien_id' => 'required|max:9999999999999|min:1|numeric',
+            'kartupasien_id' => 'required',
             
             //eksternal
             'muka'=>'required',
@@ -90,11 +90,11 @@ class EksplakkalController extends Controller
             //pengukuran plak
             'plak' => 'required|array',
             'plak.*' => 'string',
-            'jumlah_plak'=>'required',
-            'jumlah_permukaan'=>'required',
-            'jumlah_tidak_plak'=>'required',
-            'plaque_score'=>'required',
-            'kriteria'=>'required',
+            'jumlah_plak'=>'required|numeric|max:236|min:0',
+            'jumlah_permukaan'=>'required|numeric|max:236|min:1',
+            'jumlah_tidak_plak'=>'required|numeric|max:236|min:0',
+            'plaque_score'=>'required|max:6|min:4',
+            'kriteria'=>'required|max:5|min:4',
 
             //kalkulus
             'supragingiva' => 'required|array',
@@ -192,7 +192,7 @@ class EksplakkalController extends Controller
         $validatedData = $request->validate([
             'user_id' => 'required',
             'pembimbing' => 'required',
-            'kartupasien_id' => 'required|max:9999999999999|min:1|numeric',
+            'kartupasien_id' => 'required',
             
             //eksternal
             'muka'=>'required',
@@ -202,21 +202,21 @@ class EksplakkalController extends Controller
             'limpe_kiri_teraba'=>'required',
             'limpe_kiri_texture'=>'required',
             'limpe_kiri_sakit'=>'required',
-    
+
             //pengukuran plak
             'plak' => 'required|array',
             'plak.*' => 'string',
-            'jumlah_plak'=>'required',
-            'jumlah_permukaan'=>'required',
-            'jumlah_tidak_plak'=>'required',
-            'plaque_score'=>'required',
-            'kriteria'=>'required',
-    
+            'jumlah_plak'=>'required|numeric|max:236|min:0',
+            'jumlah_permukaan'=>'required|numeric|max:236|min:1',
+            'jumlah_tidak_plak'=>'required|numeric|max:236|min:0',
+            'plaque_score'=>'required|max:6|min:4',
+            'kriteria'=>'required|max:5|min:4',
+
             //kalkulus
             'supragingiva' => 'required|array',
             'supragingiva.*' => 'string',
             'subgingiva' => 'required|array',
-            'subgingiva.*' => 'string',
+            'subgingiva.*' => 'string'
         ]);
     
         // If no checkboxes are checked, set lokasi to an empty array

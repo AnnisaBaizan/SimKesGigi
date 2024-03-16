@@ -185,16 +185,58 @@
                                         <td>{{ $eksplakkal->kartupasien->no_kartu }} | {{ $eksplakkal->kartupasien->nama }}</td>
                                         
                                         {{-- Eksternal Oral--}}
-                                        <td>{{ $eksplakkal->muka }} </td>
-                                        <td>{{ $eksplakkal->limpe_kanan_teraba }} </td>
-                                        <td>{{ $eksplakkal->limpe_kanan_texture }} </td>
-                                        <td>{{ $eksplakkal->limpe_kanan_sakit }} </td>
-                                        <td>{{ $eksplakkal->limpe_kiri_teraba }}</td>
-                                        <td>{{ $eksplakkal->limpe_kiri_texture}}</td>
-                                        <td>{{ $eksplakkal->limpe_kiri_sakit}} </td>
+                                        <td>
+                                            @if ($eksplakkal->muka == "Simetris")
+                                                <span class="badge badge-sm bg-gradient-success">Simetris</span>
+                                            @else
+                                                <span class="badge badge-sm bg-gradient-danger">Tidak Simetris</span>
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @if ($eksplakkal->limpe_kanan_teraba == "Teraba")
+                                                <span class="badge badge-sm bg-gradient-success">Teraba</span>
+                                            @else
+                                                <span class="badge badge-sm bg-gradient-danger">Tidak Teraba</span>
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @if ($eksplakkal->limpe_kanan_texture == "Lunak")
+                                                <span class="badge badge-sm bg-gradient-success">Lunak</span>
+                                            @else
+                                                <span class="badge badge-sm bg-gradient-danger">Keras</span>
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @if ($eksplakkal->limpe_kanan_sakit == "Sakit")
+                                                <span class="badge badge-sm bg-gradient-success">Sakit</span>
+                                            @else
+                                                <span class="badge badge-sm bg-gradient-danger">Tidak Sakit</span>
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @if ($eksplakkal->limpe_kiri_teraba == "Teraba")
+                                                <span class="badge badge-sm bg-gradient-success">Teraba</span>
+                                            @else
+                                                <span class="badge badge-sm bg-gradient-danger">Tidak Teraba</span>
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @if ($eksplakkal->limpe_kiri_texture == "Lunak")
+                                                <span class="badge badge-sm bg-gradient-success">Lunak</span>
+                                            @else
+                                                <span class="badge badge-sm bg-gradient-danger">Keras</span>
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @if ($eksplakkal->limpe_kiri_sakit == "Sakit")
+                                                <span class="badge badge-sm bg-gradient-success">Sakit</span>
+                                            @else
+                                                <span class="badge badge-sm bg-gradient-danger">Tidak Sakit</span>
+                                            @endif
+                                        </td>
                                         
                                         {{-- Internal Oral Plak--}}
-                                        <td>{{ $eksplakkal->plak }}</td>
+                                        <td>{{ strlen($eksplakkal->plak) > 25 ? substr($eksplakkal->plak, 0, 25) . ' . . .' : $eksplakkal->plak }}</td>
                                         <td>{{ $eksplakkal->jumlah_plak}}</td>
                                         <td>{{ $eksplakkal->jumlah_tidak_plak}} / {{ $eksplakkal->jumlah_permukaan}}</td>
                                         <td>{{ $eksplakkal->plaque_score }}</td>
@@ -207,8 +249,8 @@
                                         </td>
                                         
                                         {{-- Internal Oral Kalkulus--}}
-                                        <td>{{ $eksplakkal->supragingiva }}</td>
-                                        <td>{{ $eksplakkal->subgingiva }}</td>
+                                        <td>{{ strlen($eksplakkal->supragingiva) > 25 ? substr($eksplakkal->supragingiva, 0, 25) . ' . . .' : $eksplakkal->supragingiva }}</td>
+                                        <td>{{ strlen($eksplakkal->subgingiva) > 25 ? substr($eksplakkal->subgingiva, 0, 25) . ' . . .' : $eksplakkal->subgingiva }}</td>
                                         
                                         <td>{{ date_format($eksplakkal->created_at, "d M Y") }}</td>
                                         <td>
@@ -271,7 +313,7 @@ $(document).ready( function () {
             var min = minDate.val();
             var max = maxDate.val();
             // data[1] is the date column
-            var date = new Date( data[17] );
+            var date = new Date( data[18] );
 
             if (
                 ( min === null && max === null ) ||

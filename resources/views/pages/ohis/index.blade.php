@@ -120,6 +120,7 @@
                                             <th>DI-4</th>
                                             <th>DI-5</th>
                                             <th>DI-6</th>
+                                            <th>Nilai DI</th>
                                             <th>Score DI</th>
                                             {{-- CI --}}
                                             <th>CI-1</th>
@@ -128,6 +129,7 @@
                                             <th>CI-4</th>
                                             <th>CI-5</th>
                                             <th>CI-6</th>
+                                            <th>Nilai CI</th>
                                             <th>Score CI</th>
                                             
                                             <th>Kreteria Ohis</th>
@@ -156,6 +158,7 @@
                                             <th>DI-4</th>
                                             <th>DI-5</th>
                                             <th>DI-6</th>
+                                            <th>Nilai DI</th>
                                             <th>Score DI</th>
                                             {{-- CI --}}
                                             <th>CI-1</th>
@@ -164,6 +167,7 @@
                                             <th>CI-4</th>
                                             <th>CI-5</th>
                                             <th>CI-6</th>
+                                            <th>Nilai CI</th>
                                             <th>Score CI</th>
                                             
                                             <th>Kreteria Ohis</th>
@@ -205,7 +209,15 @@
                                             <td>{{ $ohis->ci_6}}</td>
                                             <td>{{ $ohis->jumlah_nilai_ci}} / {{ $ohis->jumlah_gigi_ci}}</td>
                                             <td>{{ $ohis->score_ci }}</td> 
-                                            <td>{{ $ohis->nilai_kriteria_ohis }} {{ $ohis->kriteria_ohis }}</td> 
+                                            <td>{{ $ohis->nilai_kriteria_ohis }} 
+                                                @if ($ohis->kriteria_ohis == "Baik")
+                                                    <span class="badge badge-sm bg-gradient-success">Baik</span>
+                                                @elseif ($ohis->kriteria_ohis == "Sedang")
+                                                <span class="badge badge-sm bg-gradient-warning">Sedang</span>
+                                                @else
+                                                    <span class="badge badge-sm bg-gradient-danger">Buruk</span>
+                                                @endif
+                                            </td> 
                                             
                                             <td>{{ date_format($ohis->created_at, "d M Y") }}</td>
                                             <td>
@@ -240,7 +252,7 @@
     @include('layouts.footers.auth.footer')
 @endsection
 @section('js')
-    @can('mahasiswa')
+    @can('adminmahasiswa')
     <script type="text/javascript">
     function handleDelete(id) {
         let form = document.getElementById('deleteForm')
@@ -267,7 +279,7 @@
                 var min = minDate.val();
                 var max = maxDate.val();
                 // data[1] is the date column
-                var date = new Date( data[17] );
+                var date = new Date( data[21] );
 
                 if (
                     ( min === null && max === null ) ||

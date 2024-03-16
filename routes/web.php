@@ -34,6 +34,7 @@ use App\Http\Controllers\OdontogramController;
 use App\Http\Controllers\OhisController;
 use App\Http\Controllers\VitalitasController;
 use App\Http\Controllers\AnomalimukosaController;
+use App\Http\Controllers\PeriodontalController;
 use Illuminate\Http\Request;
 
 Route::get('/', function () {
@@ -189,6 +190,19 @@ Route::group(['middleware' => 'auth'], function () {
 
 	Route::post('importanomalimukosa', [AnomalimukosaController::class, 'import'])->name('importanomalimukosa')->middleware('mahasiswa');
     Route::get('exportanomalimukosa', [AnomalimukosaController::class, 'export'])->name('exportanomalimukosa')->middleware('mahasiswa');
+
+	
+	// Route::resource('/periodontal', PeriodontalController::class);
+	Route::get('/periodontal', [PeriodontalController::class, 'index'])->name('periodontal.index');
+	Route::get('/periodontal/create', [PeriodontalController::class, 'create'])->name('periodontal.create')->middleware('mahasiswa');
+	Route::post('/periodontal', [PeriodontalController::class, 'store'])->name('periodontal.store')->middleware('mahasiswa');
+	Route::get('/periodontal/{periodontal}', [PeriodontalController::class, 'show'])->name('periodontal.show');
+	Route::get('/periodontal/{periodontal}/edit', [PeriodontalController::class, 'edit'])->name('periodontal.edit')->middleware('mahasiswa');
+	Route::put('/periodontal/{periodontal}', [PeriodontalController::class, 'update'])->name('periodontal.update')->middleware('mahasiswa');
+	Route::Delete('/periodontal/{periodontal}', [PeriodontalController::class, 'destroy'])->name('periodontal.destroy')->middleware('mahasiswa');
+
+	Route::post('importperiodontal', [PeriodontalController::class, 'import'])->name('importperiodontal')->middleware('mahasiswa');
+    Route::get('exportperiodontal', [PeriodontalController::class, 'export'])->name('exportperiodontal')->middleware('mahasiswa');
 
 	Route::get('/{page}', [PageController::class, 'index'])->name('page');
 	Route::post('logout', [LoginController::class, 'logout'])->name('logout');

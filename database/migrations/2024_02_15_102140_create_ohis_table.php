@@ -39,17 +39,6 @@ return new class extends Migration
             $table->string('nilai_kriteria_ohis');
             $table->string('kriteria_ohis');
 
-            
-            // vitalitas
-            $table->string('elemen_gigi');
-            $table->string('inspeksi');
-            $table->string('thermis');
-            $table->string('sondasi');
-            $table->string('perkusi');
-            $table->string('druk');
-            $table->string('mobility');
-            $table->string('masalah');
-
             $table->timestamps();
         });
     }

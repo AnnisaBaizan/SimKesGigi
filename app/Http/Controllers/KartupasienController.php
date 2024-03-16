@@ -64,17 +64,17 @@ class KartupasienController extends Controller
         $validatedData = $request->validate([
             'user_id' => 'required',
             'pembimbing' => 'required',
-            'no_kartu'=> 'required|max:9999999999999|min:1|numeric',
+            'no_kartu'=> 'required|numeric|digits:13',
             'nama' => 'required|max:40|min:4',
-            'no_iden' => 'required|max:20',
+            'no_iden' => 'required|numeric|digits_between:14,16',
             'tgl_lhr' => 'required|max:20|date',
             'umur' => 'required|max:999|min:1|numeric',
             'jk' => 'required|max:10',
             'suku' => 'required|max:40',
             'pekerjaan' => 'required|max:100',
             'hub' => 'required|max:50',
-            'no_hp' => 'required|max:9999999999999|min:1|numeric',
-            'no_tlpn' => 'required|max:9999999999999|min:1|numeric',
+            'no_hp' => 'required|numeric|digits_between:10,13',
+            'no_tlpn' => 'required|numeric|digits_between:10,13',
             'alamat' =>'required|max:255'
         ]);
 
@@ -126,17 +126,17 @@ class KartupasienController extends Controller
         $validatedData = $request->validate([
             'user_id' => 'required',
             'pembimbing' => 'required',
-            'no_kartu'=> 'required|max:9999999999999|min:1|numeric',
+            'no_kartu'=> 'required|numeric|digits:13',
             'nama' => 'required|max:40|min:4',
-            'no_iden' => 'required|max:20',
+            'no_iden' => 'required|numeric|digits_between:14,16',
             'tgl_lhr' => 'required|max:20|date',
             'umur' => 'required|max:999|min:1|numeric',
             'jk' => 'required|max:10',
             'suku' => 'required|max:40',
             'pekerjaan' => 'required|max:100',
             'hub' => 'required|max:50',
-            'no_hp' => 'required|max:9999999999999|min:1|numeric',
-            'no_tlpn' => 'required|max:9999999999999|min:1|numeric',
+            'no_hp' => 'required|numeric|digits_between:10,13',
+            'no_tlpn' => 'required|numeric|digits_between:10,13',
             'alamat' =>'required|max:255'
         ]);
 

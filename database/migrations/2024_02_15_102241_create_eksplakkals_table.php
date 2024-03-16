@@ -29,7 +29,7 @@ return new class extends Migration
             $table->string('limpe_kiri_sakit');
 
             //pengukuran plak
-            $table->string('plak');
+            $table->text('plak');
             $table->Integer('jumlah_plak');
             $table->Integer('jumlah_permukaan');
             $table->Integer('jumlah_tidak_plak');
@@ -37,8 +37,8 @@ return new class extends Migration
             $table->string('kriteria');
 
             //kalkulus
-            $table->string('supragingiva');
-            $table->string('subgingiva');
+            $table->text('supragingiva');
+            $table->text('subgingiva');
 
             $table->timestamps();
         });

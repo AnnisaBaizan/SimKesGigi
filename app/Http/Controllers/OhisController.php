@@ -71,7 +71,41 @@ class OhisController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd($request);
+        $validatedData = $request->validate([
+            'user_id' => 'required',
+            'pembimbing' => 'required',
+            'kartupasien_id' => 'required',
+
+            'di_1'=> 'nullable|numeric|min:0|max:3',
+            'di_2'=> 'nullable|numeric|min:0|max:3',
+            'di_3'=> 'nullable|numeric|min:0|max:3',
+            'di_4'=> 'nullable|numeric|min:0|max:3',
+            'di_5'=> 'nullable|numeric|min:0|max:3',
+            'di_6'=> 'nullable|numeric|min:0|max:3',
+
+            'jumlah_nilai_di'=>'required|numeric|min:0|max:18',
+            'jumlah_gigi_di'=>'required|numeric|min:0|max:6',
+            'score_di' => 'string|min:4|max:6',
+
+            'ci_1'=> 'nullable|numeric|min:0|max:3',
+            'ci_2'=> 'nullable|numeric|min:0|max:3',
+            'ci_3'=> 'nullable|numeric|min:0|max:3',
+            'ci_4'=> 'nullable|numeric|min:0|max:3',
+            'ci_5'=> 'nullable|numeric|min:0|max:3',
+            'ci_6'=> 'nullable|numeric|min:0|max:3',
+
+            'jumlah_nilai_ci'=>'required|numeric|min:0|max:18',
+            'jumlah_gigi_ci'=>'required|numeric|min:0|max:6',
+            'score_ci'=> 'string|min:4|max:6',
+
+            'nilai_kriteria_ohis'=> 'string|min:4|max:6',
+            'kriteria_ohis'=>'required|min:4|max:6'
+        ]);
+
+        Ohis::create($validatedData);
+
+        return redirect()->route('ohis.index')->with('success', 'Data OHI-S Berhasil Dibuat');
     }
 
     /**
@@ -94,7 +128,10 @@ class OhisController extends Controller
     public function edit(Ohis $ohis)
     {
         if (auth()->user()->role === 1) {
-            $kartupasiens = kartupasien::all();
+            $kartupasiens = kartupasien::where('user_id', $ohis->user_id)
+                                    ->where('pembimbing', $ohis->pembimbing)
+                                    ->get();
+            // $kartupasiens = kartupasien::all();
             $users = User::where('role', 3)->get();
         } 
         elseif (auth()->user()->role === 2) {
@@ -120,7 +157,41 @@ class OhisController extends Controller
      */
     public function update(Request $request, Ohis $ohis)
     {
-        //
+        $validatedData = $request->validate([
+            'user_id' => 'required',
+            'pembimbing' => 'required',
+            'kartupasien_id' => 'required',
+
+            'di_1'=> 'nullable|numeric|min:0|max:3',
+            'di_2'=> 'nullable|numeric|min:0|max:3',
+            'di_3'=> 'nullable|numeric|min:0|max:3',
+            'di_4'=> 'nullable|numeric|min:0|max:3',
+            'di_5'=> 'nullable|numeric|min:0|max:3',
+            'di_6'=> 'nullable|numeric|min:0|max:3',
+
+            'jumlah_nilai_di'=>'required|numeric|min:0|max:18',
+            'jumlah_gigi_di'=>'required|numeric|min:0|max:6',
+            'score_di' => 'string|min:4|max:6',
+
+            'ci_1'=> 'nullable|numeric|min:0|max:3',
+            'ci_2'=> 'nullable|numeric|min:0|max:3',
+            'ci_3'=> 'nullable|numeric|min:0|max:3',
+            'ci_4'=> 'nullable|numeric|min:0|max:3',
+            'ci_5'=> 'nullable|numeric|min:0|max:3',
+            'ci_6'=> 'nullable|numeric|min:0|max:3',
+
+            'jumlah_nilai_ci'=>'required|numeric|min:0|max:18',
+            'jumlah_gigi_ci'=>'required|numeric|min:0|max:6',
+            'score_ci'=> 'string|min:4|max:6',
+
+            'nilai_kriteria_ohis'=> 'string|min:4|max:6',
+            'kriteria_ohis'=>'required|min:4|max:6'
+        ]);
+
+        Ohis::where('id', $ohis->id)
+            ->update($validatedData);
+
+        return back()->with('success', 'Data OHI-S Berhasil diubah');
     }
 
     /**
