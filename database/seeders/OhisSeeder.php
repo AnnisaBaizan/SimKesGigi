@@ -40,10 +40,9 @@ class OhisSeeder extends Seeder
 
              $diValues = [];
             $ciValues = [];
-            for ($j = 1; $j <= 6; $j++) {
-                // Generate random value between null, 1, 2, and 3
-                $diValue = rand(0, 3) === 0 ? null : rand(1, 3);
-                $ciValue = rand(0, 3) === 0 ? null : rand(1, 3);
+            for ($j = 1; $j <= 6; $j++) {// Generate random value between null, 0, 1, 2, and 3
+                $diValue = rand(0, 4) === 0 ? null : rand(0, 3);
+                $ciValue = rand(0, 4) === 0 ? null : rand(0, 3);
                 
                 $diValues[] = $diValue;
                 $ciValues[] = $ciValue;

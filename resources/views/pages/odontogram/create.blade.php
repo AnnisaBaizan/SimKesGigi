@@ -41,19 +41,19 @@
             }
 
             /* .custom-col-sm-3 { width: 6.25%; }
-                .custom-col-sm-4 { width: 6.25%; }
-                .custom-col-sm-5 { width: 6.25%; }
-                .custom-col-sm-6 { width: 6.25%; }
-                .custom-col-sm-7 { width: 6.25%; }
-                .custom-col-sm-8 { width: 6.25%; }
-                .custom-col-sm-9 { width: 6.25%; }
-                .custom-col-sm-10 { width: 6.25%; }
-                .custom-col-sm-11 { width: 6.25%; }
-                .custom-col-sm-12 { width: 6.25%; }
-                .custom-col-sm-13 { width: 6.25%; }
-                .custom-col-sm-14 { width: 6.25%; }
-                .custom-col-sm-15 { width: 6.25%; }
-                .custom-col-sm-16 { width: 6.25%; } */
+                    .custom-col-sm-4 { width: 6.25%; }
+                    .custom-col-sm-5 { width: 6.25%; }
+                    .custom-col-sm-6 { width: 6.25%; }
+                    .custom-col-sm-7 { width: 6.25%; }
+                    .custom-col-sm-8 { width: 6.25%; }
+                    .custom-col-sm-9 { width: 6.25%; }
+                    .custom-col-sm-10 { width: 6.25%; }
+                    .custom-col-sm-11 { width: 6.25%; }
+                    .custom-col-sm-12 { width: 6.25%; }
+                    .custom-col-sm-13 { width: 6.25%; }
+                    .custom-col-sm-14 { width: 6.25%; }
+                    .custom-col-sm-15 { width: 6.25%; }
+                    .custom-col-sm-16 { width: 6.25%; } */
         }
     </style>
     <div class="container-fluid py-4">
@@ -66,99 +66,99 @@
                     @csrf
 
                     @can('admin')
-                    <div class="form-group row">
-                        <div class="col-sm-4">
-                            <label for="user_id" class="form-text">Pilih Mahasiswa :</label>
-                        </div>
-                        <div class="col-sm-4">
-                            <select class="js-example-basic-single form-control @error('user_id') is-invalid @enderror"
-                                data-live-search="true" id="user_id" name="user_id" placeholder="Pilih Mahasiswa"
-                                value="{{ old('user_id') }}" required>
-                                @error('user_id')
+                        <div class="form-group row">
+                            <div class="col-sm-4">
+                                <label for="user_id" class="form-text">Pilih Mahasiswa :</label>
+                            </div>
+                            <div class="col-sm-4">
+                                <select class="js-example-basic-single form-control @error('user_id') is-invalid @enderror"
+                                    data-live-search="true" id="user_id" name="user_id" placeholder="Pilih Mahasiswa"
+                                    value="{{ old('user_id') }}" required>
+                                    @error('user_id')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                    <option value="" selected disabled>Pilih Mahasiswa</option>
+                                    @foreach ($users as $user)
+                                        <option value="{{ $user->id }}" data-pembimbing="{{ $user->pembimbing }}">
+                                            {{ ucwords($user->username) }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control @error('pembimbing') is-invalid_max @enderror"
+                                    id="pembimbing" name="pembimbing" placeholder="pembimbing" readonly required>
+                                @error('pembimbing')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
-                                <option value="" selected disabled>Pilih Mahasiswa</option>
-                                @foreach ($users as $user)
-                                    <option value="{{ $user->id }}" data-pembimbing="{{ $user->pembimbing }}">
-                                        {{ ucwords($user->username) }}</option>
-                                @endforeach
-                            </select>
+                            </div>
                         </div>
-                        <div class="col-sm-4">
-                            <input type="text" class="form-control @error('pembimbing') is-invalid_max @enderror"
-                                id="pembimbing" name="pembimbing" placeholder="pembimbing" readonly required>
+                        <div class="form-group row">
+                            <div class="col-sm-4">
+                                <label for="kartupasien_id" class="form-text">Pilih Pasien :</label>
+                            </div>
+                            <div class="col-sm-8">
+                                <select
+                                    class="js-example-basic-single form-control @error('kartupasien_id') is-invalid @enderror"
+                                    data-live-search="true" id="kartupasien_id" name="kartupasien_id" placeholder="Pilih Pasien"
+                                    value="{{ old('kartupasien_id') }}" required>
+                                    @error('kartupasien_id')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                    <option value="" selected disabled>Pilih Pasien</option>
+                                </select>
+                            </div>
+                        </div>
+                    @endcan
+
+                    @can('mahasiswa')
+                        <div class="col-sm-6">
+                            <input type="hidden" class="form-control @error('user_id') is-invalid_max @enderror" id="user_id"
+                                name="user_id" placeholder="user_id" value="{{ auth()->user()->id }}" required>
+                            @error('user_id')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                        <div class="col-sm-6">
+                            <input type="hidden" class="form-control @error('pembimbing') is-invalid_max @enderror"
+                                id="pembimbing" name="pembimbing" placeholder="pembimbing"
+                                value="{{ auth()->user()->pembimbing }}" required>
                             @error('pembimbing')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
                         </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-sm-4">
-                            <label for="kartupasien_id" class="form-text">Pilih Pasien :</label>
+                        <div class="form-group row">
+                            <div class="col-sm-4">
+                                <label for="kartupasien_id" class ="form-text">Pilih Pasien :</label>
+                            </div>
+                            <div class="col-sm-8">
+                                <select
+                                    class="js-example-basic-single form-control @error('kartupasien_id') is-invalid @enderror"
+                                    data-live-search="true" id="kartupasien_id" name="kartupasien_id" placeholder="Pilih Pasien"
+                                    value="{{ old('kartupasien_id') }}" required>
+                                    @error('kartupasien_id')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                    <option value="" selected disabled>Pilih Pasien</option>
+                                    @foreach ($kartupasiens as $kartupasien)
+                                        <option value="{{ $kartupasien->id }}">{{ $kartupasien->no_kartu }} |
+                                            {{ $kartupasien->nama }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
                         </div>
-                        <div class="col-sm-8">
-                            <select
-                                class="js-example-basic-single form-control @error('kartupasien_id') is-invalid @enderror"
-                                data-live-search="true" id="kartupasien_id" name="kartupasien_id" placeholder="Pilih Pasien"
-                                value="{{ old('kartupasien_id') }}" required>
-                                @error('kartupasien_id')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                                <option value="" selected disabled>Pilih Pasien</option>
-                            </select>
-                        </div>
-                    </div>
-                @endcan
-
-                @can('mahasiswa')
-                    <div class="col-sm-6">
-                        <input type="hidden" class="form-control @error('user_id') is-invalid_max @enderror" id="user_id"
-                            name="user_id" placeholder="user_id" value="{{ auth()->user()->id }}" required>
-                        @error('user_id')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-                    <div class="col-sm-6">
-                        <input type="hidden" class="form-control @error('pembimbing') is-invalid_max @enderror"
-                            id="pembimbing" name="pembimbing" placeholder="pembimbing"
-                            value="{{ auth()->user()->pembimbing }}" required>
-                        @error('pembimbing')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-sm-4">
-                            <label for="kartupasien_id" class ="form-text">Pilih Pasien :</label>
-                        </div>
-                        <div class="col-sm-8">
-                            <select
-                                class="js-example-basic-single form-control @error('kartupasien_id') is-invalid @enderror"
-                                data-live-search="true" id="kartupasien_id" name="kartupasien_id" placeholder="Pilih Pasien"
-                                value="{{ old('kartupasien_id') }}" required>
-                                @error('kartupasien_id')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                                <option value="" selected disabled>Pilih Pasien</option>
-                                @foreach ($kartupasiens as $kartupasien)
-                                    <option value="{{ $kartupasien->id }}">{{ $kartupasien->no_kartu }} |
-                                        {{ $kartupasien->nama }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
-                @endcan
+                    @endcan
 
                     <div class="col-sm-12 mb-3 mb-sm-0 text-center bg-gradient-faded-info-vertical">
                         <marquee>
@@ -1172,71 +1172,6 @@
             $('.js-example-basic-multiple').select2();
         });
     </script>
-    {{-- <script>
-    // Fungsi untuk menghitung jumlah selected option dengan nilai tertentu
-    function hitungJumlahSelected(className, nilaiOption) {
-      var dropdowns = document.getElementsByClassName(className);
-      var jumlahSelected = 0;
-  
-      // Loop through all select elements with the given class
-      for (var i = 0; i < dropdowns.length; i++) {
-        var selectedOption = dropdowns[i].value;
-        if (selectedOption == nilaiOption) {
-          jumlahSelected++;
-        }
-      }
-  
-      return jumlahSelected;
-    }
-  
-    // Fungsi untuk mengupdate nilai pada element HTML berdasarkan id
-    function updateNilaiElement(idElement, nilai) {
-      document.getElementById(idElement).value = nilai;
-    }
-  
-    // Fungsi untuk mengupdate nilai pada element HTML berdasarkan id (khusus untuk tampilan)
-    function updateNilaiElementTampilan(idElement, nilai) {
-      document.getElementById(idElement).textContent = nilai;
-    }
-  
-    // Fungsi untuk menghitung dan menampilkan hasil perhitungan
-    function hitungDanTampilkan() {
-      // Menghitung jumlah tetap
-      var jumlahTetapD = hitungJumlahSelected('select-option', '1') + hitungJumlahSelected('select-option', '2');
-      var jumlahTetapM = hitungJumlahSelected('select-option', '4');
-      var jumlahTetapF = hitungJumlahSelected('select-option', '3');
-  
-      // Menampilkan jumlah tetap pada elemen HTML
-      updateNilaiElement('jumlah_tetap_d', jumlahTetapD);
-      updateNilaiElement('jumlah_tetap_m', jumlahTetapM);
-      updateNilaiElement('jumlah_tetap_f', jumlahTetapF);
-  
-      // Menghitung dan menampilkan DMF-T
-      var dmfT = jumlahTetapD + jumlahTetapM + jumlahTetapF;
-      updateNilaiElementTampilan('dmf_t', dmfT);
-  
-      // Menghitung jumlah susu
-      var jumlahSusuD = hitungJumlahSelected('select-option', 'B') + hitungJumlahSelected('select-option', 'C');
-      var jumlahSusuE = hitungJumlahSelected('select-option', 'E');
-      var jumlahSusuF = hitungJumlahSelected('select-option', 'D');
-  
-      // Menampilkan jumlah susu pada elemen HTML
-      updateNilaiElement('jumlah_susu_d', jumlahSusuD);
-      updateNilaiElement('jumlah_susu_e', jumlahSusuE);
-      updateNilaiElement('jumlah_susu_f', jumlahSusuF);
-  
-      // Menghitung dan menampilkan DEF-T
-      var defT = jumlahSusuD + jumlahSusuE + jumlahSusuF;
-      updateNilaiElementTampilan('def_t', defT);
-    }
-  
-    // Mengaitkan fungsi hitungDanTampilkan() dengan event change pada setiap select dengan class 'select-option'
-    var selectOptions = document.getElementsByClassName('select-option');
-    for (var i = 0; i < selectOptions.length; i++) {
-      selectOptions[i].addEventListener('change', hitungDanTampilkan);
-    }
-</script> --}}
-    <!-- Add this script to the end of your HTML file, just before the closing </body> tag -->
     <script>
         // Function to calculate and update the counts
         function updateCounts() {
@@ -1318,42 +1253,42 @@
         updateCounts();
     </script>
     <script>
-      $(document).ready(function() {
-          $('#user_id').change(function() {
-              var selectedOption = $(this).find(':selected');
-              var pembimbingValue = selectedOption.data('pembimbing');
-              $('#pembimbing').val(pembimbingValue);
-          });
-      });
-      $(function() {
-          $.ajaxSetup({
-              headers: {
-                  'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-              }
-          });
-    
-          $('#user_id').on('change', function() {
-              var user_id = $("#user_id").val();
-              var pembimbing = $("#pembimbing").val();
-    
-              $.ajax({
-                  url: '/getPatients',
-                  type: 'POST',
-                  data: {
-                      user_id: user_id,
-                      pembimbing: pembimbing
-                  },
-                  cache: false,
-    
-                  success: function(msg) {
-                      $("#kartupasien_id").html(msg);
-                  },
-    
-                  error: function(data) {
-                      console.log('error:', data);
-                  }
-              });
-          });
-      });
+        $(document).ready(function() {
+            $('#user_id').change(function() {
+                var selectedOption = $(this).find(':selected');
+                var pembimbingValue = selectedOption.data('pembimbing');
+                $('#pembimbing').val(pembimbingValue);
+            });
+        });
+        $(function() {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $('#user_id').on('change', function() {
+                var user_id = $("#user_id").val();
+                var pembimbing = $("#pembimbing").val();
+
+                $.ajax({
+                    url: '/getPatients',
+                    type: 'POST',
+                    data: {
+                        user_id: user_id,
+                        pembimbing: pembimbing
+                    },
+                    cache: false,
+
+                    success: function(msg) {
+                        $("#kartupasien_id").html(msg);
+                    },
+
+                    error: function(data) {
+                        console.log('error:', data);
+                    }
+                });
+            });
+        });
     </script>
 @endsection
