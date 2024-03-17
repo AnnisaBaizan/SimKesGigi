@@ -177,8 +177,12 @@
                                             <td>{{ $anamripasien->user->username }}</td>
                                         @endcan
                                         <td>{{ $anamripasien->kartupasien->no_kartu }} | {{ $anamripasien->kartupasien->nama }}</td>
-                                        <td>{{ $anamripasien->klhn_utama }}</td>
-                                        <td>{{ $anamripasien->klhn_tmbhn }}</td>
+                                        <td>
+                                            {{ strlen($anamripasien->klhn_utama) > 25 ? substr($anamripasien->klhn_utama, 0, 25) . ' . . .' : $anamripasien->klhn_utama }}
+                                        </td>
+                                        <td>
+                                            {{ strlen($anamripasien->klhn_tmbhn) > 25 ? substr($anamripasien->klhn_tmbhn, 0, 25) . ' . . .' : $anamripasien->klhn_tmbhn }}
+                                        </td>
                                         <td>{{ $anamripasien->goldar }}</td>
                                         <td>{{ $anamripasien->tknn_drh }} {{ $anamripasien->ktrgn_drh }}</td>
                                         <td>{{ $anamripasien->nadi }}</td>
@@ -189,9 +193,12 @@
                                         <td>{{ $anamripasien->haemophilia }}</td>
                                         <td>{{ $anamripasien->hepatitis }}</td>
                                         <td>{{ $anamripasien->lambung }}</td>
-                                        <td>{{ $anamripasien->pnykt_ln }} | {{ $anamripasien->nm_pnykt_ln }}</td>
-                                        <td>{{ $anamripasien->alergi_obat }} | {{ $anamripasien->nm_obat }}</td>
-                                        <td>{{ $anamripasien->alergi_mkn }} | {{ $anamripasien->nm_mkn }}</td>
+                                        <td>{{ $anamripasien->pnykt_ln === "Ada" ? $anamripasien->pnykt_ln . ' | ' . $anamripasien->nm_pnykt_ln : $anamripasien->pnykt_ln }}
+                                        </td>
+                                        <td>{{ $anamripasien->alergi_obat === "Ada" ? $anamripasien->alergi_obat . ' | ' . $anamripasien->nm_obat : $anamripasien->alergi_obat }}
+                                        </td>
+                                        <td>{{ $anamripasien->alergi_mkn === "Ada" ? $anamripasien->alergi_mkn . ' | ' . $anamripasien->nm_mkn : $anamripasien->alergi_mkn }}
+                                        </td>
                                         <td>{{ date_format($anamripasien->created_at, "d M Y") }}</td>
                                         <td>
                                         <a href ="{{route('anamripasien.show', $anamripasien->id)}}" title="show" class="btn btn-sm btn-icon-split btn-primary">

@@ -70,23 +70,59 @@ class AnomalimukosaController extends Controller
     {
         
         $validatedData = $request->validate([
-            'no_kartu'=> 'required|max:9999999999999|min:1|numeric',
-            'nama' => 'required|max:40|min:4',
-            'no_iden' => 'required|max:20',
-            'tgl_lhr' => 'required|max:20|date',
-            'umur' => 'required|max:999|min:1|numeric',
-            'jk' => 'required|max:10',
-            'suku' => 'required|max:40',
-            'pekerjaan' => 'required|max:100',
-            'hub' => 'required|max:50',
-            'no_hp' => 'required|max:9999999999999|min:1|numeric',
-            'no_tlpn' => 'required|max:9999999999999|min:1|numeric',
-            'alamat' =>'required|max:255'
+            'user_id' => 'required',
+            'pembimbing' => 'required',
+            'kartupasien_id' => 'required',
+
+            'occlusi'=>'required|min:10|max:11',
+            'bentuk'=> 'required|min:6|max:8',
+            'warna'=> 'required|min:6|max:8',
+            'posisi'=> 'required|min:6|max:8',
+            'ukuran'=> 'required|min:6|max:8',
+            'struktur'=> 'required|min:6|max:8',
+
+            //mukosa mulut
+            
+            // lidah
+            'w_lidah'=> 'required|max:9|min:3',
+            'dw_lidah'=>'nullable',
+            'i_lidah'=> 'required|max:9|min:3',
+            'di_lidah'=>'nullable',
+            'u_lidah'=> 'required|max:9|min:3',
+            'du_lidah'=>'nullable',
+            // pipi
+            'w_pipi'=> 'required|max:9|min:3',
+            'dw_pipi'=>'nullable',
+            'i_pipi'=> 'required|max:9|min:3',
+            'di_pipi'=>'nullable',
+            'u_pipi'=> 'required|max:9|min:3',
+            'du_pipi'=>'nullable',
+            // palatum
+            'w_palatum'=> 'required|max:9|min:3',
+            'dw_palatum'=>'nullable',
+            'i_palatum'=> 'required|max:9|min:3',
+            'di_palatum'=>'nullable',
+            'u_palatum'=> 'required|max:9|min:3',
+            'du_palatum'=>'nullable',
+            // gingiva
+            'w_gingiva'=> 'required|max:9|min:3',
+            'dw_gingiva'=>'nullable',
+            'i_gingiva'=> 'required|max:9|min:3',
+            'di_gingiva'=>'nullable',
+            'u_gingiva'=> 'required|max:9|min:3',
+            'du_gingiva'=>'nullable',
+            // bibir
+            'w_bibir'=>'required|max:9|min:3',
+            'dw_bibir'=>'nullable',
+            'i_bibir'=> 'required|max:9|min:3',
+            'di_bibir'=>'nullable',
+            'u_bibir'=>'required|max:9|min:3',
+            'du_bibir'=>'nullable'
         ]);
 
         Anomalimukosa::create($validatedData);
 
-        return redirect('/anomalimukosa')->with('succes', 'Data Anomali Gigi dan Mukosa Mulut Berhasil Dibuat');
+        return redirect('/anomalimukosa')->with('success', 'Data Anomali Gigi dan Mukosa Mulut Berhasil Dibuat');
     }
 
     /**
@@ -109,7 +145,10 @@ class AnomalimukosaController extends Controller
     public function edit(Anomalimukosa $anomalimukosa)
     {
         if (auth()->user()->role === 1) {
-            $kartupasiens = kartupasien::all();
+            $kartupasiens = kartupasien::where('user_id', $anomalimukosa->user_id)
+                                    ->where('pembimbing', $anomalimukosa->pembimbing)
+                                    ->get();
+            // $kartupasiens = kartupasien::all();
             $users = User::where('role', 3)->get();
         } 
         elseif (auth()->user()->role === 2) {
@@ -137,13 +176,59 @@ class AnomalimukosaController extends Controller
     {
           
         $validatedData = $request->validate([
-            'kode' => 'required|max:9999999999999|digits_between:1,4|numeric',
-            'soal' =>'required'
+            'user_id' => 'required',
+            'pembimbing' => 'required',
+            'kartupasien_id' => 'required',
+
+            'occlusi'=>'required|min:10|max:11',
+            'bentuk'=> 'required|min:6|max:8',
+            'warna'=> 'required|min:6|max:8',
+            'posisi'=> 'required|min:6|max:8',
+            'ukuran'=> 'required|min:6|max:8',
+            'struktur'=> 'required|min:6|max:8',
+
+            //mukosa mulut
+            
+            // lidah
+            'w_lidah'=> 'required|max:9|min:3',
+            'dw_lidah'=>'nullable',
+            'i_lidah'=> 'required|max:9|min:3',
+            'di_lidah'=>'nullable',
+            'u_lidah'=> 'required|max:9|min:3',
+            'du_lidah'=>'nullable',
+            // pipi
+            'w_pipi'=> 'required|max:9|min:3',
+            'dw_pipi'=>'nullable',
+            'i_pipi'=> 'required|max:9|min:3',
+            'di_pipi'=>'nullable',
+            'u_pipi'=> 'required|max:9|min:3',
+            'du_pipi'=>'nullable',
+            // palatum
+            'w_palatum'=> 'required|max:9|min:3',
+            'dw_palatum'=>'nullable',
+            'i_palatum'=> 'required|max:9|min:3',
+            'di_palatum'=>'nullable',
+            'u_palatum'=> 'required|max:9|min:3',
+            'du_palatum'=>'nullable',
+            // gingiva
+            'w_gingiva'=> 'required|max:9|min:3',
+            'dw_gingiva'=>'nullable',
+            'i_gingiva'=> 'required|max:9|min:3',
+            'di_gingiva'=>'nullable',
+            'u_gingiva'=> 'required|max:9|min:3',
+            'du_gingiva'=>'nullable',
+            // bibir
+            'w_bibir'=>'required|max:9|min:3',
+            'dw_bibir'=>'nullable',
+            'i_bibir'=> 'required|max:9|min:3',
+            'di_bibir'=>'nullable',
+            'u_bibir'=>'required|max:9|min:3',
+            'du_bibir'=>'nullable'
         ]);
         Anomalimukosa::where('id', $anomalimukosa->id)
             ->update($validatedData);
 
-        return back()->with('succes', 'Data Anomali Gigi dan Mukosa Mulut berhasil diubah');
+        return back()->with('success', 'Data Anomali Gigi dan Mukosa Mulut berhasil diubah');
     }
 
     /**
@@ -155,6 +240,6 @@ class AnomalimukosaController extends Controller
     public function destroy(Anomalimukosa $anomalimukosa)
     {
         Anomalimukosa::destroy($anomalimukosa->id);
-        return back()->with('succes', 'Data anomalimukosa berhasil dihapus');
+        return back()->with('success', 'Data anomalimukosa berhasil dihapus');
     }
 }

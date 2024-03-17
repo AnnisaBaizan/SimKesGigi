@@ -170,7 +170,10 @@ class OdontogramController extends Controller
     public function edit(Odontogram $odontogram)
     {
         if (auth()->user()->role === 1) {
-            $kartupasiens = kartupasien::all();
+            $kartupasiens = kartupasien::where('user_id', $odontogram->user_id)
+                                    ->where('pembimbing', $odontogram->pembimbing)
+                                    ->get();
+            // $kartupasiens = kartupasien::all();
             $users = User::where('role', 3)->get();
         } 
         elseif (auth()->user()->role === 2) {

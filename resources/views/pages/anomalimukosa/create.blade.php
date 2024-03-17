@@ -174,7 +174,7 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
-                                <option value="" selected disabled>pilih</option>
+                                <option value="" selected disabled>Pilih</option>
                                 <option value="Normal bite">Normal bite</option>
                                 <option value="Cross bite">Cross bite</option>
                                 <option value="Steep bite">Steep bite</option>
@@ -189,7 +189,7 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
-                                <option value="" selected disabled>pilih</option>
+                                <option value="" selected disabled>Pilih</option>
                                 <option value="Normal">Normal</option>
                                 <option value="Abnormal">Abnormal</option>
                             </select>
@@ -205,7 +205,7 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
-                                <option value="" selected disabled>pilih</option>
+                                <option value="" selected disabled>Pilih</option>
                                 <option value="Normal">Normal</option>
                                 <option value="Abnormal">Abnormal</option>
                             </select>
@@ -219,7 +219,7 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
-                                <option value="" selected disabled>pilih</option>
+                                <option value="" selected disabled>Pilih</option>
                                 <option value="Normal">Normal</option>
                                 <option value="Abnormal">Abnormal</option>
                             </select>
@@ -235,7 +235,7 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
-                                <option value="" selected disabled>pilih</option>
+                                <option value="" selected disabled>Pilih</option>
                                 <option value="Normal">Normal</option>
                                 <option value="Abnormal">Abnormal</option>
                             </select>
@@ -249,7 +249,7 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
-                                <option value="" selected disabled>pilih</option>
+                                <option value="" selected disabled>Pilih</option>
                                 <option value="Normal">Normal</option>
                                 <option value="Abnormal">Abnormal</option>
                             </select>

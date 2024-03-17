@@ -48,7 +48,7 @@ class OdontogramSeeder extends Seeder
 
             $kodeValues = [];
             foreach ($kodeColumns as $kodeColumn) {
-                $kodeValues['kode_' . $kodeColumn] = rand(0, 10) === 0 ? null : rand(1, 9); // Random integer between 0 and 9
+                $kodeValues['kode_' . $kodeColumn] = rand(0, 10) === 0 ? null : rand(0, 9); // Random integer between 0 and 9
             }
 
             // Generate random Huruf A-G for kode_ columns

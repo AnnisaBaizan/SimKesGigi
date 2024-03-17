@@ -404,7 +404,7 @@
     @include('layouts.footers.auth.footer')
 @endsection
 @section('js')
-    @can('mahasiswa')
+    @can('adminmahasiswa')
         <script type="text/javascript">
             function handleDelete(id) {
                 let form = document.getElementById('deleteForm')
