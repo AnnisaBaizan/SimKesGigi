@@ -121,12 +121,15 @@
                                         <th>Limpe Kiri Texture</th>
                                         <th>Limpe Kiri Sakit</th>
                                         {{-- Internal Oral Plak--}}
+                                        <th style="display: none;">Gigi lokasi Plak</th>
                                         <th>Gigi lokasi Plak</th>
                                         <th>Gigi Ada Plak</th>
                                         <th>Nilai</th>
                                         <th>Score</th>
                                         <th>Kriteria</th>
                                         {{-- Internal Oral Kalkulus--}}
+                                        <th style="display: none;">Kalkulus Supragingiva</th>
+                                        <th style="display: none;">Kalkulus subgingiva</th>
                                         <th>Kalkulus Supragingiva</th>
                                         <th>Kalkulus subgingiva</th>
                                         <th>Dibuat</th>
@@ -156,12 +159,15 @@
                                         <th>Limpe Kiri Texture</th>
                                         <th>Limpe Kiri Sakit</th>
                                         {{-- Internal Oral Plak--}}
+                                        <th style="display: none;">Gigi lokasi Plak</th>
                                         <th>Gigi lokasi Plak</th>
                                         <th>Gigi dengan Plak</th>
                                         <th>Nilai</th>
                                         <th>Score</th>
                                         <th>Kriteria</th>
                                         {{-- Internal Oral Kalkulus--}}
+                                        <th style="display: none;">Kalkulus Supragingiva</th>
+                                        <th style="display: none;">Kalkulus subgingiva</th>
                                         <th>Kalkulus Supragingiva</th>
                                         <th>Kalkulus subgingiva</th>
                                         <th>Dibuat</th>
@@ -236,6 +242,7 @@
                                         </td>
                                         
                                         {{-- Internal Oral Plak--}}
+                                        <td style="display: none;">{{ $eksplakkal->plak}}</td>
                                         <td>{{ strlen($eksplakkal->plak) > 25 ? substr($eksplakkal->plak, 0, 25) . ' . . .' : $eksplakkal->plak }}</td>
                                         <td>{{ $eksplakkal->jumlah_plak}}</td>
                                         <td>{{ $eksplakkal->jumlah_tidak_plak}} / {{ $eksplakkal->jumlah_permukaan}}</td>
@@ -249,6 +256,8 @@
                                         </td>
                                         
                                         {{-- Internal Oral Kalkulus--}}
+                                        <td style="display: none;">{{ $eksplakkal->supragingiva}}</td>
+                                        <td style="display: none;">{{ $eksplakkal->subgingiva}}</td>
                                         <td>{{ strlen($eksplakkal->supragingiva) > 25 ? substr($eksplakkal->supragingiva, 0, 25) . ' . . .' : $eksplakkal->supragingiva }}</td>
                                         <td>{{ strlen($eksplakkal->subgingiva) > 25 ? substr($eksplakkal->subgingiva, 0, 25) . ' . . .' : $eksplakkal->subgingiva }}</td>
                                         
@@ -305,7 +314,7 @@ function handleDelete(id) {
 </script>
 @endcan
 
-@can('adminpembimbing')
+@can('admin')
 <script type="text/javascript">
 $(document).ready( function () {
     $.fn.dataTable.ext.search.push(
@@ -313,7 +322,7 @@ $(document).ready( function () {
             var min = minDate.val();
             var max = maxDate.val();
             // data[1] is the date column
-            var date = new Date( data[18] );
+            var date = new Date( data[21] );
 
             if (
                 ( min === null && max === null ) ||
@@ -347,31 +356,31 @@ $(document).ready( function () {
             {
                 extend: 'copyHtml5',
                 exportOptions: {
-                    columns: [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ]
+                    columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 13, 14, 15, 16, 17, 18, 21 ]
                 }
             },
             {
                 extend: 'print',
                 exportOptions: {
-                    columns: [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ]
+                    columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 13, 14, 15, 16, 17, 18, 21 ]
                 }
             },
             {
                 extend: 'excelHtml5',
                 exportOptions: {
-                    columns: [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ]
+                    columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 13, 14, 15, 16, 17, 18, 21 ]
                 }
             },
             {
                 extend: 'csvHtml5',
                 exportOptions: {
-                    columns: [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ]
+                    columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 13, 14, 15, 16, 17, 18, 21 ]
                 }
             },
             {
                 extend: 'pdfHtml5',
                 exportOptions: {
-                    columns: [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ]
+                    columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 13, 14, 15, 16, 17, 18, 21 ]
                 }
             },
             'colvis'
@@ -380,7 +389,79 @@ $(document).ready( function () {
     } );
 </script>
 @endcan
-<script>
+@can('pembimbing')
+<script type="text/javascript">
+$(document).ready( function () {
+    $.fn.dataTable.ext.search.push(
+        function( settings, data, dataIndex ) {
+            var min = minDate.val();
+            var max = maxDate.val();
+            // data[1] is the date column
+            var date = new Date( data[20] );
 
+            if (
+                ( min === null && max === null ) ||
+                ( min === null && date <= max ) ||
+                ( min <= date  && max === null ) ||
+                ( min <= date  && date <= max )
+            ) 
+            {
+                return true;
+            }
+                return false;
+            }
+        );
+
+        // Refilter the table
+        $('#min, #max').on('change', function () {
+            table.draw();
+        });
+
+        // Create date inputs
+        minDate = new DateTime($('#min'), {
+            format: 'DD MMM YYYY'
+        });
+        maxDate = new DateTime($('#max'), {
+            format: 'DD MMM YYYY'
+        });
+
+        var table = $('#dataTable').DataTable( {
+            dom: 'Bfrtip',
+            buttons: [
+            {
+                extend: 'copyHtml5',
+                exportOptions: {
+                    columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 15, 16, 17, 20 ]
+                }
+            },
+            {
+                extend: 'print',
+                exportOptions: {
+                    columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 15, 16, 17, 20 ]
+                }
+            },
+            {
+                extend: 'excelHtml5',
+                exportOptions: {
+                    columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 15, 16, 17, 20 ]
+                }
+            },
+            {
+                extend: 'csvHtml5',
+                exportOptions: {
+                    columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 15, 16, 17, 20 ]
+                }
+            },
+            {
+                extend: 'pdfHtml5',
+                exportOptions: {
+                    columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 15, 16, 17, 20 ]
+                }
+            },
+            'colvis'
+        ]
+        } );
+    } );
 </script>
+@endcan
 @endsection

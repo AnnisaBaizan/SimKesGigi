@@ -110,6 +110,8 @@
                                         <th>Mahasiswa</th>
                                       @endcan
                                       <th>No_Kartu & Nama Pasien</th>
+                                      <th style="display: none;">Keluhan Utama</th>
+                                      <th style="display: none;">Keluhan Tambahan</th>
                                       <th>Keluhan Utama</th>
                                       <th>Keluhan Tambahan</th>
                                       <th>GoDar</th>
@@ -143,6 +145,8 @@
                                           <th>Mahasiswa</th>
                                         @endcan
                                         <th>No_Kartu & Nama Pasien</th>
+                                        <th style="display: none;">Keluhan Utama</th>
+                                        <th style="display: none;">Keluhan Tambahan</th>
                                         <th>Keluhan Utama</th>
                                         <th>Keluhan Tambahan</th>
                                         <th>GoDar</th>
@@ -177,6 +181,8 @@
                                             <td>{{ $anamripasien->user->username }}</td>
                                         @endcan
                                         <td>{{ $anamripasien->kartupasien->no_kartu }} | {{ $anamripasien->kartupasien->nama }}</td>
+                                        <td style="display: none;">{{ $anamripasien->klhn_utama }}</td>
+                                        <td style="display: none;">{{ $anamripasien->klhn_tmbhn }}</td>
                                         <td>
                                             {{ strlen($anamripasien->klhn_utama) > 25 ? substr($anamripasien->klhn_utama, 0, 25) . ' . . .' : $anamripasien->klhn_utama }}
                                         </td>
@@ -246,7 +252,7 @@
     </script>
     @endcan
 
-    @can('adminpembimbing')
+    @can('admin')
     <script type="text/javascript">
     $(document).ready( function () {
         $.fn.dataTable.ext.search.push(
@@ -254,7 +260,7 @@
                 var min = minDate.val();
                 var max = maxDate.val();
                 // data[1] is the date column
-                var date = new Date( data[17] );
+                var date = new Date( data[21] );
 
                 if (
                     ( min === null && max === null ) ||
@@ -288,31 +294,31 @@
                 {
                     extend: 'copyHtml5',
                     exportOptions: {
-                        columns: [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ]
+                        columns: [ 0, 1, 2, 3, 4, 5, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21 ]
                     }
                 },
                 {
                     extend: 'print',
                     exportOptions: {
-                        columns: [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ]
+                        columns: [ 0, 1, 2, 3, 4, 5, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21 ]
                     }
                 },
                 {
                     extend: 'excelHtml5',
                     exportOptions: {
-                        columns: [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ]
+                        columns: [ 0, 1, 2, 3, 4, 5, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21 ]
                     }
                 },
                 {
                     extend: 'csvHtml5',
                     exportOptions: {
-                        columns: [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ]
+                        columns: [ 0, 1, 2, 3, 4, 5, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21 ]
                     }
                 },
                 {
                     extend: 'pdfHtml5',
                     exportOptions: {
-                        columns: [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ]
+                        columns: [ 0, 1, 2, 3, 4, 5, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21 ]
                     }
                 },
                 'colvis'
@@ -321,4 +327,79 @@
         } );
   </script>
   @endcan
+  @can('pembimbing')
+  <script type="text/javascript">
+  $(document).ready( function () {
+      $.fn.dataTable.ext.search.push(
+          function( settings, data, dataIndex ) {
+              var min = minDate.val();
+              var max = maxDate.val();
+              // data[1] is the date column
+              var date = new Date( data[20] );
+
+              if (
+                  ( min === null && max === null ) ||
+                  ( min === null && date <= max ) ||
+                  ( min <= date  && max === null ) ||
+                  ( min <= date  && date <= max )
+              ) 
+              {
+                  return true;
+              }
+                  return false;
+              }
+          );
+
+          // Refilter the table
+          $('#min, #max').on('change', function () {
+              table.draw();
+          });
+
+          // Create date inputs
+          minDate = new DateTime($('#min'), {
+              format: 'DD MMM YYYY'
+          });
+          maxDate = new DateTime($('#max'), {
+              format: 'DD MMM YYYY'
+          });
+
+          var table = $('#dataTable').DataTable( {
+              dom: 'Bfrtip',
+              buttons: [
+              {
+                  extend: 'copyHtml5',
+                  exportOptions: {
+                      columns: [ 0, 1, 2, 3, 4, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20 ]
+                  }
+              },
+              {
+                  extend: 'print',
+                  exportOptions: {
+                      columns: [ 0, 1, 2, 3, 4, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20 ]
+                  }
+              },
+              {
+                  extend: 'excelHtml5',
+                  exportOptions: {
+                      columns: [ 0, 1, 2, 3, 4, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20 ]
+                  }
+              },
+              {
+                  extend: 'csvHtml5',
+                  exportOptions: {
+                      columns: [ 0, 1, 2, 3, 4, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20 ]
+                  }
+              },
+              {
+                  extend: 'pdfHtml5',
+                  exportOptions: {
+                      columns: [ 0, 1, 2, 3, 4, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20 ]
+                  }
+              },
+              'colvis'
+          ]
+          } );
+      } );
+</script>
+@endcan
 @endsection

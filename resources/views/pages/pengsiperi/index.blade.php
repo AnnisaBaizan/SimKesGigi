@@ -140,6 +140,7 @@
                                         <th>Nilai Perilaku</th>
                                         <th>Berperilaku</th>
 
+                                        <th style="display: none;">Peran Orang Tua</th>
                                         <th>Peran Orang Tua</th>
 
                                         <th>Dibuat</th>
@@ -178,6 +179,7 @@
                                         <th>Nilai Perilaku</th>
                                         <th>Berperilaku</th>
 
+                                        <th style="display: none;">Peran Orang Tua</th>
                                         <th>Peran Orang Tua</th>
 
                                         <th>Dibuat</th>
@@ -321,6 +323,34 @@
                                                 @endif
                                             </td>
 
+                                            <td style="display: none;">
+                                                @php
+                                                    $peran_ortu_combined = '';
+                                                    $peran_ortu_array = explode(',', $pengsiperi->peran_ortu);
+                                            
+                                                    foreach ($peran_ortu_array as $index => $peran_ortu) {
+                                                        switch ($peran_ortu) {
+                                                            case 1:
+                                                                $peran_ortu_combined .= 'Mendampingi menggosok gigi ';
+                                                                break;
+                                                            case 2:
+                                                                $peran_ortu_combined .= 'Memerintahkan menggosok gigi ';
+                                                                break;
+                                                            case 3:
+                                                                $peran_ortu_combined .= 'Menganjurkan berkumur setiap makan manis-manis ';
+                                                                break;
+                                                        }
+                                            
+                                                        if ($index < count($peran_ortu_array) - 1 && count($peran_ortu_array) > 1) {
+                                                            $peran_ortu_combined .= '| ';
+                                                        }
+                                                    }
+                                            
+                                                    echo $peran_ortu_combined;
+                                                @endphp
+                                            </td>
+                                            
+
                                             <td>
                                                 @php
                                                     $peran_ortu_combined = '';
@@ -422,6 +452,79 @@
                         var min = minDate.val();
                         var max = maxDate.val();
                         // data[1] is the date column
+                        var date = new Date(data[18]);
+
+                        if (
+                            (min === null && max === null) ||
+                            (min === null && date <= max) ||
+                            (min <= date && max === null) ||
+                            (min <= date && date <= max)
+                        ) {
+                            return true;
+                        }
+                        return false;
+                    }
+                );
+
+                // Refilter the table
+                $('#min, #max').on('change', function() {
+                    table.draw();
+                });
+
+                // Create date inputs
+                minDate = new DateTime($('#min'), {
+                    format: 'DD MMM YYYY'
+                });
+                maxDate = new DateTime($('#max'), {
+                    format: 'DD MMM YYYY'
+                });
+
+                var table = $('#dataTable').DataTable({
+                    dom: 'Bfrtip',
+                    buttons: [{
+                            extend: 'copyHtml5',
+                            exportOptions: {
+                                columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 18]
+                            }
+                        },
+                        {
+                            extend: 'print',
+                            exportOptions: {
+                                columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 18]
+                            }
+                        },
+                        {
+                            extend: 'excelHtml5',
+                            exportOptions: {
+                                columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 18]
+                            }
+                        },
+                        {
+                            extend: 'csvHtml5',
+                            exportOptions: {
+                                columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 18]
+                            }
+                        },
+                        {
+                            extend: 'pdfHtml5',
+                            exportOptions: {
+                                columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 18]
+                            }
+                        },
+                        'colvis'
+                    ]
+                });
+            });
+        </script>
+    @endcan
+    @can('pembimbing')
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $.fn.dataTable.ext.search.push(
+                    function(settings, data, dataIndex) {
+                        var min = minDate.val();
+                        var max = maxDate.val();
+                        // data[1] is the date column
                         var date = new Date(data[17]);
 
                         if (
@@ -454,104 +557,31 @@
                     buttons: [{
                             extend: 'copyHtml5',
                             exportOptions: {
-                                columns: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
+                                columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 17]
                             }
                         },
                         {
                             extend: 'print',
                             exportOptions: {
-                                columns: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
+                                columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 17]
                             }
                         },
                         {
                             extend: 'excelHtml5',
                             exportOptions: {
-                                columns: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
+                                columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 17]
                             }
                         },
                         {
                             extend: 'csvHtml5',
                             exportOptions: {
-                                columns: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
+                                columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 17]
                             }
                         },
                         {
                             extend: 'pdfHtml5',
                             exportOptions: {
-                                columns: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
-                            }
-                        },
-                        'colvis'
-                    ]
-                });
-            });
-        </script>
-    @endcan
-    @can('pembimbing')
-        <script type="text/javascript">
-            $(document).ready(function() {
-                $.fn.dataTable.ext.search.push(
-                    function(settings, data, dataIndex) {
-                        var min = minDate.val();
-                        var max = maxDate.val();
-                        // data[1] is the date column
-                        var date = new Date(data[16]);
-
-                        if (
-                            (min === null && max === null) ||
-                            (min === null && date <= max) ||
-                            (min <= date && max === null) ||
-                            (min <= date && date <= max)
-                        ) {
-                            return true;
-                        }
-                        return false;
-                    }
-                );
-
-                // Refilter the table
-                $('#min, #max').on('change', function() {
-                    table.draw();
-                });
-
-                // Create date inputs
-                minDate = new DateTime($('#min'), {
-                    format: 'DD MMM YYYY'
-                });
-                maxDate = new DateTime($('#max'), {
-                    format: 'DD MMM YYYY'
-                });
-
-                var table = $('#dataTable').DataTable({
-                    dom: 'Bfrtip',
-                    buttons: [{
-                            extend: 'copyHtml5',
-                            exportOptions: {
-                                columns: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
-                            }
-                        },
-                        {
-                            extend: 'print',
-                            exportOptions: {
-                                columns: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
-                            }
-                        },
-                        {
-                            extend: 'excelHtml5',
-                            exportOptions: {
-                                columns: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
-                            }
-                        },
-                        {
-                            extend: 'csvHtml5',
-                            exportOptions: {
-                                columns: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
-                            }
-                        },
-                        {
-                            extend: 'pdfHtml5',
-                            exportOptions: {
-                                columns: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
+                                columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 17]
                             }
                         },
                         'colvis'

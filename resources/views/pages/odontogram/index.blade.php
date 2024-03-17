@@ -181,6 +181,7 @@
                                         <th>Gigi Susu E</th>
                                         <th>Gigi Susu F</th>
                                         <th>DEF-T </th>
+                                        <th style="display: none;">Gigi Karies </th>
                                         <th>Gigi Karies </th>
                                         <th>Dibuat</th>
                                         <th>Tindakan</th>
@@ -265,6 +266,7 @@
                                         <th>Gigi Susu E</th>
                                         <th>Gigi Susu F</th>
                                         <th>DEF-T </th>
+                                        <th style="display: none;">Gigi Karies </th>
                                         <th>Gigi Karies </th>
                                         <th>Dibuat</th>
                                         <th>Tindakan</th>
@@ -357,6 +359,9 @@
                                             <td>{{ $odontogram->jumlah_susu_e }}</td>
                                             <td>{{ $odontogram->jumlah_susu_f }}</td>
                                             <td>{{ $odontogram->def_t }}</td>
+                                            <td style="display: none;">
+                                                {{ $odontogram->gigi_karies }}
+                                            </td>
                                             <td>
                                                 {{ strlen($odontogram->gigi_karies) > 25 ? substr($odontogram->gigi_karies, 0, 25) . ' . . .' : $odontogram->gigi_karies }}
                                             </td>
@@ -423,7 +428,7 @@
         </script>
     @endcan
 
-    @can('adminpembimbing')
+    @can('admin')
         <script type="text/javascript">
             $(document).ready(function() {
                 $.fn.dataTable.ext.search.push(
@@ -431,7 +436,7 @@
                         var min = minDate.val();
                         var max = maxDate.val();
                         // data[1] is the date column
-                        var date = new Date(data[62]);
+                        var date = new Date(data[66]);
 
                         if (
                             (min === null && max === null) ||
@@ -463,50 +468,144 @@
                     buttons: [{
                             extend: 'copyHtml5',
                             exportOptions: {
-                                columns: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
-                                    20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36,
+                                columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
+                                    19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36,
                                     37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53,
-                                    54, 55, 56, 57, 58, 59, 60, 61
+                                    54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 66
                                 ]
                             }
                         },
                         {
                             extend: 'print',
                             exportOptions: {
-                                columns: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
-                                    20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36,
+                                columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
+                                    19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36,
                                     37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53,
-                                    54, 55, 56, 57, 58, 59, 60, 61
+                                    54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 66
                                 ]
                             }
                         },
                         {
                             extend: 'excelHtml5',
                             exportOptions: {
-                                columns: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
-                                    20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36,
+                                columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
+                                    19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36,
                                     37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53,
-                                    54, 55, 56, 57, 58, 59, 60, 61
+                                    54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 66
                                 ]
                             }
                         },
                         {
                             extend: 'csvHtml5',
                             exportOptions: {
-                                columns: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
-                                    20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36,
+                                columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
+                                    19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36,
                                     37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53,
-                                    54, 55, 56, 57, 58, 59, 60, 61
+                                    54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 66
                                 ]
                             }
                         },
                         {
                             extend: 'pdfHtml5',
                             exportOptions: {
-                                columns: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
-                                    20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36,
+                                columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
+                                    19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36,
                                     37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53,
-                                    54, 55, 56, 57, 58, 59, 60, 61
+                                    54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 66
+                                ]
+                            }
+                        },
+                        'colvis'
+                    ]
+                });
+            });
+        </script>
+    @endcan
+
+    @can('pembimbing')
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $.fn.dataTable.ext.search.push(
+                    function(settings, data, dataIndex) {
+                        var min = minDate.val();
+                        var max = maxDate.val();
+                        // data[1] is the date column
+                        var date = new Date(data[65]);
+
+                        if (
+                            (min === null && max === null) ||
+                            (min === null && date <= max) ||
+                            (min <= date && max === null) ||
+                            (min <= date && date <= max)
+                        ) {
+                            return true;
+                        }
+                        return false;
+                    }
+                );
+
+                // Refilter the table
+                $('#min, #max').on('change', function() {
+                    table.draw();
+                });
+
+                // Create date inputs
+                minDate = new DateTime($('#min'), {
+                    format: 'DD MMM YYYY'
+                });
+                maxDate = new DateTime($('#max'), {
+                    format: 'DD MMM YYYY'
+                });
+
+                var table = $('#dataTable').DataTable({
+                    dom: 'Bfrtip',
+                    buttons: [{
+                            extend: 'copyHtml5',
+                            exportOptions: {
+                                columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
+                                    19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36,
+                                    37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53,
+                                    54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 65
+                                ]
+                            }
+                        },
+                        {
+                            extend: 'print',
+                            exportOptions: {
+                                columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
+                                    19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36,
+                                    37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53,
+                                    54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 65
+                                ]
+                            }
+                        },
+                        {
+                            extend: 'excelHtml5',
+                            exportOptions: {
+                                columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
+                                    19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36,
+                                    37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53,
+                                    54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 65
+                                ]
+                            }
+                        },
+                        {
+                            extend: 'csvHtml5',
+                            exportOptions: {
+                                columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
+                                    19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36,
+                                    37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53,
+                                    54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 65
+                                ]
+                            }
+                        },
+                        {
+                            extend: 'pdfHtml5',
+                            exportOptions: {
+                                columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
+                                    19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36,
+                                    37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53,
+                                    54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 65
                                 ]
                             }
                         },

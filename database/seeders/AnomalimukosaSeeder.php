@@ -54,9 +54,15 @@ class AnomalimukosaSeeder extends Seeder
                 $data["w_$oralPart"] = rand(0, 1) ? 'Ada' : 'Tidak Ada';
                 $data["i_$oralPart"] = rand(0, 1) ? 'Ada' : 'Tidak Ada';
                 $data["u_$oralPart"] = rand(0, 1) ? 'Ada' : 'Tidak Ada';
-                $data["dw_$oralPart"] = substr(str_shuffle('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'), 0, 20);
-                $data["di_$oralPart"] = substr(str_shuffle('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'), 0, 20);
-                $data["du_$oralPart"] = substr(str_shuffle('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'), 0, 20);
+                if ($data["w_$oralPart"] === 'Ada') {
+                    $data["dw_$oralPart"] = substr(str_shuffle('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'), 0, 20);
+                }
+                if ($data["i_$oralPart"] === 'Ada') {
+                    $data["di_$oralPart"] = substr(str_shuffle('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'), 0, 20);
+                }
+                if ($data["u_$oralPart"] === 'Ada') {
+                    $data["du_$oralPart"] = substr(str_shuffle('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'), 0, 20);
+                }
             }
 
             $data['created_at'] = Carbon::createFromDate(rand(2022, 2024), rand(1, 12), rand(1, 28))->format('Y-m-d H:i:s');
