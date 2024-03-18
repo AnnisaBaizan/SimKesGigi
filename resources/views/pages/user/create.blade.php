@@ -171,8 +171,10 @@
           // Menampilkan atau menyembunyikan select "pembimbingContainer" berdasarkan nilai "role"
           if (selectedRole === "3") {
               $("#pembimbingContainer").show();
+              $("#pembimbing").attr('required', 'required'); // menambahkan atribut required jika pembimbing ditampilkan
           } else {
               $("#pembimbingContainer").hide();
+              $("#pembimbing").removeAttr('required'); // menghapus atribut required jika pembimbing disembunyikan
           }
       });
   });

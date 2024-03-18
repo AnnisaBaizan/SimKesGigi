@@ -48,6 +48,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request);
         $attributes = $request->validate([
             'nimnip' => 'required|max:18|min:12',
             'username' => 'required|max:255|min:2',

@@ -146,6 +146,7 @@ aria-hidden="true">
                                         <th>Nama</th>
                                         <th>Email</th>
                                         <th>Sebagai</th>
+                                        <th>Pembimbing</th>
                                         <th>Foto</th>
                                         <th>Dibuat</th>
                                         <th>Tindakan</th>
@@ -158,6 +159,7 @@ aria-hidden="true">
                                         <th>Nama</th>
                                         <th>Email</th>
                                         <th>Sebagai</th>
+                                        <th>Pembimbing</th>
                                         <th>Foto</th>
                                         <th>Dibuat</th>
                                         <th>Tindakan</th>
@@ -179,6 +181,7 @@ aria-hidden="true">
                                                 <span class="badge badge-sm bg-gradient-light text-dark">Mahasiswa</span>
                                             @endif
                                         </td>
+                                        <td>{{ ucwords(get_v('users', 'nimnip', $user->pembimbing, 'username')[0]->username ?? "") }}</td>
                                         {{-- <td>{{ $user->role }}</td> --}}
                                         <td><img src="{!! asset('/storage/avatars/'. $user->avatar) !!}" id="frame" class="text-center img-preview mb-3 img-profile rounded-circle" width="80px" height="80px" style="overflow:hidden"></td>
                                         <td>{{ date_format($user->created_at, "d M Y") }}</td>
