@@ -214,4 +214,37 @@ class AnamripasienController extends Controller
         Excel::import(new ImportAnamRiPasien, request()->file('importanamripasien'));
         return back()->with('success', 'Data Anamnesa dan Riwayat Pasien Berhasil di import');
     }
+
+    public function status($id)
+    {
+        $anamripasien = anamripasien::where('id', $id)->first();
+
+        $status_sekarang = $anamripasien->status;
+        if ($status_sekarang == 0) {
+            anamripasien::where('id', $id)->update([
+                'status' => 1
+            ]);
+        } elseif ($status_sekarang == 1) {
+            anamripasien::where('id', $id)->update([
+                'status' => 0
+            ]);
+        }
+        
+        if (auth()->user()->role === 1) {
+            $anamripasiens = anamripasien::all();
+        } 
+        elseif (auth()->user()->role === 2) {
+            $anamripasiens = anamripasien::where('pembimbing', auth()->user()->nimnip)->get();
+        } 
+        else {
+            $anamripasiens = anamripasien::where('user_id', auth()->id())->get();
+        }
+
+        return view('pages.anamripasien.index')->with([
+            'anamripasiens' => $anamripasiens,
+            'success' => 'Status pemeriksaan berhasil diubah'
+        ]);
+    }
 }
+
+
