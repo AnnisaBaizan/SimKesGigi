@@ -314,6 +314,28 @@
         </script>
     @endcan
 
+    
+    @can('adminpembimbing')
+        <script>
+            function handleDelete(id) {
+                let form = document.getElementById('deleteForm')
+                form.action = `./anamripasien/${id}`
+                console.log(form)
+                $('#ConfirmForm').modal('show')
+            }
+            function confirmData(id) {
+                var id = id;
+                var url = '{{ route('anamripasien.status', ':id') }}';
+                url = url.replace(':id', id);
+                $("#ConfirmForm").attr('action', url);
+            }
+
+            function formSubmit2() {
+                $("#ConfirmForm").submit();
+            }
+        </script>
+    @endcan
+
     @can('mahasiswa')
         <script type="text/javascript">
             $(document).ready(function() {
@@ -488,18 +510,4 @@
             });
         </script>
         @endcan
-    @can('adminpembimbing')
-        <script>
-            function confirmData(id) {
-                var id = id;
-                var url = '{{ route('anamripasien.status', ':id') }}';
-                url = url.replace(':id', id);
-                $("#ConfirmForm").attr('action', url);
-            }
-
-            function formSubmit2() {
-                $("#ConfirmForm").submit();
-            }
-        </script>
-    @endcan
 @endsection
