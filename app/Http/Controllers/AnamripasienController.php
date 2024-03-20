@@ -215,18 +215,18 @@ class AnamripasienController extends Controller
         return back()->with('success', 'Data Anamnesa dan Riwayat Pasien Berhasil di import');
     }
 
-    public function status($id)
+    public function acc($id)
     {
+        // dd($id);
         $anamripasien = anamripasien::where('id', $id)->first();
 
-        $status_sekarang = $anamripasien->status;
-        if ($status_sekarang == 0) {
+        if ($anamripasien->acc == 0) {
             anamripasien::where('id', $id)->update([
-                'status' => 1
+                'acc' => 1
             ]);
-        } elseif ($status_sekarang == 1) {
+        } elseif ($anamripasien->acc == 1) {
             anamripasien::where('id', $id)->update([
-                'status' => 0
+                'acc' => 0
             ]);
         }
         
@@ -240,9 +240,9 @@ class AnamripasienController extends Controller
             $anamripasiens = anamripasien::where('user_id', auth()->id())->get();
         }
 
-        return view('pages.anamripasien.index')->with([
+        return back()->with([
             'anamripasiens' => $anamripasiens,
-            'success' => 'Status pemeriksaan berhasil diubah'
+            'success' => 'Status ACC berhasil diubah'
         ]);
     }
 }

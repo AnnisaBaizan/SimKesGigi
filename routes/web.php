@@ -101,7 +101,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::Delete('/anamripasien/{anamripasien}', [AnamripasienController::class, 'destroy'])->name('anamripasien.destroy')->middleware('mahasiswa');
 
 	
-	Route::get('/anamripasien/status/{id}', [AnamripasienController::class, 'status'])->name('anamripasien.status')->middleware('pembimbing');
+	Route::put('/anamripasien/acc/{id}', [AnamripasienController::class, 'acc'])->name('anamripasien.acc')->middleware('pembimbing');
 
 	Route::post('importanamripasien', [AnamripasienController::class, 'import'])->name('importanamripasien')->middleware('pembimbing');
     Route::get('exportanamripasien', [AnamripasienController::class, 'export'])->name('exportanamripasien')->middleware('pembimbing');

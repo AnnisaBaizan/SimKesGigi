@@ -53,11 +53,11 @@
         </div>
     </div>
 
-    {{-- status --}}
-    <div id="ConfirmModal" class="modal fade text-danger" role="dialog">
+    {{-- acc --}}
+    <div id="AccModal" class="modal fade text-danger" role="dialog">
         <div class="modal-dialog modal-dialog modal-dialog-centered ">
             <!-- Modal content-->
-            <form action="" id="ConfirmForm" method="post">
+            <form action="" id="AccForm" method="post">
                 <div class="modal-content">
                     <div class="modal-header bg-danger">
                         <h4 class="modal-title text-center text-white">Konfirmasi Perubahan</h4>
@@ -65,15 +65,15 @@
                                 aria-hidden="true">&times;</span></button>
                     </div>
                     <div class="modal-body">
-                        {{ csrf_field() }}
-                        {{ method_field('GET') }}
-                        <p class="text-center">Apakah anda yakin ingin mengubah status? </p>
+                        @method('put')
+                        @csrf
+                        <p class="text-center">Apakah anda yakin ingin mengubah status ACC? </p>
                     </div>
                     <div class="modal-footer">
                         <center>
                             <button type="button" class="btn btn-success" data-dismiss="modal">Tidak, Batal</button>
-                            <button type="button" name="" class="btn btn-danger" data-dismiss="modal"
-                                onclick="formSubmit2()">Ya, Ubah</button>
+                            <button type="submit" name="" class="btn btn-danger" data-dismiss="modal">Ya,
+                                Ubah</button>
                         </center>
                     </div>
                 </div>
@@ -160,7 +160,7 @@
                                         <th>Penyakit Lain</th>
                                         <th>Alergi Obat</th>
                                         <th>Alergi Makanan</th>
-                                        <th>Status</th>
+                                        <th>ACC</th>
                                         <th>Dibuat</th>
                                         <th>Tindakan</th>
                                     </tr>
@@ -196,7 +196,7 @@
                                         <th>Penyakit Lain</th>
                                         <th>Alergi Obat</th>
                                         <th>Alergi Makanan</th>
-                                        <th>Status</th>
+                                        <th>ACC</th>
                                         <th>Dibuat</th>
                                         <th>Tindakan</th>
                                     </tr>
@@ -248,19 +248,17 @@
                                             <td>
                                                 @can('mahasiswa')
                                                     <label
-                                                        class="{{ $anamripasien->status == 0 ? 'btn btn-warning' : 'text-success' }}">{{ $anamripasien->status == 0 ? 'Belum' : 'Sudah' }}</label>
+                                                        class="{{ $anamripasien->acc == 0 ? 'btn btn-danger' : 'btn btn-success' }}">{{ $anamripasien->acc == 0 ? '<i class="fas fa-times"></i>' : '<i class="fas fa-check"></i>' }}</label>
                                                 @endcan
                                                 @can('adminpembimbing')
-                                                    @if ($anamripasien->status == 0)
+                                                    @if ($anamripasien->acc == 0)
                                                         <a href="javascript:;" data-toggle="modal"
-                                                            onclick="confirmData({{ $anamripasien->id }})"
-                                                            data-target="#ConfirmModal"
-                                                            class="btn btn-sm btn-icon-split btn-warning">
-                                                            Belum</a>
+                                                            onclick="handleACC({{ $anamripasien->id }})"
+                                                            data-target="#AccModal" class="btn btn-danger"><i class="fas fa-times"></i></a>
                                                     @else
                                                         <a href="javascript:;" data-toggle="modal"
-                                                            onclick="confirmData({{ $anamripasien->id }})"
-                                                            data-target="#ConfirmModal" class="text-success">Sudah</a>
+                                                            onclick="handleACC({{ $anamripasien->id }})"
+                                                            data-target="#AccModal" class="btn btn-success"><i class="fas fa-check"></i></a>
                                                     @endif
                                                 @endcan
                                             </td>
@@ -314,24 +312,14 @@
         </script>
     @endcan
 
-    
+
     @can('adminpembimbing')
         <script>
-            function handleDelete(id) {
-                let form = document.getElementById('deleteForm')
-                form.action = `./anamripasien/${id}`
+            function handleACC(id) {
+                let form = document.getElementById('AccForm')
+                form.action = `./anamripasien/acc/${id}`
                 console.log(form)
-                $('#ConfirmForm').modal('show')
-            }
-            function confirmData(id) {
-                var id = id;
-                var url = '{{ route('anamripasien.status', ':id') }}';
-                url = url.replace(':id', id);
-                $("#ConfirmForm").attr('action', url);
-            }
-
-            function formSubmit2() {
-                $("#ConfirmForm").submit();
+                $('#AccModal').modal('show')
             }
         </script>
     @endcan
@@ -509,5 +497,5 @@
                 });
             });
         </script>
-        @endcan
+    @endcan
 @endsection

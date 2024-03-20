@@ -37,7 +37,7 @@ return new class extends Migration
             $table->string('nm_obat')->nullable();
             $table->string('alergi_mkn');
             $table->string('nm_mkn')->nullable();
-            $table->boolean('status')->default(0);
+            $table->boolean('acc')->default(0);
             $table->timestamps();
         });
     }
