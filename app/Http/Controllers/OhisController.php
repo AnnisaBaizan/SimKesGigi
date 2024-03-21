@@ -205,4 +205,24 @@ class OhisController extends Controller
         Ohis::destroy($ohis->id);
         return back()->with('succes', 'Data Ohis berhasil dihapus');
     }
+
+    public function acc($id)
+    {
+        // dd($id);
+        $ohis = Ohis::where('id', $id)->first();
+
+        if ($ohis->acc == 0) {
+            Ohis::where('id', $id)->update([
+                'acc' => 1
+            ]);
+        } elseif ($ohis->acc == 1) {
+            Ohis::where('id', $id)->update([
+                'acc' => 0
+            ]);
+        }
+
+        return back()->with([
+            'success' => 'Status ACC berhasil diubah'
+        ]);
+    }
 }

@@ -30,6 +30,7 @@ return new class extends Migration
             $table->string('masalah');
             
 
+            $table->boolean('acc')->default(0);
             $table->timestamps();
         });
     }

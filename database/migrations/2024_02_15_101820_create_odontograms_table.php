@@ -85,6 +85,7 @@ return new class extends Migration
             $table->tinyInteger('def_t');
             $table->text('gigi_karies')->nullable();
             
+            $table->boolean('acc')->default(0);
             $table->timestamps();
         });
     }

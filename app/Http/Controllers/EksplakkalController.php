@@ -260,4 +260,24 @@ class EksplakkalController extends Controller
         Eksplakkal::destroy($eksplakkal->id);
         return back()->with('success', 'Data Eskternal & Internal Oral (Plak & Kalkulus) Eskternal & Internal Oral (Plak & Kalkulus) berhasil dihapus');
     }
+
+    public function acc($id)
+    {
+        // dd($id);
+        $eksplakkal = Eksplakkal::where('id', $id)->first();
+
+        if ($eksplakkal->acc == 0) {
+            Eksplakkal::where('id', $id)->update([
+                'acc' => 1
+            ]);
+        } elseif ($eksplakkal->acc == 1) {
+            Eksplakkal::where('id', $id)->update([
+                'acc' => 0
+            ]);
+        }
+
+        return back()->with([
+            'success' => 'Status ACC berhasil diubah'
+        ]);
+    }
 }

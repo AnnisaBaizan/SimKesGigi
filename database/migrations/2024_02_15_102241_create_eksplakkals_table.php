@@ -40,6 +40,7 @@ return new class extends Migration
             $table->text('supragingiva');
             $table->text('subgingiva');
 
+            $table->boolean('acc')->default(0);
             $table->timestamps();
         });
     }

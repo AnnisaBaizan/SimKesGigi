@@ -242,4 +242,24 @@ class AnomalimukosaController extends Controller
         Anomalimukosa::destroy($anomalimukosa->id);
         return back()->with('success', 'Data anomalimukosa berhasil dihapus');
     }
+
+    public function acc($id)
+    {
+        // dd($id);
+        $anomalimukosa = Anomalimukosa::where('id', $id)->first();
+
+        if ($anomalimukosa->acc == 0) {
+            Anomalimukosa::where('id', $id)->update([
+                'acc' => 1
+            ]);
+        } elseif ($anomalimukosa->acc == 1) {
+            Anomalimukosa::where('id', $id)->update([
+                'acc' => 0
+            ]);
+        }
+
+        return back()->with([
+            'success' => 'Status ACC berhasil diubah'
+        ]);
+    }
 }

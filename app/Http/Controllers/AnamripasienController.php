@@ -230,18 +230,18 @@ class AnamripasienController extends Controller
             ]);
         }
         
-        if (auth()->user()->role === 1) {
-            $anamripasiens = anamripasien::all();
-        } 
-        elseif (auth()->user()->role === 2) {
-            $anamripasiens = anamripasien::where('pembimbing', auth()->user()->nimnip)->get();
-        } 
-        else {
-            $anamripasiens = anamripasien::where('user_id', auth()->id())->get();
-        }
+        // if (auth()->user()->role === 1) {
+        //     $anamripasiens = anamripasien::all();
+        // } 
+        // elseif (auth()->user()->role === 2) {
+        //     $anamripasiens = anamripasien::where('pembimbing', auth()->user()->nimnip)->get();
+        // } 
+        // else {
+        //     $anamripasiens = anamripasien::where('user_id', auth()->id())->get();
+        // }
 
         return back()->with([
-            'anamripasiens' => $anamripasiens,
+            // 'anamripasiens' => $anamripasiens,
             'success' => 'Status ACC berhasil diubah'
         ]);
     }

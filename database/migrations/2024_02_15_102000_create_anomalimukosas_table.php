@@ -65,6 +65,7 @@ return new class extends Migration
             $table->string('u_bibir');
             $table->string('du_bibir')->nullable();
 
+            $table->boolean('acc')->default(0);
             $table->timestamps();
         });
     }

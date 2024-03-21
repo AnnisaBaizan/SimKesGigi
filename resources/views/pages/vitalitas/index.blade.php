@@ -55,6 +55,29 @@
             </div>
         </div>
           
+    {{-- acc --}}
+    <div class="modal" id="AccModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="AccModalLabel">ACC Pemeriksaan</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Apakah anda yakin ingin mengubah status ACC?</p>
+                </div>
+                <div class="modal-footer">
+                    <form action="" method="POST" id="AccForm">
+                        @method('put')
+                        @csrf
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tidak, Kembali</button>
+                        <button type="submit" class="btn btn-primary">Ya, Saya Yakin</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
     
         <div class="container-fluid py-4">
             <div class="row">
@@ -121,6 +144,8 @@
                                             <th>Druk</th>
                                             <th>Mobility</th>
                                             <th>Masalah</th>
+                                            <th style="display: none;">ACC</th>
+                                            <th>ACC</th>
                                             <th>Dibuat</th>
                                             <th>Tindakan</th>
                                         </tr>
@@ -147,6 +172,8 @@
                                             <th>Druk</th>
                                             <th>Mobility</th>
                                             <th>Masalah</th>
+                                            <th style="display: none;">ACC</th>
+                                            <th>ACC</th>
                                             <th>Dibuat</th>
                                             <th>Tindakan</th>
                                         </tr>
@@ -175,6 +202,45 @@
                                             <td>{{ $vitalitas->druk}}</td>
                                             <td>{{ $vitalitas->mobility }}</td> 
                                             <td>{{ $vitalitas->masalah }}</td>
+                                            
+                                            <td style="display: none;">
+                                                @can('mahasiswa')
+                                                    <label
+                                                        class="{{ $vitalitas->acc == 0 ? 'btn btn-danger' : 'btn btn-success' }}">{{ $vitalitas->acc == 0 ? 'Belum' : 'Sudah' }}</label>
+                                                @endcan
+                                                @can('adminpembimbing')
+                                                    @if ($vitalitas->acc == 0)
+                                                        <a href="javascript:;" data-toggle="modal"
+                                                            onclick="handleACC({{ $vitalitas->id }})"
+                                                            data-target="#AccModal" class="btn btn-danger">Belum</a>
+                                                    @else
+                                                        <a href="javascript:;" data-toggle="modal"
+                                                            onclick="handleACC({{ $vitalitas->id }})"
+                                                            data-target="#AccModal" class="btn btn-success">Sudah</a>
+                                                    @endif
+                                                @endcan
+                                            </td>
+
+                                            <td>
+                                                @can('mahasiswa')
+                                                    <label class="{{ $vitalitas->acc == 0 ? 'btn btn-danger' : 'btn btn-success' }}">
+                                                        {!! $vitalitas->acc == 0 ? '<i class="fas fa-times"></i>' : '<i class="fas fa-check"></i>' !!}
+                                                    </label>
+                                                
+                                                @endcan
+                                                @can('adminpembimbing')
+                                                    @if ($vitalitas->acc == 0)
+                                                        <a href="javascript:;" data-toggle="modal"
+                                                            onclick="handleACC({{ $vitalitas->id }})"
+                                                            data-target="#AccModal" class="btn btn-danger"><i class="fas fa-times"></i></a>
+                                                    @else
+                                                        <a href="javascript:;" data-toggle="modal"
+                                                            onclick="handleACC({{ $vitalitas->id }})"
+                                                            data-target="#AccModal" class="btn btn-success"><i class="fas fa-check"></i></a>
+                                                    @endif
+                                                @endcan
+                                            </td>
+
                                             <td>{{ date_format($vitalitas->created_at, "d M Y") }}</td>
                                             <td>
                                                 
@@ -216,6 +282,18 @@ function handleDelete(id) {
     console.log(form)
     $('#deleteModal').modal('show')
 }
+</script>
+@endcan
+
+
+@can('adminpembimbing')
+<script>
+    function handleACC(id) {
+        let form = document.getElementById('AccForm')
+        form.action = `./vitalitas/acc/${id}`
+        console.log(form)
+        $('#AccModal').modal('show')
+    }
 </script>
 @endcan
 
@@ -269,31 +347,31 @@ $(document).ready( function () {
             {
                 extend: 'copyHtml5',
                 exportOptions: {
-                    columns: [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ]
+                    columns: [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12 ]
                 }
             },
             {
                 extend: 'print',
                 exportOptions: {
-                    columns: [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ]
+                    columns: [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12 ]
                 }
             },
             {
                 extend: 'excelHtml5',
                 exportOptions: {
-                    columns: [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ]
+                    columns: [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12 ]
                 }
             },
             {
                 extend: 'csvHtml5',
                 exportOptions: {
-                    columns: [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ]
+                    columns: [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12 ]
                 }
             },
             {
                 extend: 'pdfHtml5',
                 exportOptions: {
-                    columns: [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ]
+                    columns: [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12 ]
                 }
             },
             'colvis'

@@ -56,6 +56,29 @@
         </div>
     </div>
 
+    {{-- acc --}}
+    <div class="modal" id="AccModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="AccModalLabel">ACC Pemeriksaan</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Apakah anda yakin ingin mengubah status ACC?</p>
+                </div>
+                <div class="modal-footer">
+                    <form action="" method="POST" id="AccForm">
+                        @method('put')
+                        @csrf
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tidak, Kembali</button>
+                        <button type="submit" class="btn btn-primary">Ya, Saya Yakin</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <div class="container-fluid py-4">
         <div class="row">
@@ -146,6 +169,8 @@
                                         <th>Warna Bibir</th>
                                         <th>Bibir Inflamasi</th>
                                         <th>Bibir Ulserasi</th>
+                                        <th style="display: none;">ACC</th>
+                                        <th>ACC</th>
                                         <th>Dibuat</th>
                                         <th>Tindakan</th>
                                     </tr>
@@ -192,6 +217,8 @@
                                         <th>Warna Bibir</th>
                                         <th>Bibir Inflamasi</th>
                                         <th>Bibir Ulserasi</th>
+                                        <th style="display: none;">ACC</th>
+                                        <th>ACC</th>
                                         <th>Dibuat</th>
                                         <th>Tindakan</th>
                                     </tr>
@@ -258,6 +285,44 @@
                                             <td>{{ $anomalimukosa->u_bibir === 'Ada' ? $anomalimukosa->u_bibir . ' (' . $anomalimukosa->du_bibir . ')' : $anomalimukosa->u_bibir }}
                                             </td>
 
+                                            <td style="display: none;">
+                                                @can('mahasiswa')
+                                                    <label
+                                                        class="{{ $anomalimukosa->acc == 0 ? 'btn btn-danger' : 'btn btn-success' }}">{{ $anomalimukosa->acc == 0 ? 'Belum' : 'Sudah' }}</label>
+                                                @endcan
+                                                @can('adminpembimbing')
+                                                    @if ($anomalimukosa->acc == 0)
+                                                        <a href="javascript:;" data-toggle="modal"
+                                                            onclick="handleACC({{ $anomalimukosa->id }})"
+                                                            data-target="#AccModal" class="btn btn-danger">Belum</a>
+                                                    @else
+                                                        <a href="javascript:;" data-toggle="modal"
+                                                            onclick="handleACC({{ $anomalimukosa->id }})"
+                                                            data-target="#AccModal" class="btn btn-success">Sudah</a>
+                                                    @endif
+                                                @endcan
+                                            </td>
+
+                                            <td>
+                                                @can('mahasiswa')
+                                                    <label class="{{ $anomalimukosa->acc == 0 ? 'btn btn-danger' : 'btn btn-success' }}">
+                                                        {!! $anomalimukosa->acc == 0 ? '<i class="fas fa-times"></i>' : '<i class="fas fa-check"></i>' !!}
+                                                    </label>
+                                                
+                                                @endcan
+                                                @can('adminpembimbing')
+                                                    @if ($anomalimukosa->acc == 0)
+                                                        <a href="javascript:;" data-toggle="modal"
+                                                            onclick="handleACC({{ $anomalimukosa->id }})"
+                                                            data-target="#AccModal" class="btn btn-danger"><i class="fas fa-times"></i></a>
+                                                    @else
+                                                        <a href="javascript:;" data-toggle="modal"
+                                                            onclick="handleACC({{ $anomalimukosa->id }})"
+                                                            data-target="#AccModal" class="btn btn-success"><i class="fas fa-check"></i></a>
+                                                    @endif
+                                                @endcan
+                                            </td>
+
 
                                             <td>{{ date_format($anomalimukosa->created_at, 'd M Y') }}</td>
                                             <td>
@@ -314,6 +379,18 @@
         </script>
     @endcan
 
+
+    @can('adminpembimbing')
+        <script>
+            function handleACC(id) {
+                let form = document.getElementById('AccForm')
+                form.action = `./anomalimukosa/acc/${id}`
+                console.log(form)
+                $('#AccModal').modal('show')
+            }
+        </script>
+    @endcan
+
     @can('mahasiswa')
         <script type="text/javascript">
             $(document).ready(function() {
@@ -322,7 +399,7 @@
         </script>
     @endcan
 
-    @can('adminpembimbing')
+    @can('admin')
         <script type="text/javascript">
             $(document).ready(function() {
                 $.fn.dataTable.ext.search.push(
@@ -362,31 +439,36 @@
                     buttons: [{
                             extend: 'copyHtml5',
                             exportOptions: {
-                                columns: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+                                columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
+                                    19, 20, 21, 22, 23, 24, 25, 27]
                             }
                         },
                         {
                             extend: 'print',
                             exportOptions: {
-                                columns: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+                                columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
+                                    19, 20, 21, 22, 23, 24, 25, 27]
                             }
                         },
                         {
                             extend: 'excelHtml5',
                             exportOptions: {
-                                columns: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+                                columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
+                                    19, 20, 21, 22, 23, 24, 25, 27]
                             }
                         },
                         {
                             extend: 'csvHtml5',
                             exportOptions: {
-                                columns: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+                                columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
+                                    19, 20, 21, 22, 23, 24, 25, 27]
                             }
                         },
                         {
                             extend: 'pdfHtml5',
                             exportOptions: {
-                                columns: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+                                columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
+                                    19, 20, 21, 22, 23, 24, 25, 27]
                             }
                         },
                         'colvis'
@@ -395,5 +477,82 @@
             });
         </script>
     @endcan
-    <script></script>
+    @can('pembimbing')
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $.fn.dataTable.ext.search.push(
+                    function(settings, data, dataIndex) {
+                        var min = minDate.val();
+                        var max = maxDate.val();
+                        // data[1] is the date column
+                        var date = new Date(data[17]);
+
+                        if (
+                            (min === null && max === null) ||
+                            (min === null && date <= max) ||
+                            (min <= date && max === null) ||
+                            (min <= date && date <= max)
+                        ) {
+                            return true;
+                        }
+                        return false;
+                    }
+                );
+
+                // Refilter the table
+                $('#min, #max').on('change', function() {
+                    table.draw();
+                });
+
+                // Create date inputs
+                minDate = new DateTime($('#min'), {
+                    format: 'DD MMM YYYY'
+                });
+                maxDate = new DateTime($('#max'), {
+                    format: 'DD MMM YYYY'
+                });
+
+                var table = $('#dataTable').DataTable({
+                    dom: 'Bfrtip',
+                    buttons: [{
+                            extend: 'copyHtml5',
+                            exportOptions: {
+                                columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
+                                    19, 20, 21, 22, 23, 24, 26]
+                            }
+                        },
+                        {
+                            extend: 'print',
+                            exportOptions: {
+                                columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
+                                    19, 20, 21, 22, 23, 24, 26]
+                            }
+                        },
+                        {
+                            extend: 'excelHtml5',
+                            exportOptions: {
+                                columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
+                                    19, 20, 21, 22, 23, 24, 26]
+                            }
+                        },
+                        {
+                            extend: 'csvHtml5',
+                            exportOptions: {
+                                columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
+                                    19, 20, 21, 22, 23, 24, 26]
+                            }
+                        },
+                        {
+                            extend: 'pdfHtml5',
+                            exportOptions: {
+                                columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
+                                    19, 20, 21, 22, 23, 24, 26]
+                            }
+                        },
+                        'colvis'
+                    ]
+                });
+            });
+        </script>
+    @endcan
 @endsection

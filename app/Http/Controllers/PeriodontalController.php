@@ -83,4 +83,24 @@ class PeriodontalController extends Controller
     {
         //
     }
+
+    public function acc($id)
+    {
+        // dd($id);
+        $periodontal = Periodontal::where('id', $id)->first();
+
+        if ($periodontal->acc == 0) {
+            Periodontal::where('id', $id)->update([
+                'acc' => 1
+            ]);
+        } elseif ($periodontal->acc == 1) {
+            Periodontal::where('id', $id)->update([
+                'acc' => 0
+            ]);
+        }
+
+        return back()->with([
+            'success' => 'Status ACC berhasil diubah'
+        ]);
+    }
 }

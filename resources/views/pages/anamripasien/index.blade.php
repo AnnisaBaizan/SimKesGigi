@@ -54,33 +54,27 @@
     </div>
 
     {{-- acc --}}
-    <div id="AccModal" class="modal fade text-danger" role="dialog">
-        <div class="modal-dialog modal-dialog modal-dialog-centered ">
-            <!-- Modal content-->
-            <form action="" id="AccForm" method="post">
-                <div class="modal-content">
-                    <div class="modal-header bg-danger">
-                        <h4 class="modal-title text-center text-white">Konfirmasi Perubahan</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                                aria-hidden="true">&times;</span></button>
-                    </div>
-                    <div class="modal-body">
+    <div class="modal" id="AccModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="AccModalLabel">ACC Pemeriksaan</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Apakah anda yakin ingin mengubah status ACC?</p>
+                </div>
+                <div class="modal-footer">
+                    <form action="" method="POST" id="AccForm">
                         @method('put')
                         @csrf
-                        <p class="text-center">Apakah anda yakin ingin mengubah status ACC? </p>
-                    </div>
-                    <div class="modal-footer">
-                        <center>
-                            <button type="button" class="btn btn-success" data-dismiss="modal">Tidak, Batal</button>
-                            <button type="submit" name="" class="btn btn-danger" data-dismiss="modal">Ya,
-                                Ubah</button>
-                        </center>
-                    </div>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tidak, Kembali</button>
+                        <button type="submit" class="btn btn-primary">Ya, Saya Yakin</button>
+                    </form>
                 </div>
-            </form>
+            </div>
         </div>
     </div>
-
 
     <div class="container-fluid py-4">
         <div class="row">
@@ -160,6 +154,7 @@
                                         <th>Penyakit Lain</th>
                                         <th>Alergi Obat</th>
                                         <th>Alergi Makanan</th>
+                                        <th style="display: none;">ACC</th>
                                         <th>ACC</th>
                                         <th>Dibuat</th>
                                         <th>Tindakan</th>
@@ -196,6 +191,7 @@
                                         <th>Penyakit Lain</th>
                                         <th>Alergi Obat</th>
                                         <th>Alergi Makanan</th>
+                                        <th style="display: none;">ACC</th>
                                         <th>ACC</th>
                                         <th>Dibuat</th>
                                         <th>Tindakan</th>
@@ -244,11 +240,31 @@
                                             <td>{{ $anamripasien->alergi_mkn === 'Ada' ? $anamripasien->alergi_mkn . ' | ' . $anamripasien->nm_mkn : $anamripasien->alergi_mkn }}
                                             </td>
 
+                                            
+                                            <td style="display: none;">
+                                                @can('mahasiswa')
+                                                    <label
+                                                        class="{{ $anamripasien->acc == 0 ? 'btn btn-danger' : 'btn btn-success' }}">{{ $anamripasien->acc == 0 ? 'Belum' : 'Sudah' }}</label>
+                                                @endcan
+                                                @can('adminpembimbing')
+                                                    @if ($anamripasien->acc == 0)
+                                                        <a href="javascript:;" data-toggle="modal"
+                                                            onclick="handleACC({{ $anamripasien->id }})"
+                                                            data-target="#AccModal" class="btn btn-danger">Belum</a>
+                                                    @else
+                                                        <a href="javascript:;" data-toggle="modal"
+                                                            onclick="handleACC({{ $anamripasien->id }})"
+                                                            data-target="#AccModal" class="btn btn-success">Sudah</a>
+                                                    @endif
+                                                @endcan
+                                            </td>
 
                                             <td>
                                                 @can('mahasiswa')
-                                                    <label
-                                                        class="{{ $anamripasien->acc == 0 ? 'btn btn-danger' : 'btn btn-success' }}">{{ $anamripasien->acc == 0 ? '<i class="fas fa-times"></i>' : '<i class="fas fa-check"></i>' }}</label>
+                                                    <label class="{{ $anamripasien->acc == 0 ? 'btn btn-danger' : 'btn btn-success' }}">
+                                                        {!! $anamripasien->acc == 0 ? '<i class="fas fa-times"></i>' : '<i class="fas fa-check"></i>' !!}
+                                                    </label>
+                                                
                                                 @endcan
                                                 @can('adminpembimbing')
                                                     @if ($anamripasien->acc == 0)
@@ -373,7 +389,7 @@
                             extend: 'copyHtml5',
                             exportOptions: {
                                 columns: [0, 1, 2, 3, 4, 5, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
-                                    20, 21
+                                    20, 21, 23
                                 ]
                             }
                         },
@@ -381,7 +397,7 @@
                             extend: 'print',
                             exportOptions: {
                                 columns: [0, 1, 2, 3, 4, 5, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
-                                    20, 21
+                                    20, 21, 23
                                 ]
                             }
                         },
@@ -389,7 +405,7 @@
                             extend: 'excelHtml5',
                             exportOptions: {
                                 columns: [0, 1, 2, 3, 4, 5, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
-                                    20, 21
+                                    20, 21, 23
                                 ]
                             }
                         },
@@ -397,7 +413,7 @@
                             extend: 'csvHtml5',
                             exportOptions: {
                                 columns: [0, 1, 2, 3, 4, 5, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
-                                    20, 21
+                                    20, 21, 23
                                 ]
                             }
                         },
@@ -405,7 +421,7 @@
                             extend: 'pdfHtml5',
                             exportOptions: {
                                 columns: [0, 1, 2, 3, 4, 5, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
-                                    20, 21
+                                    20, 21, 23
                                 ]
                             }
                         },
@@ -455,40 +471,40 @@
                     buttons: [{
                             extend: 'copyHtml5',
                             exportOptions: {
-                                columns: [0, 1, 2, 3, 4, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
-                                    20
+                                columns: [0, 1, 2, 3, 4, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
+                                    22
                                 ]
                             }
                         },
                         {
                             extend: 'print',
                             exportOptions: {
-                                columns: [0, 1, 2, 3, 4, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
-                                    20
+                                columns: [0, 1, 2, 3, 4, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
+                                    22
                                 ]
                             }
                         },
                         {
                             extend: 'excelHtml5',
                             exportOptions: {
-                                columns: [0, 1, 2, 3, 4, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
-                                    20
+                                columns: [0, 1, 2, 3, 4, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
+                                    22
                                 ]
                             }
                         },
                         {
                             extend: 'csvHtml5',
                             exportOptions: {
-                                columns: [0, 1, 2, 3, 4, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
-                                    20
+                                columns: [0, 1, 2, 3, 4, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
+                                    22
                                 ]
                             }
                         },
                         {
                             extend: 'pdfHtml5',
                             exportOptions: {
-                                columns: [0, 1, 2, 3, 4, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
-                                    20
+                                columns: [0, 1, 2, 3, 4, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
+                                    22
                                 ]
                             }
                         },

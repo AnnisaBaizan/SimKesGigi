@@ -56,6 +56,29 @@
         </div>
     </div>
 
+    {{-- acc --}}
+    <div class="modal" id="AccModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="AccModalLabel">ACC Pemeriksaan</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Apakah anda yakin ingin mengubah status ACC?</p>
+                </div>
+                <div class="modal-footer">
+                    <form action="" method="POST" id="AccForm">
+                        @method('put')
+                        @csrf
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tidak, Kembali</button>
+                        <button type="submit" class="btn btn-primary">Ya, Saya Yakin</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <div class="container-fluid py-4">
         <div class="row">
@@ -183,6 +206,8 @@
                                         <th>DEF-T </th>
                                         <th style="display: none;">Gigi Karies </th>
                                         <th>Gigi Karies </th>
+                                        <th style="display: none;">ACC</th>
+                                        <th>ACC</th>
                                         <th>Dibuat</th>
                                         <th>Tindakan</th>
                                     </tr>
@@ -268,6 +293,8 @@
                                         <th>DEF-T </th>
                                         <th style="display: none;">Gigi Karies </th>
                                         <th>Gigi Karies </th>
+                                        <th style="display: none;">ACC</th>
+                                        <th>ACC</th>
                                         <th>Dibuat</th>
                                         <th>Tindakan</th>
                                     </tr>
@@ -365,6 +392,45 @@
                                             <td>
                                                 {{ strlen($odontogram->gigi_karies) > 25 ? substr($odontogram->gigi_karies, 0, 25) . ' . . .' : $odontogram->gigi_karies }}
                                             </td>
+                                            
+                                            <td style="display: none;">
+                                                @can('mahasiswa')
+                                                    <label
+                                                        class="{{ $odontogram->acc == 0 ? 'btn btn-danger' : 'btn btn-success' }}">{{ $odontogram->acc == 0 ? 'Belum' : 'Sudah' }}</label>
+                                                @endcan
+                                                @can('adminpembimbing')
+                                                    @if ($odontogram->acc == 0)
+                                                        <a href="javascript:;" data-toggle="modal"
+                                                            onclick="handleACC({{ $odontogram->id }})"
+                                                            data-target="#AccModal" class="btn btn-danger">Belum</a>
+                                                    @else
+                                                        <a href="javascript:;" data-toggle="modal"
+                                                            onclick="handleACC({{ $odontogram->id }})"
+                                                            data-target="#AccModal" class="btn btn-success">Sudah</a>
+                                                    @endif
+                                                @endcan
+                                            </td>
+
+                                            <td>
+                                                @can('mahasiswa')
+                                                    <label class="{{ $odontogram->acc == 0 ? 'btn btn-danger' : 'btn btn-success' }}">
+                                                        {!! $odontogram->acc == 0 ? '<i class="fas fa-times"></i>' : '<i class="fas fa-check"></i>' !!}
+                                                    </label>
+                                                
+                                                @endcan
+                                                @can('adminpembimbing')
+                                                    @if ($odontogram->acc == 0)
+                                                        <a href="javascript:;" data-toggle="modal"
+                                                            onclick="handleACC({{ $odontogram->id }})"
+                                                            data-target="#AccModal" class="btn btn-danger"><i class="fas fa-times"></i></a>
+                                                    @else
+                                                        <a href="javascript:;" data-toggle="modal"
+                                                            onclick="handleACC({{ $odontogram->id }})"
+                                                            data-target="#AccModal" class="btn btn-success"><i class="fas fa-check"></i></a>
+                                                    @endif
+                                                @endcan
+                                            </td>
+
                                             <td>{{ date_format($odontogram->created_at, 'd M Y') }}</td>
                                             <td>
 
@@ -420,6 +486,17 @@
         </script>
     @endcan
 
+    @can('adminpembimbing')
+        <script>
+            function handleACC(id) {
+                let form = document.getElementById('AccForm')
+                form.action = `./odontogram/acc/${id}`
+                console.log(form)
+                $('#AccModal').modal('show')
+            }
+        </script>
+    @endcan
+
     @can('mahasiswa')
         <script type="text/javascript">
             $(document).ready(function() {
@@ -471,7 +548,7 @@
                                 columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
                                     19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36,
                                     37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53,
-                                    54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 66
+                                    54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 66, 68
                                 ]
                             }
                         },
@@ -481,7 +558,7 @@
                                 columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
                                     19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36,
                                     37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53,
-                                    54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 66
+                                    54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 66, 68
                                 ]
                             }
                         },
@@ -491,7 +568,7 @@
                                 columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
                                     19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36,
                                     37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53,
-                                    54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 66
+                                    54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 66, 68
                                 ]
                             }
                         },
@@ -501,7 +578,7 @@
                                 columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
                                     19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36,
                                     37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53,
-                                    54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 66
+                                    54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 66, 68
                                 ]
                             }
                         },
@@ -511,7 +588,7 @@
                                 columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
                                     19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36,
                                     37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53,
-                                    54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 66
+                                    54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 66, 68
                                 ]
                             }
                         },
@@ -565,7 +642,7 @@
                                 columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
                                     19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36,
                                     37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53,
-                                    54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 65
+                                    54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 65, 67
                                 ]
                             }
                         },
@@ -575,7 +652,7 @@
                                 columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
                                     19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36,
                                     37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53,
-                                    54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 65
+                                    54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 65, 67
                                 ]
                             }
                         },
@@ -585,7 +662,7 @@
                                 columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
                                     19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36,
                                     37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53,
-                                    54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 65
+                                    54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 65, 67
                                 ]
                             }
                         },
@@ -595,7 +672,7 @@
                                 columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
                                     19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36,
                                     37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53,
-                                    54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 65
+                                    54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 65, 67
                                 ]
                             }
                         },
@@ -605,7 +682,7 @@
                                 columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
                                     19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36,
                                     37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53,
-                                    54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 65
+                                    54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 65, 67
                                 ]
                             }
                         },

@@ -54,6 +54,29 @@
         </div>
     </div>
       
+    {{-- acc --}}
+    <div class="modal" id="AccModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="AccModalLabel">ACC Pemeriksaan</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Apakah anda yakin ingin mengubah status ACC?</p>
+                </div>
+                <div class="modal-footer">
+                    <form action="" method="POST" id="AccForm">
+                        @method('put')
+                        @csrf
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tidak, Kembali</button>
+                        <button type="submit" class="btn btn-primary">Ya, Saya Yakin</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <div class="container-fluid py-4">
         <div class="row">
@@ -132,6 +155,8 @@
                                         <th style="display: none;">Kalkulus subgingiva</th>
                                         <th>Kalkulus Supragingiva</th>
                                         <th>Kalkulus subgingiva</th>
+                                        <th style="display: none;">ACC</th>
+                                        <th>ACC</th>
                                         <th>Dibuat</th>
                                         <th>Tindakan</th>
                                     </tr>
@@ -170,6 +195,8 @@
                                         <th style="display: none;">Kalkulus subgingiva</th>
                                         <th>Kalkulus Supragingiva</th>
                                         <th>Kalkulus subgingiva</th>
+                                        <th style="display: none;">ACC</th>
+                                        <th>ACC</th>
                                         <th>Dibuat</th>
                                         <th>Tindakan</th>
                                     </tr>
@@ -261,6 +288,46 @@
                                         <td>{{ strlen($eksplakkal->supragingiva) > 25 ? substr($eksplakkal->supragingiva, 0, 25) . ' . . .' : $eksplakkal->supragingiva }}</td>
                                         <td>{{ strlen($eksplakkal->subgingiva) > 25 ? substr($eksplakkal->subgingiva, 0, 25) . ' . . .' : $eksplakkal->subgingiva }}</td>
                                         
+                                        
+                                        <td style="display: none;">
+                                            @can('mahasiswa')
+                                                <label
+                                                    class="{{ $eksplakkal->acc == 0 ? 'btn btn-danger' : 'btn btn-success' }}">{{ $eksplakkal->acc == 0 ? 'Belum' : 'Sudah' }}</label>
+                                            @endcan
+                                            @can('adminpembimbing')
+                                                @if ($eksplakkal->acc == 0)
+                                                    <a href="javascript:;" data-toggle="modal"
+                                                        onclick="handleACC({{ $eksplakkal->id }})"
+                                                        data-target="#AccModal" class="btn btn-danger">Belum</a>
+                                                @else
+                                                    <a href="javascript:;" data-toggle="modal"
+                                                        onclick="handleACC({{ $eksplakkal->id }})"
+                                                        data-target="#AccModal" class="btn btn-success">Sudah</a>
+                                                @endif
+                                            @endcan
+                                        </td>
+
+                                        <td>
+                                            @can('mahasiswa')
+                                                <label class="{{ $eksplakkal->acc == 0 ? 'btn btn-danger' : 'btn btn-success' }}">
+                                                    {!! $eksplakkal->acc == 0 ? '<i class="fas fa-times"></i>' : '<i class="fas fa-check"></i>' !!}
+                                                </label>
+                                            
+                                            @endcan
+                                            @can('adminpembimbing')
+                                                @if ($eksplakkal->acc == 0)
+                                                    <a href="javascript:;" data-toggle="modal"
+                                                        onclick="handleACC({{ $eksplakkal->id }})"
+                                                        data-target="#AccModal" class="btn btn-danger"><i class="fas fa-times"></i></a>
+                                                @else
+                                                    <a href="javascript:;" data-toggle="modal"
+                                                        onclick="handleACC({{ $eksplakkal->id }})"
+                                                        data-target="#AccModal" class="btn btn-success"><i class="fas fa-check"></i></a>
+                                                @endif
+                                            @endcan
+                                        </td>
+
+
                                         <td>{{ date_format($eksplakkal->created_at, "d M Y") }}</td>
                                         <td>
                                             
@@ -304,6 +371,18 @@ function handleDelete(id) {
     $('#deleteModal').modal('show')
 }
 </script>
+@endcan
+
+
+@can('adminpembimbing')
+    <script>
+        function handleACC(id) {
+            let form = document.getElementById('AccForm')
+            form.action = `./eksplakkal/acc/${id}`
+            console.log(form)
+            $('#AccModal').modal('show')
+        }
+    </script>
 @endcan
 
 @can('mahasiswa')
@@ -356,31 +435,31 @@ $(document).ready( function () {
             {
                 extend: 'copyHtml5',
                 exportOptions: {
-                    columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 13, 14, 15, 16, 17, 18, 21 ]
+                    columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 13, 14, 15, 16, 17, 18, 21, 23 ]
                 }
             },
             {
                 extend: 'print',
                 exportOptions: {
-                    columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 13, 14, 15, 16, 17, 18, 21 ]
+                    columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 13, 14, 15, 16, 17, 18, 21, 23 ]
                 }
             },
             {
                 extend: 'excelHtml5',
                 exportOptions: {
-                    columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 13, 14, 15, 16, 17, 18, 21 ]
+                    columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 13, 14, 15, 16, 17, 18, 21, 23 ]
                 }
             },
             {
                 extend: 'csvHtml5',
                 exportOptions: {
-                    columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 13, 14, 15, 16, 17, 18, 21 ]
+                    columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 13, 14, 15, 16, 17, 18, 21, 23 ]
                 }
             },
             {
                 extend: 'pdfHtml5',
                 exportOptions: {
-                    columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 13, 14, 15, 16, 17, 18, 21 ]
+                    columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 13, 14, 15, 16, 17, 18, 21, 23 ]
                 }
             },
             'colvis'
@@ -431,31 +510,31 @@ $(document).ready( function () {
             {
                 extend: 'copyHtml5',
                 exportOptions: {
-                    columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 15, 16, 17, 20 ]
+                    columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 15, 16, 17, 20, 22 ]
                 }
             },
             {
                 extend: 'print',
                 exportOptions: {
-                    columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 15, 16, 17, 20 ]
+                    columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 15, 16, 17, 20, 22 ]
                 }
             },
             {
                 extend: 'excelHtml5',
                 exportOptions: {
-                    columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 15, 16, 17, 20 ]
+                    columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 15, 16, 17, 20, 22 ]
                 }
             },
             {
                 extend: 'csvHtml5',
                 exportOptions: {
-                    columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 15, 16, 17, 20 ]
+                    columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 15, 16, 17, 20, 22 ]
                 }
             },
             {
                 extend: 'pdfHtml5',
                 exportOptions: {
-                    columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 15, 16, 17, 20 ]
+                    columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 15, 16, 17, 20, 22 ]
                 }
             },
             'colvis'

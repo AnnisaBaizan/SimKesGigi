@@ -289,4 +289,24 @@ class OdontogramController extends Controller
         Odontogram::destroy($odontogram->id);
         return back()->with('success', 'Data Odontogram berhasil dihapus');
     }
+
+    public function acc($id)
+    {
+        // dd($id);
+        $odontogram = Odontogram::where('id', $id)->first();
+
+        if ($odontogram->acc == 0) {
+            Odontogram::where('id', $id)->update([
+                'acc' => 1
+            ]);
+        } elseif ($odontogram->acc == 1) {
+            Odontogram::where('id', $id)->update([
+                'acc' => 0
+            ]);
+        }
+
+        return back()->with([
+            'success' => 'Status ACC berhasil diubah'
+        ]);
+    }
 }

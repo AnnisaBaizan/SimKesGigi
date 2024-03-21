@@ -39,6 +39,7 @@ return new class extends Migration
             $table->string('nilai_kriteria_ohis');
             $table->string('kriteria_ohis');
 
+            $table->boolean('acc')->default(0);
             $table->timestamps();
         });
     }

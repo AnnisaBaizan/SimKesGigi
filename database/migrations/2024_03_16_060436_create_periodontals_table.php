@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('periodontals', function (Blueprint $table) {
             $table->id();
+            $table->boolean('acc')->default(0);
             $table->timestamps();
         });
     }

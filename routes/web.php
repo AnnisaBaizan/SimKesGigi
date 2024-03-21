@@ -87,19 +87,6 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/anamripasien/{anamripasien}/edit', [AnamripasienController::class, 'edit'])->name('anamripasien.edit')->middleware('mahasiswa');
 	Route::put('/anamripasien/{anamripasien}', [AnamripasienController::class, 'update'])->name('anamripasien.update')->middleware('mahasiswa');
 	Route::Delete('/anamripasien/{anamripasien}', [AnamripasienController::class, 'destroy'])->name('anamripasien.destroy')->middleware('mahasiswa');
-
-	Route::post('importanamripasien', [AnamripasienController::class, 'import'])->name('importanamripasien')->middleware('pembimbing');
-    Route::get('exportanamripasien', [AnamripasienController::class, 'export'])->name('exportanamripasien')->middleware('pembimbing');
-
-	// Route::resource('/anamripasien', anamripasienController::class);
-	Route::get('/anamripasien', [AnamripasienController::class, 'index'])->name('anamripasien.index');
-	Route::get('/anamripasien/create', [AnamripasienController::class, 'create'])->name('anamripasien.create')->middleware('mahasiswa');
-	Route::post('/anamripasien', [AnamripasienController::class, 'store'])->name('anamripasien.store')->middleware('mahasiswa');
-	Route::get('/anamripasien/{anamripasien}', [AnamripasienController::class, 'show'])->name('anamripasien.show');
-	Route::get('/anamripasien/{anamripasien}/edit', [AnamripasienController::class, 'edit'])->name('anamripasien.edit')->middleware('mahasiswa');
-	Route::put('/anamripasien/{anamripasien}', [AnamripasienController::class, 'update'])->name('anamripasien.update')->middleware('mahasiswa');
-	Route::Delete('/anamripasien/{anamripasien}', [AnamripasienController::class, 'destroy'])->name('anamripasien.destroy')->middleware('mahasiswa');
-
 	
 	Route::put('/anamripasien/acc/{id}', [AnamripasienController::class, 'acc'])->name('anamripasien.acc')->middleware('pembimbing');
 
@@ -143,6 +130,9 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::put('/eksplakkal/{eksplakkal}', [EksplakkalController::class, 'update'])->name('eksplakkal.update')->middleware('mahasiswa');
 	Route::Delete('/eksplakkal/{eksplakkal}', [EksplakkalController::class, 'destroy'])->name('eksplakkal.destroy')->middleware('mahasiswa');
 
+	
+	Route::put('/eksplakkal/acc/{id}', [EksplakkalController::class, 'acc'])->name('eksplakkal.acc')->middleware('pembimbing');
+
 	Route::post('importeksplakkal', [EksplakkalController::class, 'import'])->name('importeksplakkal')->middleware('mahasiswa');
     Route::get('exporteksplakkal', [EksplakkalController::class, 'export'])->name('exporteksplakkal')->middleware('mahasiswa');
 
@@ -154,6 +144,8 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/odontogram/{odontogram}/edit', [OdontogramController::class, 'edit'])->name('odontogram.edit')->middleware('mahasiswa');
 	Route::put('/odontogram/{odontogram}', [OdontogramController::class, 'update'])->name('odontogram.update')->middleware('mahasiswa');
 	Route::Delete('/odontogram/{odontogram}', [OdontogramController::class, 'destroy'])->name('odontogram.destroy')->middleware('mahasiswa');
+	
+	Route::put('/odontogram/acc/{id}', [OdontogramController::class, 'acc'])->name('odontogram.acc')->middleware('pembimbing');
 
 	Route::post('importodontogram', [OdontogramController::class, 'import'])->name('importodontogram')->middleware('mahasiswa');
     Route::get('exportodontogram', [OdontogramController::class, 'export'])->name('exportodontogram')->middleware('mahasiswa');
@@ -167,6 +159,8 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::put('/ohis/{ohis}', [OhisController::class, 'update'])->name('ohis.update')->middleware('mahasiswa');
 	Route::Delete('/ohis/{ohis}', [OhisController::class, 'destroy'])->name('ohis.destroy')->middleware('mahasiswa');
 
+	Route::put('/ohis/acc/{id}', [OhisController::class, 'acc'])->name('ohis.acc')->middleware('pembimbing');
+
 	Route::post('importohis', [OhisController::class, 'import'])->name('importohis')->middleware('mahasiswa');
     Route::get('exportohis', [OhisController::class, 'export'])->name('exportohis')->middleware('mahasiswa');
 
@@ -178,6 +172,8 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/vitalitas/{vitalitas}/edit', [VitalitasController::class, 'edit'])->name('vitalitas.edit')->middleware('mahasiswa');
 	Route::put('/vitalitas/{vitalitas}', [VitalitasController::class, 'update'])->name('vitalitas.update')->middleware('mahasiswa');
 	Route::Delete('/vitalitas/{vitalitas}', [VitalitasController::class, 'destroy'])->name('vitalitas.destroy')->middleware('mahasiswa');
+	
+	Route::put('/vitalitas/acc/{id}', [VitalitasController::class, 'acc'])->name('vitalitas.acc')->middleware('pembimbing');
 
 	Route::post('importvitalitas', [VitalitasController::class, 'import'])->name('importvitalitas')->middleware('mahasiswa');
     Route::get('exportvitalitas', [VitalitasController::class, 'export'])->name('exportvitalitas')->middleware('mahasiswa');
@@ -190,6 +186,8 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/anomalimukosa/{anomalimukosa}/edit', [AnomalimukosaController::class, 'edit'])->name('anomalimukosa.edit')->middleware('mahasiswa');
 	Route::put('/anomalimukosa/{anomalimukosa}', [AnomalimukosaController::class, 'update'])->name('anomalimukosa.update')->middleware('mahasiswa');
 	Route::Delete('/anomalimukosa/{anomalimukosa}', [AnomalimukosaController::class, 'destroy'])->name('anomalimukosa.destroy')->middleware('mahasiswa');
+	
+	Route::put('/anomalimukosa/acc/{id}', [AnomalimukosaController::class, 'acc'])->name('anomalimukosa.acc')->middleware('pembimbing');
 
 	Route::post('importanomalimukosa', [AnomalimukosaController::class, 'import'])->name('importanomalimukosa')->middleware('mahasiswa');
     Route::get('exportanomalimukosa', [AnomalimukosaController::class, 'export'])->name('exportanomalimukosa')->middleware('mahasiswa');
@@ -203,6 +201,8 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/periodontal/{periodontal}/edit', [PeriodontalController::class, 'edit'])->name('periodontal.edit')->middleware('mahasiswa');
 	Route::put('/periodontal/{periodontal}', [PeriodontalController::class, 'update'])->name('periodontal.update')->middleware('mahasiswa');
 	Route::Delete('/periodontal/{periodontal}', [PeriodontalController::class, 'destroy'])->name('periodontal.destroy')->middleware('mahasiswa');
+	
+	Route::put('/periodontal/acc/{id}', [PeriodontalController::class, 'acc'])->name('periodontal.acc')->middleware('pembimbing');
 
 	Route::post('importperiodontal', [PeriodontalController::class, 'import'])->name('importperiodontal')->middleware('mahasiswa');
     Route::get('exportperiodontal', [PeriodontalController::class, 'export'])->name('exportperiodontal')->middleware('mahasiswa');

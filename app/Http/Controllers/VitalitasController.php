@@ -158,4 +158,24 @@ class VitalitasController extends Controller
         Vitalitas::destroy($vitalitas->id);
         return back()->with('succes', 'Data vitalitas berhasil dihapus');
     }
+
+    public function acc($id)
+    {
+        // dd($id);
+        $vitalitas = Vitalitas::where('id', $id)->first();
+
+        if ($vitalitas->acc == 0) {
+            Vitalitas::where('id', $id)->update([
+                'acc' => 1
+            ]);
+        } elseif ($vitalitas->acc == 1) {
+            Vitalitas::where('id', $id)->update([
+                'acc' => 0
+            ]);
+        }
+
+        return back()->with([
+            'success' => 'Status ACC berhasil diubah'
+        ]);
+    }
 }
