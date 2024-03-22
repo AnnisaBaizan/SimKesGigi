@@ -9,9 +9,11 @@
             </div>
 
             <div class="card-body" id="printableArea">
-                <div class="col-sm-12 mb-sm-0 text-center">
-                    <img class="img-fluid max-width: 150%; height: 50%;" src="{!! asset('/img/KOP.png') !!}">
-                </div>
+                @can('adminmahasiswa')
+                    <div class="col-sm-12 mb-sm-0 text-center">
+                        <img class="img-fluid max-width: 150%; height: 50%;" src="{!! asset('/img/KOP.png') !!}">
+                    </div>
+                @endcan
                 <div class="col-sm-12 mb-sm-0 text-center mt-3 mb-5">
                     <h3 class="font-weight-bold text-dark text-center">Kartu Pasien</h3>
                 </div>
@@ -81,25 +83,33 @@
                         </table>
                     </center>
                 </div>
-                <div class="ms-3 me-3 mt-4">
-                    <table style="width: 100%;">
-                        <tr>
-                            <td style="width: 35%;"> </td>
-                            <td style="width: 35%;"> </td>
-                            <td style="width: 30%;">
-                                <p>Pembimbing,
-                                    <center>
-                                        <div id="qrcode" class="mb-2"></div>
-                                        <!-- Ini adalah elemen yang akan menampilkan QR code -->
-                                    </center>
-                                    {{ ucwords(get_v('users', 'nimnip', $kartupasien->pembimbing, 'username')[0]->username ?? '') }}
-                                    <br>
-                                    NIP. {{ $kartupasien->pembimbing }}
-                                </p>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
+                @can('adminmahasiswa')
+                    <div class="ms-3 me-3 mt-4">
+                        <table style="width: 100%;">
+                            <tr>
+                                <td style="width: 35%;"> </td>
+                                <td style="width: 35%;"> </td>
+                                <td style="width: 30%;">
+                                    <p>Pembimbing,
+                                        @if ($kartupasien->alamat == 1)
+                                            <center>
+                                                <div id="qrcode" class="mb-2"></div>
+                                                <!-- Ini adalah elemen yang akan menampilkan QR code -->
+                                            </center>
+                                        @else
+                                            <center>
+                                                <div class="mb-2 text-danger fw-bolder">Belum di-ACC</div>
+                                            </center>
+                                        @endif
+                                        {{ ucwords(get_v('users', 'nimnip', $kartupasien->pembimbing, 'username')[0]->username ?? '') }}
+                                        <br>
+                                        NIP. {{ $kartupasien->pembimbing }}
+                                    </p>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                @endcan
             </div>
 
             <div class="form-group row mt-3">
@@ -141,7 +151,8 @@
         var currentDateTime = new Date(new Date().getTime() + (7 * 60 * 60 * 1000)).toISOString();
 
         // Mendapatkan nilai dari variabel dan menyusunnya menjadi teks QR code
-        var qrText = "{{ $kartupasien->user_id }}"+"_"+"{{ $kartupasien->no_kartu }}"+"_"+"{{ $kartupasien->pembimbing }}"+"_"+
+        var qrText = "{{ $kartupasien->user_id }}" + "_" + "{{ $kartupasien->no_kartu }}" + "_" +
+            "{{ $kartupasien->pembimbing }}" + "_" +
             currentDateTime;
 
         // Membuat QR code dengan teks yang diperoleh

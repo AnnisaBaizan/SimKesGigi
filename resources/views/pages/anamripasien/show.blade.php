@@ -1,11 +1,11 @@
 @extends('layouts.app', ['class' => 'g-sidenav-show bg-gray-100'])
 
 @section('content')
-    @include('layouts.navbars.auth.topnav', ['title' => 'Edit Anamnesa dan Riwayat Pasien'])
+    @include('layouts.navbars.auth.topnav', ['title' => 'Detail Anomali Gigi dan Mukosa Mulut'])
     <div class="container-fluid py-4">
         <div class="card shadow mb-4">
             <div class="card-header py-3">
-              <h6 class="m-0 font-weight-bold text-primary">Formulir Edit Anamnesa dan Riwayat Pasien</h6>
+              <h6 class="m-0 font-weight-bold text-primary">Detail Anomali Gigi dan Mukosa Mulut</h6>
             </div>
             <div class="card-body">
                 <form class="user" action="{{route('anamripasien.update', $anamripasien->id) }}" method="post">
