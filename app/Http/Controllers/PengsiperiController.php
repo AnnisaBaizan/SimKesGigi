@@ -7,6 +7,8 @@ use App\Models\Kartupasien;
 use App\Models\Pertanyaan;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\App;
 
 class PengsiperiController extends Controller
 {
@@ -162,7 +164,31 @@ class PengsiperiController extends Controller
      */
     public function show(Pengsiperi $pengsiperi)
     {
-        return view('pages.pengsiperi.show')->with('pengsiperi', $pengsiperi);
+        if (auth()->user()->role === 1) {
+            $kartupasiens = kartupasien::where('user_id', $pengsiperi->user_id)
+                                    ->where('pembimbing', $pengsiperi->pembimbing)
+                                    ->get();
+            // $kartupasiens = kartupasien::all();
+            $users = User::where('role', 3)->get();
+        } 
+        elseif (auth()->user()->role === 2) {
+            $kartupasiens = kartupasien::where('pembimbing', auth()->user()->nimnip)->get();
+        } 
+        else {
+            $kartupasiens = kartupasien::where('user_id', auth()->id())->get();
+        }
+        
+        $pengetahuans = Pertanyaan::where('kode', 1)->get();
+        $perilakus = Pertanyaan::where('kode', 2)->get();
+        
+        return view('pages.pengsiperi.show')->with([
+            'pengsiperi' => $pengsiperi,
+            'kartupasiens' => $kartupasiens,
+            'pengetahuans' => $pengetahuans,
+            'perilakus' => $perilakus,
+            'users' => $users ?? null
+        ]);
+        // return view('pages.pengsiperi.show')->with('pengsiperi', $pengsiperi);
     }
 
     /**
@@ -198,7 +224,7 @@ class PengsiperiController extends Controller
             'perilakus' => $perilakus,
             'users' => $users ?? null
         ]);
-        return view('pages.pengsiperi.edit', compact('kartupasiens'))->with('pengsiperi', $pengsiperi);
+        // return view('pages.pengsiperi.edit', compact('kartupasiens'))->with('pengsiperi', $pengsiperi);
     }
 
     /**
@@ -292,5 +318,48 @@ class PengsiperiController extends Controller
     {
         Pengsiperi::destroy($pengsiperi->id);
         return back()->with('success', 'Pengetahuan, Keterampilan, Perilaku dan peran orang tua berhasil dihapus');
+    }
+
+
+    public function generatePDF(Pengsiperi $pengsiperi)
+    {
+        // $pengsiperi = Pengsiperi::where('id', $id)->first();
+        // dd($pengsiperi);
+
+        if (auth()->user()->role === 1) {
+            $kartupasiens = kartupasien::where('user_id', $pengsiperi->user_id)
+                                    ->where('pembimbing', $pengsiperi->pembimbing)
+                                    ->get();
+            // $kartupasiens = kartupasien::all();
+            $users = User::where('role', 3)->get();
+        } 
+        elseif (auth()->user()->role === 2) {
+            $kartupasiens = kartupasien::where('pembimbing', auth()->user()->nimnip)->get();
+        } 
+        else {
+            $kartupasiens = kartupasien::where('user_id', auth()->id())->get();
+        }
+        
+        $pengetahuans = Pertanyaan::where('kode', 1)->get();
+        $perilakus = Pertanyaan::where('kode', 2)->get();
+
+        // $pdf = App::make('dompdf.wrapper');
+        $pdf = Pdf::loadView('pages.pengsiperi.pdf', ['pengsiperi'=>$pengsiperi,'kartupasiens' => $kartupasiens, 'pengetahuans' => $pengetahuans, 'perilakus' => $perilakus, 'users' => $users ?? null]);
+        return $pdf->download('document.pdf');
+
+
+        // $pdf = Pdf::loadView('pages.pengsiperi.show')->with([
+        //     'pengsiperi' => $pengsiperi,
+        //     'kartupasiens' => $kartupasiens,
+        //     'pengetahuans' => $pengetahuans,
+        //     'perilakus' => $perilakus,
+        //     'users' => $users ?? null
+        // ]);
+
+
+
+
+        // $pdf = Pdf::loadView('pages.pengsiperi.show', $pengsiperi);
+        // return $pdf->download('document.pdf');
     }
 }

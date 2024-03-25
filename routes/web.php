@@ -120,6 +120,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 	Route::post('importpengsiperi', [PengsiperiController::class, 'import'])->name('importpengsiperi')->middleware('mahasiswa');
     Route::get('exportpengsiperi', [PengsiperiController::class, 'export'])->name('exportpengsiperi')->middleware('mahasiswa');
+    Route::get('generatePDF/{pengsiperi}', [PengsiperiController::class, 'generatePDF'])->name('generatePDF');
 
 	// Route::resource('/eksplakkal', eksplakkalController::class);
 	Route::get('/eksplakkal', [EksplakkalController::class, 'index'])->name('eksplakkal.index');
