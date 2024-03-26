@@ -11,7 +11,8 @@
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-              <p>Apakah kamu yakin menghapus User ?</p>
+              <p>Apakah kamu yakin menghapus User ?</p><br>
+              <p class="text-danger">AKAN MENGHAPUS SELURUH DATA PASIEN, PEMERIKSAAN DAN HASIL</p>
             </div>
             <div class="modal-footer">
                 <form action="" method="POST" id="deleteForm">
