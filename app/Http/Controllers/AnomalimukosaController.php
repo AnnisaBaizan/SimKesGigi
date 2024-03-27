@@ -133,7 +133,25 @@ class AnomalimukosaController extends Controller
      */
     public function show(Anomalimukosa $anomalimukosa)
     {
-        return view('pages.anomalimukosa.show')->with('anomalimukosa', $anomalimukosa);
+        if (auth()->user()->role === 1) {
+            $kartupasiens = kartupasien::where('user_id', $anomalimukosa->user_id)
+                                    ->where('pembimbing', $anomalimukosa->pembimbing)
+                                    ->get();
+            // $kartupasiens = kartupasien::all();
+            $users = User::where('role', 3)->get();
+        } 
+        elseif (auth()->user()->role === 2) {
+            $kartupasiens = kartupasien::where('pembimbing', auth()->user()->nimnip)->get();
+        } 
+        else {
+            $kartupasiens = kartupasien::where('user_id', auth()->id())->get();
+        }
+        
+        return view('pages.anomalimukosa.show')->with([
+            'kartupasiens' => $kartupasiens,
+            'anomalimukosa'=>$anomalimukosa,
+            'users' => $users ?? null
+        ]);
     }
 
     /**
