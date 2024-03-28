@@ -21,36 +21,17 @@
                         <label for="user_id" class="form-text">Mahasiswa:</label>
                     </div>
                     <div class="col-sm-4">
-                        <select class="js-example-basic-single form-control @error('user_id') is-invalid @enderror"
-                            data-live-search="true" id="user_id" name="user_id" placeholder="Pilih Mahasiswa"
-                            value="{{ old('user_id') }}" required disabled readonly>
-                            @error('user_id')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                            <option value="" selected disabled>Pilih Mahasiswa</option>
-                            @foreach ($users as $user)
-                                <option value="{{ $user->id }}"
-                                    {{ $anamripasien->user_id == $user->id ? 'selected' : '' }}
-                                    data-pembimbing="{{ $user->pembimbing }}">
-                                    {{ ucwords($user->username) }}</option>
-                            @endforeach
-                        </select>
+                        <input type="text" class="form-control"
+                            value="{{ ucwords(get_v('users', 'id', $anamripasien->user_id, 'username')[0]->username ?? '') }}"
+                            disabled readonly required>
                     </div>
                     <div class="col-sm-2">
                         <label for="user_id" class="form-text">Pembimbing:</label>
                     </div>
                     <div class="col-sm-4">
-                        <input type="text" class="form-control @error('pembimbing') is-invalid_max @enderror"
-                            id="pembimbing" name="pembimbing" placeholder="pembimbing"
+                        <input type="text" class="form-control"
                             value="{{ ucwords(get_v('users', 'nimnip', $anamripasien->pembimbing, 'username')[0]->username ?? '') }}"
                             disabled readonly required>
-                        @error('pembimbing')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
                     </div>
                 </div>
                 <div class="form-group row">
@@ -58,39 +39,17 @@
                         <label for="kartupasien_id" class="form-text">No Pasien :</label>
                     </div>
                     <div class="col-sm-4">
-                        <select class="js-example-basic-single form-control @error('kartupasien_id') is-invalid @enderror"
-                            data-live-search="true" id="kartupasien_id" name="kartupasien_id" placeholder="Pilih Pasien"
-                            value="{{ old('kartupasien_id', $anamripasien->kartupasien_id) }}" required disabled readonly>
-                            @error('kartupasien_id')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                            @foreach ($kartupasiens as $kartupasien)
-                                <option value="{{ $anamripasien->kartupasien_id }}"
-                                    {{ $anamripasien->kartupasien_id == $kartupasien->id ? 'selected' : '' }}>
-                                    {{ $kartupasien->no_kartu }}</option>
-                            @endforeach
-                        </select>
+                        <input type="text" class="form-control"
+                            value="{{ ucwords(get_v('kartupasiens', 'id', $anamripasien->kartupasien_id, 'no_kartu')[0]->no_kartu ?? '') }}"
+                            disabled readonly required>
                     </div>
                     <div class="col-sm-2">
                         <label for="kartupasien_id" class="form-text">Nama Pasien :</label>
                     </div>
                     <div class="col-sm-4">
-                        <select class="js-example-basic-single form-control @error('kartupasien_id') is-invalid @enderror"
-                            data-live-search="true" id="kartupasien_id" name="kartupasien_id" placeholder="Pilih Pasien"
-                            value="{{ old('kartupasien_id', $anamripasien->kartupasien_id) }}" required disabled readonly>
-                            @error('kartupasien_id')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                            @foreach ($kartupasiens as $kartupasien)
-                                <option value="{{ $anamripasien->kartupasien_id }}"
-                                    {{ $anamripasien->kartupasien_id == $kartupasien->id ? 'selected' : '' }}>
-                                    {{ $kartupasien->nama }}</option>
-                            @endforeach
-                        </select>
+                        <input type="text" class="form-control"
+                            value="{{ ucwords(get_v('kartupasiens', 'id', $anamripasien->kartupasien_id, 'nama')[0]->nama ?? '') }}"
+                            disabled readonly required>
                     </div>
                 </div>
 
@@ -243,9 +202,8 @@
                 <div class="form-group row">
                     <div class="col-sm-4 mb-3">
                         <label for="jantung" class ="form-text">Jantung</label>
-                        <select class="form-control @error('jantung') is-invalid @enderror" id="jantung"
-                            name="jantung" placeholder="Jantung" value="{{ old('jantung') }}" required disabled
-                            readonly>
+                        <select class="form-control @error('jantung') is-invalid @enderror" id="jantung" name="jantung"
+                            placeholder="Jantung" value="{{ old('jantung') }}" required disabled readonly>
                             @error('jantung')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -498,7 +456,7 @@
         var currentDateTime = new Date(new Date().getTime() + (7 * 60 * 60 * 1000)).toISOString();
 
         // Mendapatkan nilai dari variabel dan menyusunnya menjadi teks QR code
-        var qrText = "{{ $anamripasien->user_id }}" + "_" + "{{ $anamripasien->no_kartu }}" + "_" +
+        var qrText = "{{ $anamripasien->id }}" + "_" + "{{ $anamripasien->user_id }}" + "_" + "{{ $anamripasien->no_kartu }}" + "_" +
             "{{ $anamripasien->pembimbing }}" + "_" +
             currentDateTime;
 

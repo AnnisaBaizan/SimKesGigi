@@ -144,7 +144,11 @@ class EksplakkalController extends Controller
      */
     public function show(Eksplakkal $eksplakkal)
     {
-        return view('pages.eksplakkal.show')->with('eksplakkal', $eksplakkal);
+        $permukaangigis = permukaangigi::all();
+        return view('pages.eksplakkal.show')->with([
+            'permukaangigis' => $permukaangigis,
+            'eksplakkal'=> $eksplakkal,
+        ]);
     }
 
     /**

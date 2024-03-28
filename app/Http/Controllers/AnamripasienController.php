@@ -109,17 +109,8 @@ class AnamripasienController extends Controller
      */
     public function show(anamripasien $anamripasien)
     {
-            $kartupasiens = kartupasien::where('user_id', $anamripasien->user_id)
-                                    ->where('pembimbing', $anamripasien->pembimbing)
-                                    ->get();
-            // $kartupasiens = kartupasien::all();
-            $users = User::where('role', 3)->get();
-
-        // $kartupasiens = kartupasien::all();
         return view('pages.anamripasien.show')->with([
             'anamripasien' => $anamripasien,
-            'kartupasiens' => $kartupasiens,
-            'users' => $users ?? null
         ]);
     }
 

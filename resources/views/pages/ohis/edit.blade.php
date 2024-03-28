@@ -1,12 +1,12 @@
 @extends('layouts.app', ['class' => 'g-sidenav-show bg-gray-100'])
 
 @section('content')
-    @include('layouts.navbars.auth.topnav', ['title' => 'Eskternal & Internal Oral (Plak & Kalkulus)'])
+    @include('layouts.navbars.auth.topnav', ['title' => 'Edit Data OHI-S'])
 
     <div class="container-fluid py-4">
         <div class="card shadow mb-4">
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Pengetahuan, Keterampilan, Perilaku dan Peran Orang Tua</h6>
+                <h6 class="m-0 font-weight-bold text-primary">Edit Data OHI-S</h6>
             </div>
             <div class="card-body">
                 <style>

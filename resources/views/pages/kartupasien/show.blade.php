@@ -84,7 +84,7 @@
                         </table>
                     </center>
                 </div>
-                @can('adminmahasiswa')
+                {{-- @can('adminmahasiswa')
                     <div class="ms-3 me-3 mt-4">
                         <table style="width: 100%;">
                             <tr>
@@ -110,7 +110,7 @@
                             </tr>
                         </table>
                     </div>
-                @endcan
+                @endcan --}}
             </div>
 
             <div class="form-group row mt-3">
@@ -152,7 +152,7 @@
         var currentDateTime = new Date(new Date().getTime() + (7 * 60 * 60 * 1000)).toISOString();
 
         // Mendapatkan nilai dari variabel dan menyusunnya menjadi teks QR code
-        var qrText = "{{ $kartupasien->user_id }}" + "_" + "{{ $kartupasien->no_kartu }}" + "_" +
+        var qrText = "{{ $kartupasien->id }}" + "_" + "{{ $kartupasien->user_id }}" + "_" + "{{ $kartupasien->no_kartu }}" + "_" +
             "{{ $kartupasien->pembimbing }}" + "_" +
             currentDateTime;
 
