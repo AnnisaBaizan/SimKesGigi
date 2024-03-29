@@ -36,6 +36,12 @@ class User extends Authenticatable
     public function vitalitas(){
         return $this->hasMany(Vitalitas::class);
     }
+    public function periodontal(){
+        return $this->hasMany(Periodontal::class);
+    }
+    public function diagnosa(){
+        return $this->hasMany(Diagnosa::class);
+    }
 
     /**
      * The attributes that are mass assignable.

@@ -15,6 +15,10 @@ return new class extends Migration
     {
         Schema::create('diagnosas', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id');
+            $table->string('pembimbing');
+            $table->foreignId('kartupasien_id');
+            $table->boolean('acc')->default(0);
             $table->timestamps();
         });
     }

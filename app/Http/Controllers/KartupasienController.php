@@ -4,8 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Exports\ExportKartuPasien;
 use App\Imports\ImportKartuPasien;
+use App\Models\anamripasien;
+use App\Models\Anomalimukosa;
+use App\Models\Diagnosa;
+use App\Models\Eksplakkal;
 use App\Models\kartupasien;
+use App\Models\Odontogram;
+use App\Models\Ohis;
+use App\Models\Pengsiperi;
+use App\Models\Periodontal;
 use App\Models\User;
+use App\Models\Vitalitas;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -155,7 +164,18 @@ class KartupasienController extends Controller
     public function destroy(kartupasien $kartupasien)
     {
         kartupasien::destroy($kartupasien->id);
-        return back()->with('success', 'Kartu Pasien berhasil dihapus');
+        
+        anamripasien::where('kartupasien_id', $kartupasien->id)->delete();
+        Pengsiperi::where('kartupasien_id', $kartupasien->id)->delete();
+        Eksplakkal::where('kartupasien_id', $kartupasien->id)->delete();
+        Ohis::where('kartupasien_id', $kartupasien->id)->delete();
+        Odontogram::where('kartupasien_id', $kartupasien->id)->delete();
+        Anomalimukosa::where('kartupasien_id', $kartupasien->id)->delete();
+        Vitalitas::where('kartupasien_id', $kartupasien->id)->delete();
+        Periodontal::where('kartupasien_id', $kartupasien->id)->delete();
+        Diagnosa::where('kartupasien_id', $kartupasien->id)->delete();
+
+        return back()->with('success', 'Kartu Pasien dan data-data Terkait berhasil dihapus');
     }
 
     public function export(){

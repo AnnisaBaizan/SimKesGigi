@@ -6,6 +6,16 @@ use Illuminate\Support\Facades\Storage;
 use App\Models\User;
 use App\Exports\ExportUser;
 use App\Imports\ImportUser;
+use App\Models\anamripasien;
+use App\Models\Anomalimukosa;
+use App\Models\Diagnosa;
+use App\Models\Eksplakkal;
+use App\Models\kartupasien;
+use App\Models\Odontogram;
+use App\Models\Ohis;
+use App\Models\Pengsiperi;
+use App\Models\Periodontal;
+use App\Models\Vitalitas;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
@@ -60,14 +70,13 @@ class UserController extends Controller
             'terms' => 'required'
         ]);
 
-        if($request->file('avatar')){
+        if ($request->file('avatar')) {
             // $attributes['avatar'] = request()->file('avatar')->store('avatars');
-                $avatarname='avatar'.time().'.'.$request->avatar->getClientOriginalExtension();
-                $attributes['avatar']->storeAs('avatars',$avatarname);
-                $attributes['avatar'] = $avatarname;
-            }
-            else { 
-                $attributes['avatar']= "AvatarDefault.jpg";
+            $avatarname = 'avatar' . time() . '.' . $request->avatar->getClientOriginalExtension();
+            $attributes['avatar']->storeAs('avatars', $avatarname);
+            $attributes['avatar'] = $avatarname;
+        } else {
+            $attributes['avatar'] = "AvatarDefault.jpg";
         }
 
         user::create($attributes);
@@ -83,7 +92,7 @@ class UserController extends Controller
      */
     public function show(user $user)
     {
-        
+
         return view('pages.user.show', [
             'pembimbings' => User::where('role', '2')->get(),
             'user' => $user
@@ -127,46 +136,45 @@ class UserController extends Controller
             'avatar' => 'sometimes|image|mimes:jpeg,png,jpg,gif,svg|max:1024',
         ]);
 
-        if($request->file('avatar')){
+        if ($request->file('avatar')) {
             // $attributes['avatar'] = request()->file('avatar')->store('avatars');
-            $avatarname='avatar'.time().'.'.$request->avatar->getClientOriginalExtension();
-            $request->avatar->storeAs('avatars',$avatarname);
+            $avatarname = 'avatar' . time() . '.' . $request->avatar->getClientOriginalExtension();
+            $request->avatar->storeAs('avatars', $avatarname);
             $oldpic = $user->avatar;
             if ($oldpic !== "AvatarDefault.jpg") {
-                Storage::delete('avatars/'. $oldpic);
+                Storage::delete('avatars/' . $oldpic);
                 user::where('id', $user->id)->update([
                     'avatar' => $avatarname
                     // $request['avatar'] = $avatarname  
                 ]);
             }
-            }
-            else { 
-                user::where('id', $user->id)->update([
-                    'avatar' => $user->avatar
-                    // $request['avatar']= $user->avatar
-                ]);
-        }
-        
-        // dd($request);
-            if($request['password'] !== NULL){
-                user::where('id', $user->id)->update([
-                    'password' => Hash::make($request['password']) 
-                    // 'password' => $request['password']  
-                    ]);
-            }
-
-
+        } else {
             user::where('id', $user->id)->update([
-                'nimnip' => $request['nimnip'],
-                'username' => $request['username'],
-                'email' => $request['email'],
-                'role' => $request['role'],
-                'pembimbing' => $request['pembimbing'],
+                'avatar' => $user->avatar
+                // $request['avatar']= $user->avatar
             ]);
+        }
 
-            // dd($attributes);
-            // user::where('id', $user->id)->update($attributes);
-            
+        // dd($request);
+        if ($request['password'] !== NULL) {
+            user::where('id', $user->id)->update([
+                'password' => Hash::make($request['password'])
+                // 'password' => $request['password']  
+            ]);
+        }
+
+
+        user::where('id', $user->id)->update([
+            'nimnip' => $request['nimnip'],
+            'username' => $request['username'],
+            'email' => $request['email'],
+            'role' => $request['role'],
+            'pembimbing' => $request['pembimbing'],
+        ]);
+
+        // dd($attributes);
+        // user::where('id', $user->id)->update($attributes);
+
         return back()->with('success', 'Data User succesfully updated');
     }
 
@@ -178,19 +186,46 @@ class UserController extends Controller
      */
     public function destroy(user $user)
     {
-        if($user->avatar !== "AvatarDefault.jpg"){
-            Storage::delete('avatars/'. $user->avatar);
+        if ($user->avatar !== "AvatarDefault.jpg") {
+            Storage::delete('avatars/' . $user->avatar);
         }
-        user::destroy($user->id);
-        return back()->with('success', 'User berhasil dihapus');
+
+        User::destroy($user->id);
+
+        if ($user->role === 2) {
+            kartuPasien::where('pembimbing', $user->nimnip)->delete();
+            anamripasien::where('pembimbing', $user->nimnip)->delete();
+            Pengsiperi::where('pembimbing', $user->nimnip)->delete();
+            Eksplakkal::where('pembimbing', $user->nimnip)->delete();
+            Ohis::where('pembimbing', $user->nimnip)->delete();
+            Odontogram::where('pembimbing', $user->nimnip)->delete();
+            Anomalimukosa::where('pembimbing', $user->nimnip)->delete();
+            Vitalitas::where('pembimbing', $user->nimnip)->delete();
+            Periodontal::where('pembimbing', $user->nimnip)->delete();
+            Diagnosa::where('pembimbing', $user->nimnip)->delete();
+        } else {
+            kartuPasien::where('user_id', $user->id)->delete();
+            anamripasien::where('user_id', $user->id)->delete();
+            Pengsiperi::where('user_id', $user->id)->delete();
+            Eksplakkal::where('user_id', $user->id)->delete();
+            Ohis::where('user_id', $user->id)->delete();
+            Odontogram::where('user_id', $user->id)->delete();
+            Anomalimukosa::where('user_id', $user->id)->delete();
+            Vitalitas::where('user_id', $user->id)->delete();
+            Periodontal::where('user_id', $user->id)->delete();
+            Diagnosa::where('user_id', $user->id)->delete();
+        }
+
+        return back()->with('success', 'User dan data-data terkait berhasil dihapus');
     }
 
-    public function export(){
+    public function export()
+    {
         return Excel::download(new ExportUser, 'Data_User.xlsx');
         return back()->with('success', 'Data User Berhasil di eksport');
     }
 
-    public function import(Request $request) 
+    public function import(Request $request)
     {
         // dd($request);
         $this->validate($request, [
