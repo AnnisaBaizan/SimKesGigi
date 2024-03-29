@@ -86,7 +86,7 @@ class VitalitasController extends Controller
 
         Vitalitas::create($validatedData);
 
-        return redirect('/vitalitas')->with('succes', 'Data vitalitas Berhasil Dibuat');
+        return redirect()->route('vitalitas.index')->with('success', 'Data vitalitas Berhasil Dibuat');
     }
 
     /**
@@ -144,7 +144,7 @@ class VitalitasController extends Controller
         Vitalitas::where('id', $vitalitas->id)
             ->update($validatedData);
 
-        return back()->with('succes', 'Data vitalitas berhasil diubah');
+        return back()->with('success', 'Data vitalitas berhasil diubah');
     }
 
     /**

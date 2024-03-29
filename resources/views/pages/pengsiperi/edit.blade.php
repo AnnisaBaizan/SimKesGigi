@@ -15,6 +15,9 @@
                     @csrf
                     @method('PUT')
 
+                    <div id="alert">
+                        @include('components.alert')
+                    </div>
                     @can('admin')
                         <div class="form-group row">
                             <div class="col-sm-4">

@@ -70,8 +70,8 @@ class PengsiperiSeeder extends Seeder
                 $peranOrtuLength = rand(1, 3);
                 $peranOrtu = implode(',', $this->generateRandomArray(1, 3, $peranOrtuLength)); // Generate array with random length and random numbers between 1 and 3
     
-                $randomCreatedAt = Carbon::create(rand(2022, 2023), rand(1, 12), rand(1, 28), rand(0, 23), rand(0, 59), rand(0, 59))->format('Y-m-d H:i:s');
-                $randomUpdatedAt = Carbon::create(rand(2022, 2023), rand(1, 12), rand(1, 28), rand(0, 23), rand(0, 59), rand(0, 59))->format('Y-m-d H:i:s');
+                $randomCreatedAt = Carbon::create(rand(2022, 2024), rand(1, 12), rand(1, 28), rand(0, 23), rand(0, 59), rand(0, 59))->format('Y-m-d H:i:s');
+                $randomUpdatedAt = Carbon::create(rand(2022, 2024), rand(1, 12), rand(1, 28), rand(0, 23), rand(0, 59), rand(0, 59))->format('Y-m-d H:i:s');
     
                 DB::table('pengsiperis')->insert([
                     'user_id' => $userId,

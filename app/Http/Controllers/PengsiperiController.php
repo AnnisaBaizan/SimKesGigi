@@ -52,8 +52,8 @@ class PengsiperiController extends Controller
         }
 
         // $kartupasiens = kartupasien::all();
-        $pengetahuans = Pertanyaan::where('kode', 1)->get();
-        $perilakus = Pertanyaan::where('kode', 2)->get();
+        $pengetahuans = Pertanyaan::where('kode', 1)->where('status', 1)->get();
+        $perilakus = Pertanyaan::where('kode', 2)->where('status', 1)->get();
 
         return view('pages.pengsiperi.create')->with([
             'kartupasiens' => $kartupasiens,
@@ -192,8 +192,8 @@ class PengsiperiController extends Controller
         }
 
         // $kartupasiens = kartupasien::all();
-        $pengetahuans = Pertanyaan::where('kode', 1)->get();
-        $perilakus = Pertanyaan::where('kode', 2)->get();
+        $pengetahuans = Pertanyaan::where('kode', 1)->where('status', 1)->get();
+        $perilakus = Pertanyaan::where('kode', 2)->where('status', 1)->get();
 
         return view('pages.pengsiperi.edit')->with([
             'pengsiperi' => $pengsiperi,

@@ -15,6 +15,8 @@ return new class extends Migration
     {
         Schema::create('askepgiluts', function (Blueprint $table) {
             $table->id();
+            $table->tinyInteger('kode');
+            $table->text('penyebab');
             $table->timestamps();
         });
     }

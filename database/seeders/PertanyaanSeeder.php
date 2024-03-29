@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use Carbon\Carbon;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -20,7 +21,7 @@ class PertanyaanSeeder extends Seeder
             DB::table('pertanyaans')->insert([
                 'kode' => 1,
                 'soal' => $this->getSoalKode1($i),
-                'created_at' => now(),
+                'created_at' => $this->getRandomDate(),
                 'updated_at' => now(),
             ]);
         }
@@ -30,10 +31,15 @@ class PertanyaanSeeder extends Seeder
             DB::table('pertanyaans')->insert([
                 'kode' => 2,
                 'soal' => $this->getSoalKode2($i),
-                'created_at' => now(),
+                'created_at' => $this->getRandomDate(),
                 'updated_at' => now(),
             ]);
         }
+    }
+
+    private function getRandomDate()
+    {
+        return Carbon::createFromDate(rand(2022, 2024), rand(1, 12), rand(1, 28))->format('Y-m-d H:i:s');
     }
 
     /**

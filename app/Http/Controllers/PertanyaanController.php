@@ -3,8 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pertanyaan;
-use App\Http\Requests\StorePertanyaanRequest;
-use App\Http\Requests\UpdatePertanyaanRequest;
+use Illuminate\Http\Request;
 
 class PertanyaanController extends Controller
 {
@@ -16,7 +15,7 @@ class PertanyaanController extends Controller
     public function index()
     {
         return view('pages.pertanyaan.index', [
-            'pertanyaans' => pertanyaan::all()
+            'pertanyaans' =>Pertanyaan::all()
         ]);
         // return view('pages.pertanyaan.index');
     }
@@ -28,16 +27,18 @@ class PertanyaanController extends Controller
      */
     public function create()
     {
-        return view('pages.pertanyaan.create');
+        return view('pages.pertanyaan.create', [
+            'pertanyaans' => Pertanyaan::all()
+        ]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StorePertanyaanRequest  $request
+     * @param  \App\Http\Requests\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StorePertanyaanRequest $request)
+    public function store(Request $request)
     {
         $validatedData = $request->validate([
             'kode' => 'required|max:9999999999999|digits_between:1,4|numeric',
@@ -46,7 +47,7 @@ class PertanyaanController extends Controller
 
         Pertanyaan::create($validatedData);
 
-        return redirect('/pertanyaan')->with('succes', 'Pertanyaan Berhasil Dibuat');
+        return redirect()->route('pertanyaan.index')->with('success', 'Pertanyaan Berhasil Dibuat');
     }
 
     /**
@@ -74,11 +75,11 @@ class PertanyaanController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdatePertanyaanRequest  $request
+     * @param  \App\Http\Requests\Request  $request
      * @param  \App\Models\Pertanyaan  $pertanyaan
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdatePertanyaanRequest $request, Pertanyaan $pertanyaan)
+    public function update(Request $request, Pertanyaan $pertanyaan)
     {
         $validatedData = $request->validate([
             'kode' => 'required|max:9999999999999|digits_between:1,4|numeric',
@@ -87,7 +88,7 @@ class PertanyaanController extends Controller
         Pertanyaan::where('id', $pertanyaan->id)
             ->update($validatedData);
 
-        return back()->with('succes', 'pertanyaan berhasil diubah');
+        return back()->with('success', 'pertanyaan berhasil diubah');
     }
 
     /**
@@ -99,6 +100,25 @@ class PertanyaanController extends Controller
     public function destroy(Pertanyaan $pertanyaan)
     {
         Pertanyaan::destroy($pertanyaan->id);
-        return back()->with('succes', 'Pertanyaan berhasil dihapus');
+        return back()->with('success', 'Pertanyaan berhasil dihapus');
+    }
+
+    public function status($id)
+    {
+        $pertanyaan = Pertanyaan::where('id', $id)->first();
+
+        if ($pertanyaan->status == 0) {
+            Pertanyaan::where('id', $id)->update([
+                'status' => 1
+            ]);
+        } elseif ($pertanyaan->status == 1) {
+            Pertanyaan::where('id', $id)->update([
+                'status' => 0
+            ]);
+        }
+
+        return back()->with([
+            'success' => 'Status pertanyaan berhasil diubah'
+        ]);
     }
 }

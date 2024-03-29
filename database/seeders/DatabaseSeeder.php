@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Anomalimukosa;
+use App\Models\Askepgilut;
 use App\Models\Eksplakkal;
 use App\Models\Odontogram;
 use App\Models\Ohis;
@@ -32,5 +33,6 @@ class DatabaseSeeder extends Seeder
         $this->call(OhisSeeder::class);
         $this->call(OdontogramSeeder::class);
         $this->call(AnomalimukosaSeeder::class);
+        $this->call(AskepgilutSeeder::class);
     }  
 }

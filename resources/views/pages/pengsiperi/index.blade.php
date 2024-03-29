@@ -327,7 +327,7 @@
                                                 @php
                                                     $peran_ortu_combined = '';
                                                     $peran_ortu_array = explode(',', $pengsiperi->peran_ortu);
-                                            
+
                                                     foreach ($peran_ortu_array as $index => $peran_ortu) {
                                                         switch ($peran_ortu) {
                                                             case 1:
@@ -337,19 +337,23 @@
                                                                 $peran_ortu_combined .= 'Memerintahkan menggosok gigi ';
                                                                 break;
                                                             case 3:
-                                                                $peran_ortu_combined .= 'Menganjurkan berkumur setiap makan manis-manis ';
+                                                                $peran_ortu_combined .=
+                                                                    'Menganjurkan berkumur setiap makan manis-manis ';
                                                                 break;
                                                         }
-                                            
-                                                        if ($index < count($peran_ortu_array) - 1 && count($peran_ortu_array) > 1) {
+
+                                                        if (
+                                                            $index < count($peran_ortu_array) - 1 &&
+                                                            count($peran_ortu_array) > 1
+                                                        ) {
                                                             $peran_ortu_combined .= '| ';
                                                         }
                                                     }
-                                            
+
                                                     echo $peran_ortu_combined;
                                                 @endphp
                                             </td>
-                                            
+
 
                                             <td>
                                                 @php
@@ -395,12 +399,14 @@
                                                     <i class="fas fa-eye text-success  fa-lg"></i>
                                                 </a> --}}
                                                 @can('adminmahasiswa')
-                                                    <a href ="{{ route('pengsiperi.edit', $pengsiperi->id) }}" title="Edit"
-                                                        class="btn btn-sm btn-icon-split btn-warning">
-                                                        <span class="icon"><i class="fas fa-pen text-white"
-                                                                style="padding-top: 4px;"></i></span><span
-                                                            class="text">Edit</span>
-                                                    </a>
+                                                    @if ($pengsiperi->created_at->year == now()->year)
+                                                        <a href ="{{ route('pengsiperi.edit', $pengsiperi->id) }}"
+                                                            title="Edit" class="btn btn-sm btn-icon-split btn-warning">
+                                                            <span class="icon"><i class="fas fa-pen text-white"
+                                                                    style="padding-top: 4px;"></i></span><span
+                                                                class="text">Edit</span>
+                                                        </a>
+                                                    @endif
                                                     <a href="javascript:;" data-toggle="modal"
                                                         onclick="handleDelete({{ $pengsiperi->id }})"
                                                         data-target="#DeleteModal"

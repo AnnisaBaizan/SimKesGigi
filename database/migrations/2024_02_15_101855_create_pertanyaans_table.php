@@ -18,6 +18,7 @@ return new class extends Migration
             $table->tinyInteger('kode');
             //1 (pengetahuan) dan 2 (perilaku)
             $table->text('soal');
+            $table->boolean('status')->default(1);
             $table->timestamps();
         });
     }

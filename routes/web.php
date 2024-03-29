@@ -107,6 +107,8 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::put('/pertanyaan/{pertanyaan}', [PertanyaanController::class, 'update'])->name('pertanyaan.update')->middleware('admin');
 	Route::Delete('/pertanyaan/{pertanyaan}', [PertanyaanController::class, 'destroy'])->name('pertanyaan.destroy')->middleware('admin');
 
+	Route::put('/pertanyaan/status/{id}', [PertanyaanController::class, 'status'])->name('pertanyaan.status')->middleware('pembimbing');
+
 	Route::post('importpertanyaan', [pertanyaanController::class, 'import'])->name('importpertanyaan')->middleware('admin');
     Route::get('exportpertanyaan', [pertanyaanController::class, 'export'])->name('exportpertanyaan')->middleware('admin');
 
