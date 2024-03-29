@@ -63,7 +63,7 @@ class PengsiperiSeeder extends Seeder
                 $perilaku = implode(',', $this->generateRandomArray(16, 28, $perilakuLength)); // Generate array with random length and random numbers between 1 and 13
                 $jumlahPilihan = 13;
                 $jumlahYangTerpilih = count(explode(',', $perilaku));
-                $nilaiPeri = number_format(($jumlahYangTerpilih / $jumlahPilihan)*100, 2); // Format nilaiPeri
+                $nilaiPeri = number_format((($jumlahPilihan - $jumlahYangTerpilih) / $jumlahPilihan)*100, 2); // Format nilaiPeri
                 $berperilaku = ($nilaiPeri > 50) ? 'Positif' : 'Negatif';
     
                 // Generate random array length for 'peran_ortu'

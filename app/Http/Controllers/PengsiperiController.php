@@ -21,14 +21,12 @@ class PengsiperiController extends Controller
     {
         if (auth()->user()->role === 1) {
             $pengsiperis = Pengsiperi::all();
-        } 
-        elseif (auth()->user()->role === 2) {
+        } elseif (auth()->user()->role === 2) {
             $pengsiperis = Pengsiperi::where('pembimbing', auth()->user()->nimnip)->get();
-        } 
-        else {
+        } else {
             $pengsiperis = Pengsiperi::where('user_id', auth()->id())->get();
         }
-        
+
         return view('pages.pengsiperi.index')->with('pengsiperis', $pengsiperis);
 
         // return view('pages.pengsiperi.index', [
@@ -47,18 +45,16 @@ class PengsiperiController extends Controller
         if (auth()->user()->role === 1) {
             $kartupasiens = kartupasien::all();
             $users = User::where('role', 3)->get();
-        } 
-        elseif (auth()->user()->role === 2) {
+        } elseif (auth()->user()->role === 2) {
             $kartupasiens = kartupasien::where('pembimbing', auth()->user()->nimnip)->get();
-        } 
-        else {
+        } else {
             $kartupasiens = kartupasien::where('user_id', auth()->id())->get();
         }
 
         // $kartupasiens = kartupasien::all();
         $pengetahuans = Pertanyaan::where('kode', 1)->get();
         $perilakus = Pertanyaan::where('kode', 2)->get();
-        
+
         return view('pages.pengsiperi.create')->with([
             'kartupasiens' => $kartupasiens,
             'pengetahuans' => $pengetahuans,
@@ -111,7 +107,7 @@ class PengsiperiController extends Controller
             'peran_ortu.*' => 'numeric',
         ]);
 
-        
+
         // If no checkboxes are checked, set lokasi to an empty array
         $pengetahuan = $request->has('pengetahuan') ? implode(',', $validatedData['pengetahuan']) : '';
         $perilaku = $request->has('perilaku') ? implode(',', $validatedData['perilaku']) : '';
@@ -142,15 +138,15 @@ class PengsiperiController extends Controller
         $pengsiperi->gerakan = $validatedData['gerakan'];
         $pengsiperi->hasil_g = $validatedData['hasil_g'];
         $pengsiperi->kesimpulan = $validatedData['kesimpulan'];
-        
+
         $pengsiperi->perilaku = $perilaku;
         $pengsiperi->jumlah_pilihan = $validatedData['jumlah_pilihan'];
         $pengsiperi->jumlah_yang_terpilih = $validatedData['jumlah_yang_terpilih'];
         $pengsiperi->nilai_peri = $validatedData['nilai_peri'];
         $pengsiperi->berperilaku = $validatedData['berperilaku'];
-        
+
         $pengsiperi->peran_ortu = $peran_ortu;
-        
+
         $pengsiperi->save();
 
         return redirect()->route('pengsiperi.index')->with('success', 'Pengetahuan, Keterampilan, Perilaku dan peran orang tua Berhasil Dibuat');
@@ -164,29 +160,13 @@ class PengsiperiController extends Controller
      */
     public function show(Pengsiperi $pengsiperi)
     {
-        if (auth()->user()->role === 1) {
-            $kartupasiens = kartupasien::where('user_id', $pengsiperi->user_id)
-                                    ->where('pembimbing', $pengsiperi->pembimbing)
-                                    ->get();
-            // $kartupasiens = kartupasien::all();
-            $users = User::where('role', 3)->get();
-        } 
-        elseif (auth()->user()->role === 2) {
-            $kartupasiens = kartupasien::where('pembimbing', auth()->user()->nimnip)->get();
-        } 
-        else {
-            $kartupasiens = kartupasien::where('user_id', auth()->id())->get();
-        }
-        
         $pengetahuans = Pertanyaan::where('kode', 1)->get();
         $perilakus = Pertanyaan::where('kode', 2)->get();
-        
+
         return view('pages.pengsiperi.show')->with([
             'pengsiperi' => $pengsiperi,
-            'kartupasiens' => $kartupasiens,
             'pengetahuans' => $pengetahuans,
             'perilakus' => $perilakus,
-            'users' => $users ?? null
         ]);
         // return view('pages.pengsiperi.show')->with('pengsiperi', $pengsiperi);
     }
@@ -201,22 +181,20 @@ class PengsiperiController extends Controller
     {
         if (auth()->user()->role === 1) {
             $kartupasiens = kartupasien::where('user_id', $pengsiperi->user_id)
-                                    ->where('pembimbing', $pengsiperi->pembimbing)
-                                    ->get();
+                ->where('pembimbing', $pengsiperi->pembimbing)
+                ->get();
             // $kartupasiens = kartupasien::all();
             $users = User::where('role', 3)->get();
-        } 
-        elseif (auth()->user()->role === 2) {
+        } elseif (auth()->user()->role === 2) {
             $kartupasiens = kartupasien::where('pembimbing', auth()->user()->nimnip)->get();
-        } 
-        else {
+        } else {
             $kartupasiens = kartupasien::where('user_id', auth()->id())->get();
         }
 
         // $kartupasiens = kartupasien::all();
         $pengetahuans = Pertanyaan::where('kode', 1)->get();
         $perilakus = Pertanyaan::where('kode', 2)->get();
-        
+
         return view('pages.pengsiperi.edit')->with([
             'pengsiperi' => $pengsiperi,
             'kartupasiens' => $kartupasiens,
@@ -270,12 +248,12 @@ class PengsiperiController extends Controller
             'peran_ortu' => 'required|array',
             'peran_ortu.*' => 'numeric',
         ]);
-    
+
         // If no checkboxes are checked, set lokasi to an empty array
         $pengetahuan = $request->has('pengetahuan') ? implode(',', $validatedData['pengetahuan']) : '';
         $perilaku = $request->has('perilaku') ? implode(',', $validatedData['perilaku']) : '';
         $peran_ortu = $request->has('peran_ortu') ? implode(',', $validatedData['peran_ortu']) : '';
-    
+
         // Update data di database
         $pengsiperi->update([
             'user_id' => $validatedData['user_id'],
@@ -304,7 +282,7 @@ class PengsiperiController extends Controller
             'berperilaku' => $validatedData['berperilaku'],
             'peran_ortu' => $peran_ortu,
         ]);
-    
+
         return back()->with('success', 'Pengetahuan, Keterampilan, Perilaku, dan peran orang tua Berhasil Diperbarui');
     }
 
@@ -318,48 +296,5 @@ class PengsiperiController extends Controller
     {
         Pengsiperi::destroy($pengsiperi->id);
         return back()->with('success', 'Pengetahuan, Keterampilan, Perilaku dan peran orang tua berhasil dihapus');
-    }
-
-
-    public function generatePDF(Pengsiperi $pengsiperi)
-    {
-        // $pengsiperi = Pengsiperi::where('id', $id)->first();
-        // dd($pengsiperi);
-
-        if (auth()->user()->role === 1) {
-            $kartupasiens = kartupasien::where('user_id', $pengsiperi->user_id)
-                                    ->where('pembimbing', $pengsiperi->pembimbing)
-                                    ->get();
-            // $kartupasiens = kartupasien::all();
-            $users = User::where('role', 3)->get();
-        } 
-        elseif (auth()->user()->role === 2) {
-            $kartupasiens = kartupasien::where('pembimbing', auth()->user()->nimnip)->get();
-        } 
-        else {
-            $kartupasiens = kartupasien::where('user_id', auth()->id())->get();
-        }
-        
-        $pengetahuans = Pertanyaan::where('kode', 1)->get();
-        $perilakus = Pertanyaan::where('kode', 2)->get();
-
-        // $pdf = App::make('dompdf.wrapper');
-        $pdf = Pdf::loadView('pages.pengsiperi.pdf', ['pengsiperi'=>$pengsiperi,'kartupasiens' => $kartupasiens, 'pengetahuans' => $pengetahuans, 'perilakus' => $perilakus, 'users' => $users ?? null]);
-        return $pdf->download('document.pdf');
-
-
-        // $pdf = Pdf::loadView('pages.pengsiperi.show')->with([
-        //     'pengsiperi' => $pengsiperi,
-        //     'kartupasiens' => $kartupasiens,
-        //     'pengetahuans' => $pengetahuans,
-        //     'perilakus' => $perilakus,
-        //     'users' => $users ?? null
-        // ]);
-
-
-
-
-        // $pdf = Pdf::loadView('pages.pengsiperi.show', $pengsiperi);
-        // return $pdf->download('document.pdf');
     }
 }

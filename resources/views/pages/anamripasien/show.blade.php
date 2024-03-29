@@ -57,9 +57,9 @@
 
 
                 <div class="col-sm-12 mb-3 mb-sm-0 text-center bg-gradient-faded-info-vertical">
-                    {{-- <marquee> --}}
+                    <marquee>
                     <h6 class="m-0 font-weight-bold text-dark text-bold text-center">Anamnesa</h6>
-                    {{-- </marquee> --}}
+                    </marquee>
                 </div>
                 <div class="form-group">
                     <div class="col-sm-12 mb-sm-0">
@@ -86,9 +86,9 @@
                 <hr class="my-4 w-100 border-top border-dark border-4 d-print-block">
 
                 <div class="col-sm-12 mb-3 mb-sm-0 text-center bg-gradient-faded-info-vertical">
-                    {{-- <marquee> --}}
+                    <marquee>
                     <h6 class="m-0 font-weight-bold text-dark text-bold text-center">Riwayat Kesehatan Umum</h6>
-                    {{-- </marquee> --}}
+                    </marquee>
                 </div>
                 <div class="form-group row">
                     <div class="col-sm-6 mb-3 mt-3">

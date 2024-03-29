@@ -195,7 +195,7 @@
                                         <label for="role" class ="form-text">Sebagai :</label>
                                     </div>
                                     <div class="col-sm-8 mb-3">
-                                        <select class="form-control @error('role') is-invalid @enderror" id="role" name="role" placeholder="Peran" value="{{ old('role', auth()->user()->role) }}" required>
+                                        <select class="form-control @error('role') is-invalid @enderror" id="role" name="role" placeholder="Peran" value="{{ old('role', auth()->user()->role) }}" required readonly>
                                             @error('role')
                                                 <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>

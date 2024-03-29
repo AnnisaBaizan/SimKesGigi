@@ -34,6 +34,7 @@ use App\Http\Controllers\OdontogramController;
 use App\Http\Controllers\OhisController;
 use App\Http\Controllers\VitalitasController;
 use App\Http\Controllers\AnomalimukosaController;
+use App\Http\Controllers\DiagnosaController;
 use App\Http\Controllers\PeriodontalController;
 use Illuminate\Http\Request;
 
@@ -120,7 +121,6 @@ Route::group(['middleware' => 'auth'], function () {
 
 	Route::post('importpengsiperi', [PengsiperiController::class, 'import'])->name('importpengsiperi')->middleware('mahasiswa');
     Route::get('exportpengsiperi', [PengsiperiController::class, 'export'])->name('exportpengsiperi')->middleware('mahasiswa');
-    Route::get('generatePDF/{pengsiperi}', [PengsiperiController::class, 'generatePDF'])->name('generatePDF');
 
 	// Route::resource('/eksplakkal', eksplakkalController::class);
 	Route::get('/eksplakkal', [EksplakkalController::class, 'index'])->name('eksplakkal.index');
@@ -207,6 +207,20 @@ Route::group(['middleware' => 'auth'], function () {
 
 	Route::post('importperiodontal', [PeriodontalController::class, 'import'])->name('importperiodontal')->middleware('mahasiswa');
     Route::get('exportperiodontal', [PeriodontalController::class, 'export'])->name('exportperiodontal')->middleware('mahasiswa');
+
+	// Route::resource('/diagnosa', DiagnosaController::class);
+	Route::get('/diagnosa', [DiagnosaController::class, 'index'])->name('diagnosa.index');
+	Route::get('/diagnosa/create', [DiagnosaController::class, 'create'])->name('diagnosa.create')->middleware('mahasiswa');
+	Route::post('/diagnosa', [DiagnosaController::class, 'store'])->name('diagnosa.store')->middleware('mahasiswa');
+	Route::get('/diagnosa/{diagnosa}', [DiagnosaController::class, 'show'])->name('diagnosa.show');
+	Route::get('/diagnosa/{diagnosa}/edit', [DiagnosaController::class, 'edit'])->name('diagnosa.edit')->middleware('mahasiswa');
+	Route::put('/diagnosa/{diagnosa}', [DiagnosaController::class, 'update'])->name('diagnosa.update')->middleware('mahasiswa');
+	Route::Delete('/diagnosa/{diagnosa}', [DiagnosaController::class, 'destroy'])->name('diagnosa.destroy')->middleware('mahasiswa');
+	
+	Route::put('/diagnosa/acc/{id}', [DiagnosaController::class, 'acc'])->name('diagnosa.acc')->middleware('pembimbing');
+
+	Route::post('importdiagnosa', [DiagnosaController::class, 'import'])->name('importdiagnosa')->middleware('mahasiswa');
+    Route::get('exportdiagnosa', [DiagnosaController::class, 'export'])->name('exportdiagnosa')->middleware('mahasiswa');
 
 	Route::get('/{page}', [PageController::class, 'index'])->name('page');
 	Route::post('logout', [LoginController::class, 'logout'])->name('logout');
