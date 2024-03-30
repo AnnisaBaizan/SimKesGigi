@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Vitalitas;
 use App\Models\Kartupasien;
+use App\Models\Odontogram;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -18,16 +19,14 @@ class VitalitasController extends Controller
     {
         if (auth()->user()->role === 1) {
             $vitalitass = Vitalitas::all();
-        } 
-        elseif (auth()->user()->role === 2) {
+        } elseif (auth()->user()->role === 2) {
             $vitalitass = Vitalitas::where('pembimbing', auth()->user()->nimnip)->get();
-        } 
-        else {
+        } else {
             $vitalitass = Vitalitas::where('user_id', auth()->id())->get();
         }
 
         return view('pages.vitalitas.index')->with('vitalitass', $vitalitass);
-        
+
         // return view('pages.vitalitas.index', [
         //     'vitalitass' => Vitalitas::all()
         // ]);
@@ -44,20 +43,17 @@ class VitalitasController extends Controller
         if (auth()->user()->role === 1) {
             $kartupasiens = kartupasien::all();
             $users = User::where('role', 3)->get();
-        } 
-        elseif (auth()->user()->role === 2) {
+        } elseif (auth()->user()->role === 2) {
             $kartupasiens = kartupasien::where('pembimbing', auth()->user()->nimnip)->get();
-        } 
-        else {
+        } else {
             $kartupasiens = kartupasien::where('user_id', auth()->id())->get();
         }
 
-        
+
         return view('pages.vitalitas.create')->with([
             'kartupasiens' => $kartupasiens,
             'users' => $users ?? null
         ]);
-
     }
 
     /**
@@ -68,25 +64,25 @@ class VitalitasController extends Controller
      */
     public function store(Request $request)
     {
-        
+
         $validatedData = $request->validate([
-            'no_kartu'=> 'required|max:9999999999999|min:1|numeric',
-            'nama' => 'required|max:40|min:4',
-            'no_iden' => 'required|max:20',
-            'tgl_lhr' => 'required|max:20|date',
-            'umur' => 'required|max:999|min:1|numeric',
-            'jk' => 'required|max:10',
-            'suku' => 'required|max:40',
-            'pekerjaan' => 'required|max:100',
-            'hub' => 'required|max:50',
-            'no_hp' => 'required|max:9999999999999|min:1|numeric',
-            'no_tlpn' => 'required|max:9999999999999|min:1|numeric',
-            'alamat' =>'required|max:255'
+            'user_id' => 'required',
+            'pembimbing' => 'required',
+            'kartupasien_id' => 'required',
+
+            'elemen_gigi' => 'required|min:2|max:2',
+            'inspeksi' => 'required|numeric|min:0|max:1',
+            'thermis' => 'required|numeric|min:0|max:1',
+            'sondasi' => 'required|numeric|min:0|max:1',
+            'perkusi' => 'required|numeric|min:0|max:1',
+            'druk' => 'required|numeric|min:0|max:1',
+            'mobility' => 'required|numeric|min:0|max:1',
+            'masalah' => 'required|max:255',
         ]);
 
         Vitalitas::create($validatedData);
 
-        return redirect()->route('vitalitas.index')->with('success', 'Data vitalitas Berhasil Dibuat');
+        return back()->with('success', 'Data vitalitas Berhasil Dibuat lakukan hingga elemen gigi habis');
     }
 
     /**
@@ -97,7 +93,11 @@ class VitalitasController extends Controller
      */
     public function show(Vitalitas $vitalitas)
     {
-        return view('pages.vitalitas.show')->with('vitalitas', $vitalitas);
+        $vitalitass = Vitalitas::where('kartupasien_id', $vitalitas->kartupasien_id)->get();
+        return view('pages.vitalitas.show')->with([
+            'vitalitas'=> $vitalitas,
+            'vitalitass'=> $vitalitass
+        ]);
     }
 
     /**
@@ -109,7 +109,10 @@ class VitalitasController extends Controller
     public function edit(Vitalitas $vitalitas)
     {
         if (auth()->user()->role === 1) {
-            $kartupasiens = kartupasien::all();
+            $kartupasiens = kartupasien::where('user_id', $vitalitas->user_id)
+                                    ->where('pembimbing', $vitalitas->pembimbing)
+                                    ->get();
+            // $kartupasiens = kartupasien::all();
             $users = User::where('role', 3)->get();
         } 
         elseif (auth()->user()->role === 2) {
@@ -119,10 +122,35 @@ class VitalitasController extends Controller
             $kartupasiens = kartupasien::where('user_id', auth()->id())->get();
         }
 
-        
+        $elemengigis = Odontogram::where('user_id', $vitalitas->user_id)
+            ->where('pembimbing', $vitalitas->pembimbing)
+            ->where('kartupasien_id', $vitalitas->kartupasien_id)
+            ->get('gigi_karies');
+
+            // dd($elemengigis);
+
+        $gigis = [];
+
+        foreach ($elemengigis as $elemengigi) {
+            $gigiArray = explode(",", $elemengigi->gigi_karies);
+            foreach ($gigiArray as $gigi) {
+                // Cek apakah data vitalitas sudah ada untuk elemen gigi yang sedang diproses
+                $existingVitalitas = Vitalitas::where('elemen_gigi', $gigi)
+                    ->where('user_id', $vitalitas->user_id)
+                    ->where('pembimbing', $vitalitas->pembimbing)
+                    ->where('kartupasien_id', $vitalitas->kartupasien_id)
+                    ->exists();
+                if (!$existingVitalitas || $vitalitas->elemen_gigi==$gigi) {
+                    $gigis[] = $gigi;
+                }
+            }
+        }
+        // dd($gigis);
+
         return view('pages.vitalitas.edit')->with([
             'vitalitas' => $vitalitas,
             'kartupasiens' => $kartupasiens,
+            'gigis' => $gigis,
             'users' => $users ?? null
         ]);
     }
@@ -136,10 +164,20 @@ class VitalitasController extends Controller
      */
     public function update(Request $request, Vitalitas $vitalitas)
     {
-        
+
         $validatedData = $request->validate([
-            'kode' => 'required|max:9999999999999|digits_between:1,4|numeric',
-            'soal' =>'required'
+            'user_id' => 'required',
+            'pembimbing' => 'required',
+            'kartupasien_id' => 'required',
+
+            'elemen_gigi' => 'required|min:2|max:2',
+            'inspeksi' => 'required|numeric|min:0|max:1',
+            'thermis' => 'required|numeric|min:0|max:1',
+            'sondasi' => 'required|numeric|min:0|max:1',
+            'perkusi' => 'required|numeric|min:0|max:1',
+            'druk' => 'required|numeric|min:0|max:1',
+            'mobility' => 'required|numeric|min:0|max:1',
+            'masalah' => 'required|max:255',
         ]);
         Vitalitas::where('id', $vitalitas->id)
             ->update($validatedData);
@@ -156,23 +194,26 @@ class VitalitasController extends Controller
     public function destroy(Vitalitas $vitalitas)
     {
         Vitalitas::destroy($vitalitas->id);
-        return back()->with('succes', 'Data vitalitas berhasil dihapus');
+        return back()->with('success', 'Data vitalitas berhasil dihapus');
     }
 
     public function acc($id)
     {
-        // dd($id);
-        $vitalitas = Vitalitas::where('id', $id)->first();
+        // Ambil entri yang memiliki id yang diberikan
+        $vitalitas = Vitalitas::findOrFail($id);
 
-        if ($vitalitas->acc == 0) {
-            Vitalitas::where('id', $id)->update([
-                'acc' => 1
-            ]);
-        } elseif ($vitalitas->acc == 1) {
-            Vitalitas::where('id', $id)->update([
-                'acc' => 0
-            ]);
-        }
+        // Periksa nilai acc dan perbarui
+        $newValue = $vitalitas->acc == 0 ? 1 : 0;
+
+        // Perbarui entri yang memiliki nilai acc yang sama dengan entri yang dipilih
+        Vitalitas::where('user_id', $vitalitas->user_id)
+            ->where('pembimbing', $vitalitas->pembimbing)
+            ->where('kartupasien_id', $vitalitas->kartupasien_id)
+            ->where('acc', $vitalitas->acc)
+            ->update(['acc' => $newValue]);
+
+        // Perbarui nilai acc untuk entri yang dipilih
+        $vitalitas->update(['acc' => $newValue]);
 
         return back()->with([
             'success' => 'Status ACC berhasil diubah'

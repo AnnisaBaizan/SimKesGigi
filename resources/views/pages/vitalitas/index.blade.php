@@ -64,7 +64,8 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <p>Apakah anda yakin ingin mengubah status ACC?</p>
+                    <p>Apakah anda yakin ingin mengubah status ACC?</p><br>
+                    <p class="text-danger">ANDA AKAN MENGUBAH STATUS ACC SEMUA PEMERIKSAAN VITALITAS ATAS NAMA PASIEN INI</p>
                 </div>
                 <div class="modal-footer">
                     <form action="" method="POST" id="AccForm">
@@ -137,6 +138,12 @@
                                             @endcan
                                             <th>No_Kartu & Nama Pasien</th>
                                             <th>Elemen Gigi</th>
+                                            <th style="display: none;">Inspeksi</th>
+                                            <th style="display: none;">Thermis</th>
+                                            <th style="display: none;">Sondasi</th>
+                                            <th style="display: none;">Perkusi</th>
+                                            <th style="display: none;">Druk</th>
+                                            <th style="display: none;">Mobility</th>
                                             <th>Inspeksi</th>
                                             <th>Thermis</th>
                                             <th>Sondasi</th>
@@ -165,6 +172,12 @@
                                             @endcan
                                             <th>No_Kartu & Nama Pasien</th>
                                             <th>Elemen Gigi</th>
+                                            <th style="display: none;">Inspeksi</th>
+                                            <th style="display: none;">Thermis</th>
+                                            <th style="display: none;">Sondasi</th>
+                                            <th style="display: none;">Perkusi</th>
+                                            <th style="display: none;">Druk</th>
+                                            <th style="display: none;">Mobility</th>
                                             <th>Inspeksi</th>
                                             <th>Thermis</th>
                                             <th>Sondasi</th>
@@ -195,12 +208,18 @@
                                             <td>{{ $vitalitas->kartupasien->no_kartu }} | {{ $vitalitas->kartupasien->nama }}</td>
                                             {{-- pengetahuan --}}
                                             <td>{{ $vitalitas->elemen_gigi }} </td>
-                                            <td>{{ $vitalitas->inspeksi }} </td>
-                                            <td>{{ $vitalitas->thermis }} </td>
-                                            <td>{{ $vitalitas->sondasi }} </td>
-                                            <td>{{ $vitalitas->perkusi }}</td>
-                                            <td>{{ $vitalitas->druk}}</td>
-                                            <td>{{ $vitalitas->mobility }}</td> 
+                                            <td style="display: none;">{{ $vitalitas->inspeksi == 0 ? '-' : '+' }} </td>
+                                            <td style="display: none;">{{ $vitalitas->thermis == 0 ? '-' : '+' }} </td>
+                                            <td style="display: none;">{{ $vitalitas->sondasi == 0 ? '-' : '+' }} </td>
+                                            <td style="display: none;">{{ $vitalitas->perkusi == 0 ? '-' : '+' }}</td>
+                                            <td style="display: none;">{{ $vitalitas->druk == 0 ? '-' : '+' }}</td>
+                                            <td style="display: none;">{{ $vitalitas->mobility == 0 ? '-' : '+' }}</td> 
+                                            <td>{!! $vitalitas->inspeksi == 0 ? '<i class="fas fa-minus-circle fa-2x"></i>' : '<i class="fas fa-plus-circle fa-2x"></i>' !!}</td>
+                                            <td>{!! $vitalitas->thermis == 0 ? '<i class="fas fa-minus-circle fa-2x"></i>' : '<i class="fas fa-plus-circle fa-2x"></i>' !!}</td>
+                                            <td>{!! $vitalitas->sondasi == 0 ? '<i class="fas fa-minus-circle fa-2x"></i>' : '<i class="fas fa-plus-circle fa-2x"></i>' !!}</td>
+                                            <td>{!! $vitalitas->perkusi == 0 ? '<i class="fas fa-minus-circle fa-2x"></i>' : '<i class="fas fa-plus-circle fa-2x"></i>' !!}</td>
+                                            <td>{!! $vitalitas->druk == 0 ? '<i class="fas fa-minus-circle fa-2x"></i>' : '<i class="fas fa-plus-circle fa-2x"></i>' !!}</td>
+                                            <td>{!! $vitalitas->mobility == 0 ? '<i class="fas fa-minus-circle fa-2x"></i>' : '<i class="fas fa-plus-circle fa-2x"></i>' !!}</td>
                                             <td>{{ $vitalitas->masalah }}</td>
                                             
                                             <td style="display: none;">
@@ -274,7 +293,7 @@
     @include('layouts.footers.auth.footer')
 @endsection
 @section('js')
-@can('mahasiswa')
+@can('adminmahasiswa')
 <script type="text/javascript">
 function handleDelete(id) {
     let form = document.getElementById('deleteForm')
@@ -305,7 +324,7 @@ function handleDelete(id) {
 </script>
 @endcan
 
-@can('adminpembimbing')
+@can('admin')
 <script type="text/javascript">
 $(document).ready( function () {
     $.fn.dataTable.ext.search.push(
@@ -313,7 +332,7 @@ $(document).ready( function () {
             var min = minDate.val();
             var max = maxDate.val();
             // data[1] is the date column
-            var date = new Date( data[17] );
+            var date = new Date( data[20] );
 
             if (
                 ( min === null && max === null ) ||
@@ -347,31 +366,106 @@ $(document).ready( function () {
             {
                 extend: 'copyHtml5',
                 exportOptions: {
-                    columns: [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12 ]
+                    columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 17, 18, 20 ]
                 }
             },
             {
                 extend: 'print',
                 exportOptions: {
-                    columns: [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12 ]
+                    columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 17, 18, 20 ]
                 }
             },
             {
                 extend: 'excelHtml5',
                 exportOptions: {
-                    columns: [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12 ]
+                    columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 17, 18, 20 ]
                 }
             },
             {
                 extend: 'csvHtml5',
                 exportOptions: {
-                    columns: [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12 ]
+                    columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 17, 18, 20 ]
                 }
             },
             {
                 extend: 'pdfHtml5',
                 exportOptions: {
-                    columns: [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12 ]
+                    columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 17, 18, 20 ]
+                }
+            },
+            'colvis'
+        ]
+        } );
+    } );
+</script>
+@endcan
+@can('pembimbing')
+<script type="text/javascript">
+$(document).ready( function () {
+    $.fn.dataTable.ext.search.push(
+        function( settings, data, dataIndex ) {
+            var min = minDate.val();
+            var max = maxDate.val();
+            // data[1] is the date column
+            var date = new Date( data[19] );
+
+            if (
+                ( min === null && max === null ) ||
+                ( min === null && date <= max ) ||
+                ( min <= date  && max === null ) ||
+                ( min <= date  && date <= max )
+            ) 
+            {
+                return true;
+            }
+                return false;
+            }
+        );
+
+        // Refilter the table
+        $('#min, #max').on('change', function () {
+            table.draw();
+        });
+
+        // Create date inputs
+        minDate = new DateTime($('#min'), {
+            format: 'DD MMM YYYY'
+        });
+        maxDate = new DateTime($('#max'), {
+            format: 'DD MMM YYYY'
+        });
+
+        var table = $('#dataTable').DataTable( {
+            dom: 'Bfrtip',
+            buttons: [
+            {
+                extend: 'copyHtml5',
+                exportOptions: {
+                    columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 16, 17, 19 ]
+                }
+            },
+            {
+                extend: 'print',
+                exportOptions: {
+                    columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 16, 17, 19 ]
+                }
+            },
+            {
+                extend: 'excelHtml5',
+                exportOptions: {
+                    columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 16, 17, 19 ]
+                }
+            },
+            {
+                extend: 'csvHtml5',
+                exportOptions: {
+                    columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 16, 17, 19 ]
+                }
+            },
+            {
+                extend: 'pdfHtml5',
+                exportOptions: {
+                    columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 16, 17, 19 ]
                 }
             },
             'colvis'

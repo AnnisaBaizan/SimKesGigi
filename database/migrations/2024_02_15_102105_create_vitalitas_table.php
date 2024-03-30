@@ -18,15 +18,13 @@ return new class extends Migration
             $table->foreignId('user_id');
             $table->string('pembimbing');
             $table->foreignId('kartupasien_id');
-                        //kondisi dan vitalitas gigi
-            // $table->foreignId('gigi_id');
             $table->string('elemen_gigi');
-            $table->string('inspeksi');
-            $table->string('thermis');
-            $table->string('sondasi');
-            $table->string('perkusi');
-            $table->string('druk');
-            $table->string('mobility');
+            $table->tinyInteger('inspeksi');
+            $table->tinyInteger('thermis');
+            $table->tinyInteger('sondasi');
+            $table->tinyInteger('perkusi');
+            $table->tinyInteger('druk');
+            $table->tinyInteger('mobility');
             $table->string('masalah');
             
 

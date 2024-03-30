@@ -34,19 +34,19 @@
             }
 
             /* .custom-col-sm-3 { width: 6.25%; }
-                .custom-col-sm-4 { width: 6.25%; }
-                .custom-col-sm-5 { width: 6.25%; }
-                .custom-col-sm-6 { width: 6.25%; }
-                .custom-col-sm-7 { width: 6.25%; }
-                .custom-col-sm-8 { width: 6.25%; }
-                .custom-col-sm-9 { width: 6.25%; }
-                .custom-col-sm-10 { width: 6.25%; }
-                .custom-col-sm-11 { width: 6.25%; }
-                .custom-col-sm-12 { width: 6.25%; }
-                .custom-col-sm-13 { width: 6.25%; }
-                .custom-col-sm-14 { width: 6.25%; }
-                .custom-col-sm-15 { width: 6.25%; }
-                .custom-col-sm-16 { width: 6.25%; } */
+                        .custom-col-sm-4 { width: 6.25%; }
+                        .custom-col-sm-5 { width: 6.25%; }
+                        .custom-col-sm-6 { width: 6.25%; }
+                        .custom-col-sm-7 { width: 6.25%; }
+                        .custom-col-sm-8 { width: 6.25%; }
+                        .custom-col-sm-9 { width: 6.25%; }
+                        .custom-col-sm-10 { width: 6.25%; }
+                        .custom-col-sm-11 { width: 6.25%; }
+                        .custom-col-sm-12 { width: 6.25%; }
+                        .custom-col-sm-13 { width: 6.25%; }
+                        .custom-col-sm-14 { width: 6.25%; }
+                        .custom-col-sm-15 { width: 6.25%; }
+                        .custom-col-sm-16 { width: 6.25%; } */
         }
     </style>
 
@@ -62,100 +62,103 @@
                 <form class="user" action="{{ route('vitalitas.store') }}" method="post">
                     @csrf
 
+                    <div id="alert">
+                        @include('components.alert')
+                    </div>
                     @can('admin')
-                    <div class="form-group row">
-                        <div class="col-sm-4">
-                            <label for="user_id" class="form-text">Pilih Mahasiswa :</label>
-                        </div>
-                        <div class="col-sm-4">
-                            <select class="js-example-basic-single form-control @error('user_id') is-invalid @enderror"
-                                data-live-search="true" id="user_id" name="user_id" placeholder="Pilih Mahasiswa"
-                                value="{{ old('user_id') }}" required>
-                                @error('user_id')
+                        <div class="form-group row">
+                            <div class="col-sm-4">
+                                <label for="user_id" class="form-text">Pilih Mahasiswa :</label>
+                            </div>
+                            <div class="col-sm-4">
+                                <select class="js-example-basic-single form-control @error('user_id') is-invalid @enderror"
+                                    data-live-search="true" id="user_id" name="user_id" placeholder="Pilih Mahasiswa"
+                                    value="{{ old('user_id') }}" required>
+                                    @error('user_id')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                    <option value="" selected disabled>Pilih Mahasiswa</option>
+                                    @foreach ($users as $user)
+                                        <option value="{{ $user->id }}" data-pembimbing="{{ $user->pembimbing }}">
+                                            {{ ucwords($user->username) }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control @error('pembimbing') is-invalid_max @enderror"
+                                    id="pembimbing" name="pembimbing" placeholder="pembimbing" readonly required>
+                                @error('pembimbing')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
-                                <option value="" selected disabled>Pilih Mahasiswa</option>
-                                @foreach ($users as $user)
-                                    <option value="{{ $user->id }}" data-pembimbing="{{ $user->pembimbing }}">
-                                        {{ ucwords($user->username) }}</option>
-                                @endforeach
-                            </select>
+                            </div>
                         </div>
-                        <div class="col-sm-4">
-                            <input type="text" class="form-control @error('pembimbing') is-invalid_max @enderror"
-                                id="pembimbing" name="pembimbing" placeholder="pembimbing" readonly required>
+                        <div class="form-group row">
+                            <div class="col-sm-4">
+                                <label for="kartupasien_id" class="form-text">Pilih Pasien :</label>
+                            </div>
+                            <div class="col-sm-8">
+                                <select
+                                    class="js-example-basic-single form-control @error('kartupasien_id') is-invalid @enderror"
+                                    data-live-search="true" id="kartupasien_id" name="kartupasien_id" placeholder="Pilih Pasien"
+                                    value="{{ old('kartupasien_id') }}" required>
+                                    @error('kartupasien_id')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                    <option value="" selected disabled>Pilih Pasien</option>
+                                </select>
+                            </div>
+                        </div>
+                    @endcan
+
+                    @can('mahasiswa')
+                        <div class="col-sm-6">
+                            <input type="hidden" class="form-control @error('user_id') is-invalid_max @enderror" id="user_id"
+                                name="user_id" placeholder="user_id" value="{{ auth()->user()->id }}" required>
+                            @error('user_id')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                        <div class="col-sm-6">
+                            <input type="hidden" class="form-control @error('pembimbing') is-invalid_max @enderror"
+                                id="pembimbing" name="pembimbing" placeholder="pembimbing"
+                                value="{{ auth()->user()->pembimbing }}" required>
                             @error('pembimbing')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
                         </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-sm-4">
-                            <label for="kartupasien_id" class="form-text">Pilih Pasien :</label>
+                        <div class="form-group row">
+                            <div class="col-sm-4">
+                                <label for="kartupasien_id" class ="form-text">Pilih Pasien :</label>
+                            </div>
+                            <div class="col-sm-8">
+                                <select
+                                    class="js-example-basic-single form-control @error('kartupasien_id') is-invalid @enderror"
+                                    data-live-search="true" id="kartupasien_id" name="kartupasien_id" placeholder="Pilih Pasien"
+                                    value="{{ old('kartupasien_id') }}" required>
+                                    @error('kartupasien_id')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                    <option value="" selected disabled>Pilih Pasien</option>
+                                    @foreach ($kartupasiens as $kartupasien)
+                                        <option value="{{ $kartupasien->id }}">{{ $kartupasien->no_kartu }} |
+                                            {{ $kartupasien->nama }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
                         </div>
-                        <div class="col-sm-8">
-                            <select
-                                class="js-example-basic-single form-control @error('kartupasien_id') is-invalid @enderror"
-                                data-live-search="true" id="kartupasien_id" name="kartupasien_id" placeholder="Pilih Pasien"
-                                value="{{ old('kartupasien_id') }}" required>
-                                @error('kartupasien_id')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                                <option value="" selected disabled>Pilih Pasien</option>
-                            </select>
-                        </div>
-                    </div>
-                @endcan
-
-                @can('mahasiswa')
-                    <div class="col-sm-6">
-                        <input type="hidden" class="form-control @error('user_id') is-invalid_max @enderror" id="user_id"
-                            name="user_id" placeholder="user_id" value="{{ auth()->user()->id }}" required>
-                        @error('user_id')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-                    <div class="col-sm-6">
-                        <input type="hidden" class="form-control @error('pembimbing') is-invalid_max @enderror"
-                            id="pembimbing" name="pembimbing" placeholder="pembimbing"
-                            value="{{ auth()->user()->pembimbing }}" required>
-                        @error('pembimbing')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-sm-4">
-                            <label for="kartupasien_id" class ="form-text">Pilih Pasien :</label>
-                        </div>
-                        <div class="col-sm-8">
-                            <select
-                                class="js-example-basic-single form-control @error('kartupasien_id') is-invalid @enderror"
-                                data-live-search="true" id="kartupasien_id" name="kartupasien_id" placeholder="Pilih Pasien"
-                                value="{{ old('kartupasien_id') }}" required>
-                                @error('kartupasien_id')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                                <option value="" selected disabled>Pilih Pasien</option>
-                                @foreach ($kartupasiens as $kartupasien)
-                                    <option value="{{ $kartupasien->id }}">{{ $kartupasien->no_kartu }} |
-                                        {{ $kartupasien->nama }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
-                @endcan
+                    @endcan
 
                     <div class="col-sm-12 mb-3 mb-sm-0 text-center bg-gradient-faded-info-vertical">
                         <marquee>
@@ -163,95 +166,117 @@
                         </marquee>
                     </div>
 
-                    <div class="row text-center custom-container">
-                        <div class="custom-col-sm-1 mb-3">
-                            <label for="inspeksi">Inspeksi</label>
-                            <select class="form-control @error('inspeksi[]') is-invalid @enderror" id="inspeksi"
-                                name="inspeksi[]" placeholder="75" value="{{ old('inspeksi[]') }}">
-                                @error('inspeksi[]')
+                    <div class="row text-center">
+                        <div class="col-sm-3 mb-3">
+                            <label for="elemen_gigi">Elemen Gigi</label>
+                            <select
+                                class="js-example-basic-single form-control @error('elemen_gigi') is-invalid @enderror"
+                                data-live-search="true" id="elemen_gigi" name="elemen_gigi" placeholder="Pilih Elemen Gigi"
+                                value="{{ old('elemen_gigi') }}" required>
+                                @error('elemen_gigi')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
-                                <option value="" selected disabled></option>
-                                <option value="0">-</option>
-                                <option value="1">+</option>
+                                <option value="" selected disabled>Pilih Elemen Gigi</option>
                             </select>
                         </div>
-                        <div class="custom-col-sm-1 mb-3">
-                            <label for="thermis">Thermis</label>
-                            <select class="form-control @error('thermis[]') is-invalid @enderror" id="thermis"
-                                name="thermis[]" placeholder="75" value="{{ old('thermis[]') }}">
-                                @error('thermis[]')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                                <option value="" selected disabled></option>
-                                <option value="0">-</option>
-                                <option value="1">+</option>
-                            </select>
-                        </div>
-                        <div class="custom-col-sm-1 mb-3">
-                            <label for="sondasi">Sondasi</label>
-                            <select class="form-control @error('sondasi[]') is-invalid @enderror" id="sondasi"
-                                name="sondasi[]" placeholder="75" value="{{ old('sondasi[]') }}">
-                                @error('sondasi[]')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                                <option value="" selected disabled></option>
-                                <option value="0">-</option>
-                                <option value="1">+</option>
-                            </select>
-                        </div>
-                        <div class="custom-col-sm-1 mb-3">
-                            <label for="perkusi">Perkusi</label>
-                            <select class="form-control @error('perkusi[]') is-invalid @enderror" id="perkusi"
-                                name="perkusi[]" placeholder="75" value="{{ old('perkusi[]') }}">
-                                @error('perkusi[]')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                                <option value="" selected disabled></option>
-                                <option value="0">-</option>
-                                <option value="1">+</option>
-                            </select>
-                        </div>
-                        <div class="custom-col-sm-1 mb-3">
-                            <label for="druk">Druk</label>
-                            <select class="form-control @error('druk[]') is-invalid @enderror" id="druk" name="druk[]"
-                                placeholder="75" value="{{ old('druk[]') }}">
-                                @error('druk[]')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                                <option value="" selected disabled></option>
-                                <option value="0">-</option>
-                                <option value="1">+</option>
-                            </select>
-                        </div>
-                        <div class="custom-col-sm-1 mb-3">
-                            <label for="mobility">Mobility</label>
-                            <select class="form-control @error('mobility[]') is-invalid @enderror" id="mobility"
-                                name="mobility[]" placeholder="75" value="{{ old('mobility[]') }}">
-                                @error('mobility[]')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                                <option value="" selected disabled></option>
-                                <option value="0">-</option>
-                                <option value="1">+</option>
-                            </select>
-                        </div>
-                        <div class="custom-col-sm-2 mb-3">
-                            <label for="masalah">Masalah</label>
-                            <input type="text" class="form-control text-center" id="masalah" name="masalah[]"
+                        {{-- @foreach ( $gigiArray as $gigi )
+                        <div class="col-sm-3 mb-3">
+                            <label for="elemen_gigi">Elemen Gigi</label>
+                            <input type="text" class="form-control text-center" id="elemen_gigi" name="elemen_gigi" value="{{ $gigi }}"
                                 readonly>
+                        </div>
+                        @endforeach --}}
+                        <div class="col-sm-9 mb-3">
+                            <label for="masalah">Masalah</label>
+                            <input type="text" class="form-control text-center" id="masalah" name="masalah" readonly>
+                        </div>
+                    </div>
+                    <div class="row text-center">
+                        <div class="col-sm-2 mb-3">
+                            <label for="inspeksi">Inspeksi</label>
+                            <select class="form-control @error('inspeksi') is-invalid @enderror" id="inspeksi"
+                                name="inspeksi" placeholder="75" value="{{ old('inspeksi') }}">
+                                @error('inspeksi')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                                <option value="" selected disabled></option>
+                                <option value="0">-</option>
+                                <option value="1">+</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-2 mb-3">
+                            <label for="thermis">Thermis</label>
+                            <select class="form-control @error('thermis') is-invalid @enderror" id="thermis"
+                                name="thermis" placeholder="75" value="{{ old('thermis') }}">
+                                @error('thermis')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                                <option value="" selected disabled></option>
+                                <option value="0">-</option>
+                                <option value="1">+</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-2 mb-3">
+                            <label for="sondasi">Sondasi</label>
+                            <select class="form-control @error('sondasi') is-invalid @enderror" id="sondasi"
+                                name="sondasi" placeholder="75" value="{{ old('sondasi') }}">
+                                @error('sondasi')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                                <option value="" selected disabled></option>
+                                <option value="0">-</option>
+                                <option value="1">+</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-2 mb-3">
+                            <label for="perkusi">Perkusi</label>
+                            <select class="form-control @error('perkusi') is-invalid @enderror" id="perkusi"
+                                name="perkusi" placeholder="75" value="{{ old('perkusi') }}">
+                                @error('perkusi')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                                <option value="" selected disabled></option>
+                                <option value="0">-</option>
+                                <option value="1">+</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-2 mb-3">
+                            <label for="druk">Druk</label>
+                            <select class="form-control @error('druk') is-invalid @enderror" id="druk"
+                                name="druk" placeholder="75" value="{{ old('druk') }}">
+                                @error('druk')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                                <option value="" selected disabled></option>
+                                <option value="0">-</option>
+                                <option value="1">+</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-2 mb-3">
+                            <label for="mobility">Mobility</label>
+                            <select class="form-control @error('mobility') is-invalid @enderror" id="mobility"
+                                name="mobility" placeholder="75" value="{{ old('mobility') }}">
+                                @error('mobility')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                                <option value="" selected disabled></option>
+                                <option value="0">-</option>
+                                <option value="1">+</option>
+                            </select>
                         </div>
                     </div>
 
@@ -357,11 +382,11 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
-      
+
             $('#user_id').on('change', function() {
                 var user_id = $("#user_id").val();
                 var pembimbing = $("#pembimbing").val();
-      
+
                 $.ajax({
                     url: '/getPatients',
                     type: 'POST',
@@ -370,16 +395,50 @@
                         pembimbing: pembimbing
                     },
                     cache: false,
-      
+
                     success: function(msg) {
                         $("#kartupasien_id").html(msg);
                     },
-      
+
                     error: function(data) {
                         console.log('error:', data);
                     }
                 });
             });
         });
-      </script>
+    </script>
+    <script>
+        $(function() {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $('#kartupasien_id').on('change', function() {
+                var user_id = $("#user_id").val();
+                var pembimbing = $("#pembimbing").val();
+                var kartupasien_id = $("#kartupasien_id").val();
+
+                $.ajax({
+                    url: '/getElemenGigis',
+                    type: 'POST',
+                    data: {
+                        user_id: user_id,
+                        pembimbing: pembimbing,
+                        kartupasien_id: kartupasien_id
+                    },
+                    cache: false,
+
+                    success: function(msg) {
+                        $("#elemen_gigi").html(msg);
+                    },
+
+                    error: function(data) {
+                        console.log('error:', data);
+                    }
+                });
+            });
+        });
+    </script>
 @endsection

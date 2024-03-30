@@ -14,24 +14,27 @@ class kartupasien extends Model
         return $this->belongsTo(User::class);
     }
     public function anamripasien(){
-        return $this->hasMany(anamripasien::class);
+        return $this->hasOne(anamripasien::class);
     }
     public function anomalimukosa(){
-        return $this->hasMany(Anomalimukosa::class);
+        return $this->hasOne(Anomalimukosa::class);
     }
     public function eksplakkal(){
-        return $this->hasMany(Eksplakkal::class);
+        return $this->hasOne(Eksplakkal::class);
     }
     public function odontogram(){
-        return $this->hasMany(Odontogram::class);
+        return $this->hasOne(Odontogram::class);
     }
     public function ohis(){
-        return $this->hasMany(Ohis::class);
+        return $this->hasOne(Ohis::class);
     }
     public function pengsiperi(){
-        return $this->hasMany(Pengsiperi::class);
+        return $this->hasOne(Pengsiperi::class);
     }
     public function vitalitas(){
         return $this->hasMany(Vitalitas::class);
+    }
+    public function periodontal(){
+        return $this->hasMany(Periodontal::class);
     }
 }

@@ -227,6 +227,16 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/{page}', [PageController::class, 'index'])->name('page');
 	Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 
+	Route::post('/getElemenGigis', function (Request $request) {
+		$user_id = $request->input('user_id');
+		$pembimbing = $request->input('pembimbing');
+		$kartupasien_id = $request->input('kartupasien_id');
+	
+		$elemenGigiHTML = getElemenGigis($user_id, $pembimbing, $kartupasien_id);
+	
+		return response()->json($elemenGigiHTML);
+	});
+
 	Route::post('/getPatients', function (Request $request) {
 		$user_id = $request->input('user_id');
 		$pembimbing = $request->input('pembimbing');
