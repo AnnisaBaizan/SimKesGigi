@@ -18,6 +18,20 @@ return new class extends Migration
             $table->foreignId('user_id');
             $table->string('pembimbing');
             $table->foreignId('kartupasien_id');
+
+            $table->string('elemen_gigi');
+            $table->string('pocket_depth');
+            $table->tinyInteger('pocket_sakit');
+            $table->tinyInteger('rubor');
+            $table->tinyInteger('tumor');
+            $table->tinyInteger('kolor');
+            $table->tinyInteger('dolor');
+            $table->tinyInteger('fungsio');
+            $table->tinyInteger('attachment');
+            $table->tinyInteger('pus');
+            $table->string('dll');
+            $table->string('masalah');
+
             $table->boolean('acc')->default(0);
             $table->timestamps();
         });
