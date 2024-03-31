@@ -1,7 +1,9 @@
 <?php
 
+use App\Models\Eksplakkal;
 use App\Models\kartupasien;
 use App\Models\Odontogram;
+use App\Models\Periodontal;
 use App\Models\Vitalitas;
 use Illuminate\Support\Facades\DB;
 
@@ -56,5 +58,45 @@ if (!function_exists('getElemenGigis')) {
         }
 
         return $elemenGigiHTML;
+    }
+}
+
+if (!function_exists('getElemenPermukaanGigis')) {
+    function getElemenPermukaanGigis($user_id, $pembimbing, $kartupasien_id)
+    {
+        // Ambil nilai subgingiva dan supragingiva
+        $subgingiva = Eksplakkal::where('user_id', $user_id)
+            ->where('pembimbing', $pembimbing)
+            ->where('kartupasien_id', $kartupasien_id)
+            ->pluck('subgingiva')
+            ->first(); // Ambil hanya satu baris, karena kita akan explode
+
+        $supragingiva = Eksplakkal::where('user_id', $user_id)
+            ->where('pembimbing', $pembimbing)
+            ->where('kartupasien_id', $kartupasien_id)
+            ->pluck('supragingiva')
+            ->first(); // Ambil hanya satu baris, karena kita akan explode
+
+        // Gabungkan nilai subgingiva dan supragingiva menjadi satu array
+        $gigiArray = array_merge(explode(",", $subgingiva), explode(",", $supragingiva));
+
+        $elemenPermukaanGigiHTML = '<option value="" selected disabled>Pilih Elemen Permukaan Gigi</option>';
+        foreach ($gigiArray as $permukaan_gigi) {
+            // Set nilai $kalkulus berdasarkan pilihan pengguna
+            $kalkulus = in_array($permukaan_gigi, explode(",", $subgingiva)) ? "Subgingiva" : "Supragingiva";
+
+            // Periksa apakah elemen gigi tidak ada dalam tabel periodontal
+            $periodontal = Periodontal::where('elemen_permukaan_gigi', $permukaan_gigi)
+                ->where('user_id', $user_id)
+                ->where('pembimbing', $pembimbing)
+                ->where('kartupasien_id', $kartupasien_id)
+                ->first();
+            if (!$periodontal) {
+                // Tambahkan opsi dengan atribut data-kalkulus
+                $elemenPermukaanGigiHTML .= '<option value="' . $permukaan_gigi . '" data-kalkulus="' . $kalkulus . '">' . $permukaan_gigi . '</option>';
+            }
+        }
+
+        return $elemenPermukaanGigiHTML;
     }
 }

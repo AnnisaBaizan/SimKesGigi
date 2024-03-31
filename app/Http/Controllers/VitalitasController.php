@@ -94,9 +94,13 @@ class VitalitasController extends Controller
     public function show(Vitalitas $vitalitas)
     {
         $vitalitass = Vitalitas::where('kartupasien_id', $vitalitas->kartupasien_id)->get();
+        $accs = implode(',', Vitalitas::where('kartupasien_id', $vitalitas->kartupasien_id)->pluck('acc')->toArray());
+
+        // dd($accs);
         return view('pages.vitalitas.show')->with([
             'vitalitas'=> $vitalitas,
-            'vitalitass'=> $vitalitass
+            'vitalitass'=> $vitalitass,
+            'accs' => $accs
         ]);
     }
 

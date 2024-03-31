@@ -2,7 +2,7 @@
 
 @section('content')
     @include('layouts.navbars.auth.topnav', ['title' => 'Tambah Periodontal'])
-    
+
     <div class="container-fluid py-4">
         <div class="card shadow mb-4">
 
@@ -115,43 +115,65 @@
 
                     <div class="col-sm-12 mb-3 mb-sm-0 text-center bg-gradient-faded-info-vertical">
                         <marquee>
-                            <h6 class="m-0 font-weight-bold text-dark text-bold">periodontal Gigi</h6>
+                            <h6 class="m-0 font-weight-bold text-dark text-bold">Periodontal Gigi</h6>
                         </marquee>
                     </div>
 
                     <div class="row text-center">
                         <div class="col-sm-3 mb-3">
-                            <label for="elemen_gigi">Elemen Gigi</label>
-                            <select
-                                class="js-example-basic-single form-control @error('elemen_gigi') is-invalid @enderror"
-                                data-live-search="true" id="elemen_gigi" name="elemen_gigi" placeholder="Pilih Elemen Gigi"
-                                value="{{ old('elemen_gigi') }}" required>
-                                @error('elemen_gigi')
+                            <label for="elemen_permukaan_gigi">Elemen Gigi</label>
+                            <select class="js-example-basic-single form-control @error('elemen_permukaan_gigi') is-invalid @enderror"
+                                data-live-search="true" id="elemen_permukaan_gigi" name="elemen_permukaan_gigi" placeholder="Pilih Elemen Permukaan Gigi"
+                                value="{{ old('elemen_permukaan_gigi') }}" required>
+                                @error('elemen_permukaan_gigi')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
-                                <option value="" selected disabled>Pilih Elemen Gigi</option>
+                                <option value="" selected disabled>Pilih Elemen Permukaan Gigi</option>
                             </select>
                         </div>
-                        {{-- @foreach ( $gigiArray as $gigi )
                         <div class="col-sm-3 mb-3">
-                            <label for="elemen_gigi">Elemen Gigi</label>
-                            <input type="text" class="form-control text-center" id="elemen_gigi" name="elemen_gigi" value="{{ $gigi }}"
-                                readonly>
+                            <label for="kalkulus">kalkulus</label>
+                            <input type="text" class="form-control text-center" id="kalkulus" name="kalkulus" readonly>
                         </div>
-                        @endforeach --}}
-                        <div class="col-sm-9 mb-3">
-                            <label for="masalah">Masalah</label>
-                            <input type="text" class="form-control text-center" id="masalah" name="masalah" readonly>
+                        <div class="col-sm-3 mb-3">
+                            <div class="col-sm-12 mb-3 mb-sm-0">
+                                <label for="pocket_depth" class ="form-text">Pocket Depth :</label>
+                                <div class="input-group">
+                                <input type="text" class="form-control @error('pocket_depth') is-invalid @enderror"
+                                    id="pocket_depth" name="pocket_depth" placeholder="pocket_depth"
+                                    value="{{ old('pocket_depth') }}" required>
+                                    <span class="input-group-text">mm</span>
+                                </div>
+                                @error('pocket_depth')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-sm-3 mb-3">
+                            <label for="pocket_sakit">Pocket</label>
+                            <select class="form-control @error('pocket_sakit') is-invalid @enderror" id="pocket_sakit"
+                                name="pocket_sakit" placeholder="Sakit" value="{{ old('pocket_sakit') }}" required>
+                                @error('pocket_sakit')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                                <option value="" selected disabled></option>
+                                <option value="0">-</option>
+                                <option value="1">+</option>
+                            </select>
                         </div>
                     </div>
                     <div class="row text-center">
                         <div class="col-sm-2 mb-3">
-                            <label for="inspeksi">Inspeksi</label>
-                            <select class="form-control @error('inspeksi') is-invalid @enderror" id="inspeksi"
-                                name="inspeksi" placeholder="75" value="{{ old('inspeksi') }}">
-                                @error('inspeksi')
+                            <label for="rubor">Rubor</label>
+                            <select class="form-control @error('rubor') is-invalid @enderror" id="rubor"
+                                name="rubor" placeholder="Rubor" value="{{ old('rubor') }}" required>
+                                @error('rubor')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -162,10 +184,10 @@
                             </select>
                         </div>
                         <div class="col-sm-2 mb-3">
-                            <label for="thermis">Thermis</label>
-                            <select class="form-control @error('thermis') is-invalid @enderror" id="thermis"
-                                name="thermis" placeholder="75" value="{{ old('thermis') }}">
-                                @error('thermis')
+                            <label for="tumor">Tumor</label>
+                            <select class="form-control @error('tumor') is-invalid @enderror" id="tumor"
+                                name="tumor" placeholder="Tumor" value="{{ old('tumor') }}" required>
+                                @error('tumor')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -176,10 +198,10 @@
                             </select>
                         </div>
                         <div class="col-sm-2 mb-3">
-                            <label for="sondasi">Sondasi</label>
-                            <select class="form-control @error('sondasi') is-invalid @enderror" id="sondasi"
-                                name="sondasi" placeholder="75" value="{{ old('sondasi') }}">
-                                @error('sondasi')
+                            <label for="kolor">Kolor</label>
+                            <select class="form-control @error('kolor') is-invalid @enderror" id="kolor"
+                                name="kolor" placeholder="Kolor" value="{{ old('kolor') }}" required>
+                                @error('kolor')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -190,10 +212,10 @@
                             </select>
                         </div>
                         <div class="col-sm-2 mb-3">
-                            <label for="perkusi">Perkusi</label>
-                            <select class="form-control @error('perkusi') is-invalid @enderror" id="perkusi"
-                                name="perkusi" placeholder="75" value="{{ old('perkusi') }}">
-                                @error('perkusi')
+                            <label for="dolor">Dolor</label>
+                            <select class="form-control @error('dolor') is-invalid @enderror" id="dolor"
+                                name="dolor" placeholder="Dolor" value="{{ old('dolor') }}" required>
+                                @error('dolor')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -203,11 +225,11 @@
                                 <option value="1">+</option>
                             </select>
                         </div>
-                        <div class="col-sm-2 mb-3">
-                            <label for="druk">Druk</label>
-                            <select class="form-control @error('druk') is-invalid @enderror" id="druk"
-                                name="druk" placeholder="75" value="{{ old('druk') }}">
-                                @error('druk')
+                        <div class="col-sm-4 mb-3">
+                            <label for="fungsio">Fungsio Laesa</label>
+                            <select class="form-control @error('fungsio') is-invalid @enderror" id="fungsio"
+                                name="fungsio" placeholder="Fungsio Laesa" value="{{ old('fungsio') }}" required>
+                                @error('fungsio')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -217,11 +239,13 @@
                                 <option value="1">+</option>
                             </select>
                         </div>
-                        <div class="col-sm-2 mb-3">
-                            <label for="mobility">Mobility</label>
-                            <select class="form-control @error('mobility') is-invalid @enderror" id="mobility"
-                                name="mobility" placeholder="75" value="{{ old('mobility') }}">
-                                @error('mobility')
+                    </div>
+                    <div class="row text-center">
+                        <div class="col-sm-1 mb-3">
+                            <label for="attachment">Attachment</label>
+                            <select class="form-control @error('attachment') is-invalid @enderror" id="attachment"
+                                name="attachment" placeholder="Attachment" value="{{ old('attachment') }}" required>
+                                @error('attachment')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -230,6 +254,40 @@
                                 <option value="0">-</option>
                                 <option value="1">+</option>
                             </select>
+                        </div>
+                        <div class="col-sm-1 mb-3">
+                            <label for="pus">PUS</label>
+                            <select class="form-control @error('pus') is-invalid @enderror" id="pus"
+                                name="pus" placeholder="PUS" value="{{ old('pus') }}" required>
+                                @error('pus')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                                <option value="" selected disabled></option>
+                                <option value="0">-</option>
+                                <option value="1">+</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-5 mb-3 mb-sm-0">
+                            <label for="dll" class ="form-text">Lain-lain :</label>
+                            <textarea class="form-control @error('dll') is-invalid @enderror" id="dll" name="dll"
+                                placeholder="Masukan Lain-lain" rows="1">{{ old('dll') }}</textarea>
+                            @error('dll')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                        <div class="col-sm-5 mb-3 mb-sm-0">
+                            <label for="masalah" class ="form-text">Masalah :</label>
+                            <textarea class="form-control @error('masalah') is-invalid @enderror" id="masalah" name="masalah"
+                                placeholder="Masukan Masalah" rows="1" required>{{ old('alamat') }}</textarea>
+                            @error('masalah')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
                     </div>
 
@@ -250,92 +308,99 @@
             </div>
         </div>
     </div>
-    
+
     @include('layouts.footers.auth.footer')
 @endsection
 @section('js')
-
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-<script>
-    $(document).ready(function() {
-        $('.js-example-basic-single').select2();
-    });
-    $(document).ready(function() {
-        $('.js-example-basic-multiple').select2();
-    });
-</script>
-
-<script>
-    $(document).ready(function() {
-        $('#user_id').change(function() {
-            var selectedOption = $(this).find(':selected');
-            var pembimbingValue = selectedOption.data('pembimbing');
-            $('#pembimbing').val(pembimbingValue);
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('.js-example-basic-single').select2();
         });
-    });
-    $(function() {
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
+        $(document).ready(function() {
+            $('.js-example-basic-multiple').select2();
         });
+    </script>
 
-        $('#user_id').on('change', function() {
-            var user_id = $("#user_id").val();
-            var pembimbing = $("#pembimbing").val();
-
-            $.ajax({
-                url: '/getPatients',
-                type: 'POST',
-                data: {
-                    user_id: user_id,
-                    pembimbing: pembimbing
-                },
-                cache: false,
-
-                success: function(msg) {
-                    $("#kartupasien_id").html(msg);
-                },
-
-                error: function(data) {
-                    console.log('error:', data);
-                }
+    <script>
+        $(document).ready(function() {
+            $('#user_id').change(function() {
+                var selectedOption = $(this).find(':selected');
+                var pembimbingValue = selectedOption.data('pembimbing');
+                $('#pembimbing').val(pembimbingValue);
             });
         });
-    });
-</script>
-<script>
-    $(function() {
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-
-        $('#kartupasien_id').on('change', function() {
-            var user_id = $("#user_id").val();
-            var pembimbing = $("#pembimbing").val();
-            var kartupasien_id = $("#kartupasien_id").val();
-
-            $.ajax({
-                url: '/getElemenGigis',
-                type: 'POST',
-                data: {
-                    user_id: user_id,
-                    pembimbing: pembimbing,
-                    kartupasien_id: kartupasien_id
-                },
-                cache: false,
-
-                success: function(msg) {
-                    $("#elemen_gigi").html(msg);
-                },
-
-                error: function(data) {
-                    console.log('error:', data);
+        $(function() {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
+
+            $('#user_id').on('change', function() {
+                var user_id = $("#user_id").val();
+                var pembimbing = $("#pembimbing").val();
+
+                $.ajax({
+                    url: '/getPatients',
+                    type: 'POST',
+                    data: {
+                        user_id: user_id,
+                        pembimbing: pembimbing
+                    },
+                    cache: false,
+
+                    success: function(msg) {
+                        $("#kartupasien_id").html(msg);
+                    },
+
+                    error: function(data) {
+                        console.log('error:', data);
+                    }
+                });
+            });
         });
-    });
-</script>
+    </script>
+    <script>
+        $(function() {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $('#kartupasien_id').on('change', function() {
+                var user_id = $("#user_id").val();
+                var pembimbing = $("#pembimbing").val();
+                var kartupasien_id = $("#kartupasien_id").val();
+
+                $.ajax({
+                    url: '/getElemenPermukaanGigis',
+                    type: 'POST',
+                    data: {
+                        user_id: user_id,
+                        pembimbing: pembimbing,
+                        kartupasien_id: kartupasien_id
+                    },
+                    cache: false,
+
+                    success: function(msg) {
+                        $("#elemen_permukaan_gigi").html(msg);
+                    },
+
+                    error: function(data) {
+                        console.log('error:', data);
+                    }
+                });
+            });
+        });
+        
+        $(document).ready(function() {
+            $('#elemen_permukaan_gigi').change(function() {
+                var selectedOption = $(this).find(':selected');
+                var kalkulusValue = selectedOption.data('kalkulus');
+                $('#kalkulus').val(kalkulusValue);
+            });
+        });
+    </script>
 @endsection

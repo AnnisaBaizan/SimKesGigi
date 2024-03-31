@@ -237,6 +237,16 @@ Route::group(['middleware' => 'auth'], function () {
 		return response()->json($elemenGigiHTML);
 	});
 
+	Route::post('/getElemenPermukaanGigis', function (Request $request) {
+		$user_id = $request->input('user_id');
+		$pembimbing = $request->input('pembimbing');
+		$kartupasien_id = $request->input('kartupasien_id');
+	
+		$elemenPermukaanGigiHTML = getElemenPermukaanGigis($user_id, $pembimbing, $kartupasien_id);
+	
+		return response()->json($elemenPermukaanGigiHTML);
+	});
+
 	Route::post('/getPatients', function (Request $request) {
 		$user_id = $request->input('user_id');
 		$pembimbing = $request->input('pembimbing');

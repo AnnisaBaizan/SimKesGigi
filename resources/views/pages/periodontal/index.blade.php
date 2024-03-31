@@ -138,6 +138,7 @@
                                             @endcan
                                             <th>No_Kartu & Nama Pasien</th>
                                             <th>Elemen Gigi</th>
+                                            <th>Kalkulus</th>
                                             <th>Pocket Depth</th>
                                             <th style="display: none;">Pocket Sakit</th>
                                             <th style="display: none;">Rubor</th>
@@ -178,6 +179,7 @@
                                             @endcan
                                             <th>No_Kartu & Nama Pasien</th>
                                             <th>Elemen Gigi</th>
+                                            <th>Kalkulus</th>
                                             <th>Pocket Depth</th>
                                             <th style="display: none;">Pocket Sakit</th>
                                             <th style="display: none;">Rubor</th>
@@ -219,7 +221,8 @@
                                             @endcan
                                             <td>{{ $periodontal->kartupasien->no_kartu }} | {{ $periodontal->kartupasien->nama }}</td>
                                             {{-- pengetahuan --}}
-                                            <td>{{ $periodontal->elemen_gigi }} </td>
+                                            <td>{{ $periodontal->elemen_permukaan_gigi }} </td>
+                                            <td>{{ $periodontal->kalkulus }} </td>
                                             <td>{{ $periodontal->pocket_depth }}</td>
                                             <td style="display: none;">{{ $periodontal->pocket_sakit == 0 ? '-' : '+' }} </td>
                                             <td style="display: none;">{{ $periodontal->rubor == 0 ? '-' : '+' }} </td>
@@ -350,7 +353,7 @@ $(document).ready( function () {
             var min = minDate.val();
             var max = maxDate.val();
             // data[1] is the date column
-            var date = new Date( data[25] );
+            var date = new Date( data[27] );
 
             if (
                 ( min === null && max === null ) ||
@@ -384,31 +387,31 @@ $(document).ready( function () {
             {
                 extend: 'copyHtml5',
                 exportOptions: {
-                    columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 21, 22, 23, 25 ]
+                    columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 23, 24, 25, 27 ]
                 }
             },
             {
                 extend: 'print',
                 exportOptions: {
-                    columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 21, 22, 23, 25 ]
+                    columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 23, 24, 25, 27 ]
                 }
             },
             {
                 extend: 'excelHtml5',
                 exportOptions: {
-                    columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 21, 22, 23, 25 ]
+                    columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 23, 24, 25, 27 ]
                 }
             },
             {
                 extend: 'csvHtml5',
                 exportOptions: {
-                    columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 21, 22, 23, 25 ]
+                    columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 23, 24, 25, 27 ]
                 }
             },
             {
                 extend: 'pdfHtml5',
                 exportOptions: {
-                    columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 21, 22, 23, 25 ]
+                    columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 23, 24, 25, 27 ]
                 }
             },
             'colvis'
@@ -459,31 +462,31 @@ $(document).ready( function () {
             {
                 extend: 'copyHtml5',
                 exportOptions: {
-                    columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 20, 21, 22, 24 ]
+                    columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 22, 23, 24, 26 ]
                 }
             },
             {
                 extend: 'print',
                 exportOptions: {
-                    columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 20, 21, 22, 24 ]
+                    columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 22, 23, 24, 26 ]
                 }
             },
             {
                 extend: 'excelHtml5',
                 exportOptions: {
-                    columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 20, 21, 22, 24 ]
+                    columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 22, 23, 24, 26 ]
                 }
             },
             {
                 extend: 'csvHtml5',
                 exportOptions: {
-                    columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 20, 21, 22, 24 ]
+                    columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 22, 23, 24, 26 ]
                 }
             },
             {
                 extend: 'pdfHtml5',
                 exportOptions: {
-                    columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 20, 21, 22, 24 ]
+                    columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 22, 23, 24, 26 ]
                 }
             },
             'colvis'

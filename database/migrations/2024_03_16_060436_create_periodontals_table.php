@@ -19,7 +19,8 @@ return new class extends Migration
             $table->string('pembimbing');
             $table->foreignId('kartupasien_id');
 
-            $table->string('elemen_gigi');
+            $table->string('elemen_permukaan_gigi');
+            $table->string('kalkulus');
             $table->string('pocket_depth');
             $table->tinyInteger('pocket_sakit');
             $table->tinyInteger('rubor');
@@ -29,7 +30,7 @@ return new class extends Migration
             $table->tinyInteger('fungsio');
             $table->tinyInteger('attachment');
             $table->tinyInteger('pus');
-            $table->string('dll');
+            $table->string('dll')->nullable();
             $table->string('masalah');
 
             $table->boolean('acc')->default(0);

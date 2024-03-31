@@ -15,80 +15,48 @@ class AskepgilutSeeder extends Seeder
      */
     public function run()
     {
-        $penyebabKode = [
-            1 => [
-                "Partisipasi dalam olahraga/kegiatan/pekerjaan yang beresiko menimbulkan cedera/gangguan kesehatan",
-                "Penggunaan produk kesehatan gigi dan mulut yang tidak tepat",
-                "Kurangnya pendidikan atau pengetahuan",
-                "Parestesia, anestesia",
-                "Kebiasaan buruk",
-                "Potensi terjadinya infeksi",
-                "Potensi terjadinya cedera mulut",
-                "Kekhawatiran pada pengalaman negatif tentang pengendalian infeksi, keamanan radiasi, keamanan fluoride dan sejenisnya.",
-                "Perilaku atau gaya hidup yang berisiko terhadap kesehatan"
+        $data = [
+            [
+                'askepgilut' => 'Perlindungan dari Risiko Kesehatan',
+                'deskripsi' => 'Kebutuhan untuk terhindar dari kontraindikasi medis pelayanan kesehatan gigi; termasuk kebutuhan untuk dilindungi dari risiko kesehatan yang terkait dengan asuhan kesehatan gigi dan mulut.'
             ],
-            2 => [
-                "Pengalaman negatif perawatan sebelumnya",
-                "Takut akan hal yang tidak/belum diketahuinya",
-                "Kekurangan biaya/sumber keuangan",
-                "Takut akan mahalnya biaya perawatan"
+            [
+                'askepgilut' => 'Kebebasan dari Ketakutan dan Stres',
+                'deskripsi' => 'Kebutuhan untuk merasa aman dan bebas dari rasa takut dan ketidaknyamanan emosional di lingkungan perawatan kesehatan gigi dan mulut.'
             ],
-            3 => [
-                "Menggunakan atau membutuhkan prostesis gigi dan mulut",
-                "Penyakit atau gangguan gigi dan mulut yang terlihat",
-                "Bau mulut (halitosis)",
-                "Maloklusi",
-                "Pengguna atau orang yang membutuhkan peralatan ortodontik"
+            [
+                'askepgilut' => 'Kesan Wajah Yang Sehat',
+                'deskripsi' => 'Kebutuhan untuk merasa puas dengan penampilan mulut-wajah dan nafas sendiri.'
             ],
-            4 => [
-                "Infeksi Streptococcus mutans",
-                "Nutrisi dan diet yang kurang ",
-                "Faktor-faktor risiko yang dapat berubah dan tidak dapat diubah",
-                "Kurangnya pendidikan kesehatan gigi dan mulut",
-                "Kurang memeliharaan kesehatan gigi dan mulut",
-                "Kurang melakukan perawatan/pemeriksaan gigi reguler"
+            [
+                'askepgilut' => 'Kondisi Biologis dan Fungsi Gigi yang Baik',
+                'deskripsi' => 'Kebutuhan untuk memiliki gigi-geligi yang utuh dan dan tahan terhadap mikroba berbahaya atau restorasi yang kuat, berfungsi dengan baik, dan mencerminkan nutrisi dan pola makan yang tepat.'
             ],
-            5 => [
-                "Infeksi mikroba dan respon inang",
-                "Perilaku pemeliharaan kesehatan gigi dan mulut yang tidak memadai",
-                "Nutrisi yang tidak memadai",
-                "Faktor-faktor risiko yang dapat berubah dan tidak dapat diubah",
-                "Penggunaan tembakau",
-                "Penyakit sistemik yang tidak terkontrol (mis., Diabetes, infeksi human immunodeficiency virus [HIV])",
-                "Kurang melakukan pemeriksaan/perawatan gigi reguler"
+            [
+                'askepgilut' => 'Keutuhan/Integritas Kulit dan Membran Mukosa pada Kepala dan Leher',
+                'deskripsi' => 'Kebutuhan untuk memiliki pelindung yang utuh dan berfungsi dengan baik dari kepala dan leher seseorang, termasuk selaput lendir pada rongga mulut dan periodontium yang tahan melawan mikroba berbahaya, menolak zat yang merugikan dan trauma, dan mencerminkan kecukupan nutrisi.'
             ],
-            6 => [
-                "Ketidaknyamanan sendi temporomandibular (TMJ)",
-                "Bedah mulut, prosedur tindakan medis gigi, prosedur asuhan kesehatan gigi dan mulut",
-                "Penyakit gigi yang tidak diobati",
-                "Akses yang tidak memadai ke fasilitas perawatan atau kurang rutinnya perawatan gigi"
+            [
+                'askepgilut' => 'Bebas dari Nyeri pada Kepala dan Leher',
+                'deskripsi' => 'Kebutuhan bebas dari ketidaknyamanan fisik di daerah kepala dan leher.'
             ],
-            7 => [
-                "Defisit pengetahuan",
-                "Kurangnya pemaparan informasi"
+            [
+                'askepgilut' => 'Konseptualisasi dan Pemecahan Masalah',
+                'deskripsi' => 'Kebutuhan untuk memahami ide dan abstraksi untuk membuat keputusan yang baik tentang kesehatan gigi dan mulut seseorang.'
             ],
-            8 => [
-                "Ketidakpatuhan atau ketidaktaatan",
-                "Menggunakan alat bantu atau produk perawatan gigi dan mulut yang tidak tepat",
-                "Perlu pengawasan orang tua terhadap kebersihan gigi dan mulutnya",
-                "Kurang mampu memelihara kesehatan gigi dan mulutnya sendiri",
-                "Tidak dapat memelihara kesehatan gigi dan mulutnya sendiri",
-                "Kurangnya keterampilan",
-                "Gangguan fisik dan kemampuan kognitif",
-                "Perilaku pemeliharaan kesehatan mulut yang tidak memadai",
-                "Kekurangan sumber keuangan"
-            ]
+            [
+                'askepgilut' => 'Tanggung jawab untuk Kesehatan Mulut',
+                'deskripsi' => 'Tanggung jawab untuk kesehatan mulut seseorang sebagai hasil dari interaksi antara motivasi seseorang, kemampuan fisik, dan lingkungan.'
+            ],
         ];
 
-        foreach ($penyebabKode as $kode => $penyebabs) {
-            foreach ($penyebabs as $penyebab) {
-                DB::table('askepgiluts')->insert([
-                    'kode' => $kode,
-                    'penyebab' => $penyebab,
-                    'created_at' => now(),
-                    'updated_at' => now(),
-                ]);
-            }
+        foreach ($data as $item) {
+            DB::table('askepgiluts')->insert([
+                'askepgilut' => $item['askepgilut'],
+                'deskripsi' => $item['deskripsi'],
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
         }
     }
 }
