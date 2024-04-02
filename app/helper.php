@@ -1,8 +1,10 @@
 <?php
 
 use App\Models\Eksplakkal;
+use App\Models\Gejala;
 use App\Models\kartupasien;
 use App\Models\Odontogram;
+use App\Models\Penyebab;
 use App\Models\Periodontal;
 use App\Models\Vitalitas;
 use Illuminate\Support\Facades\DB;
@@ -13,6 +15,11 @@ function get_v($tabel, $name, $id, $col)
     return $data;
 }
 
+function get_c($tabel, $name, $id)
+{
+    $data = DB::table($tabel)->where($name, $id)->get();
+    return $data;
+}
 
 if (!function_exists('getPatients')) {
     function getPatients($user_id, $pembimbing)
@@ -98,5 +105,33 @@ if (!function_exists('getElemenPermukaanGigis')) {
         }
 
         return $elemenPermukaanGigiHTML;
+    }
+}
+
+if (!function_exists('getPenyebabs')) {
+    function getPenyebabs($askepgilut)
+    {
+        $penyebabs = Penyebab::where('askepgilut_id', $askepgilut)->get();
+
+        $penyebabOptions = '<option value="" disabled>Pilih Penyebab</option>';
+        foreach ($penyebabs as $penyebab) {
+            $penyebabOptions .= '<option value="' . $penyebab->id . '">' . $penyebab->penyebab . '</option>';
+        }
+
+        return $penyebabOptions;
+    }
+}
+
+if (!function_exists('getGejalas')) {
+    function getGejalas($askepgilut)
+    {
+        $gejalas = Gejala::where('askepgilut_id', $askepgilut)->get();
+
+        $gejalaOptions = '<option value="" disabled>Pilih gejala</option>';
+        foreach ($gejalas as $gejala) {
+            $gejalaOptions .= '<option value="' . $gejala->id . '">' . $gejala->gejala . '</option>';
+        }
+
+        return $gejalaOptions;
     }
 }

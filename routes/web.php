@@ -255,5 +255,21 @@ Route::group(['middleware' => 'auth'], function () {
 	
 		return response()->json($options);
 	});
+
+	Route::post('/getPenyebabs', function (Request $request) {
+		$askepgilut = $request->input('askepgilut');
+	
+		$penyebabOptions = getPenyebabs($askepgilut);
+	
+		return response()->json($penyebabOptions);
+	});
+
+	Route::post('/getGejalas', function (Request $request) {
+		$askepgilut = $request->input('askepgilut');
+	
+		$gejalaOptions = getGejalas($askepgilut);
+	
+		return response()->json($gejalaOptions);
+	});
 	
 });

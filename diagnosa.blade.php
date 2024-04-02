@@ -150,6 +150,62 @@
                         </div>
                     </div>
                     <div id="diagnosas">
+                        {{-- <div class="form-group row">
+                            <div class="col-sm-1 mb-3 mb-sm-0"></div>
+                            <div class="col-sm-11 mb-3 mb-sm-0">
+                                <label for="askepgilut" class="form-text">Diagnosis Askepgilut :</label>
+                                <select
+                                    class="js-example-basic-single form-control @error('askepgilut') is-invalid @enderror"
+                                    data-live-search="true" id="askepgilut" name="diagnosa[][askepgilut]"
+                                    placeholder="Pilih askepgilut" value="{{ old('askepgilut') }}" required>
+                                    @error('askepgilut')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                    <option value="" selected disabled>Pilih Askepgilut</option>
+                                    @foreach ($askepgiluts as $askepgilut)
+                                        <option value="{{ $askepgilut->id }}">
+                                            {{ $askepgilut->askepgilut }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-1 mb-3 mb-sm-0"></div>
+                            <div class="col-sm-11 mb-6 mb-sm-0">
+                                <label for="penyebab[]" class ="form-text">Penyebab :</label>
+                                <select
+                                    class="js-example-basic-multiple form-control @error('penyebab') is-invalid @enderror"
+                                    data-live-search="true" id="penyebab" name="diagnosa[][penyebab][]"
+                                    placeholder="Pilih Penyebab" value="{{ old('penyebab[]') }}" multiple="multiple"
+                                    required>
+                                    @error('penyebab[]')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-1 mb-3 mb-sm-0"></div>
+                            <div class="col-sm-11 mb-3 mb-sm-0">
+                                <label for="gejala[]" class ="form-text">Gejala :</label>
+                                <select
+                                    class="js-example-basic-multiple form-control @error('gejala') is-invalid @enderror"
+                                    data-live-search="true" id="gejala" name="diagnosa[][gejala][]"
+                                    placeholder="Pilih Gejala" value="{{ old('gejala[]') }}" multiple="multiple"
+                                    required>
+                                    @error('gejala[]')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </select>
+                            </div>
+                        </div>
+                        <hr class="my-3 w-100 border-top border-dark border-1 d-print-block"> --}}
                     </div>
                     <div class="form-group row d-flex justify-content-end">
                         <div class="col-sm-3 d-grid">
@@ -159,6 +215,15 @@
                             </button>
                         </div>
                     </div>
+
+                    {{-- <div class="form-group row d-flex justify-content-end">
+                            <div class="col-sm-3 d-grid">
+                                <button type="button" class="btn btn-success btn-block" id="removeDiagnosas"
+                                    name="removeDiagnosas" value="removeDiagnosas">
+                                    <i class="fas fa-minus fa-fw"></i> Hapus Diagnosis Diagnosa
+                                </button>
+                            </div>
+                        </div> --}}
                     <div class="form-group row">
                         <div class="col-sm-6 d-grid gap-2">
                             <a href="{{ route('diagnosa.index') }}" class="btn btn-success btn-block btn">
@@ -203,7 +268,7 @@
                         <label for="askepgilut_` + a + `" class="form-text">Diagnosis Askepgilut :</label>
                         <select
                             class="js-example-basic-single form-control askepgilut-select"
-                            data-live-search="true" id="askepgilut_` + a + `" name="diagnosa[` + a + `][askepgilut][]"
+                            data-live-search="true" id="askepgilut_` + a + `" name="diagnosa[` + a + `][askepgilut]"
                             placeholder="Pilih askepgilut" required>
                             <option value="" selected disabled>Pilih Askepgilut</option>
                             @foreach ($askepgiluts as $askepgilut)
@@ -341,4 +406,64 @@
             });
         });
     </script>
+    {{-- <script>
+        $(function() {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $('#askepgilut').on('change', function() {
+                var askepgilut = $("#askepgilut").val();
+
+                $.ajax({
+                    url: '/getPenyebabs',
+                    type: 'POST',
+                    data: {
+                        askepgilut: askepgilut
+                    },
+                    cache: false,
+
+                    success: function(msg) {
+                        $("#penyebab").html(msg);
+                    },
+
+                    error: function(data) {
+                        console.log('error:', data);
+                    }
+                });
+            });
+        });
+    </script>
+    <script>
+        $(function() {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $('#askepgilut').on('change', function() {
+                var askepgilut = $("#askepgilut").val();
+
+                $.ajax({
+                    url: '/getGejalas',
+                    type: 'POST',
+                    data: {
+                        askepgilut: askepgilut
+                    },
+                    cache: false,
+
+                    success: function(msg) {
+                        $("#gejala").html(msg);
+                    },
+
+                    error: function(data) {
+                        console.log('error:', data);
+                    }
+                });
+            });
+        });
+    </script> --}}
 @endsection

@@ -18,6 +18,13 @@ return new class extends Migration
             $table->foreignId('user_id');
             $table->string('pembimbing');
             $table->foreignId('kartupasien_id');
+
+            $table->string('gigi');
+            $table->string('masalah');
+            $table->string('askepgilut');
+            $table->string('penyebab');
+            $table->string('gejala');
+
             $table->boolean('acc')->default(0);
             $table->timestamps();
         });
