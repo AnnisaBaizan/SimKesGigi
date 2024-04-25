@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Askepgilut;
 use App\Http\Requests\StoreAskepgilutRequest;
 use App\Http\Requests\UpdateAskepgilutRequest;
+use App\Models\Gejala;
+use App\Models\Penyebab;
 
 class AskepgilutController extends Controller
 {
@@ -15,7 +17,14 @@ class AskepgilutController extends Controller
      */
     public function index()
     {
-        //
+        $askepgiluts = Askepgilut::all();
+        $penyebabs = Penyebab::all();
+        $gejalas = Gejala::all();
+        return view('pages.askepgilut.index')->with([
+            'askepgiluts' => $askepgiluts,
+            'penyebabs' => $penyebabs,
+            'gejalas' => $gejalas
+        ]);
     }
 
     /**

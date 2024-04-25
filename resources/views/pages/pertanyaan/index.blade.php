@@ -1,7 +1,7 @@
-@extends('layouts.app', ['class' => 'g-sidenav-show bg-gray-100'])
+@extends('layouts.app', ['class' => 'g-sidenav-show bg-gray-100', 'titlePage' => 'Pertanyaan'])
 
 @section('content')
-    @include('layouts.navbars.auth.topnav', ['title' => 'Tambah pertanyaan'])
+    @include('layouts.navbars.auth.topnav', ['title' => 'Pertanyaan'])
 
     <!-- Modal Delete-->
     {{-- <div class="modal" id="deleteModal" tabindex="-1">

@@ -186,37 +186,42 @@ class UserController extends Controller
      */
     public function destroy(user $user)
     {
-        if ($user->avatar !== "AvatarDefault.jpg") {
-            Storage::delete('avatars/' . $user->avatar);
+        if ($user->id !== 1) {
+            if ($user->avatar !== "AvatarDefault.jpg") {
+                Storage::delete('avatars/' . $user->avatar);
+            }
+
+            User::destroy($user->id);
+
+            if ($user->role === 2) {
+                kartuPasien::where('pembimbing', $user->nimnip)->delete();
+                anamripasien::where('pembimbing', $user->nimnip)->delete();
+                Pengsiperi::where('pembimbing', $user->nimnip)->delete();
+                Eksplakkal::where('pembimbing', $user->nimnip)->delete();
+                Ohis::where('pembimbing', $user->nimnip)->delete();
+                Odontogram::where('pembimbing', $user->nimnip)->delete();
+                Anomalimukosa::where('pembimbing', $user->nimnip)->delete();
+                Vitalitas::where('pembimbing', $user->nimnip)->delete();
+                Periodontal::where('pembimbing', $user->nimnip)->delete();
+                Diagnosa::where('pembimbing', $user->nimnip)->delete();
+            } else {
+                kartuPasien::where('user_id', $user->id)->delete();
+                anamripasien::where('user_id', $user->id)->delete();
+                Pengsiperi::where('user_id', $user->id)->delete();
+                Eksplakkal::where('user_id', $user->id)->delete();
+                Ohis::where('user_id', $user->id)->delete();
+                Odontogram::where('user_id', $user->id)->delete();
+                Anomalimukosa::where('user_id', $user->id)->delete();
+                Vitalitas::where('user_id', $user->id)->delete();
+                Periodontal::where('user_id', $user->id)->delete();
+                Diagnosa::where('user_id', $user->id)->delete();
+            }
+
+            return back()->with('success', 'User dan data-data terkait berhasil dihapus');
         }
-
-        User::destroy($user->id);
-
-        if ($user->role === 2) {
-            kartuPasien::where('pembimbing', $user->nimnip)->delete();
-            anamripasien::where('pembimbing', $user->nimnip)->delete();
-            Pengsiperi::where('pembimbing', $user->nimnip)->delete();
-            Eksplakkal::where('pembimbing', $user->nimnip)->delete();
-            Ohis::where('pembimbing', $user->nimnip)->delete();
-            Odontogram::where('pembimbing', $user->nimnip)->delete();
-            Anomalimukosa::where('pembimbing', $user->nimnip)->delete();
-            Vitalitas::where('pembimbing', $user->nimnip)->delete();
-            Periodontal::where('pembimbing', $user->nimnip)->delete();
-            Diagnosa::where('pembimbing', $user->nimnip)->delete();
-        } else {
-            kartuPasien::where('user_id', $user->id)->delete();
-            anamripasien::where('user_id', $user->id)->delete();
-            Pengsiperi::where('user_id', $user->id)->delete();
-            Eksplakkal::where('user_id', $user->id)->delete();
-            Ohis::where('user_id', $user->id)->delete();
-            Odontogram::where('user_id', $user->id)->delete();
-            Anomalimukosa::where('user_id', $user->id)->delete();
-            Vitalitas::where('user_id', $user->id)->delete();
-            Periodontal::where('user_id', $user->id)->delete();
-            Diagnosa::where('user_id', $user->id)->delete();
+        else{
+            abort(403, 'User Ini Tidak Dapat Anda Hapus.');
         }
-
-        return back()->with('success', 'User dan data-data terkait berhasil dihapus');
     }
 
     public function export()
@@ -233,7 +238,6 @@ class UserController extends Controller
         ]);
 
         // $user->syncRoles([$request->input('role_id')]);
-
         request()->file('importuser');
         Excel::import(new ImportUser, request()->file('importuser'));
         return back()->with('success', 'Data User Berhasil di import');

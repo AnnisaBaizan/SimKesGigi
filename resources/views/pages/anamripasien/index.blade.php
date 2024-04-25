@@ -1,4 +1,4 @@
-@extends('layouts.app', ['class' => 'g-sidenav-show bg-gray-100'])
+@extends('layouts.app', ['class' => 'g-sidenav-show bg-gray-100','titlePage' => 'Anamnesa dan Riwayat'])
 
 @section('content')
     @include('layouts.navbars.auth.topnav', ['title' => 'Anamnesa dan Riwayat'])
@@ -356,7 +356,7 @@
                         var min = minDate.val();
                         var max = maxDate.val();
                         // data[1] is the date column
-                        var date = new Date(data[21]);
+                        var date = new Date(data[23]);
 
                         if (
                             (min === null && max === null) ||
@@ -439,7 +439,7 @@
                         var min = minDate.val();
                         var max = maxDate.val();
                         // data[1] is the date column
-                        var date = new Date(data[20]);
+                        var date = new Date(data[22]);
 
                         if (
                             (min === null && max === null) ||

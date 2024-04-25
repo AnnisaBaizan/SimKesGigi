@@ -1,4 +1,4 @@
-@extends('layouts.app', ['class' => 'g-sidenav-show bg-gray-100'])
+@extends('layouts.app', ['class' => 'g-sidenav-show bg-gray-100', 'titlePage' => 'Diagnosis'])
 
 @section('content')
     @include('layouts.navbars.auth.topnav', ['title' => 'Diagnosis'])
@@ -289,13 +289,13 @@ function handleDelete(id) {
 </script>
 @endcan
 
-@can('mahasiswa')
+{{-- @can('mahasiswa')
 <script type="text/javascript">
     $(document).ready( function () {
     $('#dataTable').DataTable();
     } );
 </script>
-@endcan
+@endcan --}}
 
 @can('admin')
 <script type="text/javascript">
@@ -305,7 +305,7 @@ $(document).ready( function () {
             var min = minDate.val();
             var max = maxDate.val();
             // data[1] is the date column
-            var date = new Date( data[27] );
+            var date = new Date( data[11] );
 
             if (
                 ( min === null && max === null ) ||
@@ -339,25 +339,25 @@ $(document).ready( function () {
             {
                 extend: 'copyHtml5',
                 exportOptions: {
-                    columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 23, 24, 25, 27 ]
+                    columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11 ]
                 }
             },
             {
                 extend: 'print',
                 exportOptions: {
-                    columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 23, 24, 25, 27 ]
+                    columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11 ]
                 }
             },
             {
                 extend: 'excelHtml5',
                 exportOptions: {
-                    columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 23, 24, 25, 27 ]
+                    columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11 ]
                 }
             },
             {
                 extend: 'csvHtml5',
                 exportOptions: {
-                    columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 23, 24, 25, 27 ]
+                    columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11 ]
                 }
             },
             {
@@ -372,7 +372,7 @@ $(document).ready( function () {
     } );
 </script>
 @endcan
-@can('pembimbing')
+@can('pembimbingmahasiswa')
 <script type="text/javascript">
 $(document).ready( function () {
     $.fn.dataTable.ext.search.push(
@@ -380,7 +380,7 @@ $(document).ready( function () {
             var min = minDate.val();
             var max = maxDate.val();
             // data[1] is the date column
-            var date = new Date( data[24] );
+            var date = new Date( data[10] );
 
             if (
                 ( min === null && max === null ) ||
@@ -414,31 +414,31 @@ $(document).ready( function () {
             {
                 extend: 'copyHtml5',
                 exportOptions: {
-                    columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 22, 23, 24, 26 ]
+                    columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 10 ]
                 }
             },
             {
                 extend: 'print',
                 exportOptions: {
-                    columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 22, 23, 24, 26 ]
+                    columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 10 ]
                 }
             },
             {
                 extend: 'excelHtml5',
                 exportOptions: {
-                    columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 22, 23, 24, 26 ]
+                    columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 10 ]
                 }
             },
             {
                 extend: 'csvHtml5',
                 exportOptions: {
-                    columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 22, 23, 24, 26 ]
+                    columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 10 ]
                 }
             },
             {
                 extend: 'pdfHtml5',
                 exportOptions: {
-                    columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 22, 23, 24, 26 ]
+                    columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 10 ]
                 }
             },
             'colvis'

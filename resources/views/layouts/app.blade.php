@@ -7,9 +7,12 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('/img/apple-icon.png') }}">
     <link rel="icon" type="image/png" href="{{ asset('/img//favicon.png') }}">
-    <title>
-        SimKesGigi
-    </title>
+    @auth()
+        <title>{{ $titlePage ?? '' }}</title>
+    @endauth
+    @guest()
+        <title>{{ __('SimKesGigi') }}</title>
+    @endguest
     {{-- untuk modal --}}
     {{-- <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha/css/bootstrap.css" rel="stylesheet">
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> --}}
@@ -67,7 +70,8 @@
             @if (!in_array(request()->route()->getName(), ['profile', 'profile-static']))
                 <div class="min-height-300 bg-primary position-absolute w-100"></div>
             @elseif (in_array(request()->route()->getName(), ['profile-static', 'profile']))
-                <div class="position-absolute w-100 min-height-300 top-0" style="background-image: url('https://raw.githubusercontent.com/creativetimofficial/public-assets/master/argon-dashboard-pro/assets/img/profile-layout-header.jpg'); background-position-y: 50%;">
+                <div class="position-absolute w-100 min-height-300 top-0" style="background-image: url('/img/GedungGigi.jpg'); background-position-y: 50%;">
+                    {{-- <img src="{{ asset('/storage/avatars/'. Auth::user()->avatar) }}" alt="profile_image" class="w-100 border-radius-lg shadow-sm"> --}}
                     <span class="mask bg-primary opacity-3"></span>
                 </div>
             @endif

@@ -34,6 +34,7 @@ use App\Http\Controllers\OdontogramController;
 use App\Http\Controllers\OhisController;
 use App\Http\Controllers\VitalitasController;
 use App\Http\Controllers\AnomalimukosaController;
+use App\Http\Controllers\AskepgilutController;
 use App\Http\Controllers\DiagnosaController;
 use App\Http\Controllers\PeriodontalController;
 use Illuminate\Http\Request;
@@ -65,8 +66,8 @@ Route::group(['middleware' => 'auth'], function () {
 	// Route::put('/user/{user}', [UserController::class, 'update'])->name('user.update');
 	// Route::Delete('/user/{user}', [UserController::class, 'destroy'])->name('user.destroy');
 
-    Route::post('importuser', [UserController::class, 'import'])->name('importuser')->middleware('pembimbing');
-    Route::get('exportuser', [UserController::class, 'export'])->name('exportuser')->middleware('pembimbing');
+    Route::post('importuser', [UserController::class, 'import'])->name('importuser')->middleware('admin');
+    Route::get('exportuser', [UserController::class, 'export'])->name('exportuser')->middleware('admin');
 
 	// Route::resource('/kartupasien', KartupasienController::class);
 	Route::get('/kartupasien', [KartupasienController::class, 'index'])->name('kartupasien.index');
@@ -99,15 +100,15 @@ Route::group(['middleware' => 'auth'], function () {
 	// Route::get('/sign-up-static', [PageController::class, 'signup'])->name('sign-up-static');
 
 	// Route::resource('/pertanyaan', PertanyaanController::class);
-	Route::get('/pertanyaan', [PertanyaanController::class, 'index'])->name('pertanyaan.index');
+	Route::get('/pertanyaan', [PertanyaanController::class, 'index'])->name('pertanyaan.index')->middleware('admin');
 	Route::get('/pertanyaan/create', [PertanyaanController::class, 'create'])->name('pertanyaan.create')->middleware('admin');
 	Route::post('/pertanyaan', [PertanyaanController::class, 'store'])->name('pertanyaan.store')->middleware('admin');
-	Route::get('/pertanyaan/{pertanyaan}', [PertanyaanController::class, 'show'])->name('pertanyaan.show');
+	Route::get('/pertanyaan/{pertanyaan}', [PertanyaanController::class, 'show'])->name('pertanyaan.show')->middleware('admin');
 	Route::get('/pertanyaan/{pertanyaan}/edit', [PertanyaanController::class, 'edit'])->name('pertanyaan.edit')->middleware('admin');
 	Route::put('/pertanyaan/{pertanyaan}', [PertanyaanController::class, 'update'])->name('pertanyaan.update')->middleware('admin');
 	Route::Delete('/pertanyaan/{pertanyaan}', [PertanyaanController::class, 'destroy'])->name('pertanyaan.destroy')->middleware('admin');
 
-	Route::put('/pertanyaan/status/{id}', [PertanyaanController::class, 'status'])->name('pertanyaan.status')->middleware('pembimbing');
+	Route::put('/pertanyaan/status/{id}', [PertanyaanController::class, 'status'])->name('pertanyaan.status')->middleware('admin');
 
 	Route::post('importpertanyaan', [pertanyaanController::class, 'import'])->name('importpertanyaan')->middleware('admin');
     Route::get('exportpertanyaan', [pertanyaanController::class, 'export'])->name('exportpertanyaan')->middleware('admin');
@@ -121,8 +122,8 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::put('/pengsiperi/{pengsiperi}', [PengsiperiController::class, 'update'])->name('pengsiperi.update')->middleware('mahasiswa');
 	Route::Delete('/pengsiperi/{pengsiperi}', [PengsiperiController::class, 'destroy'])->name('pengsiperi.destroy')->middleware('mahasiswa');
 
-	Route::post('importpengsiperi', [PengsiperiController::class, 'import'])->name('importpengsiperi')->middleware('mahasiswa');
-    Route::get('exportpengsiperi', [PengsiperiController::class, 'export'])->name('exportpengsiperi')->middleware('mahasiswa');
+	Route::post('importpengsiperi', [PengsiperiController::class, 'import'])->name('importpengsiperi')->middleware('pembimbing');
+    Route::get('exportpengsiperi', [PengsiperiController::class, 'export'])->name('exportpengsiperi')->middleware('pembimbing');
 
 	// Route::resource('/eksplakkal', eksplakkalController::class);
 	Route::get('/eksplakkal', [EksplakkalController::class, 'index'])->name('eksplakkal.index');
@@ -136,8 +137,8 @@ Route::group(['middleware' => 'auth'], function () {
 	
 	Route::put('/eksplakkal/acc/{id}', [EksplakkalController::class, 'acc'])->name('eksplakkal.acc')->middleware('pembimbing');
 
-	Route::post('importeksplakkal', [EksplakkalController::class, 'import'])->name('importeksplakkal')->middleware('mahasiswa');
-    Route::get('exporteksplakkal', [EksplakkalController::class, 'export'])->name('exporteksplakkal')->middleware('mahasiswa');
+	Route::post('importeksplakkal', [EksplakkalController::class, 'import'])->name('importeksplakkal')->middleware('pembimbing');
+    Route::get('exporteksplakkal', [EksplakkalController::class, 'export'])->name('exporteksplakkal')->middleware('pembimbing');
 
 	// Route::resource('/odontogram', OdontogramController::class);
 	Route::get('/odontogram', [OdontogramController::class, 'index'])->name('odontogram.index');
@@ -150,8 +151,8 @@ Route::group(['middleware' => 'auth'], function () {
 	
 	Route::put('/odontogram/acc/{id}', [OdontogramController::class, 'acc'])->name('odontogram.acc')->middleware('pembimbing');
 
-	Route::post('importodontogram', [OdontogramController::class, 'import'])->name('importodontogram')->middleware('mahasiswa');
-    Route::get('exportodontogram', [OdontogramController::class, 'export'])->name('exportodontogram')->middleware('mahasiswa');
+	Route::post('importodontogram', [OdontogramController::class, 'import'])->name('importodontogram')->middleware('pembimbing');
+    Route::get('exportodontogram', [OdontogramController::class, 'export'])->name('exportodontogram')->middleware('pembimbing');
 
 	// Route::resource('/ohis', OhisController::class);
 	Route::get('/ohis', [OhisController::class, 'index'])->name('ohis.index');
@@ -164,8 +165,8 @@ Route::group(['middleware' => 'auth'], function () {
 
 	Route::put('/ohis/acc/{id}', [OhisController::class, 'acc'])->name('ohis.acc')->middleware('pembimbing');
 
-	Route::post('importohis', [OhisController::class, 'import'])->name('importohis')->middleware('mahasiswa');
-    Route::get('exportohis', [OhisController::class, 'export'])->name('exportohis')->middleware('mahasiswa');
+	Route::post('importohis', [OhisController::class, 'import'])->name('importohis')->middleware('pembimbing');
+    Route::get('exportohis', [OhisController::class, 'export'])->name('exportohis')->middleware('pembimbing');
 
 	// Route::resource('/vitalitas', VitalitasController::class);
 	Route::get('/vitalitas', [VitalitasController::class, 'index'])->name('vitalitas.index');
@@ -192,8 +193,8 @@ Route::group(['middleware' => 'auth'], function () {
 	
 	Route::put('/anomalimukosa/acc/{id}', [AnomalimukosaController::class, 'acc'])->name('anomalimukosa.acc')->middleware('pembimbing');
 
-	Route::post('importanomalimukosa', [AnomalimukosaController::class, 'import'])->name('importanomalimukosa')->middleware('mahasiswa');
-    Route::get('exportanomalimukosa', [AnomalimukosaController::class, 'export'])->name('exportanomalimukosa')->middleware('mahasiswa');
+	Route::post('importanomalimukosa', [AnomalimukosaController::class, 'import'])->name('importanomalimukosa')->middleware('pembimbing');
+    Route::get('exportanomalimukosa', [AnomalimukosaController::class, 'export'])->name('exportanomalimukosa')->middleware('pembimbing');
 
 	
 	// Route::resource('/periodontal', PeriodontalController::class);
@@ -223,6 +224,9 @@ Route::group(['middleware' => 'auth'], function () {
 
 	Route::post('importdiagnosa', [DiagnosaController::class, 'import'])->name('importdiagnosa')->middleware('mahasiswa');
     Route::get('exportdiagnosa', [DiagnosaController::class, 'export'])->name('exportdiagnosa')->middleware('mahasiswa');
+
+
+	Route::get('/askepgilut', [AskepgilutController::class, 'index'])->name('askepgilut.index');
 
 	Route::get('/{page}', [PageController::class, 'index'])->name('page');
 	Route::post('logout', [LoginController::class, 'logout'])->name('logout');

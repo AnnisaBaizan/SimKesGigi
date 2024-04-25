@@ -1,4 +1,4 @@
-@extends('layouts.app', ['class' => 'g-sidenav-show bg-gray-100'])
+@extends('layouts.app', ['class' => 'g-sidenav-show bg-gray-100', 'titlePage' => 'Anomali Gigi dan Mukosa Mulut'])
 
 @section('content')
     @include('layouts.navbars.auth.topnav', ['title' => 'Anomali Gigi dan Mukosa Mulut'])
@@ -407,7 +407,7 @@
                         var min = minDate.val();
                         var max = maxDate.val();
                         // data[1] is the date column
-                        var date = new Date(data[17]);
+                        var date = new Date(data[27]);
 
                         if (
                             (min === null && max === null) ||
@@ -485,7 +485,7 @@
                         var min = minDate.val();
                         var max = maxDate.val();
                         // data[1] is the date column
-                        var date = new Date(data[17]);
+                        var date = new Date(data[26]);
 
                         if (
                             (min === null && max === null) ||

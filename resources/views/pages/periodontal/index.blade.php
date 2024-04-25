@@ -1,4 +1,4 @@
-@extends('layouts.app', ['class' => 'g-sidenav-show bg-gray-100'])
+@extends('layouts.app', ['class' => 'g-sidenav-show bg-gray-100', 'titlePage' => 'Periodontal'])
 
 @section('content')
     @include('layouts.navbars.auth.topnav', ['title' => 'Periodontal'])
@@ -337,13 +337,13 @@ function handleDelete(id) {
 </script>
 @endcan
 
-@can('mahasiswa')
+{{-- @can('mahasiswa')
 <script type="text/javascript">
     $(document).ready( function () {
     $('#dataTable').DataTable();
     } );
 </script>
-@endcan
+@endcan --}}
 
 @can('admin')
 <script type="text/javascript">
@@ -420,7 +420,7 @@ $(document).ready( function () {
     } );
 </script>
 @endcan
-@can('pembimbing')
+@can('pembimbingmahasiswa')
 <script type="text/javascript">
 $(document).ready( function () {
     $.fn.dataTable.ext.search.push(
@@ -428,7 +428,7 @@ $(document).ready( function () {
             var min = minDate.val();
             var max = maxDate.val();
             // data[1] is the date column
-            var date = new Date( data[24] );
+            var date = new Date( data[26] );
 
             if (
                 ( min === null && max === null ) ||

@@ -1,4 +1,4 @@
-@extends('layouts.app', ['class' => 'g-sidenav-show bg-gray-100'])
+@extends('layouts.app', ['class' => 'g-sidenav-show bg-gray-100', 'titlePage' => 'Periodontal'])
 
 @section('content')
     @include('layouts.navbars.auth.topnav', ['title' => 'Detail Periodontal'])

@@ -1,4 +1,4 @@
-@extends('layouts.app', ['class' => 'g-sidenav-show bg-gray-100'])
+@extends('layouts.app', ['class' => 'g-sidenav-show bg-gray-100', 'titlePage' => 'Odontogram'])
 
 @section('content')
     @include('layouts.navbars.auth.topnav', ['title' => 'Odontogram'])
@@ -513,7 +513,7 @@
                         var min = minDate.val();
                         var max = maxDate.val();
                         // data[1] is the date column
-                        var date = new Date(data[66]);
+                        var date = new Date(data[68]);
 
                         if (
                             (min === null && max === null) ||
@@ -607,7 +607,7 @@
                         var min = minDate.val();
                         var max = maxDate.val();
                         // data[1] is the date column
-                        var date = new Date(data[65]);
+                        var date = new Date(data[67]);
 
                         if (
                             (min === null && max === null) ||

@@ -48,6 +48,12 @@ class AppServiceProvider extends ServiceProvider
             // return $user->role === 3;
             return in_array($user->role, [1, 3]);
         });
+
+        Gate::define('pembimbingmahasiswa', function(User $user){
+            // return $user->role === 1;
+            // return $user->role === 3;
+            return in_array($user->role, [2, 3]);
+        });
         //
     }
 }

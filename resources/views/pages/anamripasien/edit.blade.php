@@ -1,4 +1,4 @@
-@extends('layouts.app', ['class' => 'g-sidenav-show bg-gray-100'])
+@extends('layouts.app', ['class' => 'g-sidenav-show bg-gray-100','titlePage' => 'Anamnesa dan Riwayat'])
 
 @section('content')
     @include('layouts.navbars.auth.topnav', ['title' => 'Edit Anamnesa dan Riwayat Pasien'])

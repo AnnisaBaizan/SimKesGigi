@@ -1,4 +1,4 @@
-@extends('layouts.app', ['class' => 'g-sidenav-show bg-gray-100'])
+@extends('layouts.app', ['class' => 'g-sidenav-show bg-gray-100', 'titlePage' => 'Vitalitas'])
 
 @section('content')
     @include('layouts.navbars.auth.topnav', ['title' => 'Vitalitas'])
@@ -316,13 +316,13 @@ function handleDelete(id) {
 </script>
 @endcan
 
-@can('mahasiswa')
+{{-- @can('mahasiswa')
 <script type="text/javascript">
     $(document).ready( function () {
     $('#dataTable').DataTable();
     } );
 </script>
-@endcan
+@endcan --}}
 
 @can('admin')
 <script type="text/javascript">
@@ -399,7 +399,7 @@ $(document).ready( function () {
     } );
 </script>
 @endcan
-@can('pembimbing')
+@can('pembimbingmahasiswa')
 <script type="text/javascript">
 $(document).ready( function () {
     $.fn.dataTable.ext.search.push(
