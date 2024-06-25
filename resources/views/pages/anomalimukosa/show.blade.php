@@ -771,11 +771,21 @@
         // Mendapatkan waktu saat ini dalam zona waktu Indonesia (WIB) dan mengonversinya ke format ISO string
         var currentDateTime = new Date(new Date().getTime() + (7 * 60 * 60 * 1000)).toISOString();
 
+        // Function to generate a random string of specified length
+        function generateRandomString(length) {
+            var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+            var result = '';
+            for (var i = 0; i < length; i++) {
+                result += characters.charAt(Math.floor(Math.random() * characters.length));
+            }
+            return result;
+        }
+
         // Mendapatkan nilai dari variabel dan menyusunnya menjadi teks QR code
         var qrText = "{{ $anomalimukosa->id }}" + "_" + "{{ $anomalimukosa->user_id }}" + "_" +
             "{{ $anomalimukosa->no_kartu }}" + "_" +
             "{{ $anomalimukosa->pembimbing }}" + "_" +
-            currentDateTime;
+            currentDateTime + "_" + generateRandomString(25);
 
         // Membuat QR code dengan teks yang diperoleh
         var qrcode = new QRCode(document.getElementById("qrcode"), {

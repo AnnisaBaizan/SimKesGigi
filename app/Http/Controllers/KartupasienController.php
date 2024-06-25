@@ -163,20 +163,29 @@ class KartupasienController extends Controller
      */
     public function destroy(kartupasien $kartupasien)
     {
+        // Lakukan pengecekan jika ada data terkait sebelum penghapusan
+        if (
+            $kartupasien->anamripasien()->exists() ||
+            $kartupasien->pengsiperi()->exists() ||
+            $kartupasien->eksplakkal()->exists() ||
+            $kartupasien->ohis()->exists() ||
+            $kartupasien->odontogram()->exists() ||
+            $kartupasien->anomalimukosa()->exists() ||
+            $kartupasien->vitalitas()->exists() ||
+            $kartupasien->periodontal()->exists() ||
+            $kartupasien->diagnosa()->exists()
+        ) {
+            // Jika ada data terkait, kembalikan pesan kesalahan
+            return back()->with('error', 'Tidak bisa menghapus Kartu Pasien karena masih terdapat data terkait.');
+        }
+    
+        // Jika tidak ada data terkait, lanjutkan dengan penghapusan
         kartupasien::destroy($kartupasien->id);
-        
-        anamripasien::where('kartupasien_id', $kartupasien->id)->delete();
-        Pengsiperi::where('kartupasien_id', $kartupasien->id)->delete();
-        Eksplakkal::where('kartupasien_id', $kartupasien->id)->delete();
-        Ohis::where('kartupasien_id', $kartupasien->id)->delete();
-        Odontogram::where('kartupasien_id', $kartupasien->id)->delete();
-        Anomalimukosa::where('kartupasien_id', $kartupasien->id)->delete();
-        Vitalitas::where('kartupasien_id', $kartupasien->id)->delete();
-        Periodontal::where('kartupasien_id', $kartupasien->id)->delete();
-        Diagnosa::where('kartupasien_id', $kartupasien->id)->delete();
-
+    
+        // Kembalikan pesan sukses
         return back()->with('success', 'Kartu Pasien dan data-data Terkait berhasil dihapus');
     }
+    
 
     public function export(){
         return Excel::download(new ExportKartuPasien, 'Data_Kartu_Pasien.xlsx');

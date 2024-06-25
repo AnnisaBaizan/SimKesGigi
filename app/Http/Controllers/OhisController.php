@@ -203,7 +203,7 @@ class OhisController extends Controller
     public function destroy(Ohis $ohis)
     {
         Ohis::destroy($ohis->id);
-        return back()->with('succes', 'Data Ohis berhasil dihapus');
+        return back()->with('success', 'Data Ohis berhasil dihapus');
     }
 
     public function acc($id)
