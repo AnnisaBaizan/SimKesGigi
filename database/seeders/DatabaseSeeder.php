@@ -10,7 +10,9 @@ use App\Models\Odontogram;
 use App\Models\Ohis;
 use App\Models\Pengsiperi;
 use App\Models\Penyebab;
+use App\Models\Periodontal;
 use App\Models\User;
+use App\Models\Vitalitas;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -38,5 +40,7 @@ class DatabaseSeeder extends Seeder
         $this->call(AskepgilutSeeder::class);
         $this->call(PenyebabSeeder::class);
         $this->call(GejalaSeeder::class);
+        $this->call(VitalitasSeeder::class);
+        $this->call(PeriodontalSeeder::class);
     }  
 }
