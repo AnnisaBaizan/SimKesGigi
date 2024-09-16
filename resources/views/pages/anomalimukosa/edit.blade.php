@@ -185,7 +185,7 @@
                                 <option value="" selected disabled>Pilih</option>
                                 <option value="Normal bite" {{$anomalimukosa->occlusi == "Normal bite" ? 'selected':''}}>Normal bite</option>
                                 <option value="Cross bite" {{$anomalimukosa->occlusi == "Cross bite" ? 'selected':''}}>Cross bite</option>
-                                <option value="Steep bite" {{$anomalimukosa->occlusi == "Steep bite" ? 'selected':''}}>Steep bite</option>
+                                <option value="Deep bite" {{$anomalimukosa->occlusi == "Deep bite" ? 'selected':''}}>Deep bite</option>
                             </select>
                         </div>
                         <div class="col-sm-6">
