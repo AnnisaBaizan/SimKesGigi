@@ -203,7 +203,7 @@
                                         <th>Gigi Susu D</th>
                                         <th>Gigi Susu E</th>
                                         <th>Gigi Susu F</th>
-                                        <th>DEF-T </th>
+                                        <th>def-t </th>
                                         <th style="display: none;">Gigi Karies </th>
                                         <th>Gigi Karies </th>
                                         <th style="display: none;">ACC</th>
@@ -290,7 +290,7 @@
                                         <th>Gigi Susu D</th>
                                         <th>Gigi Susu E</th>
                                         <th>Gigi Susu F</th>
-                                        <th>DEF-T </th>
+                                        <th>def-t </th>
                                         <th style="display: none;">Gigi Karies </th>
                                         <th>Gigi Karies </th>
                                         <th style="display: none;">ACC</th>

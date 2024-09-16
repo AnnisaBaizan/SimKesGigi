@@ -1133,7 +1133,7 @@
                                 readonly disabled required>
                         </div>
                         <div class="col-sm-3 mb-3">
-                            <label for="def_t">DEF-T</label>
+                            <label for="def_t">def-t</label>
                             <input type="text" name="def_t" id="def_t" value="0"
                                 class="form-control text-center" readonly required>
                         </div>
