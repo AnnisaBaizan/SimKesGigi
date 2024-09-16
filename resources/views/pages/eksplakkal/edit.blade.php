@@ -377,7 +377,7 @@
                                     @enderror
                                 </div>
                                 <div class="col-sm-2 mb-3 mb-sm-0">
-                                    <label for="plaque_score" class ="form-text">Plaque Score :</label>
+                                    <label for="plaque_score" class ="form-text">Free Plaque Score :</label>
                                     <input type="text"
                                         class="form-control @error('plaque_score') is-invalid @enderror"
                                         id="plaque_score" name="plaque_score" placeholder="Plaque Score"
