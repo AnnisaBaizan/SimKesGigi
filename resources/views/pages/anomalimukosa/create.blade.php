@@ -177,7 +177,7 @@
                                 <option value="" selected disabled>Pilih</option>
                                 <option value="Normal bite">Normal bite</option>
                                 <option value="Cross bite">Cross bite</option>
-                                <option value="Steep bite">Steep bite</option>
+                                <option value="Deep bite">Deep bite</option>
                             </select>
                         </div>
                         <div class="col-sm-6">
