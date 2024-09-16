@@ -22,9 +22,9 @@ class PeriodontalSeeder extends Seeder
         $count = 0;
         $masalahCounts = [
             "Gingivitis" => 0,
-            "Periodontitis" => 0,
-            "Abscess Periodontal" => 0,
-            "Tidak ditemukan" => 0
+            "Periodontitis" => 1,
+            "Abscess Periodontal" => 2,
+            "Tidak ditemukan" => 3
         ];
 
         while ($count < 14) {
