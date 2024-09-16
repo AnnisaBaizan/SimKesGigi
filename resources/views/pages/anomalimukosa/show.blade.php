@@ -128,7 +128,7 @@
                                 Normal bite</option>
                             <option value="Cross bite" {{ $anomalimukosa->occlusi == 'Cross bite' ? 'selected' : '' }}>Cross
                                 bite</option>
-                            <option value="Steep bite" {{ $anomalimukosa->occlusi == 'Steep bite' ? 'selected' : '' }}>Steep
+                            <option value="Deep bite" {{ $anomalimukosa->occlusi == 'Deep bite' ? 'selected' : '' }}>Steep
                                 bite</option>
                         </select>
                     </div>
