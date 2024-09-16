@@ -71,18 +71,20 @@ if (!function_exists('getElemenGigis')) {
 if (!function_exists('getElemenPermukaanGigis')) {
     function getElemenPermukaanGigis($user_id, $pembimbing, $kartupasien_id)
     {
-        // Ambil nilai subgingiva dan supragingiva
+        // Ambil nilai subgingiva yang paling baru
         $subgingiva = Eksplakkal::where('user_id', $user_id)
             ->where('pembimbing', $pembimbing)
             ->where('kartupasien_id', $kartupasien_id)
-            ->pluck('subgingiva')
-            ->first(); // Ambil hanya satu baris, karena kita akan explode
+            ->latest() // Mengurutkan berdasarkan 'created_at' secara otomatis
+            ->value('subgingiva'); // Mengambil nilai dari kolom 'subgingiva' yang paling baru
 
+        // Ambil nilai supragingiva yang paling baru
         $supragingiva = Eksplakkal::where('user_id', $user_id)
             ->where('pembimbing', $pembimbing)
             ->where('kartupasien_id', $kartupasien_id)
-            ->pluck('supragingiva')
-            ->first(); // Ambil hanya satu baris, karena kita akan explode
+            ->latest() // Mengurutkan berdasarkan 'created_at' secara otomatis
+            ->value('supragingiva'); // Mengambil nilai dari kolom 'supragingiva' yang paling baru
+
 
         // Gabungkan nilai subgingiva dan supragingiva menjadi satu array
         $gigiArray = array_merge(explode(",", $subgingiva), explode(",", $supragingiva));
