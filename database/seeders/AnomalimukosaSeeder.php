@@ -30,7 +30,7 @@ class AnomalimukosaSeeder extends Seeder
             12 => [10, 11, 12]
         ];
 
-        $occlusi = ['Normal bite', 'Cross bite', 'Steep bite'];
+        $occlusi = ['Normal bite', 'Cross bite', 'Deep bite'];
         $attributes = ['bentuk', 'warna', 'posisi', 'ukuran', 'struktur'];
 
         for ($i = 0; $i < 24; $i++) {
