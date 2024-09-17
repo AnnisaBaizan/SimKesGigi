@@ -44,11 +44,13 @@ if (!function_exists('getElemenGigis')) {
         $elemengigis = Odontogram::where('user_id', $user_id)
             ->where('pembimbing', $pembimbing)
             ->where('kartupasien_id', $kartupasien_id)
-            ->get('gigi_karies');
+            ->latest() // Mengurutkan berdasarkan 'created_at' secara otomatis
+            ->first();
 
         $elemenGigiHTML = '<option value="" selected disabled>Pilih Elemen Gigi</option>';
-        foreach ($elemengigis as $elemengigi) {
-            $gigiArray = explode(",", $elemengigi->gigi_karies);
+        if ($elemengigis && !empty($elemengigis->gigi_karies)) {
+            // foreach ($elemengigis as $elemengigi) {
+            $gigiArray = explode(",", $elemengigis->gigi_karies);
             foreach ($gigiArray as $gigi) {
 
                 // Periksa apakah elemen gigi tidak ada dalam tabel Vitalitas
@@ -62,6 +64,7 @@ if (!function_exists('getElemenGigis')) {
                     $elemenGigiHTML .= '<option value="' . $gigi . '">' . $gigi . '</option>';
                 }
             }
+            // }
         }
 
         return $elemenGigiHTML;
@@ -71,44 +74,46 @@ if (!function_exists('getElemenGigis')) {
 if (!function_exists('getElemenPermukaanGigis')) {
     function getElemenPermukaanGigis($user_id, $pembimbing, $kartupasien_id)
     {
-        // Ambil nilai subgingiva yang paling baru
-        $subgingiva = Eksplakkal::where('user_id', $user_id)
+        // Ambil record paling baru dari tabel 'Eksplakkal'
+        $latestRecord = Eksplakkal::where('user_id', $user_id)
             ->where('pembimbing', $pembimbing)
             ->where('kartupasien_id', $kartupasien_id)
             ->latest() // Mengurutkan berdasarkan 'created_at' secara otomatis
-            ->value('subgingiva'); // Mengambil nilai dari kolom 'subgingiva' yang paling baru
+            ->first(); // Ambil record paling baru
 
-        // Ambil nilai supragingiva yang paling baru
-        $supragingiva = Eksplakkal::where('user_id', $user_id)
-            ->where('pembimbing', $pembimbing)
-            ->where('kartupasien_id', $kartupasien_id)
-            ->latest() // Mengurutkan berdasarkan 'created_at' secara otomatis
-            ->value('supragingiva'); // Mengambil nilai dari kolom 'supragingiva' yang paling baru
-
-
-        // Gabungkan nilai subgingiva dan supragingiva menjadi satu array
-        $gigiArray = array_merge(explode(",", $subgingiva), explode(",", $supragingiva));
-
+        // Inisialisasi opsi HTML
         $elemenPermukaanGigiHTML = '<option value="" selected disabled>Pilih Elemen Permukaan Gigi</option>';
-        foreach ($gigiArray as $permukaan_gigi) {
-            // Set nilai $kalkulus berdasarkan pilihan pengguna
-            $kalkulus = in_array($permukaan_gigi, explode(",", $subgingiva)) ? "Subgingiva" : "Supragingiva";
 
-            // Periksa apakah elemen gigi tidak ada dalam tabel periodontal
-            $periodontal = Periodontal::where('elemen_permukaan_gigi', $permukaan_gigi)
-                ->where('user_id', $user_id)
-                ->where('pembimbing', $pembimbing)
-                ->where('kartupasien_id', $kartupasien_id)
-                ->first();
-            if (!$periodontal) {
-                // Tambahkan opsi dengan atribut data-kalkulus
-                $elemenPermukaanGigiHTML .= '<option value="' . $permukaan_gigi . '" data-kalkulus="' . $kalkulus . '">' . $permukaan_gigi . '</option>';
+        // Periksa jika record ditemukan dan nilai 'subgingiva' atau 'supragingiva' tidak kosong
+        if ($latestRecord && (!empty($latestRecord->subgingiva) || !empty($latestRecord->supragingiva))) {
+            // Gabungkan nilai subgingiva dan supragingiva menjadi satu array
+            $gigiArray = array_merge(
+                explode(",", $latestRecord->subgingiva),
+                explode(",", $latestRecord->supragingiva)
+            );
+
+            foreach ($gigiArray as $permukaan_gigi) {
+                // Set nilai $kalkulus berdasarkan pilihan pengguna
+                $kalkulus = in_array($permukaan_gigi, explode(",", $latestRecord->subgingiva)) ? "Subgingiva" : "Supragingiva";
+
+                // Periksa apakah elemen gigi tidak ada dalam tabel periodontal
+                $periodontal = Periodontal::where('elemen_permukaan_gigi', $permukaan_gigi)
+                    ->where('user_id', $user_id)
+                    ->where('pembimbing', $pembimbing)
+                    ->where('kartupasien_id', $kartupasien_id)
+                    ->first();
+
+                if (!$periodontal) {
+                    // Tambahkan opsi dengan atribut data-kalkulus
+                    $elemenPermukaanGigiHTML .= '<option value="' . htmlspecialchars($permukaan_gigi) . '" data-kalkulus="' . htmlspecialchars($kalkulus) . '">' . htmlspecialchars($permukaan_gigi) . '</option>';
+                }
             }
         }
 
         return $elemenPermukaanGigiHTML;
     }
 }
+
 
 if (!function_exists('getPenyebabs')) {
     function getPenyebabs($askepgilut)
