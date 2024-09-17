@@ -157,29 +157,34 @@ class EksplakkalController extends Controller
      */
     public function edit(Eksplakkal $eksplakkal)
     {
-        if (auth()->user()->role === 1) {
-            $kartupasiens = kartupasien::where('user_id', $eksplakkal->user_id)
-                                    ->where('pembimbing', $eksplakkal->pembimbing)
-                                    ->get();
-            // $kartupasiens = kartupasien::all();
-            $users = User::where('role', 3)->get();
-        } 
-        elseif (auth()->user()->role === 2) {
-            $kartupasiens = kartupasien::where('pembimbing', auth()->user()->nimnip)->get();
-        } 
-        else {
-            $kartupasiens = kartupasien::where('user_id', auth()->id())->get();
+        if ($eksplakkal->acc !== 1) {
+            if (auth()->user()->role === 1) {
+                $kartupasiens = kartupasien::where('user_id', $eksplakkal->user_id)
+                                        ->where('pembimbing', $eksplakkal->pembimbing)
+                                        ->get();
+                // $kartupasiens = kartupasien::all();
+                $users = User::where('role', 3)->get();
+            } 
+            elseif (auth()->user()->role === 2) {
+                $kartupasiens = kartupasien::where('pembimbing', auth()->user()->nimnip)->get();
+            } 
+            else {
+                $kartupasiens = kartupasien::where('user_id', auth()->id())->get();
+            }
+    
+            
+            $permukaangigis = permukaangigi::all();
+            
+            return view('pages.eksplakkal.edit')->with([
+                'kartupasiens' => $kartupasiens,
+                'permukaangigis' => $permukaangigis,
+                'eksplakkal'=> $eksplakkal,
+                'users' => $users ?? null
+            ]);
+        } else {
+            abort(403, 'Anda Tidak dapat Mengakses Halaman Ini, status telah ACC');
         }
-
         
-        $permukaangigis = permukaangigi::all();
-        
-        return view('pages.eksplakkal.edit')->with([
-            'kartupasiens' => $kartupasiens,
-            'permukaangigis' => $permukaangigis,
-            'eksplakkal'=> $eksplakkal,
-            'users' => $users ?? null
-        ]);
     }
 
     /**
@@ -259,8 +264,13 @@ class EksplakkalController extends Controller
      */
     public function destroy(Eksplakkal $eksplakkal)
     {
-        Eksplakkal::destroy($eksplakkal->id);
-        return back()->with('success', 'Data Eskternal & Internal Oral (Plak & Kalkulus) Eskternal & Internal Oral (Plak & Kalkulus) berhasil dihapus');
+        if ($eksplakkal->acc !== 1) {
+            Eksplakkal::destroy($eksplakkal->id);
+            return back()->with('success', 'Data Eskternal & Internal Oral (Plak & Kalkulus) Eskternal & Internal Oral (Plak & Kalkulus) berhasil dihapus');
+        } else {
+            abort(403, 'Anda Tidak dapat Mengakses Halaman Ini, status telah ACC');
+        }
+        
     }
 
     public function acc($id)

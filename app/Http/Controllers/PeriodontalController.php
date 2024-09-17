@@ -125,54 +125,59 @@ class PeriodontalController extends Controller
      */
     public function edit(Periodontal $periodontal)
     {
-        if (auth()->user()->role === 1) {
-            $kartupasiens = kartupasien::where('user_id', $periodontal->user_id)
-                                    ->where('pembimbing', $periodontal->pembimbing)
-                                    ->get();
-            // $kartupasiens = kartupasien::all();
-            $users = User::where('role', 3)->get();
-        } 
-        elseif (auth()->user()->role === 2) {
-            $kartupasiens = kartupasien::where('pembimbing', auth()->user()->nimnip)->get();
-        } 
-        else {
-            $kartupasiens = kartupasien::where('user_id', auth()->id())->get();
-        }
-
-        $subgingiva = Eksplakkal::where('user_id', $periodontal->user_id)
-            ->where('pembimbing', $periodontal->pembimbing)
-            ->where('kartupasien_id', $periodontal->kartupasien_id)
-            ->pluck('subgingiva')
-            ->first(); // Ambil hanya satu baris, karena kita akan explode
-
-        $supragingiva = Eksplakkal::where('user_id', $periodontal->user_id)
-            ->where('pembimbing', $periodontal->pembimbing)
-            ->where('kartupasien_id', $periodontal->kartupasien_id)
-            ->pluck('supragingiva')
-            ->first(); // Ambil hanya satu baris, karena kita akan explode
-
-        // Gabungkan nilai subgingiva dan supragingiva menjadi satu array
-        $gigiArray = array_merge(explode(",", $subgingiva), explode(",", $supragingiva));
-
-        foreach ($gigiArray as $permukaan_gigi) {
-            // Periksa apakah elemen gigi tidak ada dalam tabel periodontal
-                $existingperiodontal = Periodontal::where('elemen_permukaan_gigi', $permukaan_gigi)
-                ->where('user_id', $periodontal->user_id)
+        if ($periodontal->acc !== 1) {
+            if (auth()->user()->role === 1) {
+                $kartupasiens = kartupasien::where('user_id', $periodontal->user_id)
+                                        ->where('pembimbing', $periodontal->pembimbing)
+                                        ->get();
+                // $kartupasiens = kartupasien::all();
+                $users = User::where('role', 3)->get();
+            } 
+            elseif (auth()->user()->role === 2) {
+                $kartupasiens = kartupasien::where('pembimbing', auth()->user()->nimnip)->get();
+            } 
+            else {
+                $kartupasiens = kartupasien::where('user_id', auth()->id())->get();
+            }
+    
+            $subgingiva = Eksplakkal::where('user_id', $periodontal->user_id)
                 ->where('pembimbing', $periodontal->pembimbing)
                 ->where('kartupasien_id', $periodontal->kartupasien_id)
-                ->exists();
-            if (!$existingperiodontal || $periodontal->elemen_permukaan_gigi==$permukaan_gigi) {
-                $permukaan_gigis[] = $permukaan_gigi;
-                
+                ->pluck('subgingiva')
+                ->first(); // Ambil hanya satu baris, karena kita akan explode
+    
+            $supragingiva = Eksplakkal::where('user_id', $periodontal->user_id)
+                ->where('pembimbing', $periodontal->pembimbing)
+                ->where('kartupasien_id', $periodontal->kartupasien_id)
+                ->pluck('supragingiva')
+                ->first(); // Ambil hanya satu baris, karena kita akan explode
+    
+            // Gabungkan nilai subgingiva dan supragingiva menjadi satu array
+            $gigiArray = array_merge(explode(",", $subgingiva), explode(",", $supragingiva));
+    
+            foreach ($gigiArray as $permukaan_gigi) {
+                // Periksa apakah elemen gigi tidak ada dalam tabel periodontal
+                    $existingperiodontal = Periodontal::where('elemen_permukaan_gigi', $permukaan_gigi)
+                    ->where('user_id', $periodontal->user_id)
+                    ->where('pembimbing', $periodontal->pembimbing)
+                    ->where('kartupasien_id', $periodontal->kartupasien_id)
+                    ->exists();
+                if (!$existingperiodontal || $periodontal->elemen_permukaan_gigi==$permukaan_gigi) {
+                    $permukaan_gigis[] = $permukaan_gigi;
+                    
+                }
             }
+    
+            return view('pages.periodontal.edit')->with([
+                'periodontal' => $periodontal,
+                'kartupasiens' => $kartupasiens,
+                'permukaan_gigis' => $permukaan_gigis,
+                'users' => $users ?? null
+            ]);
+        } else {
+            abort(403, 'Anda Tidak dapat Mengakses Halaman Ini, status telah ACC');
         }
-
-        return view('pages.periodontal.edit')->with([
-            'periodontal' => $periodontal,
-            'kartupasiens' => $kartupasiens,
-            'permukaan_gigis' => $permukaan_gigis,
-            'users' => $users ?? null
-        ]);
+        
     }
 
     /**
@@ -218,8 +223,13 @@ class PeriodontalController extends Controller
      */
     public function destroy(Periodontal $periodontal)
     {
-        Periodontal::destroy($periodontal->id);
-        return back()->with('success', 'Data periodontal berhasil dihapus');
+        if ($periodontal->acc !== 1) {
+            Periodontal::destroy($periodontal->id);
+            return back()->with('success', 'Data periodontal berhasil dihapus');
+        } else {
+            abort(403, 'Anda Tidak dapat Mengakses Halaman Ini, status telah ACC');
+        }
+        
     }
 
     public function acc($id)

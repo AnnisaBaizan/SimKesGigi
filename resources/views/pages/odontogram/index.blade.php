@@ -392,7 +392,7 @@
                                             <td>
                                                 {{ strlen($odontogram->gigi_karies) > 25 ? substr($odontogram->gigi_karies, 0, 25) . ' . . .' : $odontogram->gigi_karies }}
                                             </td>
-                                            
+
                                             <td style="display: none;">
                                                 @can('mahasiswa')
                                                     <label
@@ -413,20 +413,22 @@
 
                                             <td>
                                                 @can('mahasiswa')
-                                                    <label class="{{ $odontogram->acc == 0 ? 'btn btn-danger' : 'btn btn-success' }}">
+                                                    <label
+                                                        class="{{ $odontogram->acc == 0 ? 'btn btn-danger' : 'btn btn-success' }}">
                                                         {!! $odontogram->acc == 0 ? '<i class="fas fa-times"></i>' : '<i class="fas fa-check"></i>' !!}
                                                     </label>
-                                                
                                                 @endcan
                                                 @can('adminpembimbing')
                                                     @if ($odontogram->acc == 0)
                                                         <a href="javascript:;" data-toggle="modal"
                                                             onclick="handleACC({{ $odontogram->id }})"
-                                                            data-target="#AccModal" class="btn btn-danger"><i class="fas fa-times"></i></a>
+                                                            data-target="#AccModal" class="btn btn-danger"><i
+                                                                class="fas fa-times"></i></a>
                                                     @else
                                                         <a href="javascript:;" data-toggle="modal"
                                                             onclick="handleACC({{ $odontogram->id }})"
-                                                            data-target="#AccModal" class="btn btn-success"><i class="fas fa-check"></i></a>
+                                                            data-target="#AccModal" class="btn btn-success"><i
+                                                                class="fas fa-check"></i></a>
                                                     @endif
                                                 @endcan
                                             </td>
@@ -445,20 +447,37 @@
                                                     <i class="fas fa-eye text-success  fa-lg"></i>
                                                 </a> --}}
                                                 @can('adminmahasiswa')
-                                                    <a href ="{{ route('odontogram.edit', $odontogram->id) }}" title="Edit"
-                                                        class="btn btn-sm btn-icon-split btn-warning">
-                                                        <span class="icon"><i class="fas fa-pen text-white"
-                                                                style="padding-top: 4px;"></i></span><span
-                                                            class="text">Edit</span>
-                                                    </a>
-                                                    <a href="javascript:;" data-toggle="modal"
-                                                        onclick="handleDelete({{ $odontogram->id }})"
-                                                        data-target="#DeleteModal"
-                                                        class="btn btn-sm btn-icon-split btn-danger">
-                                                        <span class="icon"><i class="fa fa-trash text-white"
-                                                                style="padding-top: 4px;"></i></span><span
-                                                            class="text">Hapus</span>
-                                                    </a>
+                                                    @if ($odontogram->acc !== 1)
+                                                        <a href ="{{ route('odontogram.edit', $odontogram->id) }}"
+                                                            title="Edit" class="btn btn-sm btn-icon-split btn-warning">
+                                                            <span class="icon"><i class="fas fa-pen text-white"
+                                                                    style="padding-top: 4px;"></i></span><span
+                                                                class="text">Edit</span>
+                                                        </a>
+                                                        <a href="javascript:;" data-toggle="modal"
+                                                            onclick="handleDelete({{ $odontogram->id }})"
+                                                            data-target="#DeleteModal"
+                                                            class="btn btn-sm btn-icon-split btn-danger">
+                                                            <span class="icon"><i class="fa fa-trash text-white"
+                                                                    style="padding-top: 4px;"></i></span><span
+                                                                class="text">Hapus</span>
+                                                        </a>
+                                                    @else
+                                                        <a href ="" title="Edit"
+                                                            class="btn btn-sm btn-icon-split btn-secondary"
+                                                            style="pointer-events: none; opacity: 0.6;">
+                                                            <span class="icon"><i class="fas fa-pen text-white"
+                                                                    style="padding-top: 4px;"></i></span><span
+                                                                class="text">Edit</span>
+                                                        </a>
+                                                        <a href="" title="Hapus"
+                                                            class="btn btn-sm btn-icon-split btn-secondary"
+                                                            style="pointer-events: none; opacity: 0.6;">
+                                                            <span class="icon"><i class="fa fa-trash text-white"
+                                                                    style="padding-top: 4px;"></i></span><span
+                                                                class="text">Hapus</span>
+                                                        </a>
+                                                    @endif
                                                 @endcan
                                             </td>
                                         </tr>
@@ -546,7 +565,8 @@
                             extend: 'copyHtml5',
                             exportOptions: {
                                 columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
-                                    19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36,
+                                    19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35,
+                                    36,
                                     37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53,
                                     54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 66, 68
                                 ]
@@ -556,7 +576,8 @@
                             extend: 'print',
                             exportOptions: {
                                 columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
-                                    19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36,
+                                    19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35,
+                                    36,
                                     37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53,
                                     54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 66, 68
                                 ]
@@ -566,7 +587,8 @@
                             extend: 'excelHtml5',
                             exportOptions: {
                                 columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
-                                    19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36,
+                                    19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35,
+                                    36,
                                     37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53,
                                     54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 66, 68
                                 ]
@@ -576,7 +598,8 @@
                             extend: 'csvHtml5',
                             exportOptions: {
                                 columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
-                                    19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36,
+                                    19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35,
+                                    36,
                                     37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53,
                                     54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 66, 68
                                 ]
@@ -586,7 +609,8 @@
                             extend: 'pdfHtml5',
                             exportOptions: {
                                 columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
-                                    19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36,
+                                    19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35,
+                                    36,
                                     37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53,
                                     54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 66, 68
                                 ]
@@ -640,7 +664,8 @@
                             extend: 'copyHtml5',
                             exportOptions: {
                                 columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
-                                    19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36,
+                                    19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35,
+                                    36,
                                     37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53,
                                     54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 65, 67
                                 ]
@@ -650,7 +675,8 @@
                             extend: 'print',
                             exportOptions: {
                                 columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
-                                    19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36,
+                                    19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35,
+                                    36,
                                     37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53,
                                     54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 65, 67
                                 ]
@@ -660,7 +686,8 @@
                             extend: 'excelHtml5',
                             exportOptions: {
                                 columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
-                                    19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36,
+                                    19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35,
+                                    36,
                                     37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53,
                                     54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 65, 67
                                 ]
@@ -670,7 +697,8 @@
                             extend: 'csvHtml5',
                             exportOptions: {
                                 columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
-                                    19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36,
+                                    19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35,
+                                    36,
                                     37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53,
                                     54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 65, 67
                                 ]
@@ -680,7 +708,8 @@
                             extend: 'pdfHtml5',
                             exportOptions: {
                                 columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
-                                    19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36,
+                                    19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35,
+                                    36,
                                     37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53,
                                     54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 65, 67
                                 ]

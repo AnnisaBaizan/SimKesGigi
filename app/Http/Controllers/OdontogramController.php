@@ -169,24 +169,29 @@ class OdontogramController extends Controller
      */
     public function edit(Odontogram $odontogram)
     {
-        if (auth()->user()->role === 1) {
-            $kartupasiens = kartupasien::where('user_id', $odontogram->user_id)
-                                    ->where('pembimbing', $odontogram->pembimbing)
-                                    ->get();
-            // $kartupasiens = kartupasien::all();
-            $users = User::where('role', 3)->get();
-        } 
-        elseif (auth()->user()->role === 2) {
-            $kartupasiens = kartupasien::where('pembimbing', auth()->user()->nimnip)->get();
-        } 
-        else {
-            $kartupasiens = kartupasien::where('user_id', auth()->id())->get();
+        if ($odontogram->acc !== 1) {
+            if (auth()->user()->role === 1) {
+                $kartupasiens = kartupasien::where('user_id', $odontogram->user_id)
+                                        ->where('pembimbing', $odontogram->pembimbing)
+                                        ->get();
+                // $kartupasiens = kartupasien::all();
+                $users = User::where('role', 3)->get();
+            } 
+            elseif (auth()->user()->role === 2) {
+                $kartupasiens = kartupasien::where('pembimbing', auth()->user()->nimnip)->get();
+            } 
+            else {
+                $kartupasiens = kartupasien::where('user_id', auth()->id())->get();
+            }
+            return view('pages.odontogram.edit')->with([
+                'odontogram' => $odontogram,
+                'kartupasiens' => $kartupasiens,
+                'users' => $users ?? null
+            ]);
+        } else {
+            abort(403, 'Anda Tidak dapat Mengakses Halaman Ini, status telah ACC');
         }
-        return view('pages.odontogram.edit')->with([
-            'odontogram' => $odontogram,
-            'kartupasiens' => $kartupasiens,
-            'users' => $users ?? null
-        ]);
+        
     }
 
     /**
@@ -286,8 +291,13 @@ class OdontogramController extends Controller
      */
     public function destroy(Odontogram $odontogram)
     {
-        Odontogram::destroy($odontogram->id);
-        return back()->with('success', 'Data Odontogram berhasil dihapus');
+        if ($odontogram->acc !== 1) {
+            Odontogram::destroy($odontogram->id);
+            return back()->with('success', 'Data Odontogram berhasil dihapus');
+        } else {
+            abort(403, 'Anda Tidak dapat Mengakses Halaman Ini, status telah ACC');
+        }
+        
     }
 
     public function acc($id)

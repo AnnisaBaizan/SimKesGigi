@@ -182,35 +182,40 @@ class DiagnosaController extends Controller
      */
     public function edit(Diagnosa $diagnosa)
     {
-        if (auth()->user()->role === 1) {
-            $kartupasiens = kartupasien::where('user_id', $diagnosa->user_id)
-                ->where('pembimbing', $diagnosa->pembimbing)
-                ->get();
-            // $kartupasiens = kartupasien::all();
-            $users = User::where('role', 3)->get();
-        } elseif (auth()->user()->role === 2) {
-            $kartupasiens = kartupasien::where('pembimbing', auth()->user()->nimnip)->get();
+        if ($diagnosa->acc !== 1) {
+            if (auth()->user()->role === 1) {
+                $kartupasiens = kartupasien::where('user_id', $diagnosa->user_id)
+                    ->where('pembimbing', $diagnosa->pembimbing)
+                    ->get();
+                // $kartupasiens = kartupasien::all();
+                $users = User::where('role', 3)->get();
+            } elseif (auth()->user()->role === 2) {
+                $kartupasiens = kartupasien::where('pembimbing', auth()->user()->nimnip)->get();
+            } else {
+                $kartupasiens = kartupasien::where('user_id', auth()->id())->get();
+            }
+    
+            // Pecah string menjadi array pada setiap input
+            $penyebab = explode('|', $diagnosa->penyebab);
+            // dd($penyebab);
+            $gejala = explode('|', $diagnosa->gejala);
+    
+            $gigis = gigi::all();
+            $askepgiluts = Askepgilut::all();
+    
+            return view('pages.diagnosa.edit')->with([
+                'diagnosa' => $diagnosa,
+                'kartupasiens' => $kartupasiens,
+                'gigis' => $gigis,
+                'askepgiluts' => $askepgiluts,
+                'penyebab' => $penyebab,
+                'gejala' => $gejala,
+                'users' => $users ?? null
+            ]);
         } else {
-            $kartupasiens = kartupasien::where('user_id', auth()->id())->get();
+            abort(403, 'Anda Tidak dapat Mengakses Halaman Ini, status telah ACC');
         }
-
-        // Pecah string menjadi array pada setiap input
-        $penyebab = explode('|', $diagnosa->penyebab);
-        // dd($penyebab);
-        $gejala = explode('|', $diagnosa->gejala);
-
-        $gigis = gigi::all();
-        $askepgiluts = Askepgilut::all();
-
-        return view('pages.diagnosa.edit')->with([
-            'diagnosa' => $diagnosa,
-            'kartupasiens' => $kartupasiens,
-            'gigis' => $gigis,
-            'askepgiluts' => $askepgiluts,
-            'penyebab' => $penyebab,
-            'gejala' => $gejala,
-            'users' => $users ?? null
-        ]);
+        
     }
 
     /**
@@ -292,8 +297,12 @@ class DiagnosaController extends Controller
      */
     public function destroy(Diagnosa $diagnosa)
     {
-        Diagnosa::destroy($diagnosa->id);
-        return back()->with('success', 'Data diagnosa berhasil dihapus');
+        if ($diagnosa->acc !== 1) {
+            Diagnosa::destroy($diagnosa->id);
+            return back()->with('success', 'Data diagnosa berhasil dihapus');
+        } else {
+            abort(403, 'Anda Tidak dapat Mengakses Halaman Ini, status telah ACC');
+        }
     }
 
 

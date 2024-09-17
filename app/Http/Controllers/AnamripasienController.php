@@ -122,27 +122,32 @@ class AnamripasienController extends Controller
      */
     public function edit(anamripasien $anamripasien)
     {
-        
-        if (auth()->user()->role === 1) {
-            $kartupasiens = kartupasien::where('user_id', $anamripasien->user_id)
-                                    ->where('pembimbing', $anamripasien->pembimbing)
-                                    ->get();
+        if ($anamripasien->acc !== 1) {
+            if (auth()->user()->role === 1) {
+                $kartupasiens = kartupasien::where('user_id', $anamripasien->user_id)
+                                        ->where('pembimbing', $anamripasien->pembimbing)
+                                        ->get();
+                // $kartupasiens = kartupasien::all();
+                $users = User::where('role', 3)->get();
+            } 
+            elseif (auth()->user()->role === 2) {
+                $kartupasiens = kartupasien::where('pembimbing', auth()->user()->nimnip)->get();
+            } 
+            else {
+                $kartupasiens = kartupasien::where('user_id', auth()->id())->get();
+            }
+    
             // $kartupasiens = kartupasien::all();
-            $users = User::where('role', 3)->get();
-        } 
-        elseif (auth()->user()->role === 2) {
-            $kartupasiens = kartupasien::where('pembimbing', auth()->user()->nimnip)->get();
-        } 
-        else {
-            $kartupasiens = kartupasien::where('user_id', auth()->id())->get();
+            return view('pages.anamripasien.edit')->with([
+                'anamripasien' => $anamripasien,
+                'kartupasiens' => $kartupasiens,
+                'users' => $users ?? null
+            ]);
+        } else {
+            abort(403, 'Anda Tidak dapat Mengakses Halaman Ini, status telah ACC');
         }
+        
 
-        // $kartupasiens = kartupasien::all();
-        return view('pages.anamripasien.edit')->with([
-            'anamripasien' => $anamripasien,
-            'kartupasiens' => $kartupasiens,
-            'users' => $users ?? null
-        ]);
     }
 
     /**
@@ -193,8 +198,14 @@ class AnamripasienController extends Controller
      */
     public function destroy(anamripasien $anamripasien)
     {
-        anamripasien::destroy($anamripasien->id);
-        return back()->with('success', 'Anamnesa dan Riwayat Pasien berhasil dihapus');
+        
+        if ($anamripasien->acc !== 1) {
+            anamripasien::destroy($anamripasien->id);
+            return back()->with('success', 'Anamnesa dan Riwayat Pasien berhasil dihapus');
+
+        } else {
+            abort(403, 'Anda Tidak dapat Mengakses Halaman Ini, status telah ACC');
+        }
     }
 
     public function export(){

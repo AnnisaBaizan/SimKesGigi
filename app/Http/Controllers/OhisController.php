@@ -127,25 +127,30 @@ class OhisController extends Controller
      */
     public function edit(Ohis $ohis)
     {
-        if (auth()->user()->role === 1) {
-            $kartupasiens = kartupasien::where('user_id', $ohis->user_id)
-                                    ->where('pembimbing', $ohis->pembimbing)
-                                    ->get();
-            // $kartupasiens = kartupasien::all();
-            $users = User::where('role', 3)->get();
-        } 
-        elseif (auth()->user()->role === 2) {
-            $kartupasiens = kartupasien::where('pembimbing', auth()->user()->nimnip)->get();
-        } 
-        else {
-            $kartupasiens = kartupasien::where('user_id', auth()->id())->get();
+        if ($ohis->acc !== 1) {
+            if (auth()->user()->role === 1) {
+                $kartupasiens = kartupasien::where('user_id', $ohis->user_id)
+                                        ->where('pembimbing', $ohis->pembimbing)
+                                        ->get();
+                // $kartupasiens = kartupasien::all();
+                $users = User::where('role', 3)->get();
+            } 
+            elseif (auth()->user()->role === 2) {
+                $kartupasiens = kartupasien::where('pembimbing', auth()->user()->nimnip)->get();
+            } 
+            else {
+                $kartupasiens = kartupasien::where('user_id', auth()->id())->get();
+            }
+    
+            return view('pages.ohis.edit')->with([
+                'kartupasiens' => $kartupasiens,
+                'ohis' => $ohis,
+                'users' => $users ?? null
+            ]);
+        } else {
+            abort(403, 'Anda Tidak dapat Mengakses Halaman Ini, status telah ACC');
         }
-
-        return view('pages.ohis.edit')->with([
-            'kartupasiens' => $kartupasiens,
-            'ohis' => $ohis,
-            'users' => $users ?? null
-        ]);
+        
     }
 
     /**
@@ -202,8 +207,13 @@ class OhisController extends Controller
      */
     public function destroy(Ohis $ohis)
     {
-        Ohis::destroy($ohis->id);
-        return back()->with('success', 'Data Ohis berhasil dihapus');
+        if ($ohis->acc !== 1) {
+            Ohis::destroy($ohis->id);
+            return back()->with('success', 'Data Ohis berhasil dihapus');
+        } else {
+            abort(403, 'Anda Tidak dapat Mengakses Halaman Ini, status telah ACC');
+        }
+        
     }
 
     public function acc($id)

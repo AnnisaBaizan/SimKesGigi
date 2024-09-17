@@ -18,11 +18,9 @@ class AnomalimukosaController extends Controller
     {
         if (auth()->user()->role === 1) {
             $anomalimukosas = Anomalimukosa::all();
-        } 
-        elseif (auth()->user()->role === 2) {
+        } elseif (auth()->user()->role === 2) {
             $anomalimukosas = Anomalimukosa::where('pembimbing', auth()->user()->nimnip)->get();
-        } 
-        else {
+        } else {
             $anomalimukosas = Anomalimukosa::where('user_id', auth()->id())->get();
         }
 
@@ -44,16 +42,14 @@ class AnomalimukosaController extends Controller
         if (auth()->user()->role === 1) {
             $kartupasiens = kartupasien::all();
             $users = User::where('role', 3)->get();
-        } 
-        elseif (auth()->user()->role === 2) {
+        } elseif (auth()->user()->role === 2) {
             $kartupasiens = kartupasien::where('pembimbing', auth()->user()->nimnip)->get();
-        } 
-        else {
+        } else {
             $kartupasiens = kartupasien::where('user_id', auth()->id())->get();
         }
 
         // $kartupasiens = kartupasien::all();
-        
+
         return view('pages.anomalimukosa.create')->with([
             'kartupasiens' => $kartupasiens,
             'users' => $users ?? null
@@ -68,56 +64,56 @@ class AnomalimukosaController extends Controller
      */
     public function store(Request $request)
     {
-        
+
         $validatedData = $request->validate([
             'user_id' => 'required',
             'pembimbing' => 'required',
             'kartupasien_id' => 'required',
 
-            'occlusi'=>'required|min:10|max:11',
-            'bentuk'=> 'required|min:6|max:8',
-            'warna'=> 'required|min:6|max:8',
-            'posisi'=> 'required|min:6|max:8',
-            'ukuran'=> 'required|min:6|max:8',
-            'struktur'=> 'required|min:6|max:8',
+            'occlusi' => 'required|min:10|max:11',
+            'bentuk' => 'required|min:6|max:8',
+            'warna' => 'required|min:6|max:8',
+            'posisi' => 'required|min:6|max:8',
+            'ukuran' => 'required|min:6|max:8',
+            'struktur' => 'required|min:6|max:8',
 
             //mukosa mulut
-            
+
             // lidah
-            'w_lidah'=> 'required|max:9|min:3',
-            'dw_lidah'=>'nullable',
-            'i_lidah'=> 'required|max:9|min:3',
-            'di_lidah'=>'nullable',
-            'u_lidah'=> 'required|max:9|min:3',
-            'du_lidah'=>'nullable',
+            'w_lidah' => 'required|max:9|min:3',
+            'dw_lidah' => 'nullable',
+            'i_lidah' => 'required|max:9|min:3',
+            'di_lidah' => 'nullable',
+            'u_lidah' => 'required|max:9|min:3',
+            'du_lidah' => 'nullable',
             // pipi
-            'w_pipi'=> 'required|max:9|min:3',
-            'dw_pipi'=>'nullable',
-            'i_pipi'=> 'required|max:9|min:3',
-            'di_pipi'=>'nullable',
-            'u_pipi'=> 'required|max:9|min:3',
-            'du_pipi'=>'nullable',
+            'w_pipi' => 'required|max:9|min:3',
+            'dw_pipi' => 'nullable',
+            'i_pipi' => 'required|max:9|min:3',
+            'di_pipi' => 'nullable',
+            'u_pipi' => 'required|max:9|min:3',
+            'du_pipi' => 'nullable',
             // palatum
-            'w_palatum'=> 'required|max:9|min:3',
-            'dw_palatum'=>'nullable',
-            'i_palatum'=> 'required|max:9|min:3',
-            'di_palatum'=>'nullable',
-            'u_palatum'=> 'required|max:9|min:3',
-            'du_palatum'=>'nullable',
+            'w_palatum' => 'required|max:9|min:3',
+            'dw_palatum' => 'nullable',
+            'i_palatum' => 'required|max:9|min:3',
+            'di_palatum' => 'nullable',
+            'u_palatum' => 'required|max:9|min:3',
+            'du_palatum' => 'nullable',
             // gingiva
-            'w_gingiva'=> 'required|max:9|min:3',
-            'dw_gingiva'=>'nullable',
-            'i_gingiva'=> 'required|max:9|min:3',
-            'di_gingiva'=>'nullable',
-            'u_gingiva'=> 'required|max:9|min:3',
-            'du_gingiva'=>'nullable',
+            'w_gingiva' => 'required|max:9|min:3',
+            'dw_gingiva' => 'nullable',
+            'i_gingiva' => 'required|max:9|min:3',
+            'di_gingiva' => 'nullable',
+            'u_gingiva' => 'required|max:9|min:3',
+            'du_gingiva' => 'nullable',
             // bibir
-            'w_bibir'=>'required|max:9|min:3',
-            'dw_bibir'=>'nullable',
-            'i_bibir'=> 'required|max:9|min:3',
-            'di_bibir'=>'nullable',
-            'u_bibir'=>'required|max:9|min:3',
-            'du_bibir'=>'nullable'
+            'w_bibir' => 'required|max:9|min:3',
+            'dw_bibir' => 'nullable',
+            'i_bibir' => 'required|max:9|min:3',
+            'di_bibir' => 'nullable',
+            'u_bibir' => 'required|max:9|min:3',
+            'du_bibir' => 'nullable'
         ]);
 
         Anomalimukosa::create($validatedData);
@@ -134,7 +130,7 @@ class AnomalimukosaController extends Controller
     public function show(Anomalimukosa $anomalimukosa)
     {
         return view('pages.anomalimukosa.show')->with([
-            'anomalimukosa'=>$anomalimukosa,
+            'anomalimukosa' => $anomalimukosa,
         ]);
     }
 
@@ -146,25 +142,27 @@ class AnomalimukosaController extends Controller
      */
     public function edit(Anomalimukosa $anomalimukosa)
     {
-        if (auth()->user()->role === 1) {
-            $kartupasiens = kartupasien::where('user_id', $anomalimukosa->user_id)
-                                    ->where('pembimbing', $anomalimukosa->pembimbing)
-                                    ->get();
-            // $kartupasiens = kartupasien::all();
-            $users = User::where('role', 3)->get();
-        } 
-        elseif (auth()->user()->role === 2) {
-            $kartupasiens = kartupasien::where('pembimbing', auth()->user()->nimnip)->get();
-        } 
-        else {
-            $kartupasiens = kartupasien::where('user_id', auth()->id())->get();
+        if ($anomalimukosa->acc !== 1) {
+            if (auth()->user()->role === 1) {
+                $kartupasiens = kartupasien::where('user_id', $anomalimukosa->user_id)
+                    ->where('pembimbing', $anomalimukosa->pembimbing)
+                    ->get();
+                // $kartupasiens = kartupasien::all();
+                $users = User::where('role', 3)->get();
+            } elseif (auth()->user()->role === 2) {
+                $kartupasiens = kartupasien::where('pembimbing', auth()->user()->nimnip)->get();
+            } else {
+                $kartupasiens = kartupasien::where('user_id', auth()->id())->get();
+            }
+
+            return view('pages.anomalimukosa.edit')->with([
+                'kartupasiens' => $kartupasiens,
+                'anomalimukosa' => $anomalimukosa,
+                'users' => $users ?? null
+            ]);
+        } else {
+            abort(403, 'Anda Tidak dapat Mengakses Halaman Ini, status telah ACC');
         }
-        
-        return view('pages.anomalimukosa.edit')->with([
-            'kartupasiens' => $kartupasiens,
-            'anomalimukosa'=>$anomalimukosa,
-            'users' => $users ?? null
-        ]);
     }
 
     /**
@@ -176,56 +174,56 @@ class AnomalimukosaController extends Controller
      */
     public function update(Request $request, Anomalimukosa $anomalimukosa)
     {
-          
+
         $validatedData = $request->validate([
             'user_id' => 'required',
             'pembimbing' => 'required',
             'kartupasien_id' => 'required',
 
-            'occlusi'=>'required|min:10|max:11',
-            'bentuk'=> 'required|min:6|max:8',
-            'warna'=> 'required|min:6|max:8',
-            'posisi'=> 'required|min:6|max:8',
-            'ukuran'=> 'required|min:6|max:8',
-            'struktur'=> 'required|min:6|max:8',
+            'occlusi' => 'required|min:10|max:11',
+            'bentuk' => 'required|min:6|max:8',
+            'warna' => 'required|min:6|max:8',
+            'posisi' => 'required|min:6|max:8',
+            'ukuran' => 'required|min:6|max:8',
+            'struktur' => 'required|min:6|max:8',
 
             //mukosa mulut
-            
+
             // lidah
-            'w_lidah'=> 'required|max:9|min:3',
-            'dw_lidah'=>'nullable',
-            'i_lidah'=> 'required|max:9|min:3',
-            'di_lidah'=>'nullable',
-            'u_lidah'=> 'required|max:9|min:3',
-            'du_lidah'=>'nullable',
+            'w_lidah' => 'required|max:9|min:3',
+            'dw_lidah' => 'nullable',
+            'i_lidah' => 'required|max:9|min:3',
+            'di_lidah' => 'nullable',
+            'u_lidah' => 'required|max:9|min:3',
+            'du_lidah' => 'nullable',
             // pipi
-            'w_pipi'=> 'required|max:9|min:3',
-            'dw_pipi'=>'nullable',
-            'i_pipi'=> 'required|max:9|min:3',
-            'di_pipi'=>'nullable',
-            'u_pipi'=> 'required|max:9|min:3',
-            'du_pipi'=>'nullable',
+            'w_pipi' => 'required|max:9|min:3',
+            'dw_pipi' => 'nullable',
+            'i_pipi' => 'required|max:9|min:3',
+            'di_pipi' => 'nullable',
+            'u_pipi' => 'required|max:9|min:3',
+            'du_pipi' => 'nullable',
             // palatum
-            'w_palatum'=> 'required|max:9|min:3',
-            'dw_palatum'=>'nullable',
-            'i_palatum'=> 'required|max:9|min:3',
-            'di_palatum'=>'nullable',
-            'u_palatum'=> 'required|max:9|min:3',
-            'du_palatum'=>'nullable',
+            'w_palatum' => 'required|max:9|min:3',
+            'dw_palatum' => 'nullable',
+            'i_palatum' => 'required|max:9|min:3',
+            'di_palatum' => 'nullable',
+            'u_palatum' => 'required|max:9|min:3',
+            'du_palatum' => 'nullable',
             // gingiva
-            'w_gingiva'=> 'required|max:9|min:3',
-            'dw_gingiva'=>'nullable',
-            'i_gingiva'=> 'required|max:9|min:3',
-            'di_gingiva'=>'nullable',
-            'u_gingiva'=> 'required|max:9|min:3',
-            'du_gingiva'=>'nullable',
+            'w_gingiva' => 'required|max:9|min:3',
+            'dw_gingiva' => 'nullable',
+            'i_gingiva' => 'required|max:9|min:3',
+            'di_gingiva' => 'nullable',
+            'u_gingiva' => 'required|max:9|min:3',
+            'du_gingiva' => 'nullable',
             // bibir
-            'w_bibir'=>'required|max:9|min:3',
-            'dw_bibir'=>'nullable',
-            'i_bibir'=> 'required|max:9|min:3',
-            'di_bibir'=>'nullable',
-            'u_bibir'=>'required|max:9|min:3',
-            'du_bibir'=>'nullable'
+            'w_bibir' => 'required|max:9|min:3',
+            'dw_bibir' => 'nullable',
+            'i_bibir' => 'required|max:9|min:3',
+            'di_bibir' => 'nullable',
+            'u_bibir' => 'required|max:9|min:3',
+            'du_bibir' => 'nullable'
         ]);
         Anomalimukosa::where('id', $anomalimukosa->id)
             ->update($validatedData);
@@ -241,8 +239,12 @@ class AnomalimukosaController extends Controller
      */
     public function destroy(Anomalimukosa $anomalimukosa)
     {
-        Anomalimukosa::destroy($anomalimukosa->id);
-        return back()->with('success', 'Data anomalimukosa berhasil dihapus');
+        if ($anomalimukosa->acc !== 1) {
+            Anomalimukosa::destroy($anomalimukosa->id);
+            return back()->with('success', 'Data anomalimukosa berhasil dihapus');
+        } else {
+            abort(403, 'Anda Tidak dapat Mengakses Halaman Ini, status telah ACC');
+        }
     }
 
     public function acc($id)

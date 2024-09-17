@@ -305,20 +305,22 @@
 
                                             <td>
                                                 @can('mahasiswa')
-                                                    <label class="{{ $anomalimukosa->acc == 0 ? 'btn btn-danger' : 'btn btn-success' }}">
+                                                    <label
+                                                        class="{{ $anomalimukosa->acc == 0 ? 'btn btn-danger' : 'btn btn-success' }}">
                                                         {!! $anomalimukosa->acc == 0 ? '<i class="fas fa-times"></i>' : '<i class="fas fa-check"></i>' !!}
                                                     </label>
-                                                
                                                 @endcan
                                                 @can('adminpembimbing')
                                                     @if ($anomalimukosa->acc == 0)
                                                         <a href="javascript:;" data-toggle="modal"
                                                             onclick="handleACC({{ $anomalimukosa->id }})"
-                                                            data-target="#AccModal" class="btn btn-danger"><i class="fas fa-times"></i></a>
+                                                            data-target="#AccModal" class="btn btn-danger"><i
+                                                                class="fas fa-times"></i></a>
                                                     @else
                                                         <a href="javascript:;" data-toggle="modal"
                                                             onclick="handleACC({{ $anomalimukosa->id }})"
-                                                            data-target="#AccModal" class="btn btn-success"><i class="fas fa-check"></i></a>
+                                                            data-target="#AccModal" class="btn btn-success"><i
+                                                                class="fas fa-check"></i></a>
                                                     @endif
                                                 @endcan
                                             </td>
@@ -338,20 +340,37 @@
                                                     <i class="fas fa-eye text-success  fa-lg"></i>
                                                 </a> --}}
                                                 @can('adminmahasiswa')
-                                                    <a href ="{{ route('anomalimukosa.edit', $anomalimukosa->id) }}"
-                                                        title="Edit" class="btn btn-sm btn-icon-split btn-warning">
-                                                        <span class="icon"><i class="fas fa-pen text-white"
-                                                                style="padding-top: 4px;"></i></span><span
-                                                            class="text">Edit</span>
-                                                    </a>
-                                                    <a href="javascript:;" data-toggle="modal"
-                                                        onclick="handleDelete({{ $anomalimukosa->id }})"
-                                                        data-target="#DeleteModal"
-                                                        class="btn btn-sm btn-icon-split btn-danger">
-                                                        <span class="icon"><i class="fa fa-trash text-white"
-                                                                style="padding-top: 4px;"></i></span><span
-                                                            class="text">Hapus</span>
-                                                    </a>
+                                                    @if ($anomalimukosa->acc !== 1)
+                                                        <a href ="{{ route('anomalimukosa.edit', $anomalimukosa->id) }}"
+                                                            title="Edit" class="btn btn-sm btn-icon-split btn-warning">
+                                                            <span class="icon"><i class="fas fa-pen text-white"
+                                                                    style="padding-top: 4px;"></i></span><span
+                                                                class="text">Edit</span>
+                                                        </a>
+                                                        <a href="javascript:;" data-toggle="modal"
+                                                            onclick="handleDelete({{ $anomalimukosa->id }})"
+                                                            data-target="#DeleteModal"
+                                                            class="btn btn-sm btn-icon-split btn-danger">
+                                                            <span class="icon"><i class="fa fa-trash text-white"
+                                                                    style="padding-top: 4px;"></i></span><span
+                                                                class="text">Hapus</span>
+                                                        </a>
+                                                    @else
+                                                        <a href ="" title="Edit"
+                                                            class="btn btn-sm btn-icon-split btn-secondary"
+                                                            style="pointer-events: none; opacity: 0.6;">
+                                                            <span class="icon"><i class="fas fa-pen text-white"
+                                                                    style="padding-top: 4px;"></i></span><span
+                                                                class="text">Edit</span>
+                                                        </a>
+                                                        <a href="" title="Hapus"
+                                                            class="btn btn-sm btn-icon-split btn-secondary"
+                                                            style="pointer-events: none; opacity: 0.6;">
+                                                            <span class="icon"><i class="fa fa-trash text-white"
+                                                                    style="padding-top: 4px;"></i></span><span
+                                                                class="text">Hapus</span>
+                                                        </a>
+                                                    @endif
                                                 @endcan
                                             </td>
                                         </tr>
@@ -440,35 +459,40 @@
                             extend: 'copyHtml5',
                             exportOptions: {
                                 columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
-                                    19, 20, 21, 22, 23, 24, 25, 27]
+                                    19, 20, 21, 22, 23, 24, 25, 27
+                                ]
                             }
                         },
                         {
                             extend: 'print',
                             exportOptions: {
                                 columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
-                                    19, 20, 21, 22, 23, 24, 25, 27]
+                                    19, 20, 21, 22, 23, 24, 25, 27
+                                ]
                             }
                         },
                         {
                             extend: 'excelHtml5',
                             exportOptions: {
                                 columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
-                                    19, 20, 21, 22, 23, 24, 25, 27]
+                                    19, 20, 21, 22, 23, 24, 25, 27
+                                ]
                             }
                         },
                         {
                             extend: 'csvHtml5',
                             exportOptions: {
                                 columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
-                                    19, 20, 21, 22, 23, 24, 25, 27]
+                                    19, 20, 21, 22, 23, 24, 25, 27
+                                ]
                             }
                         },
                         {
                             extend: 'pdfHtml5',
                             exportOptions: {
                                 columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
-                                    19, 20, 21, 22, 23, 24, 25, 27]
+                                    19, 20, 21, 22, 23, 24, 25, 27
+                                ]
                             }
                         },
                         'colvis'
@@ -518,35 +542,40 @@
                             extend: 'copyHtml5',
                             exportOptions: {
                                 columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
-                                    19, 20, 21, 22, 23, 24, 26]
+                                    19, 20, 21, 22, 23, 24, 26
+                                ]
                             }
                         },
                         {
                             extend: 'print',
                             exportOptions: {
                                 columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
-                                    19, 20, 21, 22, 23, 24, 26]
+                                    19, 20, 21, 22, 23, 24, 26
+                                ]
                             }
                         },
                         {
                             extend: 'excelHtml5',
                             exportOptions: {
                                 columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
-                                    19, 20, 21, 22, 23, 24, 26]
+                                    19, 20, 21, 22, 23, 24, 26
+                                ]
                             }
                         },
                         {
                             extend: 'csvHtml5',
                             exportOptions: {
                                 columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
-                                    19, 20, 21, 22, 23, 24, 26]
+                                    19, 20, 21, 22, 23, 24, 26
+                                ]
                             }
                         },
                         {
                             extend: 'pdfHtml5',
                             exportOptions: {
                                 columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,
-                                    19, 20, 21, 22, 23, 24, 26]
+                                    19, 20, 21, 22, 23, 24, 26
+                                ]
                             }
                         },
                         'colvis'

@@ -112,51 +112,56 @@ class VitalitasController extends Controller
      */
     public function edit(Vitalitas $vitalitas)
     {
-        if (auth()->user()->role === 1) {
-            $kartupasiens = kartupasien::where('user_id', $vitalitas->user_id)
-                                    ->where('pembimbing', $vitalitas->pembimbing)
-                                    ->get();
-            // $kartupasiens = kartupasien::all();
-            $users = User::where('role', 3)->get();
-        } 
-        elseif (auth()->user()->role === 2) {
-            $kartupasiens = kartupasien::where('pembimbing', auth()->user()->nimnip)->get();
-        } 
-        else {
-            $kartupasiens = kartupasien::where('user_id', auth()->id())->get();
-        }
-
-        $elemengigis = Odontogram::where('user_id', $vitalitas->user_id)
-            ->where('pembimbing', $vitalitas->pembimbing)
-            ->where('kartupasien_id', $vitalitas->kartupasien_id)
-            ->get('gigi_karies');
-
-            // dd($elemengigis);
-
-        $gigis = [];
-
-        foreach ($elemengigis as $elemengigi) {
-            $gigiArray = explode(",", $elemengigi->gigi_karies);
-            foreach ($gigiArray as $gigi) {
-                // Cek apakah data vitalitas sudah ada untuk elemen gigi yang sedang diproses
-                $existingVitalitas = Vitalitas::where('elemen_gigi', $gigi)
-                    ->where('user_id', $vitalitas->user_id)
-                    ->where('pembimbing', $vitalitas->pembimbing)
-                    ->where('kartupasien_id', $vitalitas->kartupasien_id)
-                    ->exists();
-                if (!$existingVitalitas || $vitalitas->elemen_gigi==$gigi) {
-                    $gigis[] = $gigi;
+        if ($vitalitas->acc !== 1) {
+            if (auth()->user()->role === 1) {
+                $kartupasiens = kartupasien::where('user_id', $vitalitas->user_id)
+                                        ->where('pembimbing', $vitalitas->pembimbing)
+                                        ->get();
+                // $kartupasiens = kartupasien::all();
+                $users = User::where('role', 3)->get();
+            } 
+            elseif (auth()->user()->role === 2) {
+                $kartupasiens = kartupasien::where('pembimbing', auth()->user()->nimnip)->get();
+            } 
+            else {
+                $kartupasiens = kartupasien::where('user_id', auth()->id())->get();
+            }
+    
+            $elemengigis = Odontogram::where('user_id', $vitalitas->user_id)
+                ->where('pembimbing', $vitalitas->pembimbing)
+                ->where('kartupasien_id', $vitalitas->kartupasien_id)
+                ->get('gigi_karies');
+    
+                // dd($elemengigis);
+    
+            $gigis = [];
+    
+            foreach ($elemengigis as $elemengigi) {
+                $gigiArray = explode(",", $elemengigi->gigi_karies);
+                foreach ($gigiArray as $gigi) {
+                    // Cek apakah data vitalitas sudah ada untuk elemen gigi yang sedang diproses
+                    $existingVitalitas = Vitalitas::where('elemen_gigi', $gigi)
+                        ->where('user_id', $vitalitas->user_id)
+                        ->where('pembimbing', $vitalitas->pembimbing)
+                        ->where('kartupasien_id', $vitalitas->kartupasien_id)
+                        ->exists();
+                    if (!$existingVitalitas || $vitalitas->elemen_gigi==$gigi) {
+                        $gigis[] = $gigi;
+                    }
                 }
             }
+            // dd($gigis);
+    
+            return view('pages.vitalitas.edit')->with([
+                'vitalitas' => $vitalitas,
+                'kartupasiens' => $kartupasiens,
+                'gigis' => $gigis,
+                'users' => $users ?? null
+            ]);
+        } else {
+            abort(403, 'Anda Tidak dapat Mengakses Halaman Ini, status telah ACC');
         }
-        // dd($gigis);
-
-        return view('pages.vitalitas.edit')->with([
-            'vitalitas' => $vitalitas,
-            'kartupasiens' => $kartupasiens,
-            'gigis' => $gigis,
-            'users' => $users ?? null
-        ]);
+        
     }
 
     /**
@@ -197,8 +202,13 @@ class VitalitasController extends Controller
      */
     public function destroy(Vitalitas $vitalitas)
     {
-        Vitalitas::destroy($vitalitas->id);
-        return back()->with('success', 'Data vitalitas berhasil dihapus');
+        if ($vitalitas->acc !== 1) {
+            Vitalitas::destroy($vitalitas->id);
+            return back()->with('success', 'Data vitalitas berhasil dihapus');
+        } else {
+            abort(403, 'Anda Tidak dapat Mengakses Halaman Ini, status telah ACC');
+        }
+        
     }
 
     public function acc($id)

@@ -1,4 +1,4 @@
-@extends('layouts.app', ['class' => 'g-sidenav-show bg-gray-100','titlePage' => 'Anamnesa dan Riwayat'])
+@extends('layouts.app', ['class' => 'g-sidenav-show bg-gray-100', 'titlePage' => 'Anamnesa dan Riwayat'])
 
 @section('content')
     @include('layouts.navbars.auth.topnav', ['title' => 'Anamnesa dan Riwayat'])
@@ -7,11 +7,11 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="deleteModalLabel">Hapus Kartu Pasien</h5>
+                    <h5 class="modal-title" id="deleteModalLabel">Hapus Anamnesa dan Riwayat Pasien</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <p>Apakah kamu yakin menghapus Kartu Pasien ?</p>
+                    <p>Apakah kamu yakin menghapus Anamnesa dan Riwayat Pasien ?</p>
                 </div>
                 <div class="modal-footer">
                     <form action="" method="POST" id="deleteForm">
@@ -240,7 +240,7 @@
                                             <td>{{ $anamripasien->alergi_mkn === 'Ada' ? $anamripasien->alergi_mkn . ' | ' . $anamripasien->nm_mkn : $anamripasien->alergi_mkn }}
                                             </td>
 
-                                            
+
                                             <td style="display: none;">
                                                 @can('mahasiswa')
                                                     <label
@@ -261,20 +261,22 @@
 
                                             <td>
                                                 @can('mahasiswa')
-                                                    <label class="{{ $anamripasien->acc == 0 ? 'btn btn-danger' : 'btn btn-success' }}">
+                                                    <label
+                                                        class="{{ $anamripasien->acc == 0 ? 'btn btn-danger' : 'btn btn-success' }}">
                                                         {!! $anamripasien->acc == 0 ? '<i class="fas fa-times"></i>' : '<i class="fas fa-check"></i>' !!}
                                                     </label>
-                                                
                                                 @endcan
                                                 @can('adminpembimbing')
                                                     @if ($anamripasien->acc == 0)
                                                         <a href="javascript:;" data-toggle="modal"
                                                             onclick="handleACC({{ $anamripasien->id }})"
-                                                            data-target="#AccModal" class="btn btn-danger"><i class="fas fa-times"></i></a>
+                                                            data-target="#AccModal" class="btn btn-danger"><i
+                                                                class="fas fa-times"></i></a>
                                                     @else
                                                         <a href="javascript:;" data-toggle="modal"
                                                             onclick="handleACC({{ $anamripasien->id }})"
-                                                            data-target="#AccModal" class="btn btn-success"><i class="fas fa-check"></i></a>
+                                                            data-target="#AccModal" class="btn btn-success"><i
+                                                                class="fas fa-check"></i></a>
                                                     @endif
                                                 @endcan
                                             </td>
@@ -288,20 +290,37 @@
                                                         class="text">Lihat</span>
                                                 </a>
                                                 @can('adminmahasiswa')
-                                                    <a href ="{{ route('anamripasien.edit', $anamripasien->id) }}"
-                                                        title="Edit" class="btn btn-sm btn-icon-split btn-warning">
-                                                        <span class="icon"><i class="fas fa-pen text-white"
-                                                                style="padding-top: 4px;"></i></span><span
-                                                            class="text">Edit</span>
-                                                    </a>
-                                                    <a href="javascript:;" data-toggle="modal"
-                                                        onclick="handleDelete({{ $anamripasien->id }})"
-                                                        data-target="#DeleteModal"
-                                                        class="btn btn-sm btn-icon-split btn-danger">
-                                                        <span class="icon"><i class="fa fa-trash text-white"
-                                                                style="padding-top: 4px;"></i></span><span
-                                                            class="text">Hapus</span>
-                                                    </a>
+                                                    @if ($anamripasien->acc !== 1)
+                                                        <a href ="{{ route('anamripasien.edit', $anamripasien->id) }}"
+                                                            title="Edit" class="btn btn-sm btn-icon-split btn-warning">
+                                                            <span class="icon"><i class="fas fa-pen text-white"
+                                                                    style="padding-top: 4px;"></i></span><span
+                                                                class="text">Edit</span>
+                                                        </a>
+                                                        <a href="javascript:;" data-toggle="modal"
+                                                            onclick="handleDelete({{ $anamripasien->id }})"
+                                                            data-target="#DeleteModal"
+                                                            class="btn btn-sm btn-icon-split btn-danger">
+                                                            <span class="icon"><i class="fa fa-trash text-white"
+                                                                    style="padding-top: 4px;"></i></span><span
+                                                                class="text">Hapus</span>
+                                                        </a>
+                                                    @else
+                                                        <a href ="" title="Edit"
+                                                            class="btn btn-sm btn-icon-split btn-secondary"
+                                                            style="pointer-events: none; opacity: 0.6;">
+                                                            <span class="icon"><i class="fas fa-pen text-white"
+                                                                    style="padding-top: 4px;"></i></span><span
+                                                                class="text">Edit</span>
+                                                        </a>
+                                                        <a href="" title="Hapus"
+                                                            class="btn btn-sm btn-icon-split btn-secondary"
+                                                            style="pointer-events: none; opacity: 0.6;">
+                                                            <span class="icon"><i class="fa fa-trash text-white"
+                                                                    style="padding-top: 4px;"></i></span><span
+                                                                class="text">Hapus</span>
+                                                        </a>
+                                                    @endif
                                                 @endcan
                                             </td>
                                         </tr>
@@ -471,7 +490,8 @@
                     buttons: [{
                             extend: 'copyHtml5',
                             exportOptions: {
-                                columns: [0, 1, 2, 3, 4, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
+                                columns: [0, 1, 2, 3, 4, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
+                                    20,
                                     22
                                 ]
                             }
@@ -479,7 +499,8 @@
                         {
                             extend: 'print',
                             exportOptions: {
-                                columns: [0, 1, 2, 3, 4, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
+                                columns: [0, 1, 2, 3, 4, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
+                                    20,
                                     22
                                 ]
                             }
@@ -487,7 +508,8 @@
                         {
                             extend: 'excelHtml5',
                             exportOptions: {
-                                columns: [0, 1, 2, 3, 4, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
+                                columns: [0, 1, 2, 3, 4, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
+                                    20,
                                     22
                                 ]
                             }
@@ -495,7 +517,8 @@
                         {
                             extend: 'csvHtml5',
                             exportOptions: {
-                                columns: [0, 1, 2, 3, 4, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
+                                columns: [0, 1, 2, 3, 4, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
+                                    20,
                                     22
                                 ]
                             }
@@ -503,7 +526,8 @@
                         {
                             extend: 'pdfHtml5',
                             exportOptions: {
-                                columns: [0, 1, 2, 3, 4, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
+                                columns: [0, 1, 2, 3, 4, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
+                                    20,
                                     22
                                 ]
                             }
