@@ -179,7 +179,7 @@
                                         <i class="ni ni-bulb-61 text-dark opacity-10"></i>
                                     </div>
                                     <h5 class="text-white text-bold ">Visi Jurusan Keperawatan Gigi</h5>
-                                    <p class="text-white ">Menjadi Program Studi yang Menghasilkan Ahli Madya Kesehatan Gigi yang Bermartabat dengan Keunggulan di Bidang Pelayanan Asuhan Kesehatan Gigi dan Mulut Berbsis IT Tahun 2025</p>
+                                    <p class="text-white ">Menjadi Program Studi yang Menghasilkan Ahli Madya Kesehatan Gigi yang Bermartabat dengan Keunggulan di Bidang Pelayanan Asuhan Kesehatan Gigi dan Mulut Berbsis IT Tahun 2024 </p>
                                 </div>
                             </div>
                             <div class="carousel-item h-100 img-fluid" style="background-image: url('./img/carousel-2.jpg');

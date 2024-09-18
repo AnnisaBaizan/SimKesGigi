@@ -37,6 +37,8 @@ use App\Http\Controllers\AnomalimukosaController;
 use App\Http\Controllers\AskepgilutController;
 use App\Http\Controllers\DiagnosaController;
 use App\Http\Controllers\PeriodontalController;
+use App\Http\Controllers\PerencanaanController;
+use App\Http\Controllers\PelaksanaanController;
 use Illuminate\Http\Request;
 
 Route::get('/', function () {
@@ -224,6 +226,34 @@ Route::group(['middleware' => 'auth'], function () {
 
 	Route::post('importdiagnosa', [DiagnosaController::class, 'import'])->name('importdiagnosa')->middleware('mahasiswa');
     Route::get('exportdiagnosa', [DiagnosaController::class, 'export'])->name('exportdiagnosa')->middleware('mahasiswa');
+
+	// Route::resource('/perencanaan', PerencanaanController::class);
+	Route::get('/perencanaan', [PerencanaanController::class, 'index'])->name('perencanaan.index');
+	Route::get('/perencanaan/create', [PerencanaanController::class, 'create'])->name('perencanaan.create')->middleware('mahasiswa');
+	Route::post('/perencanaan', [PerencanaanController::class, 'store'])->name('perencanaan.store')->middleware('mahasiswa');
+	Route::get('/perencanaan/{perencanaan}', [PerencanaanController::class, 'show'])->name('perencanaan.show');
+	Route::get('/perencanaan/{perencanaan}/edit', [PerencanaanController::class, 'edit'])->name('perencanaan.edit')->middleware('mahasiswa');
+	Route::put('/perencanaan/{perencanaan}', [PerencanaanController::class, 'update'])->name('perencanaan.update')->middleware('mahasiswa');
+	Route::Delete('/perencanaan/{perencanaan}', [PerencanaanController::class, 'destroy'])->name('perencanaan.destroy')->middleware('mahasiswa');
+	
+	Route::put('/perencanaan/acc/{id}', [PerencanaanController::class, 'acc'])->name('perencanaan.acc')->middleware('pembimbing');
+
+	Route::post('importperencanaan', [PerencanaanController::class, 'import'])->name('importperencanaan')->middleware('mahasiswa');
+    Route::get('exportperencanaan', [PerencanaanController::class, 'export'])->name('exportperencanaan')->middleware('mahasiswa');
+
+	// Route::resource('/pelaksanaan', PelaksanaanController::class);
+	Route::get('/pelaksanaan', [PelaksanaanController::class, 'index'])->name('pelaksanaan.index');
+	Route::get('/pelaksanaan/create', [PelaksanaanController::class, 'create'])->name('pelaksanaan.create')->middleware('mahasiswa');
+	Route::post('/pelaksanaan', [PelaksanaanController::class, 'store'])->name('pelaksanaan.store')->middleware('mahasiswa');
+	Route::get('/pelaksanaan/{pelaksanaan}', [PelaksanaanController::class, 'show'])->name('pelaksanaan.show');
+	Route::get('/pelaksanaan/{pelaksanaan}/edit', [PelaksanaanController::class, 'edit'])->name('pelaksanaan.edit')->middleware('mahasiswa');
+	Route::put('/pelaksanaan/{pelaksanaan}', [PelaksanaanController::class, 'update'])->name('pelaksanaan.update')->middleware('mahasiswa');
+	Route::Delete('/pelaksanaan/{pelaksanaan}', [PelaksanaanController::class, 'destroy'])->name('pelaksanaan.destroy')->middleware('mahasiswa');
+	
+	Route::put('/pelaksanaan/acc/{id}', [PelaksanaanController::class, 'acc'])->name('pelaksanaan.acc')->middleware('pembimbing');
+
+	Route::post('importpelaksanaan', [PelaksanaanController::class, 'import'])->name('importpelaksanaan')->middleware('mahasiswa');
+    Route::get('exportpelaksanaan', [PelaksanaanController::class, 'export'])->name('exportpelaksanaan')->middleware('mahasiswa');
 
 
 	Route::get('/askepgilut', [AskepgilutController::class, 'index'])->name('askepgilut.index');

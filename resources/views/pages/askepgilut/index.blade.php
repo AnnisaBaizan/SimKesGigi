@@ -10,6 +10,7 @@
                     <div class="card-header d-sm-flex align-items-center justify-content-between py-3">
                         <h6 class="m-0 font-weight-bold text-primary">Data Askepgilut, Penyebab, Gejala</h6>
                     </div>
+
                     <div class="card-body px-0 pt-0 pb-2">
                         <div class="table-responsive mt-4 ms-5 me-5 mb-4">
 
@@ -42,8 +43,12 @@
                                     @endforeach
                                 </tbody>
                             </table>
+                        </div>
+                    </div>
 
 
+                    <div class="card-body px-0 pt-0 pb-2">
+                        <div class="table-responsive mt-4 ms-5 me-5 mb-4">
                             <table class="table align-items-center mb-0" id="dataTable1">
                                 <thead>
                                     <tr>
@@ -72,8 +77,12 @@
                                     @endforeach
                                 </tbody>
                             </table>
+                        </div>
+                    </div>
 
 
+                    <div class="card-body px-0 pt-0 pb-2">
+                        <div class="table-responsive mt-4 ms-5 me-5 mb-4">
                             <table class="table align-items-center mb-0" id="dataTable2">
                                 <thead>
                                     <tr>
@@ -269,75 +278,75 @@
         </script>
 
 
-<script type="text/javascript">
-    $(document).ready(function() {
-        $.fn.dataTable.ext.search.push(
-            function(settings, data, dataIndex) {
-                var min = minDate.val();
-                var max = maxDate.val();
-                var date = new Date(data[3]);
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $.fn.dataTable.ext.search.push(
+                    function(settings, data, dataIndex) {
+                        var min = minDate.val();
+                        var max = maxDate.val();
+                        var date = new Date(data[3]);
 
-                if (
-                    (min === null && max === null) ||
-                    (min === null && date <= max) ||
-                    (min <= date && max === null) ||
-                    (min <= date && date <= max)
-                ) {
-                    return true;
-                }
-                return false;
-            }
-        );
+                        if (
+                            (min === null && max === null) ||
+                            (min === null && date <= max) ||
+                            (min <= date && max === null) ||
+                            (min <= date && date <= max)
+                        ) {
+                            return true;
+                        }
+                        return false;
+                    }
+                );
 
-        // Refilter the table
-        $('#min2, #max2').on('change', function() {
-            table.draw();
-        });
+                // Refilter the table
+                $('#min2, #max2').on('change', function() {
+                    table.draw();
+                });
 
-        // Create date inputs
-        minDate = new DateTime($('#min2'), {
-            format: 'DD MMM YYYY'
-        });
-        maxDate = new DateTime($('#max2'), {
-            format: 'DD MMM YYYY'
-        });
+                // Create date inputs
+                minDate = new DateTime($('#min2'), {
+                    format: 'DD MMM YYYY'
+                });
+                maxDate = new DateTime($('#max2'), {
+                    format: 'DD MMM YYYY'
+                });
 
-        var table = $('#dataTable2').DataTable({
-            dom: 'Bfrtip',
-            buttons: [{
-                    extend: 'copyHtml5',
-                    exportOptions: {
-                        columns: [0, 1, 2, 3]
-                    }
-                },
-                {
-                    extend: 'print',
-                    exportOptions: {
-                        columns: [0, 1, 2, 3]
-                    }
-                },
-                {
-                    extend: 'excelHtml5',
-                    exportOptions: {
-                        columns: [0, 1, 2, 3]
-                    }
-                },
-                {
-                    extend: 'csvHtml5',
-                    exportOptions: {
-                        columns: [0, 1, 2, 3]
-                    }
-                },
-                {
-                    extend: 'pdfHtml5',
-                    exportOptions: {
-                        columns: [0, 1, 2, 3]
-                    }
-                },
-                'colvis'
-            ]
-        });
-    });
-</script>
+                var table = $('#dataTable2').DataTable({
+                    dom: 'Bfrtip',
+                    buttons: [{
+                            extend: 'copyHtml5',
+                            exportOptions: {
+                                columns: [0, 1, 2, 3]
+                            }
+                        },
+                        {
+                            extend: 'print',
+                            exportOptions: {
+                                columns: [0, 1, 2, 3]
+                            }
+                        },
+                        {
+                            extend: 'excelHtml5',
+                            exportOptions: {
+                                columns: [0, 1, 2, 3]
+                            }
+                        },
+                        {
+                            extend: 'csvHtml5',
+                            exportOptions: {
+                                columns: [0, 1, 2, 3]
+                            }
+                        },
+                        {
+                            extend: 'pdfHtml5',
+                            exportOptions: {
+                                columns: [0, 1, 2, 3]
+                            }
+                        },
+                        'colvis'
+                    ]
+                });
+            });
+        </script>
     @endcan
 @endsection

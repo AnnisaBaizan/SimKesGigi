@@ -139,7 +139,7 @@
             </li>
 
             <li class="nav-item mt-3">
-                <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Hasil</h6>
+                <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Hasil Perawatan Gigi</h6>
             </li>
             {{-- <li class="nav-item">
                 <a class="nav-link {{ Route::currentRouteName() == 'home' ? 'active' : '' }}" href="{{ route('home') }}">
@@ -160,12 +160,30 @@
                 </a>
             </li> --}}
             <li class="nav-item">
-                <a class="nav-link {{ Request::is('diagnosa*') ? 'active' : '' }} " href="{{ route('diagnosa.index') }}">
+                <a class="nav-link {{ Request::is('pelaksanaan*') ? 'active' : '' }} " href="{{ route('diagnosa.index') }}">
                     <div
                         class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="ni ni-single-copy-04 text-success text-sm opacity-10"></i>
                     </div>
-                    <span class="nav-link-text ms-1">Diagnosa Keperawatan Gigi</span>
+                    <span class="nav-link-text ms-1">Diagnosa</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {{ Request::is('perencanaan*') ? 'active' : '' }} " href="{{ route('perencanaan.index') }}">
+                    <div
+                        class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="ni ni-single-copy-04 text-success text-sm opacity-10"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">Perencanaan</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {{ Request::is('pelaksanaan*') ? 'active' : '' }} " href="{{ route('pelaksanaan.index') }}">
+                    <div
+                        class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="ni ni-single-copy-04 text-success text-sm opacity-10"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">Pelaksanaan</span>
                 </a>
             </li>
             
