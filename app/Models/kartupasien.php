@@ -37,4 +37,10 @@ class kartupasien extends Model
     public function periodontal(){
         return $this->hasMany(Periodontal::class);
     }
+    public function perencanaan(){
+        return $this->hasMany(Perencanaan::class);
+    }
+    public function pelaksanaan(){
+        return $this->hasMany(Pelaksanaan::class);
+    }
 }

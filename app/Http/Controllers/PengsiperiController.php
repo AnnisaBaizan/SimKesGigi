@@ -179,30 +179,35 @@ class PengsiperiController extends Controller
      */
     public function edit(Pengsiperi $pengsiperi)
     {
-        if (auth()->user()->role === 1) {
-            $kartupasiens = kartupasien::where('user_id', $pengsiperi->user_id)
-                ->where('pembimbing', $pengsiperi->pembimbing)
-                ->get();
+        if ($pengsiperi->created_at->year == now()->year) {
+            if (auth()->user()->role === 1) {
+                $kartupasiens = kartupasien::where('user_id', $pengsiperi->user_id)
+                    ->where('pembimbing', $pengsiperi->pembimbing)
+                    ->get();
+                // $kartupasiens = kartupasien::all();
+                $users = User::where('role', 3)->get();
+            } elseif (auth()->user()->role === 2) {
+                $kartupasiens = kartupasien::where('pembimbing', auth()->user()->nimnip)->get();
+            } else {
+                $kartupasiens = kartupasien::where('user_id', auth()->id())->get();
+            }
+    
             // $kartupasiens = kartupasien::all();
-            $users = User::where('role', 3)->get();
-        } elseif (auth()->user()->role === 2) {
-            $kartupasiens = kartupasien::where('pembimbing', auth()->user()->nimnip)->get();
+            $pengetahuans = Pertanyaan::where('kode', 1)->where('status', 1)->get();
+            $perilakus = Pertanyaan::where('kode', 2)->where('status', 1)->get();
+    
+            return view('pages.pengsiperi.edit')->with([
+                'pengsiperi' => $pengsiperi,
+                'kartupasiens' => $kartupasiens,
+                'pengetahuans' => $pengetahuans,
+                'perilakus' => $perilakus,
+                'users' => $users ?? null
+            ]);
+            // return view('pages.pengsiperi.edit', compact('kartupasiens'))->with('pengsiperi', $pengsiperi);
         } else {
-            $kartupasiens = kartupasien::where('user_id', auth()->id())->get();
+            abort(403, 'Anda Tidak dapat Mengakses Halaman Ini, Sudah Lewat Masa Pengeditan');
         }
-
-        // $kartupasiens = kartupasien::all();
-        $pengetahuans = Pertanyaan::where('kode', 1)->where('status', 1)->get();
-        $perilakus = Pertanyaan::where('kode', 2)->where('status', 1)->get();
-
-        return view('pages.pengsiperi.edit')->with([
-            'pengsiperi' => $pengsiperi,
-            'kartupasiens' => $kartupasiens,
-            'pengetahuans' => $pengetahuans,
-            'perilakus' => $perilakus,
-            'users' => $users ?? null
-        ]);
-        // return view('pages.pengsiperi.edit', compact('kartupasiens'))->with('pengsiperi', $pengsiperi);
+        
     }
 
     /**

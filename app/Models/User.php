@@ -42,6 +42,12 @@ class User extends Authenticatable
     public function diagnosa(){
         return $this->hasMany(Diagnosa::class);
     }
+    public function perencanaan(){
+        return $this->hasMany(Perencanaan::class);
+    }
+    public function pelaksanaan(){
+        return $this->hasMany(Pelaksanaan::class);
+    }
 
     /**
      * The attributes that are mass assignable.

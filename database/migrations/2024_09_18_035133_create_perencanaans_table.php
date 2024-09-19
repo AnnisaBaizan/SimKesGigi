@@ -19,9 +19,13 @@ return new class extends Migration
             $table->string('pembimbing');
             $table->foreignId('kartupasien_id');
 
+            $table->string('gigi');
+            $table->string('rasional');
+            $table->string('kompetensi');
+            $table->string('tujuan');
+            $table->string('indikator');
+            $table->string('cara_evaluasi');
 
-
-            
             $table->boolean('acc')->default(0);
             $table->timestamps();
         });

@@ -8,6 +8,7 @@ use App\Models\Eksplakkal;
 use App\Models\Gejala;
 use App\Models\Odontogram;
 use App\Models\Ohis;
+use App\Models\Pelaksanaan;
 use App\Models\Pengsiperi;
 use App\Models\Penyebab;
 use App\Models\Periodontal;
@@ -41,6 +42,8 @@ class DatabaseSeeder extends Seeder
         $this->call(PenyebabSeeder::class);
         $this->call(GejalaSeeder::class);
         $this->call(VitalitasSeeder::class);
+        $this->call(PerencanaanSeeder::class);
+        $this->call(PelaksanaanSeeder::class);
         $this->call(PeriodontalSeeder::class);
     }  
 }

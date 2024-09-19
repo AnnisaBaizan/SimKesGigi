@@ -406,6 +406,14 @@
                                                                     style="padding-top: 4px;"></i></span><span
                                                                 class="text">Edit</span>
                                                         </a>
+                                                    @else
+                                                        <a href ="" title="Edit"
+                                                            class="btn btn-sm btn-icon-split btn-secondary"
+                                                            style="pointer-events: none; opacity: 0.6;">
+                                                            <span class="icon"><i class="fas fa-pen text-white"
+                                                                    style="padding-top: 4px;"></i></span><span
+                                                                class="text">Edit</span>
+                                                        </a>
                                                     @endif
                                                     <a href="javascript:;" data-toggle="modal"
                                                         onclick="handleDelete({{ $pengsiperi->id }})"
