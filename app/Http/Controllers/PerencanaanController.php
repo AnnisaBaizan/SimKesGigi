@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\gigi;
 use App\Models\kartupasien;
 use App\Models\Odontogram;
 use App\Models\Perencanaan;
@@ -43,10 +44,12 @@ class PerencanaanController extends Controller
         } else {
             $kartupasiens = kartupasien::where('user_id', auth()->id())->get();
         }
-
+    
+        $gigis = gigi::all();
 
         return view('pages.perencanaan.create')->with([
             'kartupasiens' => $kartupasiens,
+            'gigis' => $gigis,
             'users' => $users ?? null
         ]);
     }
@@ -65,19 +68,17 @@ class PerencanaanController extends Controller
             'pembimbing' => 'required',
             'kartupasien_id' => 'required',
 
-            'elemen_gigi' => 'required|min:2|max:2',
-            'inspeksi' => 'required|numeric|min:0|max:1',
-            'thermis' => 'required|numeric|min:0|max:1',
-            'sondasi' => 'required|numeric|min:0|max:1',
-            'perkusi' => 'required|numeric|min:0|max:1',
-            'druk' => 'required|numeric|min:0|max:1',
-            'mobility' => 'required|numeric|min:0|max:1',
-            'masalah' => 'required|max:255',
+            'gigi' => 'required|min:2|max:2',
+            'rasional' => 'required|max:255',
+            'kompetensi' => 'required|max:255',
+            'tujuan' => 'required|max:255',
+            'indikator' => 'required|max:255',
+            'cara_evaluasi' => 'required|max:255',
         ]);
 
         Perencanaan::create($validatedData);
 
-        return back()->with('success', 'Data perencanaan Berhasil Dibuat lakukan hingga elemen gigi habis');
+        return back()->with('success', 'Data perencanaan Berhasil Dibuat');
     }
 
     /**
@@ -107,50 +108,33 @@ class PerencanaanController extends Controller
      */
     public function edit(Perencanaan $perencanaan)
     {
+        
         if ($perencanaan->acc !== 1) {
             if (auth()->user()->role === 1) {
                 $kartupasiens = kartupasien::where('user_id', $perencanaan->user_id)
-                                        ->where('pembimbing', $perencanaan->pembimbing)
-                                        ->get();
+                    ->where('pembimbing', $perencanaan->pembimbing)
+                    ->get();
                 // $kartupasiens = kartupasien::all();
                 $users = User::where('role', 3)->get();
-            } 
-            elseif (auth()->user()->role === 2) {
+            } elseif (auth()->user()->role === 2) {
                 $kartupasiens = kartupasien::where('pembimbing', auth()->user()->nimnip)->get();
-            } 
-            else {
+            } else {
                 $kartupasiens = kartupasien::where('user_id', auth()->id())->get();
             }
     
-            $elemengigis = Odontogram::where('user_id', $perencanaan->user_id)
-                ->where('pembimbing', $perencanaan->pembimbing)
-                ->where('kartupasien_id', $perencanaan->kartupasien_id)
-                ->get('gigi_karies');
+            // Pecah string menjadi array pada setiap input
+            $penyebab = explode('|', $perencanaan->penyebab);
+            // dd($penyebab);
+            $gejala = explode('|', $perencanaan->gejala);
     
-                // dd($elemengigis);
-    
-            $gigis = [];
-    
-            foreach ($elemengigis as $elemengigi) {
-                $gigiArray = explode(",", $elemengigi->gigi_karies);
-                foreach ($gigiArray as $gigi) {
-                    // Cek apakah data perencanaan sudah ada untuk elemen gigi yang sedang diproses
-                    $existingperencanaan = Perencanaan::where('elemen_gigi', $gigi)
-                        ->where('user_id', $perencanaan->user_id)
-                        ->where('pembimbing', $perencanaan->pembimbing)
-                        ->where('kartupasien_id', $perencanaan->kartupasien_id)
-                        ->exists();
-                    if (!$existingperencanaan || $perencanaan->elemen_gigi==$gigi) {
-                        $gigis[] = $gigi;
-                    }
-                }
-            }
-            // dd($gigis);
+            $gigis = gigi::all();
     
             return view('pages.perencanaan.edit')->with([
                 'perencanaan' => $perencanaan,
                 'kartupasiens' => $kartupasiens,
                 'gigis' => $gigis,
+                'penyebab' => $penyebab,
+                'gejala' => $gejala,
                 'users' => $users ?? null
             ]);
         } else {
@@ -172,14 +156,12 @@ class PerencanaanController extends Controller
             'pembimbing' => 'required',
             'kartupasien_id' => 'required',
 
-            'elemen_gigi' => 'required|min:2|max:2',
-            'inspeksi' => 'required|numeric|min:0|max:1',
-            'thermis' => 'required|numeric|min:0|max:1',
-            'sondasi' => 'required|numeric|min:0|max:1',
-            'perkusi' => 'required|numeric|min:0|max:1',
-            'druk' => 'required|numeric|min:0|max:1',
-            'mobility' => 'required|numeric|min:0|max:1',
-            'masalah' => 'required|max:255',
+            'gigi' => 'required|min:2|max:2',
+            'rasional' => 'required|max:255',
+            'kompetensi' => 'required|max:255',
+            'tujuan' => 'required|max:255',
+            'indikator' => 'required|max:255',
+            'cara_evaluasi' => 'required|max:255',
         ]);
         Perencanaan::where('id', $perencanaan->id)
             ->update($validatedData);

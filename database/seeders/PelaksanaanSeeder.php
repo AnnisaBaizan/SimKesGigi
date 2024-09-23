@@ -30,7 +30,7 @@ class PelaksanaanSeeder extends Seeder
             12 => [10, 11, 12]
         ];
 
-        $gigiOptions = ['Gigi 11', 'Gigi 12', 'Gigi 13', 'Gigi 21', 'Gigi 22'];
+        $gigiOptions = ['11', '12', '13', '21', '22'];
         $diagnosaOptions = ['Karies', 'Gingivitis', 'Fraktur gigi', 'Abses periodontal'];
         $intervensiOptions = ['Pembersihan karang gigi', 'Penambalan', 'Pencabutan', 'Perawatan saluran akar'];
         $hasilOptions = ['Sembuh total', 'Memerlukan evaluasi', 'Perawatan lanjutan diperlukan'];

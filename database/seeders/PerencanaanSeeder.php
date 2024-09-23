@@ -30,7 +30,7 @@ class PerencanaanSeeder extends Seeder
             12 => [10, 11, 12]
         ];
 
-        $gigiOptions = ['Gigi 11', 'Gigi 12', 'Gigi 13', 'Gigi 21', 'Gigi 22'];
+        $gigiOptions = ['11', '12', '13', '21', '22'];
         $rasionalOptions = ['Menghindari kerusakan', 'Menjaga kebersihan', 'Memperbaiki estetika'];
         $kompetensiOptions = ['Klinis', 'Radiologi', 'Pencabutan', 'Prostodonti'];
         $tujuanOptions = ['Penyembuhan cepat', 'Perawatan maksimal', 'Pencegahan masalah lanjutan'];
