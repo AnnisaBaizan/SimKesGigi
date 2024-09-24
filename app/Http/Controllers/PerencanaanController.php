@@ -122,19 +122,12 @@ class PerencanaanController extends Controller
                 $kartupasiens = kartupasien::where('user_id', auth()->id())->get();
             }
     
-            // Pecah string menjadi array pada setiap input
-            $penyebab = explode('|', $perencanaan->penyebab);
-            // dd($penyebab);
-            $gejala = explode('|', $perencanaan->gejala);
-    
             $gigis = gigi::all();
     
             return view('pages.perencanaan.edit')->with([
                 'perencanaan' => $perencanaan,
                 'kartupasiens' => $kartupasiens,
                 'gigis' => $gigis,
-                'penyebab' => $penyebab,
-                'gejala' => $gejala,
                 'users' => $users ?? null
             ]);
         } else {

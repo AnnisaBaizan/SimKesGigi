@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\gigi;
 use App\Models\kartupasien;
 use App\Models\Odontogram;
 use App\Models\Pelaksanaan;
@@ -44,9 +45,11 @@ class PelaksanaanController extends Controller
             $kartupasiens = kartupasien::where('user_id', auth()->id())->get();
         }
 
+        $gigis = gigi::all();
 
         return view('pages.pelaksanaan.create')->with([
             'kartupasiens' => $kartupasiens,
+            'gigis' => $gigis,
             'users' => $users ?? null
         ]);
     }
@@ -65,14 +68,11 @@ class PelaksanaanController extends Controller
             'pembimbing' => 'required',
             'kartupasien_id' => 'required',
 
-            'elemen_gigi' => 'required|min:2|max:2',
-            'inspeksi' => 'required|numeric|min:0|max:1',
-            'thermis' => 'required|numeric|min:0|max:1',
-            'sondasi' => 'required|numeric|min:0|max:1',
-            'perkusi' => 'required|numeric|min:0|max:1',
-            'druk' => 'required|numeric|min:0|max:1',
-            'mobility' => 'required|numeric|min:0|max:1',
-            'masalah' => 'required|max:255',
+            'gigi' => 'required|min:2|max:2',
+            'diagnosa' => 'required|max:255',
+            'intervensi' => 'required|max:255',
+            'hasil' => 'required|max:255',
+            'rencana' => 'required|max:255',
         ]);
 
         Pelaksanaan::create($validatedData);
@@ -120,35 +120,19 @@ class PelaksanaanController extends Controller
                 $kartupasiens = kartupasien::where('user_id', auth()->id())->get();
             }
 
-            $elemengigis = Odontogram::where('user_id', $pelaksanaan->user_id)
-                ->where('pembimbing', $pelaksanaan->pembimbing)
-                ->where('kartupasien_id', $pelaksanaan->kartupasien_id)
-                ->get('gigi_karies');
+            // Pecah string menjadi array pada setiap input
+            $penyebab = explode('|', $pelaksanaan->penyebab);
+            // dd($penyebab);
+            $gejala = explode('|', $pelaksanaan->gejala);
 
-            // dd($elemengigis);
-
-            $gigis = [];
-
-            foreach ($elemengigis as $elemengigi) {
-                $gigiArray = explode(",", $elemengigi->gigi_karies);
-                foreach ($gigiArray as $gigi) {
-                    // Cek apakah data pelaksanaan sudah ada untuk elemen gigi yang sedang diproses
-                    $existingpelaksanaan = Pelaksanaan::where('elemen_gigi', $gigi)
-                        ->where('user_id', $pelaksanaan->user_id)
-                        ->where('pembimbing', $pelaksanaan->pembimbing)
-                        ->where('kartupasien_id', $pelaksanaan->kartupasien_id)
-                        ->exists();
-                    if (!$existingpelaksanaan || $pelaksanaan->elemen_gigi == $gigi) {
-                        $gigis[] = $gigi;
-                    }
-                }
-            }
-            // dd($gigis);
+            $gigis = gigi::all();
 
             return view('pages.pelaksanaan.edit')->with([
                 'pelaksanaan' => $pelaksanaan,
                 'kartupasiens' => $kartupasiens,
                 'gigis' => $gigis,
+                'penyebab' => $penyebab,
+                'gejala' => $gejala,
                 'users' => $users ?? null
             ]);
         } else {
@@ -170,14 +154,11 @@ class PelaksanaanController extends Controller
             'pembimbing' => 'required',
             'kartupasien_id' => 'required',
 
-            'elemen_gigi' => 'required|min:2|max:2',
-            'inspeksi' => 'required|numeric|min:0|max:1',
-            'thermis' => 'required|numeric|min:0|max:1',
-            'sondasi' => 'required|numeric|min:0|max:1',
-            'perkusi' => 'required|numeric|min:0|max:1',
-            'druk' => 'required|numeric|min:0|max:1',
-            'mobility' => 'required|numeric|min:0|max:1',
-            'masalah' => 'required|max:255',
+            'gigi' => 'required|min:2|max:2',
+            'diagnosa' => 'required|max:255',
+            'intervensi' => 'required|max:255',
+            'hasil' => 'required|max:255',
+            'rencana' => 'required|max:255',
         ]);
         Pelaksanaan::where('id', $pelaksanaan->id)
             ->update($validatedData);
