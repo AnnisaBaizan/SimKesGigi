@@ -114,36 +114,75 @@
 
                     <div class="col-sm-12 mb-3 mb-sm-0 text-center bg-gradient-faded-info-vertical">
                         <marquee>
-                            <h6 class="m-0 font-weight-bold text-dark text-bold">pelaksanaan Gigi</h6>
+                            <h6 class="m-0 font-weight-bold text-dark text-bold">Pelaksanaan Gigi</h6>
                         </marquee>
                     </div>
 
+                    
                     <div class="row text-center">
-                        <div class="col-sm-3 mb-3">
-                            <label for="elemen_gigi">Elemen Gigi</label>
-                            <select
-                                class="js-example-basic-single form-control @error('elemen_gigi') is-invalid @enderror"
-                                data-live-search="true" id="elemen_gigi" name="elemen_gigi" placeholder="Pilih Elemen Gigi"
-                                value="{{ old('elemen_gigi') }}" required>
-                                @error('elemen_gigi')
+                        <div class="col-sm-2 mb-3">
+                            <label for="gigi" class="form-text">Gigi :</label>
+                            <select class="js-example-basic-single form-control @error('gigi') is-invalid @enderror"
+                                data-live-search="true" id="gigi" name="gigi" placeholder="Pilih Gigi"
+                                value="{{ old('gigi') }}" required>
+                                @error('gigi')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
-                                <option value="" selected disabled>Pilih Elemen Gigi</option>
+                                <option value="" selected disabled>Pilih Gigi</option>
+                                @foreach ($gigis as $gigi)
+                                    <option value="{{ $gigi->kode }}">
+                                        {{ $gigi->kode }}</option>
+                                @endforeach
                             </select>
                         </div>
-                        {{-- @foreach ( $gigiArray as $gigi )
-                        <div class="col-sm-3 mb-3">
-                            <label for="elemen_gigi">Elemen Gigi</label>
-                            <input type="text" class="form-control text-center" id="elemen_gigi" name="elemen_gigi" value="{{ $gigi }}"
-                                readonly>
+                        <div class="col-sm-10 mb-3">
+                            <label for="diagnosa" class ="form-text">Diagnosa :</label>
+                            <textarea class="form-control @error('diagnosa') is-invalid @enderror" id="diagnosa" name="diagnosa"
+                                placeholder="Masukan Diagnosa Anda">{{ old('diagnosa') }}</textarea>
+                            @error('diagnosa')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
-                        @endforeach --}}
-                        <div class="col-sm-9 mb-3">
-                            <label for="masalah">Masalah</label>
-                            <input type="text" class="form-control text-center" id="masalah" name="masalah" readonly>
+
+                    </div>
+
+                    <div class="row text-center">
+                        
+                        <div class="col-sm-4 mb-3">
+                            <label for="intervensi" class ="form-text">Intervensi Perawatan:</label>
+                            <textarea class="form-control @error('intervensi') is-invalid @enderror" id="intervensi" name="intervensi"
+                                placeholder="Masukan intervensi Perawatan Anda">{{ old('intervensi') }}</textarea>
+                            @error('intervensi')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
+                        <div class="col-sm-4 mb-3">
+                            <label for="hasil" class ="form-text">Hasil Perawatan :</label>
+                            <textarea class="form-control @error('hasil') is-invalid @enderror" id="hasil" name="hasil"
+                                placeholder="Masukan Hasil Perawatan Anda">{{ old('hasil') }}</textarea>
+                            @error('indikator')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                        <div class="col-sm-4 mb-3">
+                            <label for="rencana" class ="form-text">Rencana Tindak Lanjut :</label>
+                            <textarea class="form-control @error('rencana') is-invalid @enderror" id="rencana" name="rencana"
+                                placeholder="Masukan Rencana Tindak Lanjut Anda">{{ old('rencana') }}</textarea>
+                            @error('rencana')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+
                     </div>
 
 
