@@ -1,7 +1,7 @@
-@extends('layouts.app', ['class' => 'g-sidenav-show bg-gray-100', 'titlePage' => 'perencanaan'])
+@extends('layouts.app', ['class' => 'g-sidenav-show bg-gray-100', 'titlePage' => 'Perencanaan'])
 
 @section('content')
-    @include('layouts.navbars.auth.topnav', ['title' => 'Edit perencanaan'])
+    @include('layouts.navbars.auth.topnav', ['title' => 'Detail Perencanaan'])
     <div class="container-fluid py-4">
         <div class="card shadow mb-4">
 
@@ -63,85 +63,84 @@
                     </marquee>
                 </div>
 
-                <div class="row text-center">
+                @foreach ($perencanaans as $perencanaan)
+                    <div class="row text-center">
 
-                    <div class="col-sm-2 mb-3">
-                        <label for="gigi" class ="form-text">gigi :</label>
-                        <input type="text" class="form-control text-center" id="gigi" name="gigi"
-                            value="{{ $perencanaan->gigi }}" readonly disabled>
-                        @error('gigi')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-                    {{-- @foreach ($gigiArray as $gigi)
+                        <div class="col-sm-2 mb-3">
+                            <label for="gigi" class ="form-text">gigi :</label>
+                            <input type="text" class="form-control text-center" id="gigi" name="gigi"
+                                value="{{ $perencanaan->gigi }}" readonly disabled>
+                            @error('gigi')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                        {{-- @foreach ($gigiArray as $gigi)
                         <div class="col-sm-3 mb-3">
                             <label for="gigi">Elemen Gigi</label>
                             <input type="text" class="form-control text-center" id="gigi" name="gigi" value="{{ $gigi }}"
                                 readonly>
                         </div>
                         @endforeach --}}
-                    <div class="col-sm-5 mb-3">
-                        <label for="rasional" class ="form-text">Rasional :</label>
-                        <textarea class="form-control @error('rasional') is-invalid @enderror" id="rasional" name="rasional"
-                            placeholder="Masukan Rasional Anda" disabled>{{ old('rasional', $perencanaan->rasional) }}</textarea>
-                        @error('rasional')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-                    <div class="col-sm-5 mb-3">
-                        <label for="kompetensi" class ="form-text">Kompetensi :</label>
-                        <textarea class="form-control @error('kompetensi') is-invalid @enderror" id="kompetensi" name="kompetensi"
-                            placeholder="Masukan Kompetensi Anda" disabled>{{ old('kompetensi', $perencanaan->kompetensi) }}</textarea>
-                        @error('kompetensi')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
+                        <div class="col-sm-5 mb-3">
+                            <label for="rasional" class ="form-text">Rasional :</label>
+                            <textarea class="form-control @error('rasional') is-invalid @enderror" id="rasional" name="rasional"
+                                placeholder="Masukan Rasional Anda" disabled>{{ old('rasional', $perencanaan->rasional) }}</textarea>
+                            @error('rasional')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                        <div class="col-sm-5 mb-3">
+                            <label for="kompetensi" class ="form-text">Kompetensi :</label>
+                            <textarea class="form-control @error('kompetensi') is-invalid @enderror" id="kompetensi" name="kompetensi"
+                                placeholder="Masukan Kompetensi Anda" disabled>{{ old('kompetensi', $perencanaan->kompetensi) }}</textarea>
+                            @error('kompetensi')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+
                     </div>
 
-                </div>
-                @foreach ($perencanaans as $perencanaan)
+                    <div class="row text-center">
 
-                <div class="row text-center">
-
-                    <div class="col-sm-4 mb-3">
-                        <label for="tujuan" class ="form-text">Tujuan Perawatan:</label>
-                        <textarea class="form-control @error('tujuan') is-invalid @enderror" id="tujuan" name="tujuan"
-                            placeholder="Masukan Tujuan Perawatan Anda" disabled>{{ old('tujuan', $perencanaan->tujuan) }}</textarea>
-                        @error('tujuan')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
+                        <div class="col-sm-4 mb-3">
+                            <label for="tujuan" class ="form-text">Tujuan Perawatan:</label>
+                            <textarea class="form-control @error('tujuan') is-invalid @enderror" id="tujuan" name="tujuan"
+                                placeholder="Masukan Tujuan Perawatan Anda" disabled>{{ old('tujuan', $perencanaan->tujuan) }}</textarea>
+                            @error('tujuan')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                        <div class="col-sm-4 mb-3">
+                            <label for="indikator" class ="form-text">Indikator Keberhasilan :</label>
+                            <textarea class="form-control @error('indikator') is-invalid @enderror" id="indikator" name="indikator"
+                                placeholder="Masukan Indikator Keberhasilan Anda" disabled>{{ old('indikator', $perencanaan->indikator) }}</textarea>
+                            @error('indikator')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                        <div class="col-sm-4 mb-3">
+                            <label for="cara_evaluasi" class ="form-text">Cara Evaluasi :</label>
+                            <textarea class="form-control @error('cara_evaluasi') is-invalid @enderror" id="cara_evaluasi" name="cara_evaluasi"
+                                placeholder="Masukan Cara Evaluasi Anda" disabled>{{ old('cara_evaluasi', $perencanaan->cara_evaluasi) }}</textarea>
+                            @error('cara_evaluasi')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
                     </div>
-                    <div class="col-sm-4 mb-3">
-                        <label for="indikator" class ="form-text">Indikator Keberhasilan :</label>
-                        <textarea class="form-control @error('indikator') is-invalid @enderror" id="indikator" name="indikator"
-                            placeholder="Masukan Indikator Keberhasilan Anda" disabled>{{ old('indikator', $perencanaan->indikator) }}</textarea>
-                        @error('indikator')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-                    <div class="col-sm-4 mb-3">
-                        <label for="cara_evaluasi" class ="form-text">Cara Evaluasi :</label>
-                        <textarea class="form-control @error('cara_evaluasi') is-invalid @enderror" id="cara_evaluasi" name="cara_evaluasi"
-                            placeholder="Masukan Cara Evaluasi Anda" disabled>{{ old('cara_evaluasi', $perencanaan->cara_evaluasi) }}</textarea>
-                        @error('cara_evaluasi')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-                </div>
-                <hr class="my-4 w-100 border-top border-dark border-1 d-print-block">
-
-            @endforeach
+                    <hr class="my-4 w-100 border-top border-dark border-1 d-print-block">
+                @endforeach
 
                 @can('adminmahasiswa')
                     <div class="col-sm-12 mb-3 mb-sm-0 me-5 d-flex justify-content-end" style="width: 100%;">

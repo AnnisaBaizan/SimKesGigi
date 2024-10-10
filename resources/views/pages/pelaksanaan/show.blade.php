@@ -1,7 +1,7 @@
 @extends('layouts.app', ['class' => 'g-sidenav-show bg-gray-100', 'titlePage' => 'Pelaksanaan'])
 
 @section('content')
-    @include('layouts.navbars.auth.topnav', ['title' => 'Edit Pelaksanaan'])
+    @include('layouts.navbars.auth.topnav', ['title' => 'Detail Pelaksanaan'])
     <div class="container-fluid py-4">
         <div class="card shadow mb-4">
 
