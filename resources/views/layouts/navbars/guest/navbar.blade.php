@@ -5,7 +5,7 @@
             <nav
                 class="navbar navbar-expand-lg blur border-radius-lg top-0 z-index-3 shadow position-stiky mt-4 py-2 start-0 end-0 mx-2 justify-content-center align-items-center text-center">
                     <center>
-                    <img src="{{ asset('/img//favicon.png') }}" width="50" class="img-fluid me-3">
+                    <img src="{{ asset('/img//favicon.png') }}" width="150" class="img-fluid me-3">
                     <a class="navbar-brand font-weight-bolder ms-lg-0 ms-2 " href="{{ route('home') }}">
                         SimKesGigi
                     </a>
