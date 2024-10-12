@@ -68,32 +68,33 @@
                 @foreach ($pelaksanaans as $pelaksanaan)
                     <div class="row text-center">
                         <div class="col-sm-2 mb-3">
-                            <label for="gigi" class ="form-text">gigi :</label>
+                            <label for="gigi" class="form-text">Gigi:</label>
                             <input type="text" class="form-control text-center" id="gigi" name="gigi"
                                 value="{{ $pelaksanaan->gigi }}" readonly disabled>
-                            @error('gigi')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
                         </div>
-                        <div class="col-sm-10 mb-3">
-                            <label for="diagnosa" class ="form-text">Diagnosa :</label>
-                            <textarea class="form-control @error('diagnosa') is-invalid @enderror" id="diagnosa" name="diagnosa"
-                                placeholder="Masukan Diagnosa Anda" disabled>{{ old('diagnosa', $pelaksanaan->diagnosa) }}</textarea>
-                            @error('diagnosa')
+                        <div class="col-sm-2 mb-3">
+                            <label for="diagnosa_id" class="form-text text-center">Diagnosa ID:</label>
+                            <input type="text"
+                                class="form-control text-center @error('diagnosa_id') is-invalid @enderror" id="diagnosa_id"
+                                name="diagnosa_id" placeholder="diagnosa_id"
+                                value="{{ old('diagnosa_id', $pelaksanaan->diagnosa_id) }}" readonly disabled required>
+                            @error('diagnosa_id')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
                         </div>
 
+                        <div class="col-sm-8 mb-3 mt-2">
+                            <div style="text-align: left; background-color: rgb(219, 219, 219);" id="previewDiagnosa">
+                                {!! getPreviewDiagnosas($pelaksanaan->user_id, $pelaksanaan->pembimbing, $pelaksanaan->kartupasien_id, $pelaksanaan->gigi) !!}
+                            </div>
+                        </div>
                     </div>
 
                     <div class="row text-center">
-
                         <div class="col-sm-4 mb-3">
-                            <label for="intervensi" class ="form-text">Intervensi Perawatan:</label>
+                            <label for="intervensi" class="form-text">Intervensi Perawatan:</label>
                             <textarea class="form-control @error('intervensi') is-invalid @enderror" id="intervensi" name="intervensi"
                                 placeholder="Masukan intervensi Perawatan Anda" disabled>{{ old('intervensi', $pelaksanaan->intervensi) }}</textarea>
                             @error('intervensi')
@@ -103,17 +104,17 @@
                             @enderror
                         </div>
                         <div class="col-sm-4 mb-3">
-                            <label for="hasil" class ="form-text">Hasil Perawatan :</label>
+                            <label for="hasil" class="form-text">Hasil Perawatan :</label>
                             <textarea class="form-control @error('hasil') is-invalid @enderror" id="hasil" name="hasil"
                                 placeholder="Masukan Hasil Perawatan Anda" disabled>{{ old('hasil', $pelaksanaan->hasil) }}</textarea>
-                            @error('indikator')
+                            @error('hasil')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
                         </div>
                         <div class="col-sm-4 mb-3">
-                            <label for="rencana" class ="form-text">Rencana Tindak Lanjut :</label>
+                            <label for="rencana" class="form-text">Rencana Tindak Lanjut :</label>
                             <textarea class="form-control @error('rencana') is-invalid @enderror" id="rencana" name="rencana"
                                 placeholder="Masukan Rencana Tindak Lanjut Anda" disabled>{{ old('rencana', $pelaksanaan->rencana) }}</textarea>
                             @error('rencana')
@@ -124,7 +125,6 @@
                         </div>
                     </div>
                     <hr class="my-4 w-100 border-top border-dark border-1 d-print-block">
-
                 @endforeach
 
 

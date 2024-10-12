@@ -33,14 +33,17 @@
                                     @enderror
                                     <option value="" selected disabled>Pilih Mahasiswa</option>
                                     @foreach ($users as $user)
-                                        <option value="{{ $user->id }}" {{ $pelaksanaan->user_id == $user->id ? 'selected' : '' }} data-pembimbing="{{ $user->pembimbing }}">
+                                        <option value="{{ $user->id }}"
+                                            {{ $pelaksanaan->user_id == $user->id ? 'selected' : '' }}
+                                            data-pembimbing="{{ $user->pembimbing }}">
                                             {{ ucwords($user->username) }}</option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="col-sm-4">
                                 <input type="text" class="form-control @error('pembimbing') is-invalid_max @enderror"
-                                    id="pembimbing" name="pembimbing" placeholder="pembimbing" value="{{ $pelaksanaan->pembimbing }}" readonly required>
+                                    id="pembimbing" name="pembimbing" placeholder="pembimbing"
+                                    value="{{ $pelaksanaan->pembimbing }}" readonly required>
                                 @error('pembimbing')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -125,8 +128,8 @@
                         </marquee>
                     </div>
 
-                    
-                    <div class="row text-center">
+
+                    <div class="row text-center mt-2">
                         <div class="col-sm-2 mb-3">
                             <label for="gigi" class="form-text">Gigi :</label>
                             <select class="js-example-basic-single form-control @error('gigi') is-invalid @enderror"
@@ -139,26 +142,65 @@
                                 @enderror
                                 <option value="" selected disabled>Pilih Gigi</option>
                                 @foreach ($gigis as $gigi)
-                                    <option value="{{ $gigi->kode }}" {{ $pelaksanaan->gigi == $gigi->kode ? 'selected' : '' }}>
+                                    <option value="{{ $gigi->kode }}"
+                                        {{ $pelaksanaan->gigi == $gigi->kode ? 'selected' : '' }}>
                                         {{ $gigi->kode }}</option>
                                 @endforeach
                             </select>
                         </div>
-                        <div class="col-sm-10 mb-3">
-                            <label for="diagnosa" class ="form-text">Diagnosa :</label>
-                            <textarea class="form-control @error('diagnosa') is-invalid @enderror" id="diagnosa" name="diagnosa"
-                                placeholder="Masukan Diagnosa Anda">{{ old('diagnosa', $pelaksanaan->diagnosa) }}</textarea>
-                            @error('diagnosa')
+                        <div class="col-sm-2 mb-3">
+                            <label for="diagnosa_id" class ="form-text text-center">Diagnosa_id :</label>
+                            <input type="text"
+                                class="form-control text-center @error('diagnosa_id') is-invalid_max @enderror"
+                                id="diagnosa_id" name="diagnosa_id" placeholder="diagnosa_id"
+                                value="{{ old('diagnosa_id', $pelaksanaan->diagnosa_id) }}" readonly required>
+                            @error('diagnosa_id')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
                         </div>
 
+                        <div class="col-sm-8 mb-3">
+                            @forelse($data as $diagnosa)
+                                <div style="text-align: left; background-color: rgb(219, 219, 219);" id=previewDiagnosa>
+                                    <center><b>Preview Diagnosa</b></center>
+                                    <br>
+                                    <b>Masalah:</b> {{ $diagnosa['masalah'] ?? 'Tidak Ditemukan' }}<br>
+                                    <hr>
+
+                                    @foreach ($diagnosa['askepgilut'] as $askepData)
+                                        @if ($askepData['askepgilut'])
+                                            <b>Askepgilut:</b> {{ $askepData['askepgilut']->askepgilut }}<br>
+                                        @endif
+
+                                        <b>Penyebab:</b>
+                                        @if (!empty($askepData['penyebab']))
+                                            {{ implode(', ', array_map(fn($item) => $item->penyebab, $askepData['penyebab'])) }}
+                                        @else
+                                            Tidak Ditemukan
+                                        @endif
+                                        <br>
+
+                                        <b>Gejala:</b>
+                                        @if (!empty($askepData['gejala']))
+                                            {{ implode(', ', array_map(fn($item) => $item->gejala, $askepData['gejala'])) }}
+                                        @else
+                                            Tidak Ditemukan
+                                        @endif
+                                        <br>
+                                        <hr>
+                                    @endforeach
+                                </div>
+                            @empty
+                                <p>Tidak ada diagnosa ditemukan</p>
+                            @endforelse
+                        </div>
+
                     </div>
 
                     <div class="row text-center">
-                        
+
                         <div class="col-sm-4 mb-3">
                             <label for="intervensi" class ="form-text">Intervensi Perawatan:</label>
                             <textarea class="form-control @error('intervensi') is-invalid @enderror" id="intervensi" name="intervensi"
@@ -275,6 +317,40 @@
                 var kartupasien_id = $("#kartupasien_id").val();
 
                 $.ajax({
+                    url: '/getGigis',
+                    type: 'POST',
+                    data: {
+                        user_id: user_id,
+                        pembimbing: pembimbing,
+                        kartupasien_id: kartupasien_id
+                    },
+                    cache: false,
+
+                    success: function(msg) {
+                        $("#gigi").html(msg);
+                    },
+
+                    error: function(data) {
+                        console.log('error:', data);
+                    }
+                });
+            });
+        });
+    </script>
+    <script>
+        $(function() {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $('#kartupasien_id').on('change', function() {
+                var user_id = $("#user_id").val();
+                var pembimbing = $("#pembimbing").val();
+                var kartupasien_id = $("#kartupasien_id").val();
+
+                $.ajax({
                     url: '/getElemenGigis',
                     type: 'POST',
                     data: {
@@ -286,6 +362,79 @@
 
                     success: function(msg) {
                         $("#elemen_gigi").html(msg);
+                    },
+
+                    error: function(data) {
+                        console.log('error:', data);
+                    }
+                });
+            });
+        });
+    </script>
+    <script>
+        $(function() {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $('#gigi').on('change', function() {
+                var user_id = $("#user_id").val();
+                var pembimbing = $("#pembimbing").val();
+                var kartupasien_id = $("#kartupasien_id").val();
+                var gigi = $("#gigi").val();
+
+                $.ajax({
+                    url: '/getPreviewDiagnosas',
+                    type: 'POST',
+                    data: {
+                        user_id: user_id,
+                        pembimbing: pembimbing,
+                        kartupasien_id: kartupasien_id,
+                        gigi: gigi
+                    },
+                    cache: false,
+
+                    success: function(msg) {
+                        $("#previewDiagnosa").html(msg);
+                    },
+
+                    error: function(data) {
+                        console.log('error:', data);
+                    }
+                });
+            });
+        });
+    </script>
+
+    <script>
+        $(function() {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $('#gigi').on('change', function() {
+                var user_id = $("#user_id").val();
+                var pembimbing = $("#pembimbing").val();
+                var kartupasien_id = $("#kartupasien_id").val();
+                var gigi = $("#gigi").val();
+
+                $.ajax({
+                    url: '/getDiagnosa',
+                    type: 'POST',
+                    data: {
+                        user_id: user_id,
+                        pembimbing: pembimbing,
+                        kartupasien_id: kartupasien_id,
+                        gigi: gigi
+                    },
+                    cache: false,
+
+                    success: function(msg) {
+                        $("#diagnosa_id").val(msg);
                     },
 
                     error: function(data) {

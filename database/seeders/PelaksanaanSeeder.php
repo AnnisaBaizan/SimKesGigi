@@ -31,7 +31,7 @@ class PelaksanaanSeeder extends Seeder
         ];
 
         $gigiOptions = ['11', '12', '13', '21', '22'];
-        $diagnosaOptions = ['Karies', 'Gingivitis', 'Fraktur gigi', 'Abses periodontal'];
+        // $diagnosaOptions = ['Karies', 'Gingivitis', 'Fraktur gigi', 'Abses periodontal'];
         $intervensiOptions = ['Pembersihan karang gigi', 'Penambalan', 'Pencabutan', 'Perawatan saluran akar'];
         $hasilOptions = ['Sembuh total', 'Memerlukan evaluasi', 'Perawatan lanjutan diperlukan'];
         $rencanaOptions = ['Kontrol rutin', 'Perawatan lanjutan', 'Observasi lebih lanjut'];
@@ -46,7 +46,9 @@ class PelaksanaanSeeder extends Seeder
                 'pembimbing' => $pembimbing,
                 'kartupasien_id' => $kartupasienId,
                 'gigi' => $gigiOptions[array_rand($gigiOptions)],
-                'diagnosa' => $diagnosaOptions[array_rand($diagnosaOptions)],
+                // 'diagnosa' => $diagnosaOptions[array_rand($diagnosaOptions)],
+                
+                'diagnosa_id' => rand(0, 12),
                 'intervensi' => $intervensiOptions[array_rand($intervensiOptions)],
                 'hasil' => $hasilOptions[array_rand($hasilOptions)],
                 'rencana' => $rencanaOptions[array_rand($rencanaOptions)],

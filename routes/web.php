@@ -261,6 +261,16 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/{page}', [PageController::class, 'index'])->name('page');
 	Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 
+	Route::post('/getGigis', function (Request $request) {
+		$user_id = $request->input('user_id');
+		$pembimbing = $request->input('pembimbing');
+		$kartupasien_id = $request->input('kartupasien_id');
+	
+		$GigiHTML = getGigis($user_id, $pembimbing, $kartupasien_id);
+	
+		return response()->json($GigiHTML);
+	});
+
 	Route::post('/getElemenGigis', function (Request $request) {
 		$user_id = $request->input('user_id');
 		$pembimbing = $request->input('pembimbing');
@@ -288,6 +298,28 @@ Route::group(['middleware' => 'auth'], function () {
 		$options = getPatients($user_id, $pembimbing);
 	
 		return response()->json($options);
+	});
+
+	Route::post('/getPreviewDiagnosas', function (Request $request) {
+		$user_id = $request->input('user_id');
+		$pembimbing = $request->input('pembimbing');
+		$kartupasien_id = $request->input('kartupasien_id');
+		$gigi = $request->input('gigi');
+	
+		$previewDiagnosaHTML = getPreviewDiagnosas($user_id, $pembimbing, $kartupasien_id, $gigi);
+	
+		return response()->json($previewDiagnosaHTML);
+	});
+
+	Route::post('/getDiagnosa', function (Request $request) {
+		$user_id = $request->input('user_id');
+		$pembimbing = $request->input('pembimbing');
+		$kartupasien_id = $request->input('kartupasien_id');
+		$gigi = $request->input('gigi');
+	
+		$DiagnosaHTML = getDiagnosa($user_id, $pembimbing, $kartupasien_id, $gigi);
+	
+		return response()->json($DiagnosaHTML);
 	});
 
 	Route::post('/getPenyebabs', function (Request $request) {

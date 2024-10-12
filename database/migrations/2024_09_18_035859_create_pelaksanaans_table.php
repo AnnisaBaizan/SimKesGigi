@@ -20,7 +20,7 @@ return new class extends Migration
             $table->foreignId('kartupasien_id');
 
             $table->string('gigi');
-            $table->string('diagnosa');
+            $table->string('diagnosa_id');
             $table->string('intervensi');
             $table->string('hasil');
             $table->string('rencana');

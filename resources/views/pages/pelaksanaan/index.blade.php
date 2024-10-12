@@ -199,7 +199,7 @@
                                                 {{ $pelaksanaan->kartupasien->nama }}</td>
                                             {{-- pengetahuan --}}
                                             <td>{{ $pelaksanaan->gigi }} </td>
-                                            <td>{{ $pelaksanaan->diagnosa }}</td>
+                                            <td>{{ $pelaksanaan->diagnosa_id }}</td>
                                             <td>{{ $pelaksanaan->intervensi }}</td>
                                             <td>{{ $pelaksanaan->hasil }}</td>
                                             <td>{{ $pelaksanaan->rencana }}</td>

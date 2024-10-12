@@ -1,9 +1,12 @@
 <?php
 
+use App\Models\Askepgilut;
+use App\Models\Diagnosa;
 use App\Models\Eksplakkal;
 use App\Models\Gejala;
 use App\Models\kartupasien;
 use App\Models\Odontogram;
+use App\Models\Pelaksanaan;
 use App\Models\Penyebab;
 use App\Models\Periodontal;
 use App\Models\Vitalitas;
@@ -34,6 +37,45 @@ if (!function_exists('getPatients')) {
         }
 
         return $options;
+    }
+}
+
+if (!function_exists('getGigis')) {
+    function getGigis($user_id, $pembimbing, $kartupasien_id)
+    {
+        $gigis = Diagnosa::where('user_id', $user_id)
+            ->where('pembimbing', $pembimbing)
+            ->where('kartupasien_id', $kartupasien_id)
+            ->get();
+
+        $GigiHTML = '<option value="" selected disabled>Pilih Gigi</option>';
+
+        $addedGigi = []; // untuk menghindari duplikasi gigi
+
+        foreach ($gigis as $gg) {
+            $gigiArray = explode(",", $gg->gigi);
+            foreach ($gigiArray as $gigi) {
+                // Periksa apakah gigi sudah ditambahkan sebelumnya
+                if (in_array($gigi, $addedGigi)) {
+                    continue; // Lewati jika sudah ada
+                }
+
+                // Periksa apakah gigi tidak ada dalam tabel Pelaksanaan
+                $exists = Pelaksanaan::where('gigi', $gigi)
+                    ->where('user_id', $user_id)
+                    ->where('pembimbing', $pembimbing)
+                    ->where('kartupasien_id', $kartupasien_id)
+                    ->exists();
+
+                if (!$exists) {
+                    // Jika gigi tidak ada dalam tabel Pelaksanaan, tambahkan sebagai opsi dalam HTML
+                    $GigiHTML .= '<option value="' . htmlspecialchars($gigi) . '">' . htmlspecialchars($gigi) . '</option>';
+                    $addedGigi[] = $gigi; // Tambahkan ke daftar gigi yang sudah ditambahkan
+                }
+            }
+        }
+
+        return $GigiHTML;
     }
 }
 
@@ -113,6 +155,79 @@ if (!function_exists('getElemenPermukaanGigis')) {
         return $elemenPermukaanGigiHTML;
     }
 }
+
+if (!function_exists('getPreviewDiagnosas')) {
+    function getPreviewDiagnosas($user_id, $pembimbing, $kartupasien_id, $gigi)
+    {
+        $diagnosas = Diagnosa::where('user_id', $user_id)
+            ->where('pembimbing', $pembimbing)
+            ->where('kartupasien_id', $kartupasien_id)
+            ->where('gigi', $gigi)
+            ->get();
+
+        $PreviewdiagnosaHTML = '';
+
+        // Loop setiap diagnosa
+        foreach ($diagnosas as $diagnosa) {
+            // Split masalah, penyebab, dan gejala
+            $penyebab = explode('|', $diagnosa->penyebab);
+            $gejala = explode('|', $diagnosa->gejala);
+            $askepIds = explode('|', $diagnosa->askepgilut);
+
+            $PreviewdiagnosaHTML .= '<br><center><b>Preview Diagnosa</b></center></br>';
+            $PreviewdiagnosaHTML .= '<b>Masalah:</b> ' . htmlspecialchars($diagnosa->masalah ?? 'Tidak Ditemukan') . '<br>';
+            $PreviewdiagnosaHTML .= '<hr>';
+
+            foreach ($askepIds as $index => $id_askep) {
+                // Tampilkan data Askepgilut
+                $askepgilut = Askepgilut::find($id_askep);
+                if ($askepgilut) {
+                    $PreviewdiagnosaHTML .= '<b>Askepgilut:</b> ' . htmlspecialchars($askepgilut->askepgilut) . '<br>';
+                }
+
+                // Tampilkan penyebab untuk askepgilut terkait
+                $penyebabs = get_c('penyebabs', 'askepgilut_id', $id_askep)->toArray();
+                $penyebabList = array_filter($penyebabs, function ($penyebabI) use ($penyebab, $index) {
+                    return in_array($penyebabI->id, explode(',', $penyebab[$index] ?? ''));
+                });
+                $PreviewdiagnosaHTML .= '<b>Penyebab:</b> ' . implode(', ', array_map(fn($item) => htmlspecialchars($item->penyebab), $penyebabList)) . '<br>';
+
+                // Tampilkan gejala untuk askepgilut terkait
+                $gejalas = get_c('gejalas', 'askepgilut_id', $id_askep)->toArray();
+                $gejalaList = array_filter($gejalas, function ($gejalaI) use ($gejala, $index) {
+                    return in_array($gejalaI->id, explode(',', $gejala[$index] ?? ''));
+                });
+                $PreviewdiagnosaHTML .= '<b>Gejala:</b> ' . implode(', ', array_map(fn($item) => htmlspecialchars($item->gejala), $gejalaList)) . '<br>';
+
+                $PreviewdiagnosaHTML .= '<hr>';
+            }
+        }
+
+        return $PreviewdiagnosaHTML ?: '<p>Tidak ada diagnosa ditemukan</p>';
+    }
+}
+
+if (!function_exists('getDiagnosa')) {
+    function getDiagnosa($user_id, $pembimbing, $kartupasien_id, $gigi)
+    {
+        $diagnosa = Diagnosa::where('user_id', $user_id)
+            ->where('pembimbing', $pembimbing)
+            ->where('kartupasien_id', $kartupasien_id)
+            ->where('gigi', $gigi)
+            ->first();
+
+        // Cek apakah $diagnosa ditemukan atau tidak
+        if ($diagnosa) {
+            $diagnosaHTML = $diagnosa->id;
+        } else {
+            $diagnosaHTML = 'Tidak ada diagnosa ditemukan';
+        }
+
+        return $diagnosaHTML;
+    }
+}
+
+
 
 
 if (!function_exists('getPenyebabs')) {

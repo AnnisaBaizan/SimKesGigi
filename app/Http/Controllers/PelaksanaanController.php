@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Askepgilut;
+use App\Models\Diagnosa;
 use App\Models\gigi;
 use App\Models\kartupasien;
 use App\Models\Odontogram;
@@ -69,7 +71,7 @@ class PelaksanaanController extends Controller
             'kartupasien_id' => 'required',
 
             'gigi' => 'required|min:2|max:2',
-            'diagnosa' => 'required|max:255',
+            'diagnosa_id' => 'required|max:255',
             'intervensi' => 'required|max:255',
             'hasil' => 'required|max:255',
             'rencana' => 'required|max:255',
@@ -88,9 +90,12 @@ class PelaksanaanController extends Controller
      */
     public function show(Pelaksanaan $pelaksanaan)
     {
+        // Get all pelaksanaans related to the kartupasien_id
         $pelaksanaans = Pelaksanaan::where('kartupasien_id', $pelaksanaan->kartupasien_id)->get();
         $accs = implode(',', Pelaksanaan::where('kartupasien_id', $pelaksanaan->kartupasien_id)->pluck('acc')->toArray());
 
+            
+        // dd($data);
         // dd($accs);
         return view('pages.pelaksanaan.show')->with([
             'pelaksanaan' => $pelaksanaan,
@@ -120,14 +125,49 @@ class PelaksanaanController extends Controller
                 $kartupasiens = kartupasien::where('user_id', auth()->id())->get();
             }
 
-            // Pecah string menjadi array pada setiap input
-            $penyebab = explode('|', $pelaksanaan->penyebab);
-            // dd($penyebab);
-            $gejala = explode('|', $pelaksanaan->gejala);
+            $diagnosas = Diagnosa::where('user_id', $pelaksanaan->user_id)
+                ->where('pembimbing', $pelaksanaan->pembimbing)
+                ->where('kartupasien_id', $pelaksanaan->kartupasien_id)
+                ->where('gigi', $pelaksanaan->gigi)
+                ->get();
+
+            $data = [];
+
+            foreach ($diagnosas as $diagnosa) {
+                $penyebab = explode('|', $diagnosa->penyebab);
+                $gejala = explode('|', $diagnosa->gejala);
+                $askepIds = explode('|', $diagnosa->askepgilut);
+                $askepData = [];
+
+                foreach ($askepIds as $index => $id_askep) {
+                    $askepgilut = Askepgilut::find($id_askep);
+
+                    $penyebabs = get_c('penyebabs', 'askepgilut_id', $id_askep)->toArray();
+                    $penyebabList = array_filter($penyebabs, function ($penyebabI) use ($penyebab, $index) {
+                        return in_array($penyebabI->id, explode(',', $penyebab[$index] ?? ''));
+                    });
+
+                    $gejalas = get_c('gejalas', 'askepgilut_id', $id_askep)->toArray();
+                    $gejalaList = array_filter($gejalas, function ($gejalaI) use ($gejala, $index) {
+                        return in_array($gejalaI->id, explode(',', $gejala[$index] ?? ''));
+                    });
+
+                    $askepData[] = [
+                        'askepgilut' => $askepgilut,
+                        'penyebab' => $penyebabList,
+                        'gejala' => $gejalaList,
+                    ];
+                }
+
+                $data[] = [
+                    'masalah' => $diagnosa->masalah,
+                    'askepgilut' => $askepData,
+                ];
+            }
 
             $gigis = gigi::all();
 
-            return view('pages.pelaksanaan.edit')->with([
+            return view('pages.pelaksanaan.edit', compact('data'))->with([
                 'pelaksanaan' => $pelaksanaan,
                 'kartupasiens' => $kartupasiens,
                 'gigis' => $gigis,
@@ -155,7 +195,7 @@ class PelaksanaanController extends Controller
             'kartupasien_id' => 'required',
 
             'gigi' => 'required|min:2|max:2',
-            'diagnosa' => 'required|max:255',
+            'diagnosa_id' => 'required|max:255',
             'intervensi' => 'required|max:255',
             'hasil' => 'required|max:255',
             'rencana' => 'required|max:255',

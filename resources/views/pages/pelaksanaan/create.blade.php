@@ -118,8 +118,8 @@
                         </marquee>
                     </div>
 
-                    
-                    <div class="row text-center">
+
+                    <div class="row text-center mt-2">
                         <div class="col-sm-2 mb-3">
                             <label for="gigi" class="form-text">Gigi :</label>
                             <select class="js-example-basic-single form-control @error('gigi') is-invalid @enderror"
@@ -137,21 +137,28 @@
                                 @endforeach
                             </select>
                         </div>
-                        <div class="col-sm-10 mb-3">
-                            <label for="diagnosa" class ="form-text">Diagnosa :</label>
-                            <textarea class="form-control @error('diagnosa') is-invalid @enderror" id="diagnosa" name="diagnosa"
-                                placeholder="Masukan Diagnosa Anda">{{ old('diagnosa') }}</textarea>
-                            @error('diagnosa')
+                        <div class="col-sm-2 mb-3">
+                            <label for="diagnosa_id" class ="form-text text-center">Diagnosa_id :</label>
+                            <input type="text"
+                                class="form-control text-center @error('diagnosa_id') is-invalid_max @enderror"
+                                id="diagnosa_id" name="diagnosa_id" placeholder="diagnosa_id"
+                                value="{{ old('diagnosa_id') }}" readonly required>
+                            @error('diagnosa_id')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
                         </div>
+                        <div class="col-sm-8 mb-3">
+                            <div style="text-align: left; background-color: rgb(219, 219, 219);" id=previewDiagnosa>
+                                <center><b>Preview Diagnosa</b></center>
+                            </div>
+                        </div>
 
                     </div>
 
                     <div class="row text-center">
-                        
+
                         <div class="col-sm-4 mb-3">
                             <label for="intervensi" class ="form-text">Intervensi Perawatan:</label>
                             <textarea class="form-control @error('intervensi') is-invalid @enderror" id="intervensi" name="intervensi"
@@ -268,7 +275,7 @@
                 var kartupasien_id = $("#kartupasien_id").val();
 
                 $.ajax({
-                    url: '/getElemenGigis',
+                    url: '/getGigis',
                     type: 'POST',
                     data: {
                         user_id: user_id,
@@ -278,7 +285,7 @@
                     cache: false,
 
                     success: function(msg) {
-                        $("#elemen_gigi").html(msg);
+                        $("#gigi").html(msg);
                     },
 
                     error: function(data) {
@@ -288,4 +295,79 @@
             });
         });
     </script>
+
+    <script>
+        $(function() {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $('#gigi').on('change', function() {
+                var user_id = $("#user_id").val();
+                var pembimbing = $("#pembimbing").val();
+                var kartupasien_id = $("#kartupasien_id").val();
+                var gigi = $("#gigi").val();
+
+                $.ajax({
+                    url: '/getPreviewDiagnosas',
+                    type: 'POST',
+                    data: {
+                        user_id: user_id,
+                        pembimbing: pembimbing,
+                        kartupasien_id: kartupasien_id,
+                        gigi: gigi
+                    },
+                    cache: false,
+
+                    success: function(msg) {
+                        $("#previewDiagnosa").html(msg);
+                    },
+
+                    error: function(data) {
+                        console.log('error:', data);
+                    }
+                });
+            });
+        });
+    </script>
+
+    <script>
+        $(function() {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $('#gigi').on('change', function() {
+                var user_id = $("#user_id").val();
+                var pembimbing = $("#pembimbing").val();
+                var kartupasien_id = $("#kartupasien_id").val();
+                var gigi = $("#gigi").val();
+
+                $.ajax({
+                    url: '/getDiagnosa',
+                    type: 'POST',
+                    data: {
+                        user_id: user_id,
+                        pembimbing: pembimbing,
+                        kartupasien_id: kartupasien_id,
+                        gigi: gigi
+                    },
+                    cache: false,
+
+                    success: function(msg) {
+                        $("#diagnosa_id").val(msg);
+                    },
+
+                    error: function(data) {
+                        console.log('error:', data);
+                    }
+                });
+            });
+        });
+    </script>
+    
 @endsection
