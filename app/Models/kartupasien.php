@@ -34,6 +34,9 @@ class kartupasien extends Model
     public function vitalitas(){
         return $this->hasMany(Vitalitas::class);
     }
+    public function diagnosa(){
+        return $this->hasMany(Diagnosa::class);
+    }
     public function periodontal(){
         return $this->hasMany(Periodontal::class);
     }

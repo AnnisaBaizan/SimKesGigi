@@ -246,7 +246,7 @@
                     </div>
 
                     <div class="col-sm-12 mb-3 mt-3 mb-sm-0 text-center">
-                        <img class="mb-3 img-fluid max-width: 150%; height: 50%;" src="{!! asset('/img/odontogram.jpeg') !!}">
+                        <img class="mb-3 img-fluid max-width: 150%; height: 50%;" src="{!! asset('/img/Odontogram.jpeg') !!}">
                     </div>
 
                     {{-- <div class="row mt-3"> --}}

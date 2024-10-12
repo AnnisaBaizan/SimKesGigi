@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Eksplakkal;
 use App\Models\Periodontal;
-use App\Models\Kartupasien;
+use App\Models\kartupasien;
 use App\Models\User;
 use Illuminate\Http\Request;
 use PhpOffice\PhpSpreadsheet\Calculation\Financial\CashFlow\Variable\Periodic;

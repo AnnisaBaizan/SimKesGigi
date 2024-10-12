@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pengsiperi;
-use App\Models\Kartupasien;
+use App\Models\kartupasien;
 use App\Models\Pertanyaan;
 use App\Models\User;
 use Illuminate\Http\Request;

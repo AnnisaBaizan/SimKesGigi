@@ -345,7 +345,7 @@
                         var min = minDate.val();
                         var max = maxDate.val();
                         // data[1] is the date column
-                        var date = new Date(data[20]);
+                        var date = new Date(data[12]);
 
                         if (
                             (min === null && max === null) ||
@@ -377,31 +377,31 @@
                     buttons: [{
                             extend: 'copyHtml5',
                             exportOptions: {
-                                columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 17, 18, 20]
+                                columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12]
                             }
                         },
                         {
                             extend: 'print',
                             exportOptions: {
-                                columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 17, 18, 20]
+                                columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12]
                             }
                         },
                         {
                             extend: 'excelHtml5',
                             exportOptions: {
-                                columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 17, 18, 20]
+                                columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12]
                             }
                         },
                         {
                             extend: 'csvHtml5',
                             exportOptions: {
-                                columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 17, 18, 20]
+                                columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12]
                             }
                         },
                         {
                             extend: 'pdfHtml5',
                             exportOptions: {
-                                columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 17, 18, 20]
+                                columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12]
                             }
                         },
                         'colvis'
@@ -418,7 +418,7 @@
                         var min = minDate.val();
                         var max = maxDate.val();
                         // data[1] is the date column
-                        var date = new Date(data[19]);
+                        var date = new Date(data[11]);
 
                         if (
                             (min === null && max === null) ||
@@ -450,31 +450,31 @@
                     buttons: [{
                             extend: 'copyHtml5',
                             exportOptions: {
-                                columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 16, 17, 19]
+                                columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11]
                             }
                         },
                         {
                             extend: 'print',
                             exportOptions: {
-                                columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 16, 17, 19]
+                                columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11]
                             }
                         },
                         {
                             extend: 'excelHtml5',
                             exportOptions: {
-                                columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 16, 17, 19]
+                                columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11]
                             }
                         },
                         {
                             extend: 'csvHtml5',
                             exportOptions: {
-                                columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 16, 17, 19]
+                                columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11]
                             }
                         },
                         {
                             extend: 'pdfHtml5',
                             exportOptions: {
-                                columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 16, 17, 19]
+                                columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11]
                             }
                         },
                         'colvis'

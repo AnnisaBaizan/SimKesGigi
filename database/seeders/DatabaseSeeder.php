@@ -30,20 +30,21 @@ class DatabaseSeeder extends Seeder
         $this->call(UserSeeder::class);
         $this->call(GigiSeeder::class);
         $this->call(PermukaangigiSeeder::class);
-        // $this->call(KartupasienSeeder::class);
-        // $this->call(AnamripasienSeeder::class);
         $this->call(PertanyaanSeeder::class);
-        // $this->call(PengsiperiSeeder::class);
-        // $this->call(EksplakkalSeeder::class);
-        // $this->call(OhisSeeder::class);
-        // $this->call(OdontogramSeeder::class);
-        // $this->call(AnomalimukosaSeeder::class);
         $this->call(AskepgilutSeeder::class);
         $this->call(PenyebabSeeder::class);
         $this->call(GejalaSeeder::class);
-        // $this->call(VitalitasSeeder::class);
-        // $this->call(PerencanaanSeeder::class);
-        // $this->call(PelaksanaanSeeder::class);
-        // $this->call(PeriodontalSeeder::class);
+
+        $this->call(KartupasienSeeder::class);
+        $this->call(AnamripasienSeeder::class);
+        $this->call(PengsiperiSeeder::class);
+        $this->call(EksplakkalSeeder::class);
+        $this->call(OhisSeeder::class);
+        $this->call(OdontogramSeeder::class);
+        $this->call(AnomalimukosaSeeder::class);
+        $this->call(VitalitasSeeder::class);
+        $this->call(PerencanaanSeeder::class);
+        $this->call(PelaksanaanSeeder::class);
+        $this->call(PeriodontalSeeder::class);
     }  
 }

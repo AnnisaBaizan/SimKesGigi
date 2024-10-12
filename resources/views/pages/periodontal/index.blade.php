@@ -324,20 +324,20 @@
                                                     <i class="fas fa-eye text-success  fa-lg"></i>
                                                 </a> --}}
                                                 @can('adminmahasiswa')
-                                                <a href="javascript:;" data-toggle="modal"
-                                                    onclick="handleDelete({{ $periodontal->id }})"
-                                                    data-target="#DeleteModal"
-                                                    class="btn btn-sm btn-icon-split btn-danger">
-                                                    <span class="icon"><i class="fa fa-trash text-white"
-                                                            style="padding-top: 4px;"></i></span><span
-                                                        class="text">Hapus</span>
-                                                </a>
                                                     @if ($periodontal->acc !== 1)
                                                         <a href ="{{ route('periodontal.edit', $periodontal->id) }}"
                                                             title="Edit" class="btn btn-sm btn-icon-split btn-warning">
                                                             <span class="icon"><i class="fas fa-pen text-white"
                                                                     style="padding-top: 4px;"></i></span><span
                                                                 class="text">Edit</span>
+                                                        </a>
+                                                        <a href="javascript:;" data-toggle="modal"
+                                                            onclick="handleDelete({{ $periodontal->id }})"
+                                                            data-target="#DeleteModal"
+                                                            class="btn btn-sm btn-icon-split btn-danger">
+                                                            <span class="icon"><i class="fa fa-trash text-white"
+                                                                    style="padding-top: 4px;"></i></span><span
+                                                                class="text">Hapus</span>
                                                         </a>
                                                     @else
                                                         <a href ="" title="Edit"

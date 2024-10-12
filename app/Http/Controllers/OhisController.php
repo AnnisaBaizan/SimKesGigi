@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Ohis;
-use App\Models\Kartupasien;
+use App\Models\kartupasien;
 use App\Models\gigi;
 use App\Models\User;
 use Illuminate\Http\Request;
