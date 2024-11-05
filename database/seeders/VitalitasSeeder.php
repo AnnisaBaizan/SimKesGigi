@@ -56,6 +56,7 @@ class VitalitasSeeder extends Seeder
             $elemenGigi = $elemenGigiValues[array_rand($elemenGigiValues)];
             
             // Generate random values for inspeksi, thermis, sondasi, perkusi, druk, mobility
+            $odontogramId = rand(1, 3);
             $inspeksi = rand(0, 1);
             $thermis = rand(0, 1);
             $sondasi = rand(0, 1);
@@ -102,6 +103,7 @@ class VitalitasSeeder extends Seeder
                 'user_id' => $userId,
                 'pembimbing' => $pembimbingId,
                 'kartupasien_id' => $kartuPasienId,
+                'odontogram_id' => $odontogramId,
                 'elemen_gigi'=> $elemenGigi,
                 'inspeksi' => $inspeksi,
                 'thermis' => $thermis,

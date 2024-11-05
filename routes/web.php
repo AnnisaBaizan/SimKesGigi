@@ -271,12 +271,23 @@ Route::group(['middleware' => 'auth'], function () {
 		return response()->json($GigiHTML);
 	});
 
-	Route::post('/getElemenGigis', function (Request $request) {
+	Route::post('/getOdontogram', function (Request $request) {
 		$user_id = $request->input('user_id');
 		$pembimbing = $request->input('pembimbing');
 		$kartupasien_id = $request->input('kartupasien_id');
 	
-		$elemenGigiHTML = getElemenGigis($user_id, $pembimbing, $kartupasien_id);
+		$odontogramHTML = getOdontogram($user_id, $pembimbing, $kartupasien_id);
+	
+		return response()->json($odontogramHTML);
+	});
+
+	Route::post('/getElemenGigis', function (Request $request) {
+		$user_id = $request->input('user_id');
+		$pembimbing = $request->input('pembimbing');
+		$kartupasien_id = $request->input('kartupasien_id');
+		$odontogram_id = $request->input('odontogram_id');
+	
+		$elemenGigiHTML = getElemenGigis($user_id, $pembimbing, $kartupasien_id, $odontogram_id);
 	
 		return response()->json($elemenGigiHTML);
 	});

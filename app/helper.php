@@ -80,12 +80,30 @@ if (!function_exists('getGigis')) {
 }
 
 
+if (!function_exists('getOdontogram')) {
+    function getOdontogram($user_id, $pembimbing, $kartupasien_id)
+    {
+        $odontograms = Odontogram::where('user_id', $user_id)
+            ->where('pembimbing', $pembimbing)
+            ->where('kartupasien_id', $kartupasien_id)
+            ->get();
+
+        $odontogramHTML = '<option value="" selected disabled>Pilih Odontogram</option>';
+        foreach ($odontograms as $odontogram) {
+            $odontogramHTML .= '<option value="' . htmlspecialchars($odontogram->id) . '">' . htmlspecialchars(date_format($odontogram->created_at, 'd M Y')) . '</option>';
+        }
+        return $odontogramHTML;
+    }
+}
+
+
 if (!function_exists('getElemenGigis')) {
-    function getElemenGigis($user_id, $pembimbing, $kartupasien_id)
+    function getElemenGigis($user_id, $pembimbing, $kartupasien_id, $odontogram_id)
     {
         $elemengigis = Odontogram::where('user_id', $user_id)
             ->where('pembimbing', $pembimbing)
             ->where('kartupasien_id', $kartupasien_id)
+            ->where('id', $odontogram_id)
             ->latest() // Mengurutkan berdasarkan 'created_at' secara otomatis
             ->first();
 
@@ -100,6 +118,7 @@ if (!function_exists('getElemenGigis')) {
                     ->where('user_id', $user_id)
                     ->where('pembimbing', $pembimbing)
                     ->where('kartupasien_id', $kartupasien_id)
+                    ->where('odontogram_id', $odontogram_id)
                     ->first();
                 if (!$vitalitas) {
                     // Jika elemen gigi tidak ada dalam tabel Vitalitas, tambahkan sebagai opsi dalam elemen HTML

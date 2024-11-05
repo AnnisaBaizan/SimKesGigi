@@ -69,6 +69,7 @@ class VitalitasController extends Controller
             'user_id' => 'required',
             'pembimbing' => 'required',
             'kartupasien_id' => 'required',
+            'odontogram_id' => 'required',
 
             'elemen_gigi' => 'required|min:2|max:2',
             'inspeksi' => 'required|numeric|min:0|max:1',
@@ -98,8 +99,8 @@ class VitalitasController extends Controller
 
         // dd($accs);
         return view('pages.vitalitas.show')->with([
-            'vitalitas'=> $vitalitas,
-            'vitalitass'=> $vitalitass,
+            'vitalitas' => $vitalitas,
+            'vitalitass' => $vitalitass,
             'accs' => $accs
         ]);
     }
@@ -115,27 +116,31 @@ class VitalitasController extends Controller
         if ($vitalitas->acc !== 1) {
             if (auth()->user()->role === 1) {
                 $kartupasiens = kartupasien::where('user_id', $vitalitas->user_id)
-                                        ->where('pembimbing', $vitalitas->pembimbing)
-                                        ->get();
+                    ->where('pembimbing', $vitalitas->pembimbing)
+                    ->get();
                 // $kartupasiens = kartupasien::all();
                 $users = User::where('role', 3)->get();
-            } 
-            elseif (auth()->user()->role === 2) {
+            } elseif (auth()->user()->role === 2) {
                 $kartupasiens = kartupasien::where('pembimbing', auth()->user()->nimnip)->get();
-            } 
-            else {
+            } else {
                 $kartupasiens = kartupasien::where('user_id', auth()->id())->get();
             }
-    
+
+            $odontograms = Odontogram::where('user_id', $vitalitas->user_id)
+                ->where('pembimbing', $vitalitas->pembimbing)
+                ->where('kartupasien_id', $vitalitas->kartupasien_id)
+                ->where('id', $vitalitas->odontogram_id)
+                ->get('created_at');
+
             $elemengigis = Odontogram::where('user_id', $vitalitas->user_id)
                 ->where('pembimbing', $vitalitas->pembimbing)
                 ->where('kartupasien_id', $vitalitas->kartupasien_id)
                 ->get('gigi_karies');
-    
-                // dd($elemengigis);
-    
+
+            // dd($elemengigis);
+
             $gigis = [];
-    
+
             foreach ($elemengigis as $elemengigi) {
                 $gigiArray = explode(",", $elemengigi->gigi_karies);
                 foreach ($gigiArray as $gigi) {
@@ -145,23 +150,23 @@ class VitalitasController extends Controller
                         ->where('pembimbing', $vitalitas->pembimbing)
                         ->where('kartupasien_id', $vitalitas->kartupasien_id)
                         ->exists();
-                    if (!$existingVitalitas || $vitalitas->elemen_gigi==$gigi) {
+                    if (!$existingVitalitas || $vitalitas->elemen_gigi == $gigi) {
                         $gigis[] = $gigi;
                     }
                 }
             }
             // dd($gigis);
-    
+
             return view('pages.vitalitas.edit')->with([
                 'vitalitas' => $vitalitas,
                 'kartupasiens' => $kartupasiens,
+                'odontograms' => $odontograms,
                 'gigis' => $gigis,
                 'users' => $users ?? null
             ]);
         } else {
             abort(403, 'Anda Tidak dapat Mengakses Halaman Ini, status telah ACC');
         }
-        
     }
 
     /**
@@ -178,6 +183,7 @@ class VitalitasController extends Controller
             'user_id' => 'required',
             'pembimbing' => 'required',
             'kartupasien_id' => 'required',
+            'odontogram_id' => 'required',
 
             'elemen_gigi' => 'required|min:2|max:2',
             'inspeksi' => 'required|numeric|min:0|max:1',
@@ -208,7 +214,6 @@ class VitalitasController extends Controller
         } else {
             abort(403, 'Anda Tidak dapat Mengakses Halaman Ini, status telah ACC');
         }
-        
     }
 
     public function acc($id)

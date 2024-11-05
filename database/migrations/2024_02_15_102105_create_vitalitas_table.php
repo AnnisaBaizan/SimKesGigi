@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignId('user_id');
             $table->string('pembimbing');
             $table->foreignId('kartupasien_id');
+            $table->foreignId('odontogram_id');
             $table->string('elemen_gigi');
             $table->tinyInteger('inspeksi');
             $table->tinyInteger('thermis');

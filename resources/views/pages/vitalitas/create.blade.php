@@ -67,10 +67,10 @@
                     </div>
                     @can('admin')
                         <div class="form-group row">
-                            <div class="col-sm-4">
+                            <div class="col-sm-2">
                                 <label for="user_id" class="form-text">Pilih Mahasiswa :</label>
                             </div>
-                            <div class="col-sm-4">
+                            <div class="col-sm-5">
                                 <select class="js-example-basic-single form-control @error('user_id') is-invalid @enderror"
                                     data-live-search="true" id="user_id" name="user_id" placeholder="Pilih Mahasiswa"
                                     value="{{ old('user_id') }}" required>
@@ -86,7 +86,7 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="col-sm-4">
+                            <div class="col-sm-5">
                                 <input type="text" class="form-control @error('pembimbing') is-invalid_max @enderror"
                                     id="pembimbing" name="pembimbing" placeholder="pembimbing" readonly required>
                                 @error('pembimbing')
@@ -97,10 +97,10 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <div class="col-sm-4">
+                            <div class="col-sm-2">
                                 <label for="kartupasien_id" class="form-text">Pilih Pasien :</label>
                             </div>
-                            <div class="col-sm-8">
+                            <div class="col-sm-4">
                                 <select
                                     class="js-example-basic-single form-control @error('kartupasien_id') is-invalid @enderror"
                                     data-live-search="true" id="kartupasien_id" name="kartupasien_id" placeholder="Pilih Pasien"
@@ -111,6 +111,22 @@
                                         </span>
                                     @enderror
                                     <option value="" selected disabled>Pilih Pasien</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-2">
+                                <label for="odontogram_id" class="form-text">Pemeriksaan Odontogram:</label>
+                            </div>
+                            <div class="col-sm-4">
+                                <select
+                                    class="js-example-basic-single form-control @error('odontogram_id') is-invalid @enderror"
+                                    data-live-search="true" id="odontogram_id" name="odontogram_id" placeholder="Pilih Odontogram"
+                                    value="{{ old('odontogram_id') }}" required>
+                                    @error('odontogram_id')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                    <option value="" selected disabled>Pilih Odontogram</option>
                                 </select>
                             </div>
                         </div>
@@ -136,11 +152,12 @@
                                 </span>
                             @enderror
                         </div>
+
                         <div class="form-group row">
-                            <div class="col-sm-4">
+                            <div class="col-sm-2">
                                 <label for="kartupasien_id" class ="form-text">Pilih Pasien :</label>
                             </div>
-                            <div class="col-sm-8">
+                            <div class="col-sm-4">
                                 <select
                                     class="js-example-basic-single form-control @error('kartupasien_id') is-invalid @enderror"
                                     data-live-search="true" id="kartupasien_id" name="kartupasien_id" placeholder="Pilih Pasien"
@@ -155,6 +172,24 @@
                                         <option value="{{ $kartupasien->id }}">{{ $kartupasien->no_kartu }} |
                                             {{ $kartupasien->nama }}</option>
                                     @endforeach
+                                </select>
+                            </div>
+
+                            
+                            <div class="col-sm-2">
+                                <label for="odontogram_id" class="form-text">Pemeriksaan Odontogram:</label>
+                            </div>
+                            <div class="col-sm-4">
+                                <select
+                                    class="js-example-basic-single form-control @error('odontogram_id') is-invalid @enderror"
+                                    data-live-search="true" id="odontogram_id" name="odontogram_id" placeholder="Pilih Odontogram"
+                                    value="{{ old('odontogram_id') }}" required>
+                                    @error('odontogram_id')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                    <option value="" selected disabled>Pilih Odontogram</option>
                                 </select>
                             </div>
                         </div>
@@ -421,12 +456,48 @@
                 var kartupasien_id = $("#kartupasien_id").val();
 
                 $.ajax({
-                    url: '/getElemenGigis',
+                    url: '/getOdontogram',
                     type: 'POST',
                     data: {
                         user_id: user_id,
                         pembimbing: pembimbing,
                         kartupasien_id: kartupasien_id
+                    },
+                    cache: false,
+
+                    success: function(msg) {
+                        $("#odontogram_id").html(msg);
+                    },
+
+                    error: function(data) {
+                        console.log('error:', data);
+                    }
+                });
+            });
+        });
+    </script>
+    <script>
+        $(function() {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $('#odontogram_id').on('change', function() {
+                var user_id = $("#user_id").val();
+                var pembimbing = $("#pembimbing").val();
+                var kartupasien_id = $("#kartupasien_id").val();
+                var odontogram_id = $("#odontogram_id").val();
+
+                $.ajax({
+                    url: '/getElemenGigis',
+                    type: 'POST',
+                    data: {
+                        user_id: user_id,
+                        pembimbing: pembimbing,
+                        kartupasien_id: kartupasien_id,
+                        odontogram_id: odontogram_id
                     },
                     cache: false,
 

@@ -142,6 +142,7 @@
                                         @can('pembimbing')
                                             <th>Mahasiswa</th>
                                         @endcan
+                                        <th>Odontogram</th>
                                         <th>No_Kartu & Nama Pasien</th>
                                         <th>Elemen Gigi</th>
                                         <th style="display: none;">Inspeksi</th>
@@ -176,6 +177,7 @@
                                         @can('pembimbing')
                                             <th>Mahasiswa</th>
                                         @endcan
+                                        <th>Odontogram</th>
                                         <th>No_Kartu & Nama Pasien</th>
                                         <th>Elemen Gigi</th>
                                         <th style="display: none;">Inspeksi</th>
@@ -213,7 +215,8 @@
                                             @can('pembimbing')
                                                 <td>{{ $vitalitas->user->username }}</td>
                                             @endcan
-                                            <td>{{ $vitalitas->kartupasien->no_kartu }} |
+                                            <td>{{ date_format($vitalitas->odontogram->created_at, 'd M Y') }}</td>
+                                            <td>{{ $vitalitas->kartupasien->no_kartu }}
                                                 {{ $vitalitas->kartupasien->nama }}</td>
                                             {{-- pengetahuan --}}
                                             <td>{{ $vitalitas->elemen_gigi }} </td>

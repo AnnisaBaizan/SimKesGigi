@@ -100,10 +100,10 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <div class="col-sm-4">
+                            <div class="col-sm-2">
                                 <label for="kartupasien_id" class="form-text">Pilih Pasien :</label>
                             </div>
-                            <div class="col-sm-8">
+                            <div class="col-sm-4">
                                 <select
                                     class="js-example-basic-single form-control @error('kartupasien_id') is-invalid @enderror"
                                     data-live-search="true" id="kartupasien_id" name="kartupasien_id" placeholder="Pilih Pasien"
@@ -118,6 +118,28 @@
                                             {{ $vitalitas->kartupasien_id == $kartupasien->id ? 'selected' : '' }}>
                                             {{ $kartupasien->no_kartu }} |
                                             {{ $kartupasien->nama }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            
+                            <div class="col-sm-2">
+                                <label for="odontogram_id" class="form-text">Pilih Pasien :</label>
+                            </div>
+                            <div class="col-sm-4">
+                                <select
+                                    class="js-example-basic-single form-control @error('odontogram_id') is-invalid @enderror"
+                                    data-live-search="true" id="odontogram_id" name="odontogram_id" placeholder="Pilih Pasien"
+                                    value="{{ old('odontogram_id', $vitalitas->odontogram_id) }}" required>
+                                    @error('odontogram_id')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                    @foreach ($odontograms as $odontogram)
+                                        <option value="{{ $vitalitas->odontogram_id }}"
+                                            {{ $vitalitas->odontogram_id == $odontogram->id ? 'selected' : '' }}>
+                                            {{ date_format($odontogram->created_at, 'd M Y') }} </option>
                                     @endforeach
                                 </select>
                             </div>
@@ -145,10 +167,10 @@
                             @enderror
                         </div>
                         <div class="form-group row">
-                            <div class="col-sm-4">
+                            <div class="col-sm-2">
                                 <label for="kartupasien_id" class ="form-text">Pilih Pasien :</label>
                             </div>
-                            <div class="col-sm-8">
+                            <div class="col-sm-4">
                                 <select
                                     class="js-example-basic-single form-control @error('kartupasien_id') is-invalid @enderror"
                                     data-live-search="true" id="kartupasien_id" name="kartupasien_id" placeholder="Pilih Pasien"
@@ -164,6 +186,26 @@
                                             {{ $vitalitas->kartupasien_id == $kartupasien->id ? 'selected' : '' }}>
                                             {{ $kartupasien->no_kartu }} |
                                             {{ $kartupasien->nama }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-sm-2">
+                                <label for="odontogram_id" class="form-text">Pilih Pasien :</label>
+                            </div>
+                            <div class="col-sm-4">
+                                <select
+                                    class="js-example-basic-single form-control @error('odontogram_id') is-invalid @enderror"
+                                    data-live-search="true" id="odontogram_id" name="odontogram_id" placeholder="Pilih Pasien"
+                                    value="{{ old('odontogram_id', $vitalitas->odontogram_id) }}" required>
+                                    @error('odontogram_id')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                    @foreach ($odontograms as $odontogram)
+                                        <option value="{{ $vitalitas->odontogram_id }}"
+                                            {{ $vitalitas->odontogram_id == $odontogram->id ? 'selected' : '' }}>
+                                            {{ date_format($odontogram->created_at, 'd M Y') }} </option>
                                     @endforeach
                                 </select>
                             </div>
@@ -436,12 +478,48 @@
                 var kartupasien_id = $("#kartupasien_id").val();
 
                 $.ajax({
-                    url: '/getElemenGigis',
+                    url: '/getOdontogram',
                     type: 'POST',
                     data: {
                         user_id: user_id,
                         pembimbing: pembimbing,
                         kartupasien_id: kartupasien_id
+                    },
+                    cache: false,
+
+                    success: function(msg) {
+                        $("#odontogram_id").html(msg);
+                    },
+
+                    error: function(data) {
+                        console.log('error:', data);
+                    }
+                });
+            });
+        });
+    </script>
+    <script>
+        $(function() {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $('#odontogram_id').on('change', function() {
+                var user_id = $("#user_id").val();
+                var pembimbing = $("#pembimbing").val();
+                var kartupasien_id = $("#kartupasien_id").val();
+                var odontogram_id = $("#odontogram_id").val();
+
+                $.ajax({
+                    url: '/getElemenGigis',
+                    type: 'POST',
+                    data: {
+                        user_id: user_id,
+                        pembimbing: pembimbing,
+                        kartupasien_id: kartupasien_id,
+                        odontogram_id: odontogram_id
                     },
                     cache: false,
 

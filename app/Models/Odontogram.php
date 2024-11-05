@@ -15,4 +15,7 @@ class Odontogram extends Model
     public function user(){
         return $this->belongsTo(User::class);
     }
+    public function vitalitas(){
+        return $this->hasMany(Vitalitas::class);
+    }
 }
