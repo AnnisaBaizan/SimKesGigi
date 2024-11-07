@@ -74,6 +74,7 @@ class UserController extends Controller
             // $attributes['avatar'] = request()->file('avatar')->store('avatars');
             $avatarname = 'avatar' . time() . '.' . $request->avatar->getClientOriginalExtension();
             $attributes['avatar']->storeAs('avatars', $avatarname);
+            // $attributes['avatar']->storeAs('avatars', $avatarname, 'public_html');
             $attributes['avatar'] = $avatarname;
         } else {
             $attributes['avatar'] = "AvatarDefault.jpg";
@@ -140,12 +141,14 @@ class UserController extends Controller
             // $attributes['avatar'] = request()->file('avatar')->store('avatars');
             $avatarname = 'avatar' . time() . '.' . $request->avatar->getClientOriginalExtension();
             $request->avatar->storeAs('avatars', $avatarname);
+            // $request->avatar->storeAs('avatars', $avatarname, 'public_html');
             $oldpic = $user->avatar;
             if ($oldpic !== "AvatarDefault.jpg") {
                 Storage::delete('avatars/' . $oldpic);
+                // Storage::disk('public_html')->delete('avatars/' . $oldpic);
                 user::where('id', $user->id)->update([
                     'avatar' => $avatarname
-                    // $request['avatar'] = $avatarname  
+                    // $request['avatar'] = $avatarname
                 ]);
             }
         } else {
@@ -159,7 +162,7 @@ class UserController extends Controller
         if ($request['password'] !== NULL) {
             user::where('id', $user->id)->update([
                 'password' => Hash::make($request['password'])
-                // 'password' => $request['password']  
+                // 'password' => $request['password']
             ]);
         }
 
@@ -189,6 +192,7 @@ class UserController extends Controller
         if ($user->id !== 1) {
             if ($user->avatar !== "AvatarDefault.jpg") {
                 Storage::delete('avatars/' . $user->avatar);
+                // Storage::disk('public_html')->delete('avatars/' . $user->avatar);
             }
 
             User::destroy($user->id);

@@ -32,35 +32,38 @@ class UserProfileController extends Controller
             $oldpic = auth()->user()->avatar;
             if ($oldpic !== "AvatarDefault.jpg") {
                 Storage::delete('avatars/'. $oldpic);
+                // Storage::disk('public_html')->delete('avatars/'. $oldpic);
                 $avatarname='avatar'.time().'.'.$request->avatar->getClientOriginalExtension();
                 $request->avatar->storeAs('avatars',$avatarname);
+                // $request->avatar->storeAs('avatars',$avatarname,'public_html');
                 user::where('id', auth()->user()->id)->update([
                     'avatar' => $avatarname
-                    // $request['avatar'] = $avatarname  
+                    // $request['avatar'] = $avatarname
                 ]);
             }
             else {
                 $avatarname='avatar'.time().'.'.$request->avatar->getClientOriginalExtension();
                 $request->avatar->storeAs('avatars',$avatarname);
+                // $request->avatar->storeAs('avatars',$avatarname,'public_html');
                 user::where('id', auth()->user()->id)->update([
                     'avatar' => $avatarname
-                    // $request['avatar'] = $avatarname  
+                    // $request['avatar'] = $avatarname
                 ]);
             }
-            
+
         }
-        else { 
+        else {
             user::where('id', auth()->user()->id)->update([
                 'avatar' => auth()->user()->avatar
                 // $request['avatar']= auth()->user()->avatar
             ]);
         }
-        
+
         // dd($request);
             if($request['password'] !== NULL){
                 user::where('id', auth()->user()->id)->update([
-                    'password' => Hash::make($request['password']) 
-                    // 'password' => $request['password']  
+                    'password' => Hash::make($request['password'])
+                    // 'password' => $request['password']
                     ]);
             }
 
@@ -74,7 +77,7 @@ class UserProfileController extends Controller
 
             // dd($attributes);
             // user::where('id', auth()->user()->id)->update($attributes);
-            
+
         return back()->with('succes', 'Profile succesfully updated');
 
         // $attributes = $request->validate([
@@ -96,14 +99,14 @@ class UserProfileController extends Controller
         //             $attributes['avatar'] = $avatarname;
         //         }
         //     }
-        //     else { 
+        //     else {
         //         $attributes['avatar']= auth()->user()->avatar;
         //         // $attributes['avatar']= "AvatarDefault.jpg";
         //     }
 
         //     if($request['password'] !== NULL){
         //         auth()->user()->update([
-        //             'password' => $request['password'],  
+        //             'password' => $request['password'],
         //             ]);
         //     }
 
