@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignId('user_id');
             $table->string('pembimbing');
             $table->foreignId('kartupasien_id');
+            $table->foreignId('eksplakkal_id');
 
             $table->string('elemen_permukaan_gigi');
             $table->string('kalkulus');

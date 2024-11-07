@@ -79,6 +79,7 @@ if (!function_exists('getGigis')) {
     }
 }
 
+//Menu Vitalitas
 
 if (!function_exists('getOdontogram')) {
     function getOdontogram($user_id, $pembimbing, $kartupasien_id)
@@ -132,13 +133,38 @@ if (!function_exists('getElemenGigis')) {
     }
 }
 
+//end Menu Vitalitas
+
+
+//---------------------------------------------------------
+
+
+//Menu Periodontal
+
+if (!function_exists('getEksplakkal')) {
+    function getEksplakkal($user_id, $pembimbing, $kartupasien_id)
+    {
+        $eksplakkals = eksplakkal::where('user_id', $user_id)
+            ->where('pembimbing', $pembimbing)
+            ->where('kartupasien_id', $kartupasien_id)
+            ->get();
+
+        $eksplakkalHTML = '<option value="" selected disabled>Pilih eksplakkal</option>';
+        foreach ($eksplakkals as $eksplakkal) {
+            $eksplakkalHTML .= '<option value="' . htmlspecialchars($eksplakkal->id) . '">' . htmlspecialchars(date_format($eksplakkal->created_at, 'd M Y')) . '</option>';
+        }
+        return $eksplakkalHTML;
+    }
+}
+
 if (!function_exists('getElemenPermukaanGigis')) {
-    function getElemenPermukaanGigis($user_id, $pembimbing, $kartupasien_id)
+    function getElemenPermukaanGigis($user_id, $pembimbing, $kartupasien_id, $eksplakkal_id)
     {
         // Ambil record paling baru dari tabel 'Eksplakkal'
         $latestRecord = Eksplakkal::where('user_id', $user_id)
             ->where('pembimbing', $pembimbing)
             ->where('kartupasien_id', $kartupasien_id)
+            ->where('id', $eksplakkal_id)
             ->latest() // Mengurutkan berdasarkan 'created_at' secara otomatis
             ->first(); // Ambil record paling baru
 
@@ -162,6 +188,7 @@ if (!function_exists('getElemenPermukaanGigis')) {
                     ->where('user_id', $user_id)
                     ->where('pembimbing', $pembimbing)
                     ->where('kartupasien_id', $kartupasien_id)
+                    ->where('eksplakkal_id', $eksplakkal_id)
                     ->first();
 
                 if (!$periodontal) {
@@ -174,6 +201,14 @@ if (!function_exists('getElemenPermukaanGigis')) {
         return $elemenPermukaanGigiHTML;
     }
 }
+
+//end Menu Periodontal
+
+
+//------------------------------------------------------------------------------------------
+
+
+//Menu Pelaksanaan
 
 if (!function_exists('getPreviewDiagnosas')) {
     function getPreviewDiagnosas($user_id, $pembimbing, $kartupasien_id, $gigi)
@@ -226,6 +261,7 @@ if (!function_exists('getPreviewDiagnosas')) {
     }
 }
 
+
 if (!function_exists('getDiagnosa')) {
     function getDiagnosa($user_id, $pembimbing, $kartupasien_id, $gigi)
     {
@@ -246,7 +282,16 @@ if (!function_exists('getDiagnosa')) {
     }
 }
 
+//end Menu Pelaksanaan
 
+
+
+//--------------------------------------------------
+
+
+
+
+//Menu Diagnosis
 
 
 if (!function_exists('getPenyebabs')) {
@@ -276,3 +321,6 @@ if (!function_exists('getGejalas')) {
         return $gejalaOptions;
     }
 }
+
+
+//End Menu Diagnosis

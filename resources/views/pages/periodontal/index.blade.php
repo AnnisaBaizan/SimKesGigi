@@ -66,7 +66,7 @@
                 </div>
                 <div class="modal-body">
                     <p>Apakah anda yakin ingin mengubah status ACC?</p><br>
-                    <p class="text-danger">ANDA AKAN MENGUBAH STATUS ACC SEMUA PEMERIKSAAN PERIODONTAL ATAS NAMA PASIEN INI
+                    <p class="text-danger">ANDA AKAN MENGUBAH STATUS ACC SEMUA PEMERIKSAAN PERIODONTAL ATAS NAMA PASIEN INI DENGAN EKSTENAL & INTERNAL ORAL (PLAK & KALKULUS) TERSEBUT
                     </p>
                 </div>
                 <div class="modal-footer">
@@ -142,6 +142,7 @@
                                         @can('pembimbing')
                                             <th>Mahasiswa</th>
                                         @endcan
+                                        <th>Eks&In Oral (Plak&Kal)</th>
                                         <th>No_Kartu & Nama Pasien</th>
                                         <th>Elemen Gigi</th>
                                         <th>Kalkulus</th>
@@ -183,6 +184,7 @@
                                         @can('pembimbing')
                                             <th>Mahasiswa</th>
                                         @endcan
+                                        <th>Eks&In Oral (Plak&Kal)</th>
                                         <th>No_Kartu & Nama Pasien</th>
                                         <th>Elemen Gigi</th>
                                         <th>Kalkulus</th>
@@ -227,6 +229,7 @@
                                             @can('pembimbing')
                                                 <td>{{ $periodontal->user->username }}</td>
                                             @endcan
+                                            <td>{{ date_format($periodontal->eksplakkal->created_at, 'd M Y') }}</td>
                                             <td>{{ $periodontal->kartupasien->no_kartu }} |
                                                 {{ $periodontal->kartupasien->nama }}</td>
                                             {{-- pengetahuan --}}

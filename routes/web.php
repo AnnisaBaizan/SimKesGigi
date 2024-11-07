@@ -271,6 +271,19 @@ Route::group(['middleware' => 'auth'], function () {
 		return response()->json($GigiHTML);
 	});
 
+	
+	Route::post('/getPatients', function (Request $request) {
+		$user_id = $request->input('user_id');
+		$pembimbing = $request->input('pembimbing');
+	
+		$options = getPatients($user_id, $pembimbing);
+	
+		return response()->json($options);
+	});
+
+
+	//Menu Vitalitas
+
 	Route::post('/getOdontogram', function (Request $request) {
 		$user_id = $request->input('user_id');
 		$pembimbing = $request->input('pembimbing');
@@ -292,24 +305,42 @@ Route::group(['middleware' => 'auth'], function () {
 		return response()->json($elemenGigiHTML);
 	});
 
-	Route::post('/getElemenPermukaanGigis', function (Request $request) {
+	//End Menu Vitalitas
+
+
+	//------------------------------------------------------------
+
+
+	//Menu Periodontal
+
+	Route::post('/getEksplakkal', function (Request $request) {
 		$user_id = $request->input('user_id');
 		$pembimbing = $request->input('pembimbing');
 		$kartupasien_id = $request->input('kartupasien_id');
 	
-		$elemenPermukaanGigiHTML = getElemenPermukaanGigis($user_id, $pembimbing, $kartupasien_id);
+		$eksplakkalHTML = getEksplakkal($user_id, $pembimbing, $kartupasien_id);
+	
+		return response()->json($eksplakkalHTML);
+	});
+
+	Route::post('/getElemenPermukaanGigis', function (Request $request) {
+		$user_id = $request->input('user_id');
+		$pembimbing = $request->input('pembimbing');
+		$kartupasien_id = $request->input('kartupasien_id');
+		$eksplakkal_id = $request->input('eksplakkal_id');
+	
+		$elemenPermukaanGigiHTML = getElemenPermukaanGigis($user_id, $pembimbing, $kartupasien_id, $eksplakkal_id);
 	
 		return response()->json($elemenPermukaanGigiHTML);
 	});
 
-	Route::post('/getPatients', function (Request $request) {
-		$user_id = $request->input('user_id');
-		$pembimbing = $request->input('pembimbing');
-	
-		$options = getPatients($user_id, $pembimbing);
-	
-		return response()->json($options);
-	});
+	//End Menu Periodontal
+
+
+	//------------------------------------------------------------
+
+
+	//Menu Pelaksanaan
 
 	Route::post('/getPreviewDiagnosas', function (Request $request) {
 		$user_id = $request->input('user_id');
@@ -333,6 +364,14 @@ Route::group(['middleware' => 'auth'], function () {
 		return response()->json($DiagnosaHTML);
 	});
 
+	//End Menu Pelaksanaan
+
+
+	//------------------------------------------------------------
+
+
+	//Menu Diagnosa
+
 	Route::post('/getPenyebabs', function (Request $request) {
 		$askepgilut = $request->input('askepgilut');
 	
@@ -348,5 +387,7 @@ Route::group(['middleware' => 'auth'], function () {
 	
 		return response()->json($gejalaOptions);
 	});
+
+	//End Menu Diagnosa
 	
 });

@@ -49,6 +49,8 @@ class PeriodontalSeeder extends Seeder
                     $kartuPasienId = rand(1, 12);
             }
 
+            $eksplakkalId = rand(1, 3);
+
             // Randomly select values for elemen_permukaan_gigi and kalkulus
             $elemenPermukaanGigi = $elemenPermukaanGigiValues[array_rand($elemenPermukaanGigiValues)];
             $kalkulus = $kalkulusValues[array_rand($kalkulusValues)];
@@ -90,6 +92,8 @@ class PeriodontalSeeder extends Seeder
                 'user_id' => $userId,
                 'pembimbing' => $pembimbingId,
                 'kartupasien_id' => $kartuPasienId,
+                'eksplakkal_id' => $eksplakkalId,
+                
                 'elemen_permukaan_gigi' => $elemenPermukaanGigi,
                 'kalkulus' => $kalkulus,
                 'pocket_depth' => $pocketDepth,

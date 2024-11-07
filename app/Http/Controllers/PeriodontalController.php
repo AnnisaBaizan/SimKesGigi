@@ -18,14 +18,12 @@ class PeriodontalController extends Controller
      */
     public function index()
     {
-        
+
         if (auth()->user()->role === 1) {
             $periodontals = Periodontal::all();
-        } 
-        elseif (auth()->user()->role === 2) {
+        } elseif (auth()->user()->role === 2) {
             $periodontals = Periodontal::where('pembimbing', auth()->user()->nimnip)->get();
-        } 
-        else {
+        } else {
             $periodontals = Periodontal::where('user_id', auth()->id())->get();
         }
 
@@ -39,19 +37,17 @@ class PeriodontalController extends Controller
      */
     public function create()
     {
-        
+
         if (auth()->user()->role === 1) {
             $kartupasiens = kartupasien::all();
             $users = User::where('role', 3)->get();
-        } 
-        elseif (auth()->user()->role === 2) {
+        } elseif (auth()->user()->role === 2) {
             $kartupasiens = kartupasien::where('pembimbing', auth()->user()->nimnip)->get();
-        } 
-        else {
+        } else {
             $kartupasiens = kartupasien::where('user_id', auth()->id())->get();
         }
 
-        
+
         return view('pages.periodontal.create')->with([
             'kartupasiens' => $kartupasiens,
             'users' => $users ?? null
@@ -70,6 +66,7 @@ class PeriodontalController extends Controller
             'user_id' => 'required',
             'pembimbing' => 'required',
             'kartupasien_id' => 'required',
+            'eksplakkal_id' => 'required',
 
             'elemen_permukaan_gigi' => 'required|min:8|max:10',
             'kalkulus' => 'required|min:10|max:12',
@@ -83,7 +80,7 @@ class PeriodontalController extends Controller
             'attachment' => 'required|numeric|min:0|max:1',
             'pus' => 'required|numeric|min:0|max:1',
             'dll' => 'max:255',
-            'masalah' =>'required|max:255'
+            'masalah' => 'required|max:255'
         ]);
 
         Periodontal::create($validatedData);
@@ -100,19 +97,22 @@ class PeriodontalController extends Controller
     public function show(Periodontal $periodontal)
     {
         $periodontalSubs = Periodontal::where('kartupasien_id', $periodontal->kartupasien_id)
-        ->where('kalkulus', 'Subgingiva')
-        ->get();
-        
-        $periodontalSupras = Periodontal::where('kartupasien_id', $periodontal->kartupasien_id)
-        ->where('kalkulus', 'Supragingiva')
-        ->get();
+            ->where('kalkulus', 'Subgingiva')
+            ->where('eksplakkal_id', $periodontal->eksplakkal_id)
+            ->get();
 
-        $accs = implode(',', Periodontal::where('kartupasien_id', $periodontal->kartupasien_id)->pluck('acc')->toArray());
+        $periodontalSupras = Periodontal::where('kartupasien_id', $periodontal->kartupasien_id)
+            ->where('kalkulus', 'Supragingiva')
+            ->where('eksplakkal_id', $periodontal->eksplakkal_id)
+            ->get();
+
+        $accs = implode(',', Periodontal::where('kartupasien_id', $periodontal->kartupasien_id)
+            ->where('eksplakkal_id', $periodontal->eksplakkal_id)->pluck('acc')->toArray());
 
         return view('pages.periodontal.show')->with([
-            'periodontal'=> $periodontal,
-            'periodontalSubs'=> $periodontalSubs,
-            'periodontalSupras'=> $periodontalSupras,
+            'periodontal' => $periodontal,
+            'periodontalSubs' => $periodontalSubs,
+            'periodontalSupras' => $periodontalSupras,
             'accs' => $accs
         ]);
     }
@@ -128,56 +128,61 @@ class PeriodontalController extends Controller
         if ($periodontal->acc !== 1) {
             if (auth()->user()->role === 1) {
                 $kartupasiens = kartupasien::where('user_id', $periodontal->user_id)
-                                        ->where('pembimbing', $periodontal->pembimbing)
-                                        ->get();
+                    ->where('pembimbing', $periodontal->pembimbing)
+                    ->get();
                 // $kartupasiens = kartupasien::all();
                 $users = User::where('role', 3)->get();
-            } 
-            elseif (auth()->user()->role === 2) {
+            } elseif (auth()->user()->role === 2) {
                 $kartupasiens = kartupasien::where('pembimbing', auth()->user()->nimnip)->get();
-            } 
-            else {
+            } else {
                 $kartupasiens = kartupasien::where('user_id', auth()->id())->get();
             }
-    
+
+            $eksplakkals = eksplakkal::where('user_id', $periodontal->user_id)
+                ->where('pembimbing', $periodontal->pembimbing)
+                ->where('kartupasien_id', $periodontal->kartupasien_id)
+                ->get();
+
             $subgingiva = Eksplakkal::where('user_id', $periodontal->user_id)
                 ->where('pembimbing', $periodontal->pembimbing)
                 ->where('kartupasien_id', $periodontal->kartupasien_id)
+                ->where('id', $periodontal->eksplakkal_id)
                 ->pluck('subgingiva')
                 ->first(); // Ambil hanya satu baris, karena kita akan explode
-    
+
             $supragingiva = Eksplakkal::where('user_id', $periodontal->user_id)
                 ->where('pembimbing', $periodontal->pembimbing)
                 ->where('kartupasien_id', $periodontal->kartupasien_id)
+                ->where('id', $periodontal->eksplakkal_id)
                 ->pluck('supragingiva')
                 ->first(); // Ambil hanya satu baris, karena kita akan explode
-    
+
             // Gabungkan nilai subgingiva dan supragingiva menjadi satu array
             $gigiArray = array_merge(explode(",", $subgingiva), explode(",", $supragingiva));
-    
+
             foreach ($gigiArray as $permukaan_gigi) {
                 // Periksa apakah elemen gigi tidak ada dalam tabel periodontal
-                    $existingperiodontal = Periodontal::where('elemen_permukaan_gigi', $permukaan_gigi)
+                $existingperiodontal = Periodontal::where('elemen_permukaan_gigi', $permukaan_gigi)
                     ->where('user_id', $periodontal->user_id)
                     ->where('pembimbing', $periodontal->pembimbing)
                     ->where('kartupasien_id', $periodontal->kartupasien_id)
+                    ->where('eksplakkal_id', $periodontal->eksplakkal_id)
                     ->exists();
-                if (!$existingperiodontal || $periodontal->elemen_permukaan_gigi==$permukaan_gigi) {
+                if (!$existingperiodontal || $periodontal->elemen_permukaan_gigi == $permukaan_gigi) {
                     $permukaan_gigis[] = $permukaan_gigi;
-                    
                 }
             }
-    
+
             return view('pages.periodontal.edit')->with([
                 'periodontal' => $periodontal,
                 'kartupasiens' => $kartupasiens,
+                'eksplakkals' => $eksplakkals,
                 'permukaan_gigis' => $permukaan_gigis,
                 'users' => $users ?? null
             ]);
         } else {
             abort(403, 'Anda Tidak dapat Mengakses Halaman Ini, status telah ACC');
         }
-        
     }
 
     /**
@@ -189,11 +194,12 @@ class PeriodontalController extends Controller
      */
     public function update(Request $request, Periodontal $periodontal)
     {
-        
+
         $validatedData = $request->validate([
             'user_id' => 'required',
             'pembimbing' => 'required',
             'kartupasien_id' => 'required',
+            'eksplakkal_id' => 'required',
 
             'elemen_permukaan_gigi' => 'required|min:8|max:10',
             'kalkulus' => 'required|min:10|max:12',
@@ -207,7 +213,7 @@ class PeriodontalController extends Controller
             'attachment' => 'required|numeric|min:0|max:1',
             'pus' => 'required|numeric|min:0|max:1',
             'dll' => 'max:255',
-            'masalah' =>'required|max:255'
+            'masalah' => 'required|max:255'
         ]);
         Periodontal::where('id', $periodontal->id)
             ->update($validatedData);
@@ -229,12 +235,11 @@ class PeriodontalController extends Controller
         } else {
             abort(403, 'Anda Tidak dapat Mengakses Halaman Ini, status telah ACC');
         }
-        
     }
 
     public function acc($id)
     {
-        
+
         // Ambil entri yang memiliki id yang diberikan
         $periodontal = Periodontal::findOrFail($id);
 
@@ -245,6 +250,7 @@ class PeriodontalController extends Controller
         Periodontal::where('user_id', $periodontal->user_id)
             ->where('pembimbing', $periodontal->pembimbing)
             ->where('kartupasien_id', $periodontal->kartupasien_id)
+            ->where('eksplakkal_id', $periodontal->eksplakkal_id)
             ->where('acc', $periodontal->acc)
             ->update(['acc' => $newValue]);
 
