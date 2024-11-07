@@ -94,8 +94,8 @@ class VitalitasController extends Controller
      */
     public function show(Vitalitas $vitalitas)
     {
-        $vitalitass = Vitalitas::where('kartupasien_id', $vitalitas->kartupasien_id)->get();
-        $accs = implode(',', Vitalitas::where('kartupasien_id', $vitalitas->kartupasien_id)->pluck('acc')->toArray());
+        $vitalitass = Vitalitas::where('kartupasien_id', $vitalitas->kartupasien_id)->where('odontogram_id', $vitalitas->odontogram_id)->get();
+        $accs = implode(',', Vitalitas::where('kartupasien_id', $vitalitas->kartupasien_id)->where('odontogram_id', $vitalitas->odontogram_id)->pluck('acc')->toArray());
 
         // dd($accs);
         return view('pages.vitalitas.show')->with([
@@ -129,14 +129,14 @@ class VitalitasController extends Controller
             $odontograms = Odontogram::where('user_id', $vitalitas->user_id)
                 ->where('pembimbing', $vitalitas->pembimbing)
                 ->where('kartupasien_id', $vitalitas->kartupasien_id)
-                ->where('id', $vitalitas->odontogram_id)
-                ->get('created_at');
+                ->get();
+            // dd($odontograms);
 
             $elemengigis = Odontogram::where('user_id', $vitalitas->user_id)
                 ->where('pembimbing', $vitalitas->pembimbing)
                 ->where('kartupasien_id', $vitalitas->kartupasien_id)
-                ->get('gigi_karies');
-
+                ->where('id', $vitalitas->odontogram_id)
+                ->get();
             // dd($elemengigis);
 
             $gigis = [];
@@ -149,6 +149,7 @@ class VitalitasController extends Controller
                         ->where('user_id', $vitalitas->user_id)
                         ->where('pembimbing', $vitalitas->pembimbing)
                         ->where('kartupasien_id', $vitalitas->kartupasien_id)
+                        ->where('odontogram_id', $vitalitas->odontogram_id)
                         ->exists();
                     if (!$existingVitalitas || $vitalitas->elemen_gigi == $gigi) {
                         $gigis[] = $gigi;
@@ -228,6 +229,7 @@ class VitalitasController extends Controller
         Vitalitas::where('user_id', $vitalitas->user_id)
             ->where('pembimbing', $vitalitas->pembimbing)
             ->where('kartupasien_id', $vitalitas->kartupasien_id)
+            ->where('odontogram_id', $vitalitas->odontogram_id)
             ->where('acc', $vitalitas->acc)
             ->update(['acc' => $newValue]);
 

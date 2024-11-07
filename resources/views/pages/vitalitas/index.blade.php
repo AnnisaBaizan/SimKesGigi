@@ -66,7 +66,7 @@
                 </div>
                 <div class="modal-body">
                     <p>Apakah anda yakin ingin mengubah status ACC?</p><br>
-                    <p class="text-danger">ANDA AKAN MENGUBAH STATUS ACC SEMUA PEMERIKSAAN VITALITAS ATAS NAMA PASIEN INI
+                    <p class="text-danger">ANDA AKAN MENGUBAH STATUS ACC SEMUA PEMERIKSAAN VITALITAS ATAS NAMA PASIEN INI DENGAN ODONTOGRAM TERSEBUT
                     </p>
                 </div>
                 <div class="modal-footer">

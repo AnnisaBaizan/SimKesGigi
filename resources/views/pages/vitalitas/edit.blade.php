@@ -67,10 +67,10 @@
                     </div>
                     @can('admin')
                         <div class="form-group row">
-                            <div class="col-sm-4">
+                            <div class="col-sm-2">
                                 <label for="user_id" class="form-text">Pilih Mahasiswa :</label>
                             </div>
-                            <div class="col-sm-4">
+                            <div class="col-sm-5">
                                 <select class="js-example-basic-single form-control @error('user_id') is-invalid @enderror"
                                     data-live-search="true" id="user_id" name="user_id" placeholder="Pilih Mahasiswa"
                                     value="{{ old('user_id') }}" required>
@@ -88,7 +88,7 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="col-sm-4">
+                            <div class="col-sm-5">
                                 <input type="text" class="form-control @error('pembimbing') is-invalid_max @enderror"
                                     id="pembimbing" name="pembimbing" placeholder="pembimbing"
                                     value="{{ $vitalitas->pembimbing }}" readonly required>
@@ -124,12 +124,12 @@
 
                             
                             <div class="col-sm-2">
-                                <label for="odontogram_id" class="form-text">Pilih Pasien :</label>
+                                <label for="odontogram_id" class="form-text">Pilih Odontogram :</label>
                             </div>
                             <div class="col-sm-4">
                                 <select
                                     class="js-example-basic-single form-control @error('odontogram_id') is-invalid @enderror"
-                                    data-live-search="true" id="odontogram_id" name="odontogram_id" placeholder="Pilih Pasien"
+                                    data-live-search="true" id="odontogram_id" name="odontogram_id" placeholder="Pilih Odontogram"
                                     value="{{ old('odontogram_id', $vitalitas->odontogram_id) }}" required>
                                     @error('odontogram_id')
                                         <span class="invalid-feedback" role="alert">
@@ -189,13 +189,14 @@
                                     @endforeach
                                 </select>
                             </div>
+
                             <div class="col-sm-2">
-                                <label for="odontogram_id" class="form-text">Pilih Pasien :</label>
+                                <label for="odontogram_id" class="form-text">Pilih Odontogram :</label>
                             </div>
                             <div class="col-sm-4">
                                 <select
                                     class="js-example-basic-single form-control @error('odontogram_id') is-invalid @enderror"
-                                    data-live-search="true" id="odontogram_id" name="odontogram_id" placeholder="Pilih Pasien"
+                                    data-live-search="true" id="odontogram_id" name="odontogram_id" placeholder="Pilih Odontogram"
                                     value="{{ old('odontogram_id', $vitalitas->odontogram_id) }}" required>
                                     @error('odontogram_id')
                                         <span class="invalid-feedback" role="alert">

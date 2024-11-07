@@ -35,20 +35,28 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <div class="col-sm-2">
+                    <div class="col-sm-1">
                         <label for="kartupasien_id" class="form-text">No Pasien :</label>
                     </div>
-                    <div class="col-sm-4">
+                    <div class="col-sm-3">
                         <input type="text" class="form-control"
                             value="{{ ucwords(get_v('kartupasiens', 'id', $vitalitas->kartupasien_id, 'no_kartu')[0]->no_kartu ?? '') }}"
                             disabled readonly required>
                     </div>
-                    <div class="col-sm-2">
+                    <div class="col-sm-1">
                         <label for="kartupasien_id" class="form-text">Nama Pasien :</label>
                     </div>
-                    <div class="col-sm-4">
+                    <div class="col-sm-3">
                         <input type="text" class="form-control"
                             value="{{ ucwords(get_v('kartupasiens', 'id', $vitalitas->kartupasien_id, 'nama')[0]->nama ?? '') }}"
+                            disabled readonly required>
+                    </div>
+                    <div class="col-sm-1">
+                        <label for="odontogram_id" class="form-text">Odontogram :</label>
+                    </div>
+                    <div class="col-sm-3">
+                        <input type="text" class="form-control"
+                            value="{{ ucwords(\Carbon\Carbon::parse(get_v('odontograms', 'id', $vitalitas->odontogram_id, 'created_at')[0]->created_at ?? '')->format('d M Y')) }}"
                             disabled readonly required>
                     </div>
                 </div>
