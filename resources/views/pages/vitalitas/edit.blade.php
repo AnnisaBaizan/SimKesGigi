@@ -139,7 +139,7 @@
                                     @foreach ($odontograms as $odontogram)
                                         <option value="{{ $vitalitas->odontogram_id }}"
                                             {{ $vitalitas->odontogram_id == $odontogram->id ? 'selected' : '' }}>
-                                            {{ date_format($odontogram->created_at, 'd M Y') }} </option>
+                                            {{ $odontogram->created_at }} </option>
                                     @endforeach
                                 </select>
                             </div>
@@ -206,7 +206,7 @@
                                     @foreach ($odontograms as $odontogram)
                                         <option value="{{ $vitalitas->odontogram_id }}"
                                             {{ $vitalitas->odontogram_id == $odontogram->id ? 'selected' : '' }}>
-                                            {{ date_format($odontogram->created_at, 'd M Y') }} </option>
+                                            {{ $odontogram->created_at }} </option>
                                     @endforeach
                                 </select>
                             </div>

@@ -58,7 +58,7 @@
                     </div>
                     <div class="col-sm-3">
                         <input type="text" class="form-control"
-                            value="{{ ucwords(\Carbon\Carbon::parse(get_v('eksplakkals', 'id', $periodontal->eksplakkal_id, 'created_at')[0]->created_at ?? '')->format('d M Y')) }}"
+                            value="{{ ucwords(get_v('eksplakkals', 'id', $periodontal->eksplakkal_id, 'created_at')[0]->created_at ?? '') }}"
                             disabled readonly required>
                     </div>
                 </div>

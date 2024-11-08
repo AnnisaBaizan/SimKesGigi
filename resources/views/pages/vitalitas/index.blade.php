@@ -215,7 +215,7 @@
                                             @can('pembimbing')
                                                 <td>{{ $vitalitas->user->username }}</td>
                                             @endcan
-                                            <td>{{ date_format($vitalitas->odontogram->created_at, 'd M Y') }}</td>
+                                            <td>{{ $vitalitas->odontogram->created_at }}</td>
                                             <td>{{ $vitalitas->kartupasien->no_kartu }}
                                                 {{ $vitalitas->kartupasien->nama }}</td>
                                             {{-- pengetahuan --}}

@@ -92,7 +92,7 @@
                                     @foreach ($eksplakkals as $eksplakkal)
                                         <option value="{{ $periodontal->eksplakkal_id }}"
                                             {{ $periodontal->eksplakkal_id == $eksplakkal->id ? 'selected' : '' }}>
-                                            {{ date_format($eksplakkal->created_at, 'd M Y') }}</option>
+                                            {{ $eksplakkal->created_at }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -120,10 +120,10 @@
                             @enderror
                         </div>
                         <div class="form-group row">
-                            <div class="col-sm-4">
+                            <div class="col-sm-2">
                                 <label for="kartupasien_id" class ="form-text">Pilih Pasien :</label>
                             </div>
-                            <div class="col-sm-8">
+                            <div class="col-sm-4">
                                 <select
                                     class="js-example-basic-single form-control @error('kartupasien_id') is-invalid @enderror"
                                     data-live-search="true" id="kartupasien_id" name="kartupasien_id" placeholder="Pilih Pasien"
@@ -139,6 +139,28 @@
                                             {{ $periodontal->kartupasien_id == $kartupasien->id ? 'selected' : '' }}>
                                             {{ $kartupasien->no_kartu }} |
                                             {{ $kartupasien->nama }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            
+
+                            <div class="col-sm-2">
+                                <label for="eksplakkal_id" class="form-text">Pemeriksaan Eksplakkal :</label>
+                            </div>
+                            <div class="col-sm-4">
+                                <select
+                                    class="js-example-basic-single form-control @error('eksplakkal_id') is-invalid @enderror"
+                                    data-live-search="true" id="eksplakkal_id" name="eksplakkal_id" placeholder="Pemeriksaan Eksplakkal"
+                                    value="{{ old('eksplakkal_id', $periodontal->eksplakkal_id) }}" required>
+                                    @error('eksplakkal_id')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                    @foreach ($eksplakkals as $eksplakkal)
+                                        <option value="{{ $periodontal->eksplakkal_id }}"
+                                            {{ $periodontal->eksplakkal_id == $eksplakkal->id ? 'selected' : '' }}>
+                                            {{ $eksplakkal->created_at }}</option>
                                     @endforeach
                                 </select>
                             </div>

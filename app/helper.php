@@ -91,7 +91,7 @@ if (!function_exists('getOdontogram')) {
 
         $odontogramHTML = '<option value="" selected disabled>Pilih Odontogram</option>';
         foreach ($odontograms as $odontogram) {
-            $odontogramHTML .= '<option value="' . htmlspecialchars($odontogram->id) . '">' . htmlspecialchars(date_format($odontogram->created_at, 'd M Y')) . '</option>';
+            $odontogramHTML .= '<option value="' . htmlspecialchars($odontogram->id) . '">' . htmlspecialchars($odontogram->created_at) . '</option>';
         }
         return $odontogramHTML;
     }
@@ -151,7 +151,7 @@ if (!function_exists('getEksplakkal')) {
 
         $eksplakkalHTML = '<option value="" selected disabled>Pilih eksplakkal</option>';
         foreach ($eksplakkals as $eksplakkal) {
-            $eksplakkalHTML .= '<option value="' . htmlspecialchars($eksplakkal->id) . '">' . htmlspecialchars(date_format($eksplakkal->created_at, 'd M Y')) . '</option>';
+            $eksplakkalHTML .= '<option value="' . htmlspecialchars($eksplakkal->id) . '">' . htmlspecialchars($eksplakkal->created_at) . '</option>';
         }
         return $eksplakkalHTML;
     }

@@ -229,7 +229,7 @@
                                             @can('pembimbing')
                                                 <td>{{ $periodontal->user->username }}</td>
                                             @endcan
-                                            <td>{{ date_format($periodontal->eksplakkal->created_at, 'd M Y') }}</td>
+                                            <td>{{ $periodontal->eksplakkal->created_at }}</td>
                                             <td>{{ $periodontal->kartupasien->no_kartu }} |
                                                 {{ $periodontal->kartupasien->nama }}</td>
                                             {{-- pengetahuan --}}
