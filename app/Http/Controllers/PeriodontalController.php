@@ -128,7 +128,7 @@ class PeriodontalController extends Controller
         if ($periodontal->acc !== 1) {
             if (auth()->user()->role === 1) {
                 $kartupasiens = kartupasien::where('user_id', $periodontal->user_id)
-                    ->where('pembimbing', $periodontal->pembimbing)
+                    // ->where('pembimbing', $periodontal->pembimbing)
                     ->get();
                 // $kartupasiens = kartupasien::all();
                 $users = User::where('role', 3)->get();

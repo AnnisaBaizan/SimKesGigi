@@ -145,7 +145,7 @@ class AnomalimukosaController extends Controller
         if ($anomalimukosa->acc !== 1) {
             if (auth()->user()->role === 1) {
                 $kartupasiens = kartupasien::where('user_id', $anomalimukosa->user_id)
-                    ->where('pembimbing', $anomalimukosa->pembimbing)
+                    // ->where('pembimbing', $anomalimukosa->pembimbing)
                     ->get();
                 // $kartupasiens = kartupasien::all();
                 $users = User::where('role', 3)->get();

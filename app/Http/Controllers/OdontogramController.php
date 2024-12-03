@@ -176,7 +176,7 @@ class OdontogramController extends Controller
         if ($odontogram->acc !== 1) {
             if (auth()->user()->role === 1) {
                 $kartupasiens = kartupasien::where('user_id', $odontogram->user_id)
-                                        ->where('pembimbing', $odontogram->pembimbing)
+                                        // ->where('pembimbing', $odontogram->pembimbing)
                                         ->get();
                 // $kartupasiens = kartupasien::all();
                 $users = User::where('role', 3)->get();

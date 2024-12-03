@@ -182,7 +182,7 @@ class PengsiperiController extends Controller
         if ($pengsiperi->created_at->year == now()->year) {
             if (auth()->user()->role === 1) {
                 $kartupasiens = kartupasien::where('user_id', $pengsiperi->user_id)
-                    ->where('pembimbing', $pengsiperi->pembimbing)
+                    // ->where('pembimbing', $pengsiperi->pembimbing)
                     ->get();
                 // $kartupasiens = kartupasien::all();
                 $users = User::where('role', 3)->get();

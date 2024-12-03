@@ -2,8 +2,8 @@
 
 @section('content')
     @include('layouts.navbars.auth.topnav', ['title' => 'Edit Anomali Gigi dan Mukosa Mulut'])
-    
-    
+
+
     <style>
         .custom-container {
             max-width: 100%;
@@ -35,19 +35,19 @@
             }
 
             /* .custom-col-sm-3 { width: 6.25%; }
-                .custom-col-sm-4 { width: 6.25%; }
-                .custom-col-sm-5 { width: 6.25%; }
-                .custom-col-sm-6 { width: 6.25%; }
-                .custom-col-sm-7 { width: 6.25%; }
-                .custom-col-sm-8 { width: 6.25%; }
-                .custom-col-sm-9 { width: 6.25%; }
-                .custom-col-sm-10 { width: 6.25%; }
-                .custom-col-sm-11 { width: 6.25%; }
-                .custom-col-sm-12 { width: 6.25%; }
-                .custom-col-sm-13 { width: 6.25%; }
-                .custom-col-sm-14 { width: 6.25%; }
-                .custom-col-sm-15 { width: 6.25%; }
-                .custom-col-sm-16 { width: 6.25%; } */
+                    .custom-col-sm-4 { width: 6.25%; }
+                    .custom-col-sm-5 { width: 6.25%; }
+                    .custom-col-sm-6 { width: 6.25%; }
+                    .custom-col-sm-7 { width: 6.25%; }
+                    .custom-col-sm-8 { width: 6.25%; }
+                    .custom-col-sm-9 { width: 6.25%; }
+                    .custom-col-sm-10 { width: 6.25%; }
+                    .custom-col-sm-11 { width: 6.25%; }
+                    .custom-col-sm-12 { width: 6.25%; }
+                    .custom-col-sm-13 { width: 6.25%; }
+                    .custom-col-sm-14 { width: 6.25%; }
+                    .custom-col-sm-15 { width: 6.25%; }
+                    .custom-col-sm-16 { width: 6.25%; } */
         }
     </style>
 
@@ -83,14 +83,17 @@
                                     @enderror
                                     <option value="" selected disabled>Pilih Mahasiswa</option>
                                     @foreach ($users as $user)
-                                        <option value="{{ $user->id }}" {{ $anomalimukosa->user_id == $user->id ? 'selected' : '' }} data-pembimbing="{{ $user->pembimbing }}">
+                                        {{-- <option value="{{ $user->id }}" {{ $anomalimukosa->user_id == $user->id ? 'selected' : '' }} data-pembimbing="{{ $user->pembimbing }}"> --}}
+                                        <option value="{{ $user->id }}"
+                                            {{ $anomalimukosa->user_id == $user->id ? 'selected' : '' }}>
                                             {{ ucwords($user->username) }}</option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="col-sm-4">
                                 <input type="text" class="form-control @error('pembimbing') is-invalid_max @enderror"
-                                    id="pembimbing" name="pembimbing" placeholder="pembimbing" value="{{ $anomalimukosa->pembimbing }}" readonly required>
+                                    id="pembimbing" name="pembimbing" placeholder="pembimbing"
+                                    value="{{ $anomalimukosa->pembimbing }}" readonly required>
                                 @error('pembimbing')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -113,8 +116,10 @@
                                         </span>
                                     @enderror
                                     @foreach ($kartupasiens as $kartupasien)
-                                    <option value="{{ $anomalimukosa->kartupasien_id }}" {{ $anomalimukosa->kartupasien_id == $kartupasien->id ? 'selected' : '' }}>{{ $kartupasien->no_kartu }} |
-                                        {{ $kartupasien->nama }}</option>
+                                        <option value="{{ $anomalimukosa->kartupasien_id }}"
+                                            {{ $anomalimukosa->kartupasien_id == $kartupasien->id ? 'selected' : '' }}
+                                            data-pembimbing="{{ $kartupasien->pembimbing }}">{{ $kartupasien->no_kartu }} |
+                                            {{ $kartupasien->nama }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -157,7 +162,9 @@
                                     @enderror
                                     <option value="" selected disabled>Pilih Pasien</option>
                                     @foreach ($kartupasiens as $kartupasien)
-                                        <option value="{{ $kartupasien->id }}" {{ $anomalimukosa->kartupasien_id == $kartupasien->id ? 'selected' : '' }}>{{ $kartupasien->no_kartu }} |
+                                        <option value="{{ $kartupasien->id }}"
+                                            {{ $anomalimukosa->kartupasien_id == $kartupasien->id ? 'selected' : '' }}
+                                            data-pembimbing="{{ $kartupasien->pembimbing }}">{{ $kartupasien->no_kartu }} |
                                             {{ $kartupasien->nama }}</option>
                                     @endforeach
                                 </select>
@@ -183,9 +190,12 @@
                                     </span>
                                 @enderror
                                 <option value="" selected disabled>Pilih</option>
-                                <option value="Normal bite" {{$anomalimukosa->occlusi == "Normal bite" ? 'selected':''}}>Normal bite</option>
-                                <option value="Cross bite" {{$anomalimukosa->occlusi == "Cross bite" ? 'selected':''}}>Cross bite</option>
-                                <option value="Deep bite" {{$anomalimukosa->occlusi == "Deep bite" ? 'selected':''}}>Deep bite</option>
+                                <option value="Normal bite" {{ $anomalimukosa->occlusi == 'Normal bite' ? 'selected' : '' }}>
+                                    Normal bite</option>
+                                <option value="Cross bite" {{ $anomalimukosa->occlusi == 'Cross bite' ? 'selected' : '' }}>
+                                    Cross bite</option>
+                                <option value="Deep bite" {{ $anomalimukosa->occlusi == 'Deep bite' ? 'selected' : '' }}>Deep
+                                    bite</option>
                             </select>
                         </div>
                         <div class="col-sm-6">
@@ -198,8 +208,10 @@
                                     </span>
                                 @enderror
                                 <option value="" selected disabled>Pilih</option>
-                                <option value="Normal" {{$anomalimukosa->bentuk == "Normal" ? 'selected':''}}>Normal</option>
-                                <option value="Abnormal" {{$anomalimukosa->bentuk == "Abnormal" ? 'selected':''}}>Abnormal</option>
+                                <option value="Normal" {{ $anomalimukosa->bentuk == 'Normal' ? 'selected' : '' }}>Normal
+                                </option>
+                                <option value="Abnormal" {{ $anomalimukosa->bentuk == 'Abnormal' ? 'selected' : '' }}>
+                                    Abnormal</option>
                             </select>
                         </div>
                     </div>
@@ -214,8 +226,10 @@
                                     </span>
                                 @enderror
                                 <option value="" selected disabled>Pilih</option>
-                                <option value="Normal" {{$anomalimukosa->warna == "Normal" ? 'selected':''}}>Normal</option>
-                                <option value="Abnormal" {{$anomalimukosa->warna == "Abnormal" ? 'selected':''}}>Abnormal</option>
+                                <option value="Normal" {{ $anomalimukosa->warna == 'Normal' ? 'selected' : '' }}>Normal
+                                </option>
+                                <option value="Abnormal" {{ $anomalimukosa->warna == 'Abnormal' ? 'selected' : '' }}>
+                                    Abnormal</option>
                             </select>
                         </div>
                         <div class="col-sm-6">
@@ -228,8 +242,10 @@
                                     </span>
                                 @enderror
                                 <option value="" selected disabled>Pilih</option>
-                                <option value="Normal" {{$anomalimukosa->posisi == "Normal" ? 'selected':''}}>Normal</option>
-                                <option value="Abnormal" {{$anomalimukosa->posisi == "Abnormal" ? 'selected':''}}>Abnormal</option>
+                                <option value="Normal" {{ $anomalimukosa->posisi == 'Normal' ? 'selected' : '' }}>Normal
+                                </option>
+                                <option value="Abnormal" {{ $anomalimukosa->posisi == 'Abnormal' ? 'selected' : '' }}>
+                                    Abnormal</option>
                             </select>
                         </div>
                     </div>
@@ -244,8 +260,10 @@
                                     </span>
                                 @enderror
                                 <option value="" selected disabled>Pilih</option>
-                                <option value="Normal" {{$anomalimukosa->ukuran == "Normal" ? 'selected':''}}>Normal</option>
-                                <option value="Abnormal" {{$anomalimukosa->ukuran == "Abnormal" ? 'selected':''}}>Abnormal</option>
+                                <option value="Normal" {{ $anomalimukosa->ukuran == 'Normal' ? 'selected' : '' }}>Normal
+                                </option>
+                                <option value="Abnormal" {{ $anomalimukosa->ukuran == 'Abnormal' ? 'selected' : '' }}>
+                                    Abnormal</option>
                             </select>
                         </div>
                         <div class="col-sm-6">
@@ -258,8 +276,10 @@
                                     </span>
                                 @enderror
                                 <option value="" selected disabled>Pilih</option>
-                                <option value="Normal" {{$anomalimukosa->struktur == "Normal" ? 'selected':''}}>Normal</option>
-                                <option value="Abnormal" {{$anomalimukosa->struktur == "Abnormal" ? 'selected':''}}>Abnormal</option>
+                                <option value="Normal" {{ $anomalimukosa->struktur == 'Normal' ? 'selected' : '' }}>Normal
+                                </option>
+                                <option value="Abnormal" {{ $anomalimukosa->struktur == 'Abnormal' ? 'selected' : '' }}>
+                                    Abnormal</option>
                             </select>
                         </div>
                     </div>
@@ -287,8 +307,9 @@
                                     </span>
                                 @enderror
                                 <option value="" selected disabled>Perubahan Warna</option>
-                                <option value="Ada" {{$anomalimukosa->w_lidah == "Ada" ? 'selected':''}}>Ada</option>
-                                <option value="Tidak Ada" {{$anomalimukosa->w_lidah == "Tidak Ada" ? 'selected':''}}>Tidak Ada</option>
+                                <option value="Ada" {{ $anomalimukosa->w_lidah == 'Ada' ? 'selected' : '' }}>Ada</option>
+                                <option value="Tidak Ada" {{ $anomalimukosa->w_lidah == 'Tidak Ada' ? 'selected' : '' }}>
+                                    Tidak Ada</option>
                             </select>
                         </div>
                         <div class="col-sm-6 mb-3 mb-sm-0">
@@ -314,8 +335,9 @@
                                     </span>
                                 @enderror
                                 <option value="" selected disabled>Inflamasi</option>
-                                <option value="Ada" {{$anomalimukosa->i_lidah == "Ada" ? 'selected':''}}>Ada</option>
-                                <option value="Tidak Ada" {{$anomalimukosa->i_lidah == "Tidak Ada" ? 'selected':''}}>Tidak Ada</option>
+                                <option value="Ada" {{ $anomalimukosa->i_lidah == 'Ada' ? 'selected' : '' }}>Ada</option>
+                                <option value="Tidak Ada" {{ $anomalimukosa->i_lidah == 'Tidak Ada' ? 'selected' : '' }}>
+                                    Tidak Ada</option>
                             </select>
                         </div>
                         <div class="col-sm-6 mb-3 mb-sm-0">
@@ -341,8 +363,9 @@
                                     </span>
                                 @enderror
                                 <option value="" selected disabled>Ulserasi</option>
-                                <option value="Ada" {{$anomalimukosa->u_lidah == "Ada" ? 'selected':''}}>Ada</option>
-                                <option value="Tidak Ada" {{$anomalimukosa->u_lidah == "Tidak Ada" ? 'selected':''}}>Tidak Ada</option>
+                                <option value="Ada" {{ $anomalimukosa->u_lidah == 'Ada' ? 'selected' : '' }}>Ada</option>
+                                <option value="Tidak Ada" {{ $anomalimukosa->u_lidah == 'Tidak Ada' ? 'selected' : '' }}>
+                                    Tidak Ada</option>
                             </select>
                         </div>
                         <div class="col-sm-6 mb-3 mb-sm-0">
@@ -376,8 +399,9 @@
                                     </span>
                                 @enderror
                                 <option value="" selected disabled>Perubahan Warna</option>
-                                <option value="Ada" {{$anomalimukosa->w_pipi == "Ada" ? 'selected':''}}>Ada</option>
-                                <option value="Tidak Ada" {{$anomalimukosa->w_pipi == "Tidak Ada" ? 'selected':''}}>Tidak Ada</option>
+                                <option value="Ada" {{ $anomalimukosa->w_pipi == 'Ada' ? 'selected' : '' }}>Ada</option>
+                                <option value="Tidak Ada" {{ $anomalimukosa->w_pipi == 'Tidak Ada' ? 'selected' : '' }}>
+                                    Tidak Ada</option>
                             </select>
                         </div>
                         <div class="col-sm-6 mb-3 mb-sm-0">
@@ -403,8 +427,9 @@
                                     </span>
                                 @enderror
                                 <option value="" selected disabled>Inflamasi</option>
-                                <option value="Ada" {{$anomalimukosa->i_pipi == "Ada" ? 'selected':''}}>Ada</option>
-                                <option value="Tidak Ada" {{$anomalimukosa->i_pipi == "Tidak Ada" ? 'selected':''}}>Tidak Ada</option>
+                                <option value="Ada" {{ $anomalimukosa->i_pipi == 'Ada' ? 'selected' : '' }}>Ada</option>
+                                <option value="Tidak Ada" {{ $anomalimukosa->i_pipi == 'Tidak Ada' ? 'selected' : '' }}>
+                                    Tidak Ada</option>
                             </select>
                         </div>
                         <div class="col-sm-6 mb-3 mb-sm-0">
@@ -430,8 +455,9 @@
                                     </span>
                                 @enderror
                                 <option value="" selected disabled>Ulserasi</option>
-                                <option value="Ada" {{$anomalimukosa->u_pipi == "Ada" ? 'selected':''}}>Ada</option>
-                                <option value="Tidak Ada" {{$anomalimukosa->u_pipi == "Tidak Ada" ? 'selected':''}}>Tidak Ada</option>
+                                <option value="Ada" {{ $anomalimukosa->u_pipi == 'Ada' ? 'selected' : '' }}>Ada</option>
+                                <option value="Tidak Ada" {{ $anomalimukosa->u_pipi == 'Tidak Ada' ? 'selected' : '' }}>
+                                    Tidak Ada</option>
                             </select>
                         </div>
                         <div class="col-sm-6 mb-3 mb-sm-0">
@@ -465,8 +491,10 @@
                                     </span>
                                 @enderror
                                 <option value="" selected disabled>Perubahan Warna</option>
-                                <option value="Ada" {{$anomalimukosa->w_palatum == "Ada" ? 'selected':''}}>Ada</option>
-                                <option value="Tidak Ada" {{$anomalimukosa->w_palatum == "Tidak Ada" ? 'selected':''}}>Tidak Ada</option>
+                                <option value="Ada" {{ $anomalimukosa->w_palatum == 'Ada' ? 'selected' : '' }}>Ada
+                                </option>
+                                <option value="Tidak Ada" {{ $anomalimukosa->w_palatum == 'Tidak Ada' ? 'selected' : '' }}>
+                                    Tidak Ada</option>
                             </select>
                         </div>
                         <div class="col-sm-6 mb-3 mb-sm-0">
@@ -492,8 +520,10 @@
                                     </span>
                                 @enderror
                                 <option value="" selected disabled>Inflamasi</option>
-                                <option value="Ada" {{$anomalimukosa->i_palatum == "Ada" ? 'selected':''}}>Ada</option>
-                                <option value="Tidak Ada" {{$anomalimukosa->i_palatum == "Tidak Ada" ? 'selected':''}}>Tidak Ada</option>
+                                <option value="Ada" {{ $anomalimukosa->i_palatum == 'Ada' ? 'selected' : '' }}>Ada
+                                </option>
+                                <option value="Tidak Ada" {{ $anomalimukosa->i_palatum == 'Tidak Ada' ? 'selected' : '' }}>
+                                    Tidak Ada</option>
                             </select>
                         </div>
                         <div class="col-sm-6 mb-3 mb-sm-0">
@@ -519,8 +549,10 @@
                                     </span>
                                 @enderror
                                 <option value="" selected disabled>Ulserasi</option>
-                                <option value="Ada" {{$anomalimukosa->u_palatum == "Ada" ? 'selected':''}}>Ada</option>
-                                <option value="Tidak Ada" {{$anomalimukosa->u_palatum == "Tidak Ada" ? 'selected':''}}>Tidak Ada</option>
+                                <option value="Ada" {{ $anomalimukosa->u_palatum == 'Ada' ? 'selected' : '' }}>Ada
+                                </option>
+                                <option value="Tidak Ada" {{ $anomalimukosa->u_palatum == 'Tidak Ada' ? 'selected' : '' }}>
+                                    Tidak Ada</option>
                             </select>
                         </div>
                         <div class="col-sm-6 mb-3 mb-sm-0">
@@ -554,8 +586,10 @@
                                     </span>
                                 @enderror
                                 <option value="" selected disabled>Perubahan Warna</option>
-                                <option value="Ada" {{$anomalimukosa->w_gingiva == "Ada" ? 'selected':''}}>Ada</option>
-                                <option value="Tidak Ada" {{$anomalimukosa->w_gingiva == "Tidak Ada" ? 'selected':''}}>Tidak Ada</option>
+                                <option value="Ada" {{ $anomalimukosa->w_gingiva == 'Ada' ? 'selected' : '' }}>Ada
+                                </option>
+                                <option value="Tidak Ada" {{ $anomalimukosa->w_gingiva == 'Tidak Ada' ? 'selected' : '' }}>
+                                    Tidak Ada</option>
                             </select>
                         </div>
                         <div class="col-sm-6 mb-3 mb-sm-0">
@@ -581,8 +615,10 @@
                                     </span>
                                 @enderror
                                 <option value="" selected disabled>Inflamasi</option>
-                                <option value="Ada" {{$anomalimukosa->i_gingiva == "Ada" ? 'selected':''}}>Ada</option>
-                                <option value="Tidak Ada" {{$anomalimukosa->i_gingiva == "Tidak Ada" ? 'selected':''}}>Tidak Ada</option>
+                                <option value="Ada" {{ $anomalimukosa->i_gingiva == 'Ada' ? 'selected' : '' }}>Ada
+                                </option>
+                                <option value="Tidak Ada" {{ $anomalimukosa->i_gingiva == 'Tidak Ada' ? 'selected' : '' }}>
+                                    Tidak Ada</option>
                             </select>
                         </div>
                         <div class="col-sm-6 mb-3 mb-sm-0">
@@ -608,8 +644,10 @@
                                     </span>
                                 @enderror
                                 <option value="" selected disabled>Ulserasi</option>
-                                <option value="Ada" {{$anomalimukosa->u_gingiva == "Ada" ? 'selected':''}}>Ada</option>
-                                <option value="Tidak Ada" {{$anomalimukosa->u_gingiva == "Tidak Ada" ? 'selected':''}}>Tidak Ada</option>
+                                <option value="Ada" {{ $anomalimukosa->u_gingiva == 'Ada' ? 'selected' : '' }}>Ada
+                                </option>
+                                <option value="Tidak Ada" {{ $anomalimukosa->u_gingiva == 'Tidak Ada' ? 'selected' : '' }}>
+                                    Tidak Ada</option>
                             </select>
                         </div>
                         <div class="col-sm-6 mb-3 mb-sm-0">
@@ -643,8 +681,10 @@
                                     </span>
                                 @enderror
                                 <option value="" selected disabled>Perubahan Warna</option>
-                                <option value="Ada" {{$anomalimukosa->w_bibir == "Ada" ? 'selected':''}}>Ada</option>
-                                <option value="Tidak Ada" {{$anomalimukosa->w_bibir == "Tidak Ada" ? 'selected':''}}>Tidak Ada</option>
+                                <option value="Ada" {{ $anomalimukosa->w_bibir == 'Ada' ? 'selected' : '' }}>Ada
+                                </option>
+                                <option value="Tidak Ada" {{ $anomalimukosa->w_bibir == 'Tidak Ada' ? 'selected' : '' }}>
+                                    Tidak Ada</option>
                             </select>
                         </div>
                         <div class="col-sm-6 mb-3 mb-sm-0">
@@ -670,8 +710,10 @@
                                     </span>
                                 @enderror
                                 <option value="" selected disabled>Inflamasi</option>
-                                <option value="Ada" {{$anomalimukosa->i_bibir == "Ada" ? 'selected':''}}>Ada</option>
-                                <option value="Tidak Ada" {{$anomalimukosa->i_bibir == "Tidak Ada" ? 'selected':''}}>Tidak Ada</option>
+                                <option value="Ada" {{ $anomalimukosa->i_bibir == 'Ada' ? 'selected' : '' }}>Ada
+                                </option>
+                                <option value="Tidak Ada" {{ $anomalimukosa->i_bibir == 'Tidak Ada' ? 'selected' : '' }}>
+                                    Tidak Ada</option>
                             </select>
                         </div>
                         <div class="col-sm-6 mb-3 mb-sm-0">
@@ -697,8 +739,10 @@
                                     </span>
                                 @enderror
                                 <option value="" selected disabled>Ulserasi</option>
-                                <option value="Ada" {{$anomalimukosa->u_bibir == "Ada" ? 'selected':''}}>Ada</option>
-                                <option value="Tidak Ada" {{$anomalimukosa->u_bibir == "Tidak Ada" ? 'selected':''}}>Tidak Ada</option>
+                                <option value="Ada" {{ $anomalimukosa->u_bibir == 'Ada' ? 'selected' : '' }}>Ada
+                                </option>
+                                <option value="Tidak Ada" {{ $anomalimukosa->u_bibir == 'Tidak Ada' ? 'selected' : '' }}>
+                                    Tidak Ada</option>
                             </select>
                         </div>
                         <div class="col-sm-6 mb-3 mb-sm-0">
@@ -936,43 +980,61 @@
         }).trigger("change");
     </script>
 
-<script>
-  $(document).ready(function() {
-      $('#user_id').change(function() {
-          var selectedOption = $(this).find(':selected');
-          var pembimbingValue = selectedOption.data('pembimbing');
-          $('#pembimbing').val(pembimbingValue);
-      });
-  });
-  $(function() {
-      $.ajaxSetup({
-          headers: {
-              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-          }
-      });
+    <script>
+        // $(document).ready(function() {
+        //     $('#user_id').change(function() {
+        //         var selectedOption = $(this).find(':selected');
+        //         var pembimbingValue = selectedOption.data('pembimbing');
+        //         $('#pembimbing').val(pembimbingValue);
+        //     });
+        // });
+        $(document).ready(function() {
+            // Fungsi untuk mengupdate nilai pembimbing
+            function updatePembimbing() {
+                var selectedOption = $('#kartupasien_id').find(':selected');
+                var pembimbingValue = selectedOption.data('pembimbing');
+                $('#pembimbing').val(pembimbingValue);
+            }
 
-      $('#user_id').on('change', function() {
-          var user_id = $("#user_id").val();
-          var pembimbing = $("#pembimbing").val();
+            // Jalankan fungsi saat halaman dimuat
+            updatePembimbing();
 
-          $.ajax({
-              url: '/getPatients',
-              type: 'POST',
-              data: {
-                  user_id: user_id,
-                  pembimbing: pembimbing
-              },
-              cache: false,
+            // Jalankan fungsi saat elemen dengan id "kartupasien_id" diubah
+            $('#kartupasien_id').change(function() {
+                updatePembimbing();
+            });
+        });
 
-              success: function(msg) {
-                  $("#kartupasien_id").html(msg);
-              },
 
-              error: function(data) {
-                  console.log('error:', data);
-              }
-          });
-      });
-  });
-</script>
+        $(function() {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $('#user_id').on('change', function() {
+                var user_id = $("#user_id").val();
+                // var pembimbing = $("#pembimbing").val();
+
+                $.ajax({
+                    url: '/getPatients',
+                    type: 'POST',
+                    data: {
+                        user_id: user_id,
+                        // pembimbing: pembimbing
+                    },
+                    cache: false,
+
+                    success: function(msg) {
+                        $("#kartupasien_id").html(msg);
+                    },
+
+                    error: function(data) {
+                        console.log('error:', data);
+                    }
+                });
+            });
+        });
+    </script>
 @endsection

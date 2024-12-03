@@ -164,10 +164,12 @@
                                         <td>{{ $loop->iteration }}</td>
                                         @can('admin')
                                             <td>{{ $kartupasien->user->username }}</td>
-                                            <td>{{ ucwords(get_v('users', 'nimnip', $kartupasien->user->pembimbing, 'username')[0]->username ?? "") }}</td>
+                                            {{-- <td>{{ ucwords(get_v('users', 'nimnip', $kartupasien->user->pembimbing, 'username')[0]->username ?? "") }}</td> --}}
+                                            <td>{{ ucwords(get_v('users', 'nimnip', $kartupasien->pembimbing, 'username')[0]->username ?? "") }}</td>
                                         @endcan
                                         @can('mahasiswa')
-                                            <td>{{ ucwords(get_v('users', 'nimnip', $kartupasien->user->pembimbing, 'username')[0]->username ?? "") }}</td>
+                                            {{-- <td>{{ ucwords(get_v('users', 'nimnip', $kartupasien->user->pembimbing, 'username')[0]->username ?? "") }}</td> --}}
+                                            <td>{{ ucwords(get_v('users', 'nimnip', $kartupasien->pembimbing, 'username')[0]->username ?? "") }}</td>
                                         @endcan
                                         @can('pembimbing')
                                             <td>{{ $kartupasien->user->username }}</td>

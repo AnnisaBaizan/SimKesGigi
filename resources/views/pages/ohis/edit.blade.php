@@ -102,9 +102,8 @@
                                     @enderror
                                     <option value="" selected disabled>Pilih Mahasiswa</option>
                                     @foreach ($users as $user)
-                                        <option value="{{ $user->id }}"
-                                            {{ $ohis->user_id == $user->id ? 'selected' : '' }}
-                                            data-pembimbing="{{ $user->pembimbing }}">
+                                        {{-- <option value="{{ $user->id }}" {{ $ohis->user_id == $user->id ? 'selected' : '' }} data-pembimbing="{{ $user->pembimbing }}"> --}}
+                                        <option value="{{ $user->id }}" {{ $ohis->user_id == $user->id ? 'selected' : '' }}>
                                             {{ ucwords($user->username) }}</option>
                                     @endforeach
                                 </select>
@@ -136,7 +135,7 @@
                                     @enderror
                                     @foreach ($kartupasiens as $kartupasien)
                                         <option value="{{ $ohis->kartupasien_id }}"
-                                            {{ $ohis->kartupasien_id == $kartupasien->id ? 'selected' : '' }}>
+                                            {{ $ohis->kartupasien_id == $kartupasien->id ? 'selected' : '' }} data-pembimbing="{{ $kartupasien->pembimbing }}">
                                             {{ $kartupasien->no_kartu }} |
                                             {{ $kartupasien->nama }}</option>
                                     @endforeach
@@ -182,7 +181,7 @@
                                     <option value="" selected disabled>Pilih Pasien</option>
                                     @foreach ($kartupasiens as $kartupasien)
                                         <option value="{{ $kartupasien->id }}"
-                                            {{ $ohis->kartupasien_id == $kartupasien->id ? 'selected' : '' }}>
+                                            {{ $ohis->kartupasien_id == $kartupasien->id ? 'selected' : '' }} data-pembimbing="{{ $kartupasien->pembimbing }}">
                                             {{ $kartupasien->no_kartu }} |
                                             {{ $kartupasien->nama }}</option>
                                     @endforeach
@@ -564,43 +563,61 @@
         calculateDI();
         calculateCI();
     </script>
-    <script>
-        $(document).ready(function() {
-            $('#user_id').change(function() {
-                var selectedOption = $(this).find(':selected');
-                var pembimbingValue = selectedOption.data('pembimbing');
-                $('#pembimbing').val(pembimbingValue);
-            });
-        });
-        $(function() {
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        <script>
+            // $(document).ready(function() {
+            //     $('#user_id').change(function() {
+            //         var selectedOption = $(this).find(':selected');
+            //         var pembimbingValue = selectedOption.data('pembimbing');
+            //         $('#pembimbing').val(pembimbingValue);
+            //     });
+            // });
+            $(document).ready(function() {
+                // Fungsi untuk mengupdate nilai pembimbing
+                function updatePembimbing() {
+                    var selectedOption = $('#kartupasien_id').find(':selected');
+                    var pembimbingValue = selectedOption.data('pembimbing');
+                    $('#pembimbing').val(pembimbingValue);
                 }
-            });
-
-            $('#user_id').on('change', function() {
-                var user_id = $("#user_id").val();
-                var pembimbing = $("#pembimbing").val();
-
-                $.ajax({
-                    url: '/getPatients',
-                    type: 'POST',
-                    data: {
-                        user_id: user_id,
-                        pembimbing: pembimbing
-                    },
-                    cache: false,
-
-                    success: function(msg) {
-                        $("#kartupasien_id").html(msg);
-                    },
-
-                    error: function(data) {
-                        console.log('error:', data);
-                    }
+    
+                // Jalankan fungsi saat halaman dimuat
+                updatePembimbing();
+    
+                // Jalankan fungsi saat elemen dengan id "kartupasien_id" diubah
+                $('#kartupasien_id').change(function() {
+                    updatePembimbing();
                 });
             });
-        });
-    </script>
+    
+    
+            $(function() {
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+    
+                $('#user_id').on('change', function() {
+                    var user_id = $("#user_id").val();
+                    // var pembimbing = $("#pembimbing").val();
+    
+                    $.ajax({
+                        url: '/getPatients',
+                        type: 'POST',
+                        data: {
+                            user_id: user_id,
+                            // pembimbing: pembimbing
+                        },
+                        cache: false,
+    
+                        success: function(msg) {
+                            $("#kartupasien_id").html(msg);
+                        },
+    
+                        error: function(data) {
+                            console.log('error:', data);
+                        }
+                    });
+                });
+            });
+        </script>
 @endsection

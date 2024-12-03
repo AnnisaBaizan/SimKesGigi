@@ -34,7 +34,8 @@
                                     @enderror
                                     <option value="" selected disabled>Pilih Mahasiswa</option>
                                     @foreach ($users as $user)
-                                        <option value="{{ $user->id }}" data-pembimbing="{{ $user->pembimbing }}">
+                                        {{-- <option value="{{ $user->id }}" data-pembimbing="{{ $user->pembimbing }}"> --}}
+                                        <option value="{{ $user->id }}">
                                             {{ ucwords($user->username) }}</option>
                                     @endforeach
                                 </select>
@@ -105,7 +106,7 @@
                                     @enderror
                                     <option value="" selected disabled>Pilih Pasien</option>
                                     @foreach ($kartupasiens as $kartupasien)
-                                        <option value="{{ $kartupasien->id }}">{{ $kartupasien->no_kartu }} |
+                                        <option value="{{ $kartupasien->id }}" data-pembimbing="{{ $kartupasien->pembimbing }}">{{ $kartupasien->no_kartu }} |
                                             {{ $kartupasien->nama }}</option>
                                     @endforeach
                                 </select>
@@ -304,7 +305,7 @@
 
     <script>
         $(document).ready(function() {
-            $('#user_id').change(function() {
+            $('#kartupasien_id').change(function() {
                 var selectedOption = $(this).find(':selected');
                 var pembimbingValue = selectedOption.data('pembimbing');
                 $('#pembimbing').val(pembimbingValue);
@@ -319,14 +320,14 @@
 
             $('#user_id').on('change', function() {
                 var user_id = $("#user_id").val();
-                var pembimbing = $("#pembimbing").val();
+                // var pembimbing = $("#pembimbing").val();
 
                 $.ajax({
                     url: '/getPatients',
                     type: 'POST',
                     data: {
                         user_id: user_id,
-                        pembimbing: pembimbing
+                        // pembimbing: pembimbing
                     },
                     cache: false,
 

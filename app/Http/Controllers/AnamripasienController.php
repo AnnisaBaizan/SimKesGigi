@@ -125,7 +125,6 @@ class AnamripasienController extends Controller
         if ($anamripasien->acc !== 1) {
             if (auth()->user()->role === 1) {
                 $kartupasiens = kartupasien::where('user_id', $anamripasien->user_id)
-                                        ->where('pembimbing', $anamripasien->pembimbing)
                                         ->get();
                 // $kartupasiens = kartupasien::all();
                 $users = User::where('role', 3)->get();

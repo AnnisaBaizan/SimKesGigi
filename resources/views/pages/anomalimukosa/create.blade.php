@@ -34,19 +34,19 @@
             }
 
             /* .custom-col-sm-3 { width: 6.25%; }
-                .custom-col-sm-4 { width: 6.25%; }
-                .custom-col-sm-5 { width: 6.25%; }
-                .custom-col-sm-6 { width: 6.25%; }
-                .custom-col-sm-7 { width: 6.25%; }
-                .custom-col-sm-8 { width: 6.25%; }
-                .custom-col-sm-9 { width: 6.25%; }
-                .custom-col-sm-10 { width: 6.25%; }
-                .custom-col-sm-11 { width: 6.25%; }
-                .custom-col-sm-12 { width: 6.25%; }
-                .custom-col-sm-13 { width: 6.25%; }
-                .custom-col-sm-14 { width: 6.25%; }
-                .custom-col-sm-15 { width: 6.25%; }
-                .custom-col-sm-16 { width: 6.25%; } */
+                    .custom-col-sm-4 { width: 6.25%; }
+                    .custom-col-sm-5 { width: 6.25%; }
+                    .custom-col-sm-6 { width: 6.25%; }
+                    .custom-col-sm-7 { width: 6.25%; }
+                    .custom-col-sm-8 { width: 6.25%; }
+                    .custom-col-sm-9 { width: 6.25%; }
+                    .custom-col-sm-10 { width: 6.25%; }
+                    .custom-col-sm-11 { width: 6.25%; }
+                    .custom-col-sm-12 { width: 6.25%; }
+                    .custom-col-sm-13 { width: 6.25%; }
+                    .custom-col-sm-14 { width: 6.25%; }
+                    .custom-col-sm-15 { width: 6.25%; }
+                    .custom-col-sm-16 { width: 6.25%; } */
         }
     </style>
 
@@ -78,7 +78,8 @@
                                     @enderror
                                     <option value="" selected disabled>Pilih Mahasiswa</option>
                                     @foreach ($users as $user)
-                                        <option value="{{ $user->id }}" data-pembimbing="{{ $user->pembimbing }}">
+                                        {{-- <option value="{{ $user->id }}" data-pembimbing="{{ $user->pembimbing }}"> --}}
+                                        <option value="{{ $user->id }}">
                                             {{ ucwords($user->username) }}</option>
                                     @endforeach
                                 </select>
@@ -149,7 +150,8 @@
                                     @enderror
                                     <option value="" selected disabled>Pilih Pasien</option>
                                     @foreach ($kartupasiens as $kartupasien)
-                                        <option value="{{ $kartupasien->id }}">{{ $kartupasien->no_kartu }} |
+                                        <option value="{{ $kartupasien->id }}"
+                                            data-pembimbing="{{ $kartupasien->pembimbing }}">{{ $kartupasien->no_kartu }} |
                                             {{ $kartupasien->nama }}</option>
                                     @endforeach
                                 </select>
@@ -928,43 +930,43 @@
         }).trigger("change");
     </script>
 
-<script>
-  $(document).ready(function() {
-      $('#user_id').change(function() {
-          var selectedOption = $(this).find(':selected');
-          var pembimbingValue = selectedOption.data('pembimbing');
-          $('#pembimbing').val(pembimbingValue);
-      });
-  });
-  $(function() {
-      $.ajaxSetup({
-          headers: {
-              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-          }
-      });
+    <script>
+        $(document).ready(function() {
+            $('#kartupasien_id').change(function() {
+                var selectedOption = $(this).find(':selected');
+                var pembimbingValue = selectedOption.data('pembimbing');
+                $('#pembimbing').val(pembimbingValue);
+            });
+        });
+        $(function() {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
 
-      $('#user_id').on('change', function() {
-          var user_id = $("#user_id").val();
-          var pembimbing = $("#pembimbing").val();
+            $('#user_id').on('change', function() {
+                var user_id = $("#user_id").val();
+                //   var pembimbing = $("#pembimbing").val();
 
-          $.ajax({
-              url: '/getPatients',
-              type: 'POST',
-              data: {
-                  user_id: user_id,
-                  pembimbing: pembimbing
-              },
-              cache: false,
+                $.ajax({
+                    url: '/getPatients',
+                    type: 'POST',
+                    data: {
+                        user_id: user_id,
+                        //   pembimbing: pembimbing
+                    },
+                    cache: false,
 
-              success: function(msg) {
-                  $("#kartupasien_id").html(msg);
-              },
+                    success: function(msg) {
+                        $("#kartupasien_id").html(msg);
+                    },
 
-              error: function(data) {
-                  console.log('error:', data);
-              }
-          });
-      });
-  });
-</script>
+                    error: function(data) {
+                        console.log('error:', data);
+                    }
+                });
+            });
+        });
+    </script>
 @endsection

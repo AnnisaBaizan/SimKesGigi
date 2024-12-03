@@ -187,11 +187,11 @@
                                             <td>{{ $loop->iteration }}</td>
                                             @can('admin')
                                                 <td>{{ $perencanaan->user->username }}</td>
-                                                <td>{{ ucwords(get_v('users', 'nimnip', $perencanaan->user->pembimbing, 'username')[0]->username ?? '') }}
+                                                <td>{{ ucwords(get_v('users', 'nimnip', $perencanaan->pembimbing, 'username')[0]->username ?? '') }}
                                                 </td>
                                             @endcan
                                             @can('mahasiswa')
-                                                <td>{{ ucwords(get_v('users', 'nimnip', $perencanaan->user->pembimbing, 'username')[0]->username ?? '') }}
+                                                <td>{{ ucwords(get_v('users', 'nimnip', $perencanaan->pembimbing, 'username')[0]->username ?? '') }}
                                                 </td>
                                             @endcan
                                             @can('pembimbing')

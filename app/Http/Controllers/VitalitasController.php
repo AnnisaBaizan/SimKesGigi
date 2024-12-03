@@ -116,7 +116,7 @@ class VitalitasController extends Controller
         if ($vitalitas->acc !== 1) {
             if (auth()->user()->role === 1) {
                 $kartupasiens = kartupasien::where('user_id', $vitalitas->user_id)
-                    ->where('pembimbing', $vitalitas->pembimbing)
+                    // ->where('pembimbing', $vitalitas->pembimbing)
                     ->get();
                 // $kartupasiens = kartupasien::all();
                 $users = User::where('role', 3)->get();

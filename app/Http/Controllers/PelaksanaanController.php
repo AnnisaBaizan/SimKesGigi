@@ -115,7 +115,7 @@ class PelaksanaanController extends Controller
         if ($pelaksanaan->acc !== 1) {
             if (auth()->user()->role === 1) {
                 $kartupasiens = kartupasien::where('user_id', $pelaksanaan->user_id)
-                    ->where('pembimbing', $pelaksanaan->pembimbing)
+                    // ->where('pembimbing', $pelaksanaan->pembimbing)
                     ->get();
                 // $kartupasiens = kartupasien::all();
                 $users = User::where('role', 3)->get();

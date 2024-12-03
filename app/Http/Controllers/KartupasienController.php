@@ -54,10 +54,12 @@ class KartupasienController extends Controller
     {
         $users = User::where('role', 3)->get();
         $id_max = sprintf("%09d", kartupasien::max('id') + 1);
+        $pembimbings = User::where('role', '2')->get();
 
         return view('pages.kartupasien.create')->with([
             'id_max' => $id_max,
-            'users' => $users ?? null
+            'users' => $users ?? null,
+            'pembimbings' => $pembimbings
         ]);
         // return view('pages.kartupasien.create', compact('id_max'));
     }
@@ -114,11 +116,13 @@ class KartupasienController extends Controller
         // dd($kartupasien);
         $users = User::where('role', 3)->get();
         $id_max = sprintf("%09d", $kartupasien->id);
+        $pembimbings = User::where('role', '2')->get();
         
         return view('pages.kartupasien.edit')->with([
             'kartupasien'=> $kartupasien,
             'id_max' => $id_max,
-            'users' => $users ?? null
+            'users' => $users ?? null,
+            'pembimbings' => $pembimbings
         ]);
         // return view('pages.kartupasien.edit', compact('id_max'))->with('kartupasien', $kartupasien);
     }

@@ -33,9 +33,8 @@
                                     @enderror
                                     <option value="" selected disabled>Pilih Mahasiswa</option>
                                     @foreach ($users as $user)
-                                        <option value="{{ $user->id }}"
-                                            {{ $pelaksanaan->user_id == $user->id ? 'selected' : '' }}
-                                            data-pembimbing="{{ $user->pembimbing }}">
+                                        {{-- <option value="{{ $user->id }}" {{ $pelaksanaan->user_id == $user->id ? 'selected' : '' }} data-pembimbing="{{ $user->pembimbing }}"> --}}
+                                        <option value="{{ $user->id }}" {{ $pelaksanaan->user_id == $user->id ? 'selected' : '' }}>
                                             {{ ucwords($user->username) }}</option>
                                     @endforeach
                                 </select>
@@ -67,7 +66,7 @@
                                     @enderror
                                     @foreach ($kartupasiens as $kartupasien)
                                         <option value="{{ $pelaksanaan->kartupasien_id }}"
-                                            {{ $pelaksanaan->kartupasien_id == $kartupasien->id ? 'selected' : '' }}>
+                                            {{ $pelaksanaan->kartupasien_id == $kartupasien->id ? 'selected' : '' }} data-pembimbing="{{ $kartupasien->pembimbing }}">
                                             {{ $kartupasien->no_kartu }} |
                                             {{ $kartupasien->nama }}</option>
                                     @endforeach
@@ -113,7 +112,7 @@
                                     <option value="" selected disabled>Pilih Pasien</option>
                                     @foreach ($kartupasiens as $kartupasien)
                                         <option value="{{ $kartupasien->id }}"
-                                            {{ $pelaksanaan->kartupasien_id == $kartupasien->id ? 'selected' : '' }}>
+                                            {{ $pelaksanaan->kartupasien_id == $kartupasien->id ? 'selected' : '' }} data-pembimbing="{{ $kartupasien->pembimbing }}">
                                             {{ $kartupasien->no_kartu }} |
                                             {{ $kartupasien->nama }}</option>
                                     @endforeach
@@ -265,13 +264,31 @@
         });
     </script>
     <script>
+        // $(document).ready(function() {
+        //     $('#user_id').change(function() {
+        //         var selectedOption = $(this).find(':selected');
+        //         var pembimbingValue = selectedOption.data('pembimbing');
+        //         $('#pembimbing').val(pembimbingValue);
+        //     });
+        // });
+
         $(document).ready(function() {
-            $('#user_id').change(function() {
-                var selectedOption = $(this).find(':selected');
+            // Fungsi untuk mengupdate nilai pembimbing
+            function updatePembimbing() {
+                var selectedOption = $('#kartupasien_id').find(':selected');
                 var pembimbingValue = selectedOption.data('pembimbing');
                 $('#pembimbing').val(pembimbingValue);
+            }
+
+            // Jalankan fungsi saat halaman dimuat
+            updatePembimbing();
+
+            // Jalankan fungsi saat elemen dengan id "kartupasien_id" diubah
+            $('#kartupasien_id').change(function() {
+                updatePembimbing();
             });
         });
+
         $(function() {
             $.ajaxSetup({
                 headers: {
@@ -281,14 +298,14 @@
 
             $('#user_id').on('change', function() {
                 var user_id = $("#user_id").val();
-                var pembimbing = $("#pembimbing").val();
+                // var pembimbing = $("#pembimbing").val();
 
                 $.ajax({
                     url: '/getPatients',
                     type: 'POST',
                     data: {
                         user_id: user_id,
-                        pembimbing: pembimbing
+                        // pembimbing: pembimbing
                     },
                     cache: false,
 

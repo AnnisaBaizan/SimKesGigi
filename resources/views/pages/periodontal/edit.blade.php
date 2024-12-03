@@ -35,8 +35,8 @@
                                     <option value="" selected disabled>Pilih Mahasiswa</option>
                                     @foreach ($users as $user)
                                         <option value="{{ $user->id }}"
-                                            {{ $periodontal->user_id == $user->id ? 'selected' : '' }}
-                                            data-pembimbing="{{ $user->pembimbing }}">
+                                            {{-- {{ $periodontal->user_id == $user->id ? 'selected' : '' }} data-pembimbing="{{ $user->pembimbing }}"> --}}
+                                            {{ $periodontal->user_id == $user->id ? 'selected' : '' }}>
                                             {{ ucwords($user->username) }}</option>
                                     @endforeach
                                 </select>
@@ -68,7 +68,7 @@
                                     @enderror
                                     @foreach ($kartupasiens as $kartupasien)
                                         <option value="{{ $periodontal->kartupasien_id }}"
-                                            {{ $periodontal->kartupasien_id == $kartupasien->id ? 'selected' : '' }}>
+                                            {{ $periodontal->kartupasien_id == $kartupasien->id ? 'selected' : '' }} data-pembimbing="{{ $kartupasien->pembimbing }}">
                                             {{ $kartupasien->no_kartu }} |
                                             {{ $kartupasien->nama }}</option>
                                     @endforeach
@@ -91,7 +91,7 @@
                                     @enderror
                                     @foreach ($eksplakkals as $eksplakkal)
                                         <option value="{{ $periodontal->eksplakkal_id }}"
-                                            {{ $periodontal->eksplakkal_id == $eksplakkal->id ? 'selected' : '' }}>
+                                            {{ $periodontal->eksplakkal_id == $eksplakkal->id ? 'selected' : '' }} data-pembimbing="{{ $kartupasien->pembimbing }}">
                                             {{ $eksplakkal->created_at }}</option>
                                     @endforeach
                                 </select>
@@ -381,13 +381,31 @@
     </script>
 
     <script>
+        // $(document).ready(function() {
+        //     $('#user_id').change(function() {
+        //         var selectedOption = $(this).find(':selected');
+        //         var pembimbingValue = selectedOption.data('pembimbing');
+        //         $('#pembimbing').val(pembimbingValue);
+        //     });
+        // });
+
         $(document).ready(function() {
-            $('#user_id').change(function() {
-                var selectedOption = $(this).find(':selected');
+            // Fungsi untuk mengupdate nilai pembimbing
+            function updatePembimbing() {
+                var selectedOption = $('#kartupasien_id').find(':selected');
                 var pembimbingValue = selectedOption.data('pembimbing');
                 $('#pembimbing').val(pembimbingValue);
+            }
+
+            // Jalankan fungsi saat halaman dimuat
+            updatePembimbing();
+
+            // Jalankan fungsi saat elemen dengan id "kartupasien_id" diubah
+            $('#kartupasien_id').change(function() {
+                updatePembimbing();
             });
         });
+
         $(function() {
             $.ajaxSetup({
                 headers: {
@@ -397,14 +415,14 @@
 
             $('#user_id').on('change', function() {
                 var user_id = $("#user_id").val();
-                var pembimbing = $("#pembimbing").val();
+                // var pembimbing = $("#pembimbing").val();
 
                 $.ajax({
                     url: '/getPatients',
                     type: 'POST',
                     data: {
                         user_id: user_id,
-                        pembimbing: pembimbing
+                        // pembimbing: pembimbing
                     },
                     cache: false,
 

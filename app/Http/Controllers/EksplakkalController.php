@@ -160,7 +160,7 @@ class EksplakkalController extends Controller
         if ($eksplakkal->acc !== 1) {
             if (auth()->user()->role === 1) {
                 $kartupasiens = kartupasien::where('user_id', $eksplakkal->user_id)
-                                        ->where('pembimbing', $eksplakkal->pembimbing)
+                                        // ->where('pembimbing', $eksplakkal->pembimbing)
                                         ->get();
                 // $kartupasiens = kartupasien::all();
                 $users = User::where('role', 3)->get();

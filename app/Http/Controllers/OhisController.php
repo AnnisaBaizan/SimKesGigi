@@ -130,7 +130,7 @@ class OhisController extends Controller
         if ($ohis->acc !== 1) {
             if (auth()->user()->role === 1) {
                 $kartupasiens = kartupasien::where('user_id', $ohis->user_id)
-                                        ->where('pembimbing', $ohis->pembimbing)
+                                        // ->where('pembimbing', $ohis->pembimbing)
                                         ->get();
                 // $kartupasiens = kartupasien::all();
                 $users = User::where('role', 3)->get();

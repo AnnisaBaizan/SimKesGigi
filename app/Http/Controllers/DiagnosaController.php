@@ -185,7 +185,7 @@ class DiagnosaController extends Controller
         if ($diagnosa->acc !== 1) {
             if (auth()->user()->role === 1) {
                 $kartupasiens = kartupasien::where('user_id', $diagnosa->user_id)
-                    ->where('pembimbing', $diagnosa->pembimbing)
+                    // ->where('pembimbing', $diagnosa->pembimbing)
                     ->get();
                 // $kartupasiens = kartupasien::all();
                 $users = User::where('role', 3)->get();

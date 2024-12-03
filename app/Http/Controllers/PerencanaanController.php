@@ -112,7 +112,7 @@ class PerencanaanController extends Controller
         if ($perencanaan->acc !== 1) {
             if (auth()->user()->role === 1) {
                 $kartupasiens = kartupasien::where('user_id', $perencanaan->user_id)
-                    ->where('pembimbing', $perencanaan->pembimbing)
+                    // ->where('pembimbing', $perencanaan->pembimbing)
                     ->get();
                 // $kartupasiens = kartupasien::all();
                 $users = User::where('role', 3)->get();

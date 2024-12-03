@@ -273,10 +273,16 @@ Route::group(['middleware' => 'auth'], function () {
 
 	
 	Route::post('/getPatients', function (Request $request) {
-		$user_id = $request->input('user_id');
-		$pembimbing = $request->input('pembimbing');
+		// $user_id = $request->input('user_id');
+		// $pembimbing = $request->input('pembimbing');
 	
-		$options = getPatients($user_id, $pembimbing);
+		// $options = getPatients($user_id, $pembimbing);
+	
+		// return response()->json($options);
+		$user_id = $request->input('user_id');
+		// $pembimbing = $request->input('pembimbing');
+	
+		$options = getPatients($user_id);
 	
 		return response()->json($options);
 	});

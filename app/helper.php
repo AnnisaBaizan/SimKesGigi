@@ -24,16 +24,31 @@ function get_c($tabel, $name, $id)
     return $data;
 }
 
+// if (!function_exists('getPatients')) {
+//     function getPatients($user_id, $pembimbing)
+//     {
+//         $patients = kartupasien::where('user_id', $user_id)
+//             ->where('pembimbing', $pembimbing)
+//             ->get();
+
+//         $options = '<option value="" selected disabled>Pilih Pasien</option>';
+//         foreach ($patients as $patient) {
+//             $options .= '<option value="' . $patient->id . '">' . $patient->no_kartu . ' | ' . $patient->nama . '</option>';
+//         }
+
+//         return $options;
+//     }
+// }
 if (!function_exists('getPatients')) {
-    function getPatients($user_id, $pembimbing)
+    function getPatients($user_id)
     {
         $patients = kartupasien::where('user_id', $user_id)
-            ->where('pembimbing', $pembimbing)
             ->get();
 
         $options = '<option value="" selected disabled>Pilih Pasien</option>';
         foreach ($patients as $patient) {
-            $options .= '<option value="' . $patient->id . '">' . $patient->no_kartu . ' | ' . $patient->nama . '</option>';
+            $options .= '<option value="' . $patient->id . '" data-pembimbing="' . $patient->pembimbing . '">'
+                . $patient->no_kartu . ' | ' . $patient->nama . '</option>';
         }
 
         return $options;
@@ -81,6 +96,21 @@ if (!function_exists('getGigis')) {
 
 //Menu Vitalitas
 
+if (!function_exists('getOdontogram')) {
+    function getOdontogram($user_id, $pembimbing, $kartupasien_id)
+    {
+        $odontograms = Odontogram::where('user_id', $user_id)
+            ->where('pembimbing', $pembimbing)
+            ->where('kartupasien_id', $kartupasien_id)
+            ->get();
+
+        $odontogramHTML = '<option value="" selected disabled>Pilih Odontogram</option>';
+        foreach ($odontograms as $odontogram) {
+            $odontogramHTML .= '<option value="' . htmlspecialchars($odontogram->id) . '">' . htmlspecialchars($odontogram->created_at) . '</option>';
+        }
+        return $odontogramHTML;
+    }
+}
 if (!function_exists('getOdontogram')) {
     function getOdontogram($user_id, $pembimbing, $kartupasien_id)
     {
